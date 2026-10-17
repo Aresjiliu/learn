@@ -1,0 +1,53 @@
+{
+  "generatedAt": "2026-10-14T07:11:49.084220+00:00",
+  "roots": [
+    "D:\\project\\weixin\\media",
+    "D:\\project\\learn\\images",
+    "D:\\project\\learn\\static"
+  ],
+  "policy": "Local files are development evidence only; authorization and production availability are unverified.",
+  "assets": [
+    {
+      "path": "D:\\project\\weixin\\media\\video\\video1.mp4",
+      "extension": ".mp4",
+      "sizeBytes": 224123969,
+      "modifiedTime": "2024-05-04T04:17:56+00:00",
+      "status": "local-test-only"
+    },
+    {
+      "path": "D:\\project\\weixin\\media\\video\\video2.mp4",
+      "extension": ".mp4",
+      "sizeBytes": 315400139,
+      "modifiedTime": "2024-05-04T04:18:42+00:00",
+      "status": "local-test-only"
+    },
+    {
+      "path": "D:\\project\\weixin\\media\\video\\video3.mp4",
+      "extension": ".mp4",
+      "sizeBytes": 256782036,
+      "modifiedTime": "2024-05-04T04:18:28+00:00",
+      "status": "local-test-only"
+    },
+    {
+      "path": "D:\\project\\weixin\\media\\video\\video4.mp4",
+      "extension": ".mp4",
+      "sizeBytes": 300241582,
+      "modifiedTime": "2024-05-04T04:18:08+00:00",
+      "status": "local-test-only"
+    },
+    {
+      "path": "D:\\project\\weixin\\media\\video\\video5.mp4",
+      "extension": ".mp4",
+      "sizeBytes": 266223056,
+      "modifiedTime": "2024-05-04T04:18:32+00:00",
+      "status": "local-test-only"
+    },
+    {
+      "path": "D:\\project\\weixin\\media\\video\\video6.mp4",
+      "extension": ".mp4",
+      "sizeBytes": 312396097,
+      "modifiedTime": "2024-05-04T04:21:18+00:00",
+      "status": "local-test-only"
+    }
+  ]
+}

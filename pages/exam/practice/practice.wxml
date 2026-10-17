@@ -1,0 +1,67 @@
+<view class="page">
+    <view wx:if="{{loading}}" class="state-card loading-state">题目加载中...</view>
+    <view wx:elif="{{loadError}}" class="state-card error-state">
+        <text>{{loadError}}</text>
+        <button class="state-action" bindtap="retryLoad">重新加载</button>
+    </view>
+    <view wx:elif="{{finished}}" class="result-card">
+        <view class="result-summary">
+            <text class="result-title">练习完成</text>
+            <text class="result-score">{{score}} / {{questions.length}}</text>
+            <button class="primary-button" bindtap="restart">再练一次</button>
+        </view>
+        <view class="review-card">
+            <text class="section-title">答题复盘</text>
+            <view wx:for="{{reviewItems}}" wx:key="id" class="review-item">
+                <view class="review-heading">
+                    <text class="review-question">{{item.index}}. {{item.question_content}}</text>
+                    <text class="review-status {{item.correct ? 'correct' : 'wrong'}}">{{item.correct ? '正确' : '错误'}}</text>
+                </view>
+                <text class="review-answer">你的答案：{{item.userAnswer || '未作答'}}</text>
+                <text class="review-answer">标准答案：{{item.standardAnswer}}</text>
+                <text wx:if="{{item.hasAnalysis}}" class="review-analysis">解析：{{item.analysis}}</text>
+            </view>
+        </view>
+    </view>
+    <view wx:elif="{{questions.length}}" class="practice-layout">
+        <view class="progress-card">
+            <text class="progress-count">第 {{currentIndex + 1}} / {{questions.length}} 题</text>
+            <text class="progress-score">得分 {{score}} · {{source === 'content-api' ? '在线题库' : '本地样本'}}</text>
+        </view>
+        <view class="question-card">
+            <text class="question-type">{{questions[currentIndex].answerMode === 'text' ? '填空题' : '选择题'}}</text>
+            <text class="question">{{questions[currentIndex].question_content}}</text>
+            <view wx:if="{{questions[currentIndex].audioPlayable || questions[currentIndex].audioPending}}" class="audio-card">
+                <text class="audio-title">听力材料</text>
+                <button wx:if="{{questions[currentIndex].audioPlayable}}" class="audio-button" bindtap="playQuestionAudio">{{isPlayingAudio ? '播放中…' : '播放听力'}}</button>
+                <text wx:if="{{questions[currentIndex].audioPending}}" class="audio-pending">听力音频资源待接入，可继续作答</text>
+                <view wx:if="{{audioError}}" class="audio-error">
+                    <text>{{audioError}}</text>
+                    <button class="text-action" bindtap="retryQuestionAudio">重试听力</button>
+                </view>
+            </view>
+        </view>
+        <view class="answer-card">
+            <text class="section-title">{{questions[currentIndex].answerMode === 'text' ? '填写答案' : '选择答案'}}</text>
+            <block wx:if="{{questions[currentIndex].answerMode !== 'text'}}">
+                <view class="options">
+                <view wx:for="{{options}}" wx:key="*this"
+                      class="option {{selectedAnswer === item ? 'selected' : ''}} {{submitted && item === questions[currentIndex].answerKey ? 'correct' : ''}} {{submitted && selectedAnswer === item && item !== questions[currentIndex].answerKey ? 'wrong' : ''}}"
+                      bindtap="selectAnswer" data-answer="{{item}}">
+                    <text class="option-key">{{item}}</text>
+                    <text class="option-label">{{questions[currentIndex][item + '_item']}}</text>
+                </view>
+                </view>
+            </block>
+            <input wx:if="{{questions[currentIndex].answerMode === 'text'}}" class="answer-input" value="{{answerInput}}" bindinput="handleTextInput" placeholder="请输入答案" disabled="{{submitted}}" />
+            <view wx:if="{{submitted}}" class="feedback-card {{answerCorrect ? 'feedback-correct' : 'feedback-wrong'}}">
+                <text class="feedback-title">{{answerCorrect ? '回答正确' : '回答错误'}}</text>
+                <text wx:if="{{questions[currentIndex].answerMode === 'text'}}" class="reference-answer">参考答案：{{questions[currentIndex].right_result}}</text>
+                <text wx:if="{{questions[currentIndex].hasAnalysis}}" class="analysis">{{questions[currentIndex].analysis}}</text>
+            </view>
+            <button wx:if="{{!submitted}}" class="primary-button" bindtap="submitAnswer">提交答案</button>
+            <button wx:else class="primary-button" bindtap="nextQuestion">{{currentIndex === questions.length - 1 ? '查看结果' : '下一题'}}</button>
+        </view>
+    </view>
+    <view wx:else class="state-card empty-state">暂无可练习题目</view>
+</view>

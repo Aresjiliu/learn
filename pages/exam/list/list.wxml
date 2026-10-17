@@ -1,0 +1,44 @@
+<view class="page">
+    <view class="page-heading">
+        <text class="page-title">考级题库</text>
+        <text class="page-description">按题型与内容状态选择练习</text>
+    </view>
+    <view class="filter-bar" aria-label="按题型筛选">
+        <button wx:for="{{filters}}" wx:key="value"
+                class="filter-button {{activeFilter === item.value ? 'filter-button-active' : ''}}"
+                bindtap="setPaperFilter" data-filter="{{item.value}}"
+                aria-pressed="{{activeFilter === item.value}}">
+            {{item.label}}{{activeFilter === item.value ? ' · 已选' : ''}}
+        </button>
+    </view>
+    <view wx:if="{{loading}}" class="state-card loading-state">试卷加载中...</view>
+    <view wx:elif="{{loadError}}" class="state-card error-state">
+        <text>{{loadError}}</text>
+        <button class="state-action" bindtap="retryLoad">重新加载</button>
+    </view>
+    <view wx:elif="{{visiblePapers.length}}" class="paper-list">
+        <view wx:for="{{visiblePapers}}" wx:key="id" class="paper-card {{item.canPractice ? '' : 'paper-card-disabled'}}" bindtap="openPaper" data-paper-id="{{item.id}}" data-can-practice="{{item.canPractice}}">
+            <view class="paper-heading">
+                <text class="paper-title">{{item.title}}</text>
+                <text class="content-status {{item.canPractice ? 'ready' : 'locked'}}">{{item.canPractice ? '可练习' : '审核中'}}</text>
+            </view>
+            <view class="paper-meta">
+                <text class="meta-chip">{{item.questionMode === 'choice' ? '选择题' : (item.questionMode === 'text' ? '填空题' : '题型待确认')}}</text>
+                <text class="meta-chip">{{item.questionCount || 0}} 题</text>
+                <text class="meta-chip">{{item.analysisReady ? '含解析' : '暂无解析'}}</text>
+                <text class="meta-chip">听力 {{item.audioReadyCount || 0}} 题</text>
+            </view>
+            <view wx:if="{{!item.canPractice}}" class="review-notice">
+                <text class="review-title">内容审核中，暂不可练习</text>
+                <text class="review-reason">{{item.reviewReason || item.auditReason || item.contentStatusReason || '题目内容尚未通过审核'}}</text>
+            </view>
+        </view>
+        <text class="source">数据来源：{{source}}</text>
+    </view>
+    <view wx:else class="state-card empty-state">{{papers.length ? '当前题型暂无试卷' : '暂无可练习试卷'}}{{hasMore ? '，可继续加载后续试卷' : ''}}</view>
+    <view wx:if="{{!loading && !loadError && hasMore}}" class="pagination">
+        <text wx:if="{{loadMoreError}}" class="pagination-error">{{loadMoreError}}</text>
+        <button wx:if="{{loadMoreError}}" class="state-action" bindtap="retryLoad">重试加载下一页</button>
+        <button wx:else class="state-action" bindtap="loadMore" disabled="{{loadingMore}}">{{loadingMore ? '加载中…' : '加载更多试卷'}}</button>
+    </view>
+</view>

@@ -1,0 +1,16 @@
+const fs = require('fs')
+const path = require('path')
+const js = fs.readFileSync(path.join(__dirname, '..', 'pages', 'exam', 'practice', 'practice.js'), 'utf8')
+const wxml = fs.readFileSync(path.join(__dirname, '..', 'pages', 'exam', 'practice', 'practice.wxml'), 'utf8')
+
+if (!js.includes("loadError: ''")) throw new Error('practice page must initialize loadError')
+if (!js.includes("loadError: '题目加载失败，请检查网络后重试'")) throw new Error('practice page must expose load failure')
+if (!js.includes('retryLoad: function()')) throw new Error('practice page must provide retry handler')
+if (!js.includes('this.loadQuestions()')) throw new Error('practice page must load through retryable method')
+if (!js.includes('const requestId = (this._loadRequestId || 0) + 1')) throw new Error('practice page must sequence load requests')
+if (!js.includes('this._isUnloaded || requestId !== this._loadRequestId')) throw new Error('practice page must ignore stale or unloaded responses')
+if (!js.includes('this._loadRequestId = (this._loadRequestId || 0) + 1')) throw new Error('practice page must invalidate requests on unload')
+if (!wxml.includes('wx:elif="{{loadError}}"')) throw new Error('practice WXML must render load error before empty state')
+if (!wxml.includes('bindtap="retryLoad"')) throw new Error('practice WXML must expose retry button')
+
+console.log('practice load state tests: PASS')

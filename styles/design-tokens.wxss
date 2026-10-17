@@ -1,0 +1,21 @@
+/* Shared visual tokens for the textbook and exam UI. */
+page {
+    --color-primary: #1f5f8b;
+    --color-sky: #eaf3f8;
+    --color-page-bg: #f5f7f9;
+    --color-text: #1f2933;
+    --color-text-secondary: #667085;
+    --color-exam: #d97706;
+    --color-error: #c2413b;
+    --color-surface: #ffffff;
+    --color-loading: #98a2b3;
+    --color-empty: #667085;
+    --color-locked: #98a2b3;
+    --radius-card: 20rpx;
+    --space-page: 32rpx;
+    --shadow-card: 0 8rpx 24rpx rgba(31, 41, 51, 0.08);
+    --font-size-page-title: 40rpx;
+    --font-size-section-title: 32rpx;
+    --font-size-body: 28rpx;
+    --font-size-caption: 24rpx;
+}

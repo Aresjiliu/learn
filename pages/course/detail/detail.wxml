@@ -1,0 +1,131 @@
+<view wx:if="{{loading}}" class="course-state course-state-card">课程加载中...</view>
+<view wx:elif="{{loadError}}" class="course-state course-state-card error">
+  <text>{{loadError}}</text>
+  <button bindtap="retryLoad">重新加载</button>
+</view>
+<view wx:else class="course-detail">
+  <view class="course-cover-wrap">
+    <image class="course-cover" src="{{course.cover_image}}" mode="aspectFill"></image>
+    <text class="course-cover-label">俄语课程</text>
+  </view>
+
+  <view class="course-identity course-card">
+    <view class="identity-heading">
+      <text class="course-title">{{course.title}}</text>
+      <text class="content-status">{{contentModeLabel}}</text>
+    </view>
+    <text class="course-subtitle">{{course.subtitle || course.description || '按章节学习俄语词汇与课程内容'}}</text>
+    <view class="identity-meta">
+      <text>{{course.students_count || 0}} 人学习</text>
+      <text wx:if="{{course.price}}">¥{{course.price}}</text>
+    </view>
+  </view>
+
+  <view class="primary-action-row">
+    <button wx:if="{{hasPurchased}}" class="primary-action" bindtap="navigateToVideo">继续学习</button>
+    <button wx:elif="{{hasPreview}}" class="primary-action" bindtap="previewVideo">免费试听</button>
+    <button wx:else class="primary-action" bindtap="handleBuy">立即购买</button>
+  </view>
+
+  <view class="course-summary course-card">
+    <view class="section-heading">
+      <view>
+        <text class="section-title">课程摘要</text>
+        <text class="section-description">掌握课程规模和内容准备情况</text>
+      </view>
+      <text class="section-kicker">{{contentModeLabel}}</text>
+    </view>
+    <view class="course-stats">
+      <view class="stat-item">
+        <text class="stat-value">{{courseStats.chapterCount}}</text>
+        <text class="stat-label">章节</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-value">{{courseStats.videoCount}}</text>
+        <text class="stat-label">视频</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-value">{{courseStats.wordCount}}</text>
+        <text class="stat-label">词汇</text>
+      </view>
+    </view>
+    <rich-text class="course-description" nodes="{{course.description}}"></rich-text>
+  </view>
+
+  <view class="chapter-section course-card">
+    <view class="section-heading">
+      <view>
+        <text class="section-title">章节目录</text>
+        <text class="section-description">选择章节开始学习</text>
+      </view>
+      <text class="section-count">{{courseStats.videoCount}} 节</text>
+    </view>
+    <view wx:if="{{chapters.length}}" class="chapter-list">
+      <view class="chapter-card" wx:for="{{chapters}}" wx:for-index="chapterIndex" wx:key="rowKey">
+        <view class="chapter-heading">
+          <text class="chapter-number">{{index + 1}}</text>
+          <text class="chapter-title">{{item.title}}</text>
+        </view>
+        <view class="video-list">
+          <view class="video-item {{(!hasPurchased && !video.canPreview) ? 'locked-state' : ''}}"
+                wx:for="{{item.videos}}"
+                wx:for-item="video"
+                wx:for-index="videoIndex"
+                wx:key="rowKey"
+                bindtap="openCatalogVideo"
+                data-video-id="{{video.id}}"
+                data-chapter-index="{{chapterIndex}}"
+                data-is-preview="{{video.canPreview}}">
+            <view class="video-info">
+              <text class="video-index">{{videoIndex + 1}}</text>
+              <view class="video-copy">
+                <text class="video-title">{{video.title}}</text>
+                <text class="video-duration">{{video.durationText || '--:--'}}</text>
+              </view>
+            </view>
+            <text class="video-status {{!video.url ? 'pending-state' : ((!hasPurchased && !video.canPreview) ? 'locked-state' : (video.canPreview ? 'preview-state' : 'ready-state'))}}">{{video.statusLabel}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view wx:else class="empty-state">暂无章节内容</view>
+  </view>
+
+  <view class="related-words course-card">
+    <view class="section-heading">
+      <view>
+        <text class="section-title">关联词汇</text>
+        <text class="section-description">从课程词汇进入词典查看详情</text>
+      </view>
+      <text class="section-count">{{wordSummary.total}} 词</text>
+    </view>
+    <view class="word-summary">
+      <text>共 {{wordSummary.total}} 词</text>
+      <text>已匹配 {{wordSummary.mapped}}</text>
+      <text>待复核 {{wordSummary.pending}}</text>
+      <text>缺释义 {{wordSummary.missingMeaning}}</text>
+    </view>
+    <input class="word-search" value="{{wordQuery}}" bindinput="searchWords" placeholder="搜索俄语词形或中文释义" confirm-type="search" />
+    <view wx:if="{{visibleWords.length}}" class="word-list">
+      <view class="word-item"
+            wx:for="{{visibleWords}}"
+            wx:key="rowKey"
+            bindtap="openWordDetail"
+            data-word="{{item.word}}"
+            data-word-id="{{item.dictionaryId || ''}}"
+            data-textbook-id="{{item.id || ''}}"
+            data-word-meaning="{{item.displayMeaning || ''}}"
+            data-word-class="{{item.word_character || ''}}"
+            data-word-examples="{{item.sentence_all || ''}}">
+        <view class="word-main">
+          <text class="word-text">{{item.word}}</text>
+          <text class="word-type">{{item.word_character}}</text>
+        </view>
+        <text class="word-meaning">{{item.displayMeaning || '释义待补充'}}</text>
+        <text class="word-match">{{item.matchTier === 'exact' ? '主词典已匹配' : item.matchTier === 'relaxed' ? '规范化匹配' : item.matchTier === 'wordForm' ? '词形回溯' : item.matchTier === 'reviewed' ? '人工审核匹配' : '待人工复核'}}</text>
+      </view>
+      <button wx:if="{{hasMoreWords}}" class="load-more-words" bindtap="loadMoreWords">加载更多词汇</button>
+    </view>
+    <view wx:else class="empty-state">暂无关联词汇</view>
+  </view>
+</view>

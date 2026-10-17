@@ -1,0 +1,149 @@
+{
+    "appid": "wx65c8a5b19e5b2077",
+    "compileType": "miniprogram",
+    "libVersion": "3.17.4",
+    "packOptions": {
+        "ignore": [
+            {
+                "value": ".git",
+                "type": "folder"
+            },
+            {
+                "value": ".gitignore",
+                "type": "file"
+            },
+            {
+                "value": "README.md",
+                "type": "file"
+            },
+            {
+                "value": "images/banner1.png",
+                "type": "file"
+            },
+            {
+                "value": "images/banner2.png",
+                "type": "file"
+            },
+            {
+                "value": "images/banner3.png",
+                "type": "file"
+            },
+            {
+                "value": "images/courses/course2.png",
+                "type": "file"
+            },
+            {
+                "value": "videos",
+                "type": "folder"
+            },
+            {
+                "value": "audio",
+                "type": "folder"
+            },
+            {
+                "value": "data/remote_7500km",
+                "type": "folder"
+            },
+            {
+                "value": "docs",
+                "type": "folder"
+            },
+            {
+                "value": "scripts",
+                "type": "folder"
+            },
+            {
+                "value": "tasks",
+                "type": "folder"
+            },
+            {
+                "value": "learn",
+                "type": "folder"
+            },
+            {
+                "value": "lingosnake-main",
+                "type": "folder"
+            },
+            {
+                "value": "miniprogram-demo-master",
+                "type": "folder"
+            },
+            {
+                "value": "data/content_samples/books.json",
+                "type": "file"
+            },
+            {
+                "value": "data/content_samples/book_1_words.json",
+                "type": "file"
+            },
+            {
+                "value": "data/content_samples/book_13_words.json",
+                "type": "file"
+            },
+            {
+                "value": "data/content_samples/book_word_forms.json",
+                "type": "file"
+            },
+            {
+                "value": "data/content_samples/dictionary_words.json",
+                "type": "file"
+            },
+            {
+                "value": "data/content_samples/exam_fillin_sample.json",
+                "type": "file"
+            },
+            {
+                "value": "data/content_samples/exam_papers.json",
+                "type": "file"
+            },
+            {
+                "value": "data/content_samples/exam_practice_sample.json",
+                "type": "file"
+            },
+            {
+                "value": "data/content_samples/categories.json",
+                "type": "file"
+            },
+            {
+                "value": "AGENTS.md",
+                "type": "file"
+            },
+            {
+                "value": "findings.md",
+                "type": "file"
+            },
+            {
+                "value": "progress.md",
+                "type": "file"
+            },
+            {
+                "value": "task_plan.md",
+                "type": "file"
+            },
+            {
+                "value": "learn.code-workspace",
+                "type": "file"
+            }
+        ],
+        "include": []
+    },
+    "setting": {
+        "coverView": true,
+        "es6": true,
+        "postcss": true,
+        "minified": true,
+        "enhance": true,
+        "showShadowRootInWxmlPanel": true,
+        "packNpmRelationList": [],
+        "babelSetting": {
+            "ignore": [],
+            "disablePlugins": [],
+            "outputPath": ""
+        }
+    },
+    "condition": {},
+    "editorSetting": {
+        "tabIndent": "insertSpaces",
+        "tabSize": 4
+    }
+}

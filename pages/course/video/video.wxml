@@ -1,0 +1,80 @@
+<view class="video-page">
+  <view wx:if="{{loading}}" class="player-state">视频信息加载中...</view>
+  <view wx:if="{{!loading && loadError}}" class="player-state error">
+    <text>{{loadError}}</text>
+    <button bindtap="retryLoad">重新加载</button>
+  </view>
+  <block wx:if="{{!loading && !loadError}}">
+    <view class="player-card">
+      <view class="video-container">
+        <media-player wx:if="{{currentVideo && currentVideo.url && !playbackError}}"
+          class="video-player"
+          src="{{currentVideo.url}}"
+          title="{{currentVideo.title}}"
+          autoplay="{{true}}"
+          controls="{{true}}"
+          initial-time="{{currentVideo.lastProgress || 0}}"
+          bindtimeupdate="onTimeUpdate"
+          bindended="onVideoEnd"
+          bindplay="onVideoPlay"
+          bindpause="onVideoPause"
+          bindwaiting="onVideoBuffering"
+          binderror="onVideoError"
+          bindfullscreenchange="onFullScreenChange"
+          object-fit="contain"
+          bindplaybackratechange="onPlaybackRateChange"
+          bindprogress="onVideoProgress"
+          bindseek="onVideoSeek"
+          bindseekcomplete="onVideoSeekComplete">
+        </media-player>
+        <view wx:elif="{{playbackError}}" class="player-state error">
+          <text>{{playbackError}}</text>
+          <button bindtap="retryPlayback">重试播放</button>
+        </view>
+        <view wx:else class="player-state pending">
+          <text>媒体待接入</text>
+          <text class="player-state-caption">当前章节暂无可访问的视频地址</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="course-info-card">
+      <text class="video-title">{{currentVideo.title || '课程视频'}}</text>
+      <text class="course-title">{{course.title}}</text>
+      <text wx:if="{{currentVideo && currentVideo.statusLabel}}" class="media-notice">{{currentVideo.statusLabel}}</text>
+      <button wx:if="{{nextVideo}}" class="next-video-btn" bindtap="playNextVideo">下一节：{{nextVideo.title}}</button>
+    </view>
+
+    <view class="chapter-list">
+      <view class="chapter" wx:for="{{chapters}}" wx:for-index="chapterIndex" wx:key="rowKey">
+        <view class="chapter-header">
+          <text class="chapter-title">{{item.title}}</text>
+        </view>
+        <view class="video-list">
+          <view class="video-item {{currentVideo && currentVideo.id === video.id ? 'active' : ''}} {{(!hasPurchased && !video.canPreview) ? 'locked' : ''}} {{(!hasPurchased && !video.canPreview) ? 'locked-state' : ''}}"
+                wx:for="{{item.videos}}"
+                wx:for-item="video"
+                wx:for-index="videoIndex"
+                wx:key="rowKey"
+                bindtap="switchVideo"
+                data-video="{{video}}"
+                data-chapter-index="{{chapterIndex}}">
+            <view class="video-info">
+              <text class="video-index">{{videoIndex + 1}}</text>
+              <text class="video-name">{{video.title}}</text>
+            </view>
+            <view class="video-meta">
+              <text class="video-status {{!video.url ? 'pending-state' : ((!hasPurchased && !video.canPreview) ? 'locked-state' : (video.canPreview ? 'preview-state' : 'ready-state'))}}">{{video.statusLabel}}</text>
+              <text class="duration">{{video.durationText || '--:--'}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="purchase-tip" wx:if="{{!hasPurchased}}">
+      <text>购买课程后可观看完整内容</text>
+      <button class="purchase-btn" bindtap="handlePurchase">立即购买 ¥{{course.price}}</button>
+    </view>
+  </block>
+</view>

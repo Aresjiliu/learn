@@ -1,0 +1,45 @@
+{
+  "generatedFrom": "data/remote_7500km/manifest.json",
+  "databaseTouched": false,
+  "dictionary": {
+    "rows": 166260,
+    "distinctNormalizedWords": 165998
+  },
+  "bookWords": {
+    "rows": 63783,
+    "distinctNormalizedWords": 15379,
+    "distinctBookWordPairs": 63345,
+    "duplicateBookWordPairs": 438,
+    "matchedDictionaryWords": 13600,
+    "matchRate": 0.884323,
+    "missing": {
+      "book_name": 0,
+      "word": 0,
+      "accent": 1721,
+      "word_meaning_all": 1031
+    }
+  },
+  "examples": {
+    "rows": 87188,
+    "missing": {
+      "eyu": 1,
+      "han": 4
+    }
+  },
+  "questions": {
+    "rows": 13486,
+    "missing": {
+      "analysis": 3207,
+      "question_content": 3,
+      "right_result": 724
+    }
+  },
+  "books": {
+    "rows": 31,
+    "missing": {
+      "book_name": 0,
+      "book_uuid": 0,
+      "introduce": 30
+    }
+  }
+}

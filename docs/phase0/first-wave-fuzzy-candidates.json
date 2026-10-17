@@ -1,0 +1,840 @@
+{
+  "policy": "仅为拼写相近候选，不代表词义或词性一致；任何候选必须人工核对后才能批准。",
+  "source": "data/remote_7500km/ey_data__x_7500km_russian_index_new_test.csv.gz",
+  "summary": {
+    "unmatchedEntries": 53,
+    "entriesWithCandidates": 16,
+    "candidateCount": 63,
+    "approvedCount": 0
+  },
+  "entries": [
+    {
+      "reviewId": "东方教材大学俄语3:астрахань",
+      "textbookWord": "Астрахань",
+      "textbookMeaning": "сущ.阿斯特拉罕",
+      "decisionStatus": "pending",
+      "candidates": [
+        {
+          "score": 0.8421,
+          "word": "астраханка",
+          "id": "223128",
+          "meaning": "1.阿斯特拉罕鲱鱼。；2.阿斯特拉罕甜瓜。",
+          "wordCharacter": "名 单 阴 1格"
+        },
+        {
+          "score": 0.8421,
+          "word": "астраханец",
+          "id": "223127",
+          "meaning": "【方】(里海北岸一带的)热风。",
+          "wordCharacter": ""
+        },
+        {
+          "score": 0.7778,
+          "word": "шараханье",
+          "id": "319749",
+          "meaning": "〈俗〉{{шарахать(-ся)}}的动名词。",
+          "wordCharacter": "名 非动 单 中 4格"
+        },
+        {
+          "score": 0.7778,
+          "word": "затрахать",
+          "id": "333280",
+          "meaning": "",
+          "wordCharacter": "动 完 及 不定"
+        },
+        {
+          "score": 0.7778,
+          "word": "дастархан",
+          "id": "333817",
+          "meaning": "",
+          "wordCharacter": "名 非动 单 阳 4格"
+        }
+      ]
+    },
+    {
+      "reviewId": "东方教材大学俄语3:венеция",
+      "textbookWord": "Венеция",
+      "textbookMeaning": "сущ.威尼斯",
+      "decisionStatus": "pending",
+      "candidates": [
+        {
+          "score": 0.8333,
+          "word": "венец",
+          "id": "229576",
+          "meaning": "1.见  {{ венцы }}。；2.【旧】 ={{ венок }}。；3.【转】圆满结果，成功结局；顶峰，最高成就。；4.(皇)冠，冕。；5.【宗】(教堂结婚仪式中的)花冠，婚礼冠；【转，口语】婚礼，结婚。；6.【天】晕，华，日冕；(圣像头上的)光环。；7.俄罗斯木屋沿墙叠起的成排原木(四角用榫头衔接；从前常用原木根数来计算木屋的高度)。",
+          "wordCharacter": "名 非动 单 阳 4格"
+        },
+        {
+          "score": 0.8,
+          "word": "инвенция",
+          "id": "256470",
+          "meaning": "〈乐〉创意曲。",
+          "wordCharacter": "名 非动 单 阴 1格"
+        },
+        {
+          "score": 0.7692,
+          "word": "кенция",
+          "id": "182727",
+          "meaning": "1.〈植〉建奇棕；建奇棕属(Kentia)。",
+          "wordCharacter": ""
+        },
+        {
+          "score": 0.75,
+          "word": "тенденция",
+          "id": "309860",
+          "meaning": "1.趋向，趋势，倾向。；2.〈旧〉(作品的)意图，意向，倾向(性)，命意。；3.(与作品内容、情节无有机联系的，强加给读者的)作者意图，人为的倾向性。",
+          "wordCharacter": "名 非动 单 阴 1格"
+        },
+        {
+          "score": 0.75,
+          "word": "субвенция",
+          "id": "307516",
+          "meaning": "〈经〉(国家对地方或个别经济部门用于一定目的的)财政津贴，补助金。",
+          "wordCharacter": "名 非动 单 阴 1格"
+        }
+      ]
+    },
+    {
+      "reviewId": "东方教材大学俄语3:днепр",
+      "textbookWord": "Днепр",
+      "textbookMeaning": "сущ.第聂伯河",
+      "decisionStatus": "pending",
+      "candidates": [
+        {
+          "score": 0.8,
+          "word": "непер",
+          "id": "267448",
+          "meaning": "〈电〉奈培(衰减单位，等于8.686分贝)。",
+          "wordCharacter": "名 非动 单 阳 4格"
+        },
+        {
+          "score": 0.75,
+          "word": "дёр",
+          "id": "243240",
+          "meaning": "задать (或дать) дёру〈俗〉跑掉，逃之夭夭。\n\nОн такого дёру дал，что только его и видели。他逃得飞快，转眼间就不见了。\n\n德尔人[北非]",
+          "wordCharacter": "名 非动 单 阳 4格"
+        }
+      ]
+    },
+    {
+      "reviewId": "东方教材大学俄语3:жестокийроманс",
+      "textbookWord": "Жестокий романс",
+      "textbookMeaning": "《残酷的浪漫曲》",
+      "decisionStatus": "pending",
+      "candidates": []
+    },
+    {
+      "reviewId": "东方教材大学俄语3:исаакиевскийсобор",
+      "textbookWord": "Исаакиевский собор",
+      "textbookMeaning": "с/с.伊萨基耶夫大教堂",
+      "decisionStatus": "pending",
+      "candidates": []
+    },
+    {
+      "reviewId": "东方教材大学俄语3:казанскийсобор",
+      "textbookWord": "Казанский собор",
+      "textbookMeaning": "с/с.喀山大教堂",
+      "decisionStatus": "pending",
+      "candidates": []
+    },
+    {
+      "reviewId": "东方教材大学俄语3:казань",
+      "textbookWord": "Казань",
+      "textbookMeaning": "сущ.喀山",
+      "decisionStatus": "pending",
+      "candidates": [
+        {
+          "score": 0.9091,
+          "word": "казнь",
+          "id": "180816",
+          "meaning": "1.死刑，极刑，处决。；2.〈旧〉严惩，惩罚。；3.〈转〉(精神上的)痛苦，折磨。",
+          "wordCharacter": "名 非动 单 阴 4格"
+        },
+        {
+          "score": 0.9091,
+          "word": "казан",
+          "id": "180753",
+          "meaning": "〈方〉大锅。",
+          "wordCharacter": "名 非动 单 阳 4格"
+        },
+        {
+          "score": 0.8333,
+          "word": "казать",
+          "id": "180767",
+          "meaning": "1.把…给(某人看)，让(某人)看…，出示；〈旧〉指，指引。；2.〈旧〉具有…样子，好像。",
+          "wordCharacter": "动 未 及/不及 不定"
+        },
+        {
+          "score": 0.8,
+          "word": "каза",
+          "id": "180747",
+          "meaning": "酒窖壁龛(存酒用)。",
+          "wordCharacter": ""
+        },
+        {
+          "score": 0.8,
+          "word": "азан",
+          "id": "220334",
+          "meaning": "(伊斯兰教)叫拜，宣礼 ;【化】阿咱(染料)",
+          "wordCharacter": "名 非动 单 阳 4格"
+        }
+      ]
+    },
+    {
+      "reviewId": "东方教材大学俄语3:отечественнаявойна",
+      "textbookWord": "Отечественная война",
+      "textbookMeaning": "卫国战争",
+      "decisionStatus": "pending",
+      "candidates": []
+    },
+    {
+      "reviewId": "东方教材大学俄语3:сибирскийцирюльник",
+      "textbookWord": "Сибирский цирюльник",
+      "textbookMeaning": "(影片)《西伯利亚理发师》",
+      "decisionStatus": "pending",
+      "candidates": []
+    },
+    {
+      "reviewId": "东方教材大学俄语3:ульяновск",
+      "textbookWord": "Ульяновск",
+      "textbookMeaning": "сущ.乌里扬诺夫斯克",
+      "decisionStatus": "pending",
+      "candidates": [
+        {
+          "score": 0.875,
+          "word": "ульянов",
+          "id": "342504",
+          "meaning": "",
+          "wordCharacter": "名 动名 单 阳 1格"
+        },
+        {
+          "score": 0.75,
+          "word": "льяносы",
+          "id": "261162",
+          "meaning": "〈地理〉奥里诺科平原(位于南美洲东北部，奥里诺科河左岸);里雅诺群落(委内瑞拉稀树草原);",
+          "wordCharacter": "名 非动 复 4格"
+        }
+      ]
+    },
+    {
+      "reviewId": "东方教材大学俄语3:урга",
+      "textbookWord": "Урга",
+      "textbookMeaning": "сущ.库伦",
+      "decisionStatus": "pending",
+      "candidates": [
+        {
+          "score": 0.8889,
+          "word": "пурга",
+          "id": "294872",
+          "meaning": "暴风雪，雪暴。",
+          "wordCharacter": "名 非动 单 阴 1格"
+        },
+        {
+          "score": 0.8571,
+          "word": "ура",
+          "id": "217761",
+          "meaning": "1.乌拉!(军队冲锋的呐喊声)。；2.[用作名词，不变，中]乌拉(表示赞美的欢呼声)。",
+          "wordCharacter": "谓"
+        },
+        {
+          "score": 0.8,
+          "word": "ураган",
+          "id": "217780",
+          "meaning": "1.飓风(12级风)；气旋，旋风，暴风。；2.〈转〉（чего）急剧变化；剧烈的表现；狂澜。；3.[用作副词]ураганом风驰电掣地；突如其来地。",
+          "wordCharacter": "名 非动 单 阳 4格"
+        },
+        {
+          "score": 0.8,
+          "word": "курган",
+          "id": "188611",
+          "meaning": "1.高大古墓(古冢)；土岗，土丘；(古代边界上的)土堆瞭望台。；2.饲料沟。",
+          "wordCharacter": "名 非动 单 阳 4格"
+        },
+        {
+          "score": 0.8,
+          "word": "курага",
+          "id": "188584",
+          "meaning": "1.(剖成两半、去核的)杏干.无核杏。；2.〈方〉杏树。",
+          "wordCharacter": "名 非动 单 阴 1格"
+        }
+      ]
+    },
+    {
+      "reviewId": "东方教材大学俄语3:утомлённыесолнцем",
+      "textbookWord": "Утомлённые солнцем",
+      "textbookMeaning": "(影片)《烈日灼人》",
+      "decisionStatus": "pending",
+      "candidates": []
+    },
+    {
+      "reviewId": "东方教材大学俄语3:финляндия",
+      "textbookWord": "Финляндия",
+      "textbookMeaning": "сущ.芬兰",
+      "decisionStatus": "pending",
+      "candidates": [
+        {
+          "score": 0.8,
+          "word": "финляндский",
+          "id": "315199",
+          "meaning": "芬兰的；芬兰(国)人的；芬兰造的。",
+          "wordCharacter": "形 单 阳 4格 非动"
+        },
+        {
+          "score": 0.7778,
+          "word": "финляндцы",
+          "id": "315200",
+          "meaning": "芬兰(国)人。",
+          "wordCharacter": ""
+        },
+        {
+          "score": 0.7778,
+          "word": "финляндка",
+          "id": "315198",
+          "meaning": "见  {{финляндцы}}。",
+          "wordCharacter": "名 动名 单 阴 1格"
+        },
+        {
+          "score": 0.7778,
+          "word": "финляндец",
+          "id": "315197",
+          "meaning": "见  {{финляндцы}}。",
+          "wordCharacter": "名 动名 单 阳 1格"
+        },
+        {
+          "score": 0.75,
+          "word": "филярия",
+          "id": "315144",
+          "meaning": "〈动〉血丝虫，丝虫；丝虫属(Filaria)。",
+          "wordCharacter": "名 动名 单 阴 1格"
+        }
+      ]
+    },
+    {
+      "reviewId": "东方教材大学俄语3:хельсинки",
+      "textbookWord": "Хельсинки",
+      "textbookMeaning": "сущ.赫尔辛基",
+      "decisionStatus": "pending",
+      "candidates": [
+        {
+          "score": 0.9,
+          "word": "хельсинский",
+          "id": "213894",
+          "meaning": "及{{хельсинкский}}(芬兰)赫尔辛基的。",
+          "wordCharacter": ""
+        },
+        {
+          "score": 0.75,
+          "word": "сельсин",
+          "id": "298691",
+          "meaning": "〈电〉自动同步机。\n\nсельсин-датчик自动同步发送器，自动同步传感器。\n\nсильсин-приёмник自动同步接收器，自动同步受感器。",
+          "wordCharacter": "名 非动 单 阳 4格"
+        }
+      ]
+    },
+    {
+      "reviewId": "东方教材大学俄语3:япония",
+      "textbookWord": "Япония",
+      "textbookMeaning": "сущ.日本",
+      "decisionStatus": "pending",
+      "candidates": [
+        {
+          "score": 0.8,
+          "word": "пони",
+          "id": "283692",
+          "meaning": "",
+          "wordCharacter": "名 动名 单 阳 不变"
+        },
+        {
+          "score": 0.7692,
+          "word": "японист",
+          "id": "324901",
+          "meaning": "日本问题研究者，日本学家；日本通。",
+          "wordCharacter": "名 动名 单 阳 1格"
+        }
+      ]
+    },
+    {
+      "reviewId": "东方教材大学俄语3:ярославль",
+      "textbookWord": "Ярославль",
+      "textbookMeaning": "сущ.雅罗斯拉夫尔（俄罗斯城市）",
+      "decisionStatus": "pending",
+      "candidates": [
+        {
+          "score": 0.8,
+          "word": "прославлять",
+          "id": "292885",
+          "meaning": "见{{прославить}}  。",
+          "wordCharacter": "动 未 及 不定"
+        },
+        {
+          "score": 0.7778,
+          "word": "ославлять",
+          "id": "201754",
+          "meaning": "见{{ославить}}。",
+          "wordCharacter": "动 未 及 不定"
+        },
+        {
+          "score": 0.75,
+          "word": "голавль",
+          "id": "239871",
+          "meaning": "〈动〉圆鳍雅罗鱼(Leuciscus cephalus)。",
+          "wordCharacter": "名 动名 单 阳 1格"
+        }
+      ]
+    },
+    {
+      "reviewId": "东方教材大学俄语3:бизнес-ланч",
+      "textbookWord": "бизнес-ланч",
+      "textbookMeaning": "сущ.商务套餐，工作餐",
+      "decisionStatus": "pending",
+      "candidates": []
+    },
+    {
+      "reviewId": "东方教材大学俄语3:вканун",
+      "textbookWord": "в канун",
+      "textbookMeaning": "前夕",
+      "decisionStatus": "pending",
+      "candidates": []
+    },
+    {
+      "reviewId": "东方教材大学俄语3:вкругукого",
+      "textbookWord": "в кругу кого",
+      "textbookMeaning": "与……在一起,在中间",
+      "decisionStatus": "pending",
+      "candidates": []
+    },
+    {
+      "reviewId": "东方教材大学俄语3:вэтомотношении",
+      "textbookWord": "в этом отношении",
+      "textbookMeaning": "在这方面",
+      "decisionStatus": "pending",
+      "candidates": []
+    },
+    {
+      "reviewId": "东方教材大学俄语3:веб-сайт",
+      "textbookWord": "веб-сайт",
+      "textbookMeaning": "сущ.网站",
+      "decisionStatus": "pending",
+      "candidates": []
+    },
+    {
+      "reviewId": "东方教材大学俄语3:выстовочный",
+      "textbookWord": "выстовочный",
+      "textbookMeaning": "展览会的,陈列的",
+      "decisionStatus": "pending",
+      "candidates": [
+        {
+          "score": 0.9091,
+          "word": "выставочный",
+          "id": "236430",
+          "meaning": "展览会的；陈列的。",
+          "wordCharacter": "形 单 阳 4格 非动"
+        },
+        {
+          "score": 0.8571,
+          "word": "вставочный",
+          "id": "234021",
+          "meaning": "={{вставной}}。插入的",
+          "wordCharacter": "形 单 阳 4格 非动"
+        },
+        {
+          "score": 0.8182,
+          "word": "стыковочный",
+          "id": "307463",
+          "meaning": "",
+          "wordCharacter": "形 单 阳 4格 非动"
+        },
+        {
+          "score": 0.8182,
+          "word": "выстилочный",
+          "id": "236446",
+          "meaning": "{{выстилка}}的形容词。",
+          "wordCharacter": "形 单 阳 4格 非动"
+        },
+        {
+          "score": 0.8182,
+          "word": "винтовочный",
+          "id": "230969",
+          "meaning": "步枪的。",
+          "wordCharacter": "形 单 阳 4格 非动"
+        }
+      ]
+    },
+    {
+      "reviewId": "东方教材大学俄语3:зарулём",
+      "textbookWord": "за рулём",
+      "textbookMeaning": "开车",
+      "decisionStatus": "pending",
+      "candidates": []
+    },
+    {
+      "reviewId": "东方教材大学俄语3:зернистаяикра",
+      "textbookWord": "зернистая икра",
+      "textbookMeaning": "上等鳍鱼子(黑色粒状,俗称黑鱼子)",
+      "decisionStatus": "pending",
+      "candidates": []
+    },
+    {
+      "reviewId": "东方教材大学俄语3:изпоколениявпоколениепередаётсячто-н",
+      "textbookWord": "из поколения в поколение передаётся что-н.",
+      "textbookMeaning": "代代相传",
+      "decisionStatus": "pending",
+      "candidates": []
+    },
+    {
+      "reviewId": "东方教材大学俄语3:изобразительноеискусство",
+      "textbookWord": "изобразительное искусство",
+      "textbookMeaning": "造形艺术(绘画、雕 塑等的总称)",
+      "decisionStatus": "pending",
+      "candidates": []
+    },
+    {
+      "reviewId": "东方教材大学俄语3:исходяизчего",
+      "textbookWord": "исходя из чего",
+      "textbookMeaning": "根据",
+      "decisionStatus": "pending",
+      "candidates": []
+    },
+    {
+      "reviewId": "东方教材大学俄语3:кассовыйсбор",
+      "textbookWord": "кассовый сбор",
+      "textbookMeaning": "票房收入",
+      "decisionStatus": "pending",
+      "candidates": []
+    },
+    {
+      "reviewId": "东方教材大学俄语3:легендарнаяфигура",
+      "textbookWord": "легендарная фигура",
+      "textbookMeaning": "传奇人物",
+      "decisionStatus": "pending",
+      "candidates": []
+    },
+    {
+      "reviewId": "东方教材大学俄语3:ломатьголовунадчем",
+      "textbookWord": "ломать голову над чем",
+      "textbookMeaning": "冥思苦想,伤脑筋",
+      "decisionStatus": "pending",
+      "candidates": []
+    },
+    {
+      "reviewId": "东方教材大学俄语3:лунныйкалендарь",
+      "textbookWord": "лунный календарь",
+      "textbookMeaning": "农历,阴历",
+      "decisionStatus": "pending",
+      "candidates": []
+    },
+    {
+      "reviewId": "东方教材大学俄语3:минеральнаявода",
+      "textbookWord": "минеральная вода",
+      "textbookMeaning": "矿泉水",
+      "decisionStatus": "pending",
+      "candidates": []
+    },
+    {
+      "reviewId": "东方教材大学俄语3:навысоте",
+      "textbookWord": "на высоте",
+      "textbookMeaning": "(быть, оказаться)具有高水平",
+      "decisionStatus": "pending",
+      "candidates": []
+    },
+    {
+      "reviewId": "东方教材大学俄语3:нашумевшийдетектив",
+      "textbookWord": "нашумевший детектив",
+      "textbookMeaning": "引起轰动的侦探小说",
+      "decisionStatus": "pending",
+      "candidates": []
+    },
+    {
+      "reviewId": "东方教材大学俄语3:номинирован",
+      "textbookWord": "номинирован",
+      "textbookMeaning": "крат.获得提名；被提名",
+      "decisionStatus": "pending",
+      "candidates": [
+        {
+          "score": 0.8333,
+          "word": "доминирование",
+          "id": "245634",
+          "meaning": "1.доминировать的动名词。",
+          "wordCharacter": "名 非动 单 中 4格"
+        },
+        {
+          "score": 0.8182,
+          "word": "минирование",
+          "id": "192825",
+          "meaning": "минировать的动名词。",
+          "wordCharacter": "名 非动 单 中 4格"
+        },
+        {
+          "score": 0.7826,
+          "word": "нормирование",
+          "id": "269610",
+          "meaning": "1.{{нормировать}}的动名词；标准化，规范化；定额测定，规定定额，查定定额，赋值；配给，定量供应。",
+          "wordCharacter": "名 非动 单 中 4格"
+        },
+        {
+          "score": 0.7826,
+          "word": "минированный",
+          "id": "192826",
+          "meaning": "布设地雷的；布设水雷的。\n\n\nМост был минирован。桥已布雷。",
+          "wordCharacter": "形 单 阳 4格 非动"
+        },
+        {
+          "score": 0.7826,
+          "word": "доминировать",
+          "id": "245635",
+          "meaning": "1.占主要地位，占优势。；2.над чем居高临下；〈军〉占据居高临下的有利地形，居高临下控制。",
+          "wordCharacter": "动 未 不及 不定"
+        }
+      ]
+    },
+    {
+      "reviewId": "东方教材大学俄语3:носсгорбинкой",
+      "textbookWord": "нос с горбинкой",
+      "textbookMeaning": "鹰钩鼻",
+      "decisionStatus": "pending",
+      "candidates": []
+    },
+    {
+      "reviewId": "东方教材大学俄语3:обратитьвниманиеначто",
+      "textbookWord": "обратить внимание на что",
+      "textbookMeaning": "注意到……,将注意力转向……",
+      "decisionStatus": "pending",
+      "candidates": []
+    },
+    {
+      "reviewId": "东方教材大学俄语3:передатьвдар",
+      "textbookWord": "передать в дар",
+      "textbookMeaning": "捐赠,赠送",
+      "decisionStatus": "pending",
+      "candidates": []
+    },
+    {
+      "reviewId": "东方教材大学俄语3:пожатькомуруку",
+      "textbookWord": "пожать кому руку",
+      "textbookMeaning": "握 握……的手",
+      "decisionStatus": "pending",
+      "candidates": []
+    },
+    {
+      "reviewId": "东方教材大学俄语3:прикладноеискусство",
+      "textbookWord": "прикладное искусство",
+      "textbookMeaning": "实用艺术",
+      "decisionStatus": "pending",
+      "candidates": []
+    },
+    {
+      "reviewId": "东方教材大学俄语3:приложитьсилукчему",
+      "textbookWord": "приложить силу к чему",
+      "textbookMeaning": "用力,着力",
+      "decisionStatus": "pending",
+      "candidates": []
+    },
+    {
+      "reviewId": "东方教材大学俄语3:продемонстрироваться",
+      "textbookWord": "продемонстрироваться",
+      "textbookMeaning": "展示,显示",
+      "decisionStatus": "pending",
+      "candidates": [
+        {
+          "score": 0.9474,
+          "word": "продемонстрировать",
+          "id": "291113",
+          "meaning": "见 {{ демонстрировать }}",
+          "wordCharacter": "动 完 及/不及 不定"
+        },
+        {
+          "score": 0.8947,
+          "word": "подремонтироваться",
+          "id": "280181",
+          "meaning": "〈口语〉稍加修理。",
+          "wordCharacter": "动 完 不及 反身 不定"
+        },
+        {
+          "score": 0.85,
+          "word": "переконструироваться",
+          "id": "273324",
+          "meaning": "переконструировать的被动。",
+          "wordCharacter": "动 未 不及 反身 不定"
+        },
+        {
+          "score": 0.8421,
+          "word": "реконструироваться",
+          "id": "210853",
+          "meaning": "1.[完，未。；(得到)改造；改建；修复，复原，复原；重拟，构拟。；2.[未。",
+          "wordCharacter": "动 双体 不及 反身 不定"
+        },
+        {
+          "score": 0.8,
+          "word": "проконсультироваться",
+          "id": "291751",
+          "meaning": "见 {{консультироваться}} 。",
+          "wordCharacter": "动 完 不及 反身 不定"
+        }
+      ]
+    },
+    {
+      "reviewId": "东方教材大学俄语3:произвестивпечатление",
+      "textbookWord": "произвести впечатление",
+      "textbookMeaning": "使……产生印象",
+      "decisionStatus": "pending",
+      "candidates": []
+    },
+    {
+      "reviewId": "东方教材大学俄语3:сводитьконцысконцами",
+      "textbookWord": "сводить концы с концами",
+      "textbookMeaning": "靠收入勉强维持生活",
+      "decisionStatus": "pending",
+      "candidates": []
+    },
+    {
+      "reviewId": "东方教材大学俄语3:сдаватьвкамерухранения",
+      "textbookWord": "сдавать в камеру хранения",
+      "textbookMeaning": "存放在寄存处",
+      "decisionStatus": "pending",
+      "candidates": []
+    },
+    {
+      "reviewId": "东方教材大学俄语3:солнечноезатмение",
+      "textbookWord": "солнечное затмение",
+      "textbookMeaning": "日食",
+      "decisionStatus": "pending",
+      "candidates": []
+    },
+    {
+      "reviewId": "东方教材大学俄语3:социо-культурный",
+      "textbookWord": "социо-культурный",
+      "textbookMeaning": "прл.社会文化（学）的",
+      "decisionStatus": "pending",
+      "candidates": [
+        {
+          "score": 0.9677,
+          "word": "социокультурный",
+          "id": "341365",
+          "meaning": "",
+          "wordCharacter": "形 单 阳 4格 非动"
+        },
+        {
+          "score": 0.8,
+          "word": "монокультурный",
+          "id": "194048",
+          "meaning": "",
+          "wordCharacter": "形 单 阳 4格 非动"
+        },
+        {
+          "score": 0.8,
+          "word": "лесокультурный",
+          "id": "335212",
+          "meaning": "",
+          "wordCharacter": "形 单 阳 4格 非动"
+        },
+        {
+          "score": 0.7879,
+          "word": "идейно-культурный",
+          "id": "254875",
+          "meaning": "思想上文化上的。",
+          "wordCharacter": ""
+        }
+      ]
+    },
+    {
+      "reviewId": "东方教材大学俄语3:устроитьфейерверк",
+      "textbookWord": "устроить фейерверк",
+      "textbookMeaning": "放烟花",
+      "decisionStatus": "pending",
+      "candidates": []
+    },
+    {
+      "reviewId": "东方教材大学俄语3:читательскийбилет",
+      "textbookWord": "читательский билет",
+      "textbookMeaning": "阅览证,借书证",
+      "decisionStatus": "pending",
+      "candidates": []
+    },
+    {
+      "reviewId": "东方教材大学俄语3:чтокасаетсякого-чегото",
+      "textbookWord": "что касается кого-чего, то...",
+      "textbookMeaning": "至于……那么……",
+      "decisionStatus": "pending",
+      "candidates": []
+    },
+    {
+      "reviewId": "东方教材大学俄语3:школаживописи",
+      "textbookWord": "школа живописи",
+      "textbookMeaning": "绘画(艺术)流派",
+      "decisionStatus": "pending",
+      "candidates": []
+    },
+    {
+      "reviewId": "俄语专业大纲综合:логин",
+      "textbookWord": "логин",
+      "textbookMeaning": "сущ.登陆,登入(计算机用语)",
+      "decisionStatus": "pending",
+      "candidates": [
+        {
+          "score": 0.8,
+          "word": "логик",
+          "id": "260478",
+          "meaning": "逻辑学家。",
+          "wordCharacter": "名 动名 单 阳 1格"
+        },
+        {
+          "score": 0.8,
+          "word": "иогин",
+          "id": "257232",
+          "meaning": "=йог。",
+          "wordCharacter": ""
+        },
+        {
+          "score": 0.75,
+          "word": "лог",
+          "id": "260467",
+          "meaning": "1.宽谷，宽沟;深谷，蛱谷;荒地;休耕地。；2.〈旧〉 ={{логовище}}。；3.〈方〉撂荒地。；4.(砖的)纵向侧面。",
+          "wordCharacter": "名 非动 单 阳 4格"
+        }
+      ]
+    },
+    {
+      "reviewId": "俄语专业大纲综合:свёртывать",
+      "textbookWord": "свёртывать",
+      "textbookMeaning": "гл.卷,卷起\r\nгл.拐向,转向",
+      "decisionStatus": "pending",
+      "candidates": [
+        {
+          "score": 0.9524,
+          "word": "свёрстывать",
+          "id": "297366",
+          "meaning": "见  сверстать。",
+          "wordCharacter": "动 未 及 不定"
+        },
+        {
+          "score": 0.9091,
+          "word": "свёртываться",
+          "id": "297373",
+          "meaning": "1.见свернуться及свертеться。；2.свёртывать的被动。",
+          "wordCharacter": "动 未 不及 反身 不定"
+        },
+        {
+          "score": 0.9,
+          "word": "увёртывать",
+          "id": "215615",
+          "meaning": "",
+          "wordCharacter": "动 未 及 不定"
+        },
+        {
+          "score": 0.9,
+          "word": "ввёртывать",
+          "id": "229138",
+          "meaning": "",
+          "wordCharacter": "动 未 及 不定"
+        },
+        {
+          "score": 0.8571,
+          "word": "увёрстывать",
+          "id": "215607",
+          "meaning": "",
+          "wordCharacter": "动 未 及 不定"
+        }
+      ]
+    }
+  ]
+}

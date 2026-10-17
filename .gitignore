@@ -1,0 +1,34 @@
+# Local production exports and media are not source code.
+/data/remote_7500km/
+/videos/
+/audio/
+
+# Downloaded reference projects and local workspace files.
+/learn/
+/lingosnake-main/
+/miniprogram-demo-master/
+/learn.code-workspace
+/project.private.config.json
+
+# Local infrastructure notes containing host or account details.
+/docs/phase0/asset-inventory.md
+/docs/phase0/runtime-db-snapshot.md
+/docs/phase0/remote-export-verification.txt
+/tasks/phase0-plan.md
+/scripts/export_remote_7500km.py
+
+# Generated caches, credentials, and local databases.
+**/__pycache__/
+*.py[cod]
+**/node_modules/
+.env
+.env.*
+*.log
+*.sqlite
+*.db
+*.sql
+*.pem
+*.key
+*.p12
+Thumbs.db
+.DS_Store

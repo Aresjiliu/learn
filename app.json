@@ -1,0 +1,44 @@
+{
+    "pages": [
+        "pages/index/index",
+        "pages/profile/profile",
+        "pages/course/detail/detail",
+        "pages/my-courses/my-courses",
+        "pages/course/video/video",
+        "pages/collections/collections",
+        "pages/exam/list/list",
+        "pages/exam/practice/practice",
+        "pages/dictionary/search/search",
+        "pages/dictionary/detail/detail",
+        "pages/orders/orders",
+        "pages/settings/settings",
+        "pages/statement/statement",
+        "pages/client/client"
+    ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#1296db",
+        "navigationBarTitleText": "俄语7500",
+        "navigationBarTextStyle": "white"
+    },
+    "tabBar": {
+        "color": "#8a8a8a",
+        "selectedColor": "#1296db",
+        "backgroundColor": "#ffffff",
+        "borderStyle": "white",
+        "list": [
+            {
+                "pagePath": "pages/index/index",
+                "text": "课程",
+                "iconPath": "images/course.png",
+                "selectedIconPath": "images/course-active.png"
+            },
+            {
+                "pagePath": "pages/profile/profile",
+                "text": "我的",
+                "iconPath": "images/profile.png",
+                "selectedIconPath": "images/profile-active.png"
+            }
+        ]
+    }
+}

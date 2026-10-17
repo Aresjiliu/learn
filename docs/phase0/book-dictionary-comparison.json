@@ -1,0 +1,5672 @@
+{
+  "policy": {
+    "tier1": "标准化后精确匹配，直接复用主词典释义/音频并保留教材字段。",
+    "tier2": "仅处理大小写、重音符号和 ё/е 差异，需保留原词用于展示。",
+    "tier3": "通过 e_change_word 从变形回溯原型；不覆盖教材释义，需记录映射来源。",
+    "unmatched": "进入人工复核，不自动删除或强行合并。"
+  },
+  "summary": {
+    "distinctBookWords": 15335,
+    "dictionaryExact": 13601,
+    "dictionaryRelaxed": 36,
+    "wordFormToDictionary": 331,
+    "unmatched": 1367,
+    "coveredByAnyTier": 13968,
+    "coverageRate": 0.910858
+  },
+  "byBook": {
+    "东方教材大学俄语1": {
+      "distinctWords": 1005,
+      "exact": 926,
+      "relaxed": 2,
+      "wordFormToDictionary": 31,
+      "unmatched": 46,
+      "meaningMissing": 0,
+      "unmatchedSamples": [
+        {
+          "word": "будьте добры",
+          "accent": "2,12",
+          "meaning": "с/с.劳驾"
+        },
+        {
+          "word": "вечернее платье",
+          "accent": "4,12",
+          "meaning": "с/с.（女士穿的）晚礼服"
+        },
+        {
+          "word": "Владивосток",
+          "accent": "10",
+          "meaning": "сущ.符拉迪沃斯托克（海参崴）"
+        },
+        {
+          "word": "Волгоград",
+          "accent": "8",
+          "meaning": "сущ.伏尔加格勒"
+        },
+        {
+          "word": "Третьяковская галерея",
+          "accent": "8,20",
+          "meaning": "с/с.特列季亚科夫美术馆"
+        },
+        {
+          "word": "Зимний дворец",
+          "accent": "2,12",
+          "meaning": "с/с.冬宫"
+        },
+        {
+          "word": "играть на гитаре",
+          "accent": "4,15",
+          "meaning": "с/с.弹吉它"
+        },
+        {
+          "word": "Интернет-кафе",
+          "accent": "7,13",
+          "meaning": "с/с.网吧"
+        },
+        {
+          "word": "Саратов",
+          "accent": "4",
+          "meaning": "сущ.萨拉托夫市"
+        },
+        {
+          "word": "Средняя Азия",
+          "accent": "3",
+          "meaning": "с/с.中亚"
+        },
+        {
+          "word": "Суздаль",
+          "accent": "2",
+          "meaning": "сущ.苏兹达里市"
+        },
+        {
+          "word": "читальный зал",
+          "accent": "4",
+          "meaning": "с/с.阅读室"
+        },
+        {
+          "word": "Эмма",
+          "accent": "1",
+          "meaning": "сущ.爱玛"
+        },
+        {
+          "word": "у окна",
+          "accent": "6",
+          "meaning": "с/с.在窗旁"
+        },
+        {
+          "word": "Как зовут?",
+          "accent": "2,8",
+          "meaning": "叫什么名字？"
+        },
+        {
+          "word": "Шанхай",
+          "accent": "5",
+          "meaning": "сущ.上海;"
+        },
+        {
+          "word": "Ннтернет",
+          "accent": "7",
+          "meaning": "因特网"
+        },
+        {
+          "word": "чьё",
+          "accent": "0",
+          "meaning": "谁的"
+        },
+        {
+          "word": "Институт русского языка",
+          "accent": "0",
+          "meaning": "俄语学院"
+        },
+        {
+          "word": "Кто такой?",
+          "accent": "3,8",
+          "meaning": "究竟是谁？"
+        }
+      ],
+      "coveredByAnyTier": 959,
+      "coverageRate": 0.954229
+    },
+    "东方教材大学俄语2": {
+      "distinctWords": 955,
+      "exact": 899,
+      "relaxed": 2,
+      "wordFormToDictionary": 11,
+      "unmatched": 43,
+      "meaningMissing": 0,
+      "unmatchedSamples": [
+        {
+          "word": "Байкал",
+          "accent": "5",
+          "meaning": "сущ.贝加尔(湖)"
+        },
+        {
+          "word": "время года",
+          "accent": "3,8",
+          "meaning": "с/с.季节"
+        },
+        {
+          "word": "Гуанчжоу",
+          "accent": "7",
+          "meaning": "сущ.广州"
+        },
+        {
+          "word": "ГУМ",
+          "accent": "0",
+          "meaning": "сокр.国营百货商店"
+        },
+        {
+          "word": "ИКЕА",
+          "accent": "0",
+          "meaning": "абб.宜家（国际家居制品连锁店）"
+        },
+        {
+          "word": "Италия",
+          "accent": "3",
+          "meaning": "сущ.意大利"
+        },
+        {
+          "word": "классно",
+          "accent": "3",
+          "meaning": "нар.高水平地，技巧高超地"
+        },
+        {
+          "word": "контроллёр-автомат",
+          "accent": "9,17",
+          "meaning": "сущ.自动检票机"
+        },
+        {
+          "word": "лёгкие",
+          "accent": "2",
+          "meaning": "сущ.прл.肺"
+        },
+        {
+          "word": "Париж",
+          "accent": "4",
+          "meaning": "сущ.巴黎"
+        },
+        {
+          "word": "трудоголик",
+          "accent": "7",
+          "meaning": "сущ.工作狂"
+        },
+        {
+          "word": "Ухань",
+          "accent": "3",
+          "meaning": "сущ.武汉"
+        },
+        {
+          "word": "ЦУМ",
+          "accent": "0",
+          "meaning": "абб.中央百货商店"
+        },
+        {
+          "word": "Шанхай",
+          "accent": "5",
+          "meaning": "сущ.上海"
+        },
+        {
+          "word": "выходить за кого",
+          "accent": "6,2",
+          "meaning": "嫁给"
+        },
+        {
+          "word": "выйти замуж за кого",
+          "accent": "2,2,2",
+          "meaning": "出嫁,嫁给……"
+        },
+        {
+          "word": "женат на ком",
+          "accent": "2,2",
+          "meaning": "娶……为妻"
+        },
+        {
+          "word": "право на что",
+          "accent": "3,2,3",
+          "meaning": "权利;许可证,证书,执照"
+        },
+        {
+          "word": "Ни пуха ни пера!",
+          "accent": "2",
+          "meaning": "祝你一帆风顺!祝你满载而归！"
+        },
+        {
+          "word": "еле-еле",
+          "accent": "0",
+          "meaning": "十分勉强地"
+        }
+      ],
+      "coveredByAnyTier": 912,
+      "coverageRate": 0.954974
+    },
+    "东方教材大学俄语3": {
+      "distinctWords": 1247,
+      "exact": 1185,
+      "relaxed": 1,
+      "wordFormToDictionary": 10,
+      "unmatched": 51,
+      "meaningMissing": 0,
+      "unmatchedSamples": [
+        {
+          "word": "Астрахань",
+          "accent": "1",
+          "meaning": "сущ.阿斯特拉罕"
+        },
+        {
+          "word": "бизнес-ланч",
+          "accent": "2",
+          "meaning": "сущ.商务套餐，工作餐"
+        },
+        {
+          "word": "веб-сайт",
+          "accent": "2",
+          "meaning": "сущ.网站"
+        },
+        {
+          "word": "Венеция",
+          "accent": "4",
+          "meaning": "сущ.威尼斯"
+        },
+        {
+          "word": "Днепр",
+          "accent": "0",
+          "meaning": "сущ.第聂伯河"
+        },
+        {
+          "word": "Исаакиевский собор",
+          "accent": "3,18",
+          "meaning": "с/с.伊萨基耶夫大教堂"
+        },
+        {
+          "word": "Казанский собор",
+          "accent": "4,14",
+          "meaning": "с/с.喀山大教堂"
+        },
+        {
+          "word": "Казань",
+          "accent": "4",
+          "meaning": "сущ.喀山"
+        },
+        {
+          "word": "номинирован",
+          "accent": "6",
+          "meaning": "крат.获得提名；被提名"
+        },
+        {
+          "word": "социо-культурный",
+          "accent": "12",
+          "meaning": "прл.社会文化（学）的"
+        },
+        {
+          "word": "Ульяновск",
+          "accent": "4",
+          "meaning": "сущ.乌里扬诺夫斯克"
+        },
+        {
+          "word": "Урга",
+          "accent": "4",
+          "meaning": "сущ.库伦"
+        },
+        {
+          "word": "Финляндия",
+          "accent": "5",
+          "meaning": "сущ.芬兰"
+        },
+        {
+          "word": "Хельсинки",
+          "accent": "2",
+          "meaning": "сущ.赫尔辛基"
+        },
+        {
+          "word": "Япония",
+          "accent": "3",
+          "meaning": "сущ.日本"
+        },
+        {
+          "word": "Ярославль",
+          "accent": "6",
+          "meaning": "сущ.雅罗斯拉夫尔（俄罗斯城市）"
+        },
+        {
+          "word": "нос с горбинкой",
+          "accent": "2,0",
+          "meaning": "鹰钩鼻"
+        },
+        {
+          "word": "ломать голову над чем",
+          "accent": "4,2,2",
+          "meaning": "冥思苦想,伤脑筋"
+        },
+        {
+          "word": "обратить внимание на что",
+          "accent": "6,5,2,3",
+          "meaning": "注意到……,将注意力转向……"
+        },
+        {
+          "word": "произвести впечатление",
+          "accent": "10,8",
+          "meaning": "使……产生印象"
+        }
+      ],
+      "coveredByAnyTier": 1196,
+      "coverageRate": 0.959102
+    },
+    "东方教材大学俄语4": {
+      "distinctWords": 1019,
+      "exact": 962,
+      "relaxed": 4,
+      "wordFormToDictionary": 15,
+      "unmatched": 38,
+      "meaningMissing": 0,
+      "unmatchedSamples": [
+        {
+          "word": "бледно-сапфировый",
+          "accent": "12",
+          "meaning": "прл.淡蓝宝石色的"
+        },
+        {
+          "word": "Болгария",
+          "accent": "6",
+          "meaning": "сущ.保加利亚"
+        },
+        {
+          "word": "Болонская Декларация",
+          "accent": "4,17",
+          "meaning": "с/с.博洛尼亚宣言"
+        },
+        {
+          "word": "действительный член",
+          "accent": "7",
+          "meaning": "с/с.正式会员"
+        },
+        {
+          "word": "дипломная работа",
+          "accent": "5,14",
+          "meaning": "с/с.毕业论文"
+        },
+        {
+          "word": "зачётная книжка",
+          "accent": "4,12",
+          "meaning": "с/с.记分册"
+        },
+        {
+          "word": "Индиана",
+          "accent": "5",
+          "meaning": "сущ.印第安纳（州）"
+        },
+        {
+          "word": "ИСЗ",
+          "accent": "0",
+          "meaning": "абб.人造地球卫星"
+        },
+        {
+          "word": "Казанское княжество",
+          "accent": "4,13",
+          "meaning": "с/с.喀山公国"
+        },
+        {
+          "word": "катастрофически",
+          "accent": "10",
+          "meaning": "нар.灾难性地，毁灭性地"
+        },
+        {
+          "word": "Медный всадник",
+          "accent": "2,10",
+          "meaning": "с/с.青铜骑士"
+        },
+        {
+          "word": "наследствие",
+          "accent": "5",
+          "meaning": "сущ.遗产"
+        },
+        {
+          "word": "Нобелевская премия",
+          "accent": "2,15",
+          "meaning": "с/с.诺贝尔奖"
+        },
+        {
+          "word": "онлайновый",
+          "accent": "4",
+          "meaning": "прл.在线的"
+        },
+        {
+          "word": "оснащённый",
+          "accent": "6",
+          "meaning": "прч.装备......的"
+        },
+        {
+          "word": "оцифрованный",
+          "accent": "6",
+          "meaning": "прл.数字化的"
+        },
+        {
+          "word": "подавляющее большинство",
+          "accent": "6,23",
+          "meaning": "с/с.压倒多数"
+        },
+        {
+          "word": "Польша",
+          "accent": "2",
+          "meaning": "сущ.波兰"
+        },
+        {
+          "word": "почётный караул",
+          "accent": "4,14",
+          "meaning": "с/с.仪仗队"
+        },
+        {
+          "word": "предприняться",
+          "accent": "9",
+          "meaning": "прл.做，采取，实现"
+        }
+      ],
+      "coveredByAnyTier": 981,
+      "coverageRate": 0.962709
+    },
+    "东方教材大学俄语5": {
+      "distinctWords": 674,
+      "exact": 620,
+      "relaxed": 4,
+      "wordFormToDictionary": 17,
+      "unmatched": 33,
+      "meaningMissing": 0,
+      "unmatchedSamples": [
+        {
+          "word": "Бавария",
+          "accent": "4",
+          "meaning": "сущ.巴伐利亚（德国）"
+        },
+        {
+          "word": "веб-дизайнер",
+          "accent": "8",
+          "meaning": "сущ.网页设计师"
+        },
+        {
+          "word": "ВТО",
+          "accent": "0",
+          "meaning": "абб.世贸组织"
+        },
+        {
+          "word": "годиться кому в отцы",
+          "accent": "4,13,20",
+          "meaning": "с/с.年龄上相当于……父亲"
+        },
+        {
+          "word": "домовая контора",
+          "accent": "6,13",
+          "meaning": "с/с.房屋管理处"
+        },
+        {
+          "word": "доподготовка",
+          "accent": "9",
+          "meaning": "сущ.完成准备"
+        },
+        {
+          "word": "за кулисами",
+          "accent": "7",
+          "meaning": "с/с.在后台"
+        },
+        {
+          "word": "испокон веков",
+          "accent": "6,12",
+          "meaning": "с/с.自古以来，从来"
+        },
+        {
+          "word": "к общему знаменателю прийти",
+          "accent": "3,16,27",
+          "meaning": "с/с.达成共识；通分"
+        },
+        {
+          "word": "наращивание",
+          "accent": "4",
+          "meaning": "сущ.增加，扩大"
+        },
+        {
+          "word": "нацификация",
+          "accent": "8",
+          "meaning": "сущ.纳粹化的"
+        },
+        {
+          "word": "Не так страшен чёрт, как его малюют",
+          "accent": "0",
+          "meaning": "鬼并不像人们描绘的那样可怕（传说往往比实际更可怕）"
+        },
+        {
+          "word": "общество достатка",
+          "accent": "1,14",
+          "meaning": "с/с.小康社会"
+        },
+        {
+          "word": "обречён на провал",
+          "accent": "6,16",
+          "meaning": "с/с.注定失败"
+        },
+        {
+          "word": "общегреческий",
+          "accent": "7",
+          "meaning": "прл.全希腊的"
+        },
+        {
+          "word": "оптоволоконный",
+          "accent": "10",
+          "meaning": "прл.纤维光学的，光学纤维的"
+        },
+        {
+          "word": "Перикл",
+          "accent": "4",
+          "meaning": "сущ.伯里克利"
+        },
+        {
+          "word": "полис-государство",
+          "accent": "2,12",
+          "meaning": "с/с.城邦国家"
+        },
+        {
+          "word": "полуанекдот",
+          "accent": "10",
+          "meaning": "сущ.半笑话，半趣闻，半虚构的事"
+        },
+        {
+          "word": "попылать",
+          "accent": "6",
+          "meaning": "гл.熊熊燃烧；（感情）炽热"
+        }
+      ],
+      "coveredByAnyTier": 641,
+      "coverageRate": 0.951039
+    },
+    "东方教材大学俄语6": {
+      "distinctWords": 533,
+      "exact": 508,
+      "relaxed": 4,
+      "wordFormToDictionary": 13,
+      "unmatched": 8,
+      "meaningMissing": 0,
+      "unmatchedSamples": [
+        {
+          "word": "гражданский брак",
+          "accent": "6,15",
+          "meaning": "с/с.试婚"
+        },
+        {
+          "word": "дистрофичный",
+          "accent": "8",
+          "meaning": "прл.营养不良的，营养障碍的"
+        },
+        {
+          "word": "низкоуглеродный",
+          "accent": "11",
+          "meaning": "прл.低碳的"
+        },
+        {
+          "word": "плакатик",
+          "accent": "5",
+          "meaning": "сущ.启事，招贴"
+        },
+        {
+          "word": "пресс-бар",
+          "accent": "8",
+          "meaning": "сущ.记者酒会"
+        },
+        {
+          "word": "стручковый перец",
+          "accent": "7,13",
+          "meaning": "с/с.辣椒，辣子"
+        },
+        {
+          "word": "углекислый газ",
+          "accent": "6,13",
+          "meaning": "с/с.二氧化碳"
+        },
+        {
+          "word": "хрустальный башмачок",
+          "accent": "6,19",
+          "meaning": "с/с.水晶鞋"
+        }
+      ],
+      "coveredByAnyTier": 525,
+      "coverageRate": 0.984991
+    },
+    "东方教材大学俄语7": {
+      "distinctWords": 625,
+      "exact": 612,
+      "relaxed": 1,
+      "wordFormToDictionary": 2,
+      "unmatched": 10,
+      "meaningMissing": 0,
+      "unmatchedSamples": [
+        {
+          "word": "Византия",
+          "accent": "7",
+          "meaning": "сущ.拜占庭"
+        },
+        {
+          "word": "дай бог",
+          "accent": "2,6",
+          "meaning": "с/с.上帝保佑"
+        },
+        {
+          "word": "денег куры не клюют",
+          "accent": "2,8,18",
+          "meaning": "с/с.……钱很多，……很有钱"
+        },
+        {
+          "word": "Кёлын",
+          "accent": "2",
+          "meaning": "сущ.科隆市"
+        },
+        {
+          "word": "между тем",
+          "accent": "2",
+          "meaning": "с/с.与此同时；当时"
+        },
+        {
+          "word": "море по колено",
+          "accent": "2,12",
+          "meaning": "с/с.满不在乎"
+        },
+        {
+          "word": "стало быть",
+          "accent": "3",
+          "meaning": "с/с.所以，因此，可见"
+        },
+        {
+          "word": "так сказать",
+          "accent": "9",
+          "meaning": "с/с.可以说，这样说吧"
+        },
+        {
+          "word": "чёрт возьми",
+          "accent": "2,11",
+          "meaning": "с/с.真见鬼（岂有此理）"
+        },
+        {
+          "word": "что бы то ни было",
+          "accent": "0",
+          "meaning": "с/с.无论什么"
+        }
+      ],
+      "coveredByAnyTier": 615,
+      "coverageRate": 0.984
+    },
+    "东方教材大学俄语8": {
+      "distinctWords": 519,
+      "exact": 504,
+      "relaxed": 2,
+      "wordFormToDictionary": 2,
+      "unmatched": 11,
+      "meaningMissing": 0,
+      "unmatchedSamples": [
+        {
+          "word": "делать вид",
+          "accent": "2",
+          "meaning": "с/с.做样子"
+        },
+        {
+          "word": "засучив рукава",
+          "accent": "6,14",
+          "meaning": "с/с.卷起袖子；卖力气地干起来"
+        },
+        {
+          "word": "Иерусалим",
+          "accent": "8",
+          "meaning": "сущ.耶路撒冷"
+        },
+        {
+          "word": "не по дням, а по часам",
+          "accent": "21",
+          "meaning": "с/с.非常快地，迅速地"
+        },
+        {
+          "word": "не спускать глаз",
+          "accent": "9",
+          "meaning": "с/с.目不转睛地看"
+        },
+        {
+          "word": "неоднозначность",
+          "accent": "9",
+          "meaning": "сущ.非同义性，多义性"
+        },
+        {
+          "word": "Сербия",
+          "accent": "2",
+          "meaning": "сущ.塞尔维亚"
+        },
+        {
+          "word": "слава богу",
+          "accent": "3,8",
+          "meaning": "с/с.谢天谢地"
+        },
+        {
+          "word": "сойти с ума",
+          "accent": "5,11",
+          "meaning": "с/с.发疯发狂"
+        },
+        {
+          "word": "упустить из виду",
+          "accent": "6,10,14",
+          "meaning": "с/с.忘掉；忽略"
+        },
+        {
+          "word": "цивилизационный",
+          "accent": "11",
+          "meaning": "прл.文明的"
+        }
+      ],
+      "coveredByAnyTier": 508,
+      "coverageRate": 0.978805
+    },
+    "俄语专业八级综合": {
+      "distinctWords": 4212,
+      "exact": 4207,
+      "relaxed": 3,
+      "wordFormToDictionary": 1,
+      "unmatched": 1,
+      "meaningMissing": 0,
+      "unmatchedSamples": [
+        {
+          "word": "логин",
+          "accent": "2",
+          "meaning": "сущ.登陆,登入(计算机用语)"
+        }
+      ],
+      "coveredByAnyTier": 4211,
+      "coverageRate": 0.999763
+    },
+    "俄语专业四级综合": {
+      "distinctWords": 3725,
+      "exact": 3724,
+      "relaxed": 0,
+      "wordFormToDictionary": 0,
+      "unmatched": 1,
+      "meaningMissing": 0,
+      "unmatchedSamples": [
+        {
+          "word": "свёртывать",
+          "accent": "3",
+          "meaning": "гл.卷,卷起\r\nгл.拐向,转向"
+        }
+      ],
+      "coveredByAnyTier": 3724,
+      "coverageRate": 0.999732
+    },
+    "俄语专业大纲综合": {
+      "distinctWords": 7816,
+      "exact": 7808,
+      "relaxed": 4,
+      "wordFormToDictionary": 2,
+      "unmatched": 2,
+      "meaningMissing": 0,
+      "unmatchedSamples": [
+        {
+          "word": "логин",
+          "accent": "2",
+          "meaning": "сущ.登陆,登入(计算机用语)"
+        },
+        {
+          "word": "свёртывать",
+          "accent": "3",
+          "meaning": "гл.卷,卷起\r\nгл.拐向,转向"
+        }
+      ],
+      "coveredByAnyTier": 7814,
+      "coverageRate": 0.999744
+    },
+    "俄语单词库": {
+      "distinctWords": 295,
+      "exact": 295,
+      "relaxed": 0,
+      "wordFormToDictionary": 0,
+      "unmatched": 0,
+      "meaningMissing": 0,
+      "unmatchedSamples": [],
+      "coveredByAnyTier": 295,
+      "coverageRate": 1.0
+    },
+    "公共俄语四六级": {
+      "distinctWords": 6218,
+      "exact": 6211,
+      "relaxed": 2,
+      "wordFormToDictionary": 3,
+      "unmatched": 2,
+      "meaningMissing": 0,
+      "unmatchedSamples": [
+        {
+          "word": "Госдума",
+          "accent": "2",
+          "meaning": "сущ.国家杜马"
+        },
+        {
+          "word": "свёртывать",
+          "accent": "3",
+          "meaning": "гл.卷,卷起\r\nгл.拐向,转向"
+        }
+      ],
+      "coveredByAnyTier": 6216,
+      "coverageRate": 0.999678
+    },
+    "大学俄语第七册": {
+      "distinctWords": 626,
+      "exact": 613,
+      "relaxed": 1,
+      "wordFormToDictionary": 1,
+      "unmatched": 11,
+      "meaningMissing": 0,
+      "unmatchedSamples": [
+        {
+          "word": "так сказать",
+          "accent": "9",
+          "meaning": "с/с.可以说，这样说吧(вводн. сл.)"
+        },
+        {
+          "word": "стало быть",
+          "accent": "5",
+          "meaning": "с/с.所以，因此，可见(разг.)"
+        },
+        {
+          "word": "между тем",
+          "accent": "8",
+          "meaning": "нар.与此同时;当时"
+        },
+        {
+          "word": "что бы то ни было",
+          "accent": "0",
+          "meaning": "с/с.无论什么"
+        },
+        {
+          "word": "денег куры не клюют",
+          "accent": "0",
+          "meaning": "с/с. …钱很多;…很有钱(разг.)"
+        },
+        {
+          "word": "море по колено",
+          "accent": "2,12",
+          "meaning": "с/с.满不在乎"
+        },
+        {
+          "word": "Кёльн",
+          "accent": "0",
+          "meaning": "сущ.科隆市"
+        },
+        {
+          "word": "чёрт возьми",
+          "accent": "2,11",
+          "meaning": "с/с.真见鬼（岂有此理）"
+        },
+        {
+          "word": "Византия",
+          "accent": "7",
+          "meaning": "сущ.拜占庭"
+        },
+        {
+          "word": "отзывычивый",
+          "accent": "4",
+          "meaning": "прл.富有同情心的;敏感的"
+        },
+        {
+          "word": "дай бог",
+          "accent": "2,6",
+          "meaning": "с/с.上帝保佑"
+        }
+      ],
+      "coveredByAnyTier": 615,
+      "coverageRate": 0.982428
+    },
+    "大学俄语第五册": {
+      "distinctWords": 666,
+      "exact": 612,
+      "relaxed": 5,
+      "wordFormToDictionary": 16,
+      "unmatched": 33,
+      "meaningMissing": 0,
+      "unmatchedSamples": [
+        {
+          "word": "самоутверждаться",
+          "accent": "12",
+          "meaning": "гл.变得自信;肯定自我"
+        },
+        {
+          "word": "наращивание",
+          "accent": "4",
+          "meaning": "сущ.增加，扩大"
+        },
+        {
+          "word": "радиомонтажник",
+          "accent": "10",
+          "meaning": "сущ.无线电装配工"
+        },
+        {
+          "word": "доподготовка",
+          "accent": "9",
+          "meaning": "сущ.完成准备"
+        },
+        {
+          "word": "потрепать нервы",
+          "accent": "0",
+          "meaning": "с/с.刺激……的神经"
+        },
+        {
+          "word": "испокон веков",
+          "accent": "6,12",
+          "meaning": "с/с.自古以来，从来"
+        },
+        {
+          "word": "скатертью дорожка",
+          "accent": "0",
+          "meaning": "с/с.请便吧，让……走吧(прост.)"
+        },
+        {
+          "word": "упереться как",
+          "accent": "0",
+          "meaning": "сов..固执，执拗;( разг.)支住，撑住， 靠住，顶住;(разг.)目光紧盯住"
+        },
+        {
+          "word": "лень кому что делать",
+          "accent": "0",
+          "meaning": "с/с.不愿，懒得(разг.)"
+        },
+        {
+          "word": "веб-дизайнер",
+          "accent": "2,8",
+          "meaning": "сущ.网页设计师"
+        },
+        {
+          "word": "с пеной у рта",
+          "accent": "0",
+          "meaning": "с/с.唾沫四溅地，非常激动地;再三地"
+        },
+        {
+          "word": "сходить налево",
+          "accent": "0",
+          "meaning": "с/с.出轨"
+        },
+        {
+          "word": "к общему знаменателю прийти",
+          "accent": "0",
+          "meaning": "с/с.达成共识"
+        },
+        {
+          "word": "попылать",
+          "accent": "6",
+          "meaning": "сов.熊熊燃烧;（感情）炽热"
+        },
+        {
+          "word": "за кулисами",
+          "accent": "0",
+          "meaning": "с/с.在后台"
+        },
+        {
+          "word": "смарт",
+          "accent": "0",
+          "meaning": "сущ.奔驰的品牌 SMART"
+        },
+        {
+          "word": "спецполоса",
+          "accent": "10",
+          "meaning": "сущ.专用通道"
+        },
+        {
+          "word": "Не так страшен чёрт, как его малюют",
+          "accent": "0",
+          "meaning": "с/с.鬼并不像人们描绘的那样可怕。（传说往往比实际更可怕）(прост.)"
+        },
+        {
+          "word": "нацификация",
+          "accent": "8",
+          "meaning": "сущ.纳粹化"
+        },
+        {
+          "word": "полуанекдот",
+          "accent": "10",
+          "meaning": "сущ.半笑话，半趣闻;半虚构的事"
+        }
+      ],
+      "coveredByAnyTier": 633,
+      "coverageRate": 0.95045
+    },
+    "大学俄语第六册": {
+      "distinctWords": 516,
+      "exact": 491,
+      "relaxed": 3,
+      "wordFormToDictionary": 13,
+      "unmatched": 9,
+      "meaningMissing": 0,
+      "unmatchedSamples": [
+        {
+          "word": "плакатик",
+          "accent": "5",
+          "meaning": "сущ.启事，招贴"
+        },
+        {
+          "word": "гражданский брак",
+          "accent": "6,15",
+          "meaning": "с/с.试婚"
+        },
+        {
+          "word": "стручковый перец",
+          "accent": "7,15",
+          "meaning": "с/с.辣椒，辣子"
+        },
+        {
+          "word": "дистрофичный",
+          "accent": "8",
+          "meaning": "прл.营养不良的，"
+        },
+        {
+          "word": "углекислый газ",
+          "accent": "6,13",
+          "meaning": "с/с.二氧化碳"
+        },
+        {
+          "word": "парниковый газ",
+          "accent": "7,13",
+          "meaning": "с/с.温室气体"
+        },
+        {
+          "word": "низкоуглеродный",
+          "accent": "2,11",
+          "meaning": "прл.低碳的"
+        },
+        {
+          "word": "хрустальный башмачок",
+          "accent": "6,19",
+          "meaning": "с/с.水晶鞋"
+        },
+        {
+          "word": "пресс-бар",
+          "accent": "3,8",
+          "meaning": "прл.记者酒会"
+        }
+      ],
+      "coveredByAnyTier": 507,
+      "coverageRate": 0.982558
+    },
+    "对外俄语一级单词": {
+      "distinctWords": 2353,
+      "exact": 2297,
+      "relaxed": 1,
+      "wordFormToDictionary": 47,
+      "unmatched": 8,
+      "meaningMissing": 193,
+      "unmatchedSamples": [
+        {
+          "word": "вести себя",
+          "accent": "0",
+          "meaning": ".表现，举止"
+        },
+        {
+          "word": "ребёнка",
+          "accent": "0",
+          "meaning": ""
+        },
+        {
+          "word": "медсестёр",
+          "accent": "0",
+          "meaning": ""
+        },
+        {
+          "word": "не только..., но и...",
+          "accent": "0",
+          "meaning": ""
+        },
+        {
+          "word": "русско-английский",
+          "accent": "0",
+          "meaning": ""
+        },
+        {
+          "word": "c",
+          "accent": "0",
+          "meaning": ""
+        },
+        {
+          "word": "cтатья",
+          "accent": "0",
+          "meaning": ""
+        },
+        {
+          "word": "фигурное катание",
+          "accent": "0",
+          "meaning": ""
+        }
+      ],
+      "coveredByAnyTier": 2345,
+      "coverageRate": 0.9966
+    },
+    "对外俄语二级单词": {
+      "distinctWords": 4719,
+      "exact": 4660,
+      "relaxed": 4,
+      "wordFormToDictionary": 34,
+      "unmatched": 21,
+      "meaningMissing": 825,
+      "unmatchedSamples": [
+        {
+          "word": "сушка",
+          "accent": "0",
+          "meaning": ""
+        },
+        {
+          "word": "сбербанк",
+          "accent": "0",
+          "meaning": ""
+        },
+        {
+          "word": "взаимо-",
+          "accent": "0",
+          "meaning": ""
+        },
+        {
+          "word": "достоин",
+          "accent": "0",
+          "meaning": ""
+        },
+        {
+          "word": "свою жизнь, ситуацию",
+          "accent": "0",
+          "meaning": ""
+        },
+        {
+          "word": "испанско-русский",
+          "accent": "0",
+          "meaning": "прл.西班牙俄罗斯的"
+        },
+        {
+          "word": "какао неизм.",
+          "accent": "0",
+          "meaning": ""
+        },
+        {
+          "word": "как..., так и...",
+          "accent": "0",
+          "meaning": ""
+        },
+        {
+          "word": "кино неизм.",
+          "accent": "0",
+          "meaning": ""
+        },
+        {
+          "word": "китайско-русский",
+          "accent": "0",
+          "meaning": "прл.汉俄的"
+        },
+        {
+          "word": "немецко-русский",
+          "accent": "0",
+          "meaning": "прл.德俄的"
+        },
+        {
+          "word": "не только..., но и...",
+          "accent": "0",
+          "meaning": ""
+        },
+        {
+          "word": "одновременно и одновременно",
+          "accent": "0",
+          "meaning": ""
+        },
+        {
+          "word": "парковаться",
+          "accent": "0",
+          "meaning": ""
+        },
+        {
+          "word": "пра-",
+          "accent": "0",
+          "meaning": ""
+        },
+        {
+          "word": "припарковаться",
+          "accent": "0",
+          "meaning": ""
+        },
+        {
+          "word": "сиянок",
+          "accent": "0",
+          "meaning": ""
+        },
+        {
+          "word": "русско-английский",
+          "accent": "0",
+          "meaning": ""
+        },
+        {
+          "word": "c",
+          "accent": "0",
+          "meaning": ""
+        },
+        {
+          "word": "убеждён",
+          "accent": "0",
+          "meaning": ""
+        }
+      ],
+      "coveredByAnyTier": 4698,
+      "coverageRate": 0.99555
+    },
+    "考研": {
+      "distinctWords": 5623,
+      "exact": 5609,
+      "relaxed": 2,
+      "wordFormToDictionary": 2,
+      "unmatched": 10,
+      "meaningMissing": 0,
+      "unmatchedSamples": [
+        {
+          "word": "анти...",
+          "accent": "1",
+          "meaning": "перв часть сложн слов.接形容词和名词 表示 反，反对，违反，对抗"
+        },
+        {
+          "word": "видео-",
+          "accent": "0",
+          "meaning": "перв часть сложн слов.1.表示 电视、视频；2. 录像"
+        },
+        {
+          "word": "видеоигры",
+          "accent": "9",
+          "meaning": "сущ.电子游戏"
+        },
+        {
+          "word": "Госдума",
+          "accent": "2",
+          "meaning": "сущ.国家杜马"
+        },
+        {
+          "word": "Греция",
+          "accent": "3",
+          "meaning": "сущ.希腊"
+        },
+        {
+          "word": "свёртывать",
+          "accent": "3",
+          "meaning": "гл.卷,卷起\r\nгл.拐向,转向"
+        },
+        {
+          "word": "стереокомплекс",
+          "accent": "8",
+          "meaning": "сущ.组合音响"
+        },
+        {
+          "word": "термо...",
+          "accent": "0",
+          "meaning": "перв часть сложн слов.表示 1.\"热\",\"热力\",\"温\",\"温度\",\"温差\"之意"
+        },
+        {
+          "word": "то-есть",
+          "accent": "2",
+          "meaning": "союз. част. ввод.即，就是说"
+        },
+        {
+          "word": "экранчик",
+          "accent": "4",
+          "meaning": "сущ.荧光屏"
+        }
+      ],
+      "coveredByAnyTier": 5613,
+      "coverageRate": 0.998222
+    },
+    "职称俄语综合": {
+      "distinctWords": 5512,
+      "exact": 5497,
+      "relaxed": 1,
+      "wordFormToDictionary": 4,
+      "unmatched": 10,
+      "meaningMissing": 0,
+      "unmatchedSamples": [
+        {
+          "word": "Байкал",
+          "accent": "5",
+          "meaning": "сущ.贝加尔(湖)"
+        },
+        {
+          "word": "Белоруссия",
+          "accent": "6",
+          "meaning": "сущ.白俄罗斯"
+        },
+        {
+          "word": "валютно-торговый",
+          "accent": "4,13",
+          "meaning": "прл.外汇交易的"
+        },
+        {
+          "word": "ГУМ",
+          "accent": "0",
+          "meaning": "сокр.国营百货商店"
+        },
+        {
+          "word": "маркет",
+          "accent": "2",
+          "meaning": "сущ.市场，集市，市面"
+        },
+        {
+          "word": "нехватать",
+          "accent": "7",
+          "meaning": "гл.不够，缺少"
+        },
+        {
+          "word": "поливалка",
+          "accent": "6",
+          "meaning": "сущ.浇灌装置,洒水车"
+        },
+        {
+          "word": "СНГ",
+          "accent": "0",
+          "meaning": "Абб.独联体"
+        },
+        {
+          "word": "СССР",
+          "accent": "0",
+          "meaning": "Абб.苏联（苏维埃社会主义共和国联盟）"
+        },
+        {
+          "word": "США",
+          "accent": "0",
+          "meaning": "Абб.美国"
+        }
+      ],
+      "coveredByAnyTier": 5502,
+      "coverageRate": 0.998186
+    },
+    "走遍俄罗斯-第一册": {
+      "distinctWords": 1113,
+      "exact": 955,
+      "relaxed": 0,
+      "wordFormToDictionary": 41,
+      "unmatched": 117,
+      "meaningMissing": 0,
+      "unmatchedSamples": [
+        {
+          "word": "Иван",
+          "accent": "",
+          "meaning": "伊万（男）"
+        },
+        {
+          "word": "Антон",
+          "accent": "",
+          "meaning": "安东（男）"
+        },
+        {
+          "word": "Инна",
+          "accent": "",
+          "meaning": "茵娜（女）"
+        },
+        {
+          "word": "Ван Лин",
+          "accent": "",
+          "meaning": "王玲"
+        },
+        {
+          "word": "Иванов",
+          "accent": "",
+          "meaning": "伊万诺夫"
+        },
+        {
+          "word": "Вологда",
+          "accent": "",
+          "meaning": "沃洛格达市"
+        },
+        {
+          "word": "Омск",
+          "accent": "",
+          "meaning": "鄂木斯克"
+        },
+        {
+          "word": "жд",
+          "accent": "",
+          "meaning": "（我）等"
+        },
+        {
+          "word": "Как дела",
+          "accent": "",
+          "meaning": "近来怎么样？"
+        },
+        {
+          "word": "Елена",
+          "accent": "",
+          "meaning": "叶连娜（女）"
+        },
+        {
+          "word": "Красная площадь",
+          "accent": "0",
+          "meaning": "с/с.红场;"
+        },
+        {
+          "word": "Площадь Тяньаньмэнь",
+          "accent": "",
+          "meaning": "天安门广场"
+        },
+        {
+          "word": "Большой театр",
+          "accent": "",
+          "meaning": "大剧院"
+        },
+        {
+          "word": "стадион «Лужники»",
+          "accent": "",
+          "meaning": "卢日尼基体育场"
+        },
+        {
+          "word": "Хуачжунский университет науки и техники",
+          "accent": "",
+          "meaning": "华中理工大学（中国）"
+        },
+        {
+          "word": "Русский музей",
+          "accent": "",
+          "meaning": "俄罗斯博物馆"
+        },
+        {
+          "word": "перерь",
+          "accent": "",
+          "meaning": "旧（课间，工间）休息时间"
+        },
+        {
+          "word": "Давайте познакомимся.",
+          "accent": "",
+          "meaning": "让我们认识一下"
+        },
+        {
+          "word": "Илья",
+          "accent": "",
+          "meaning": "伊里亚（男）"
+        },
+        {
+          "word": "Дарья",
+          "accent": "",
+          "meaning": "达里娅（女）"
+        }
+      ],
+      "coveredByAnyTier": 996,
+      "coverageRate": 0.894879
+    },
+    "走遍俄罗斯-第三册": {
+      "distinctWords": 2219,
+      "exact": 1905,
+      "relaxed": 0,
+      "wordFormToDictionary": 15,
+      "unmatched": 299,
+      "meaningMissing": 0,
+      "unmatchedSamples": [
+        {
+          "word": "Добро пожаловать!",
+          "accent": "",
+          "meaning": "欢迎光临！"
+        },
+        {
+          "word": "проездной билет",
+          "accent": "",
+          "meaning": "公交车或地铁车票"
+        },
+        {
+          "word": "немецко-фашистский",
+          "accent": "",
+          "meaning": "德国法西斯的"
+        },
+        {
+          "word": "выходить из моды",
+          "accent": "",
+          "meaning": "不时髦，不流行"
+        },
+        {
+          "word": "выйти из моды",
+          "accent": "",
+          "meaning": "不时髦，不流行"
+        },
+        {
+          "word": "уделять внимание",
+          "accent": "5,5",
+          "meaning": "с/с.把注意力投到;"
+        },
+        {
+          "word": "уделить внимание",
+          "accent": "",
+          "meaning": "把注意力投到"
+        },
+        {
+          "word": "уделяется внимание",
+          "accent": "",
+          "meaning": "把注意力投向……"
+        },
+        {
+          "word": "теория относительности",
+          "accent": "0",
+          "meaning": "с/с.相对论;"
+        },
+        {
+          "word": "видеть во сне",
+          "accent": "",
+          "meaning": "做梦"
+        },
+        {
+          "word": "увидеть во сне",
+          "accent": "",
+          "meaning": "做梦"
+        },
+        {
+          "word": "Мелихово",
+          "accent": "",
+          "meaning": "（莫斯科附近的小城）麦利霍沃"
+        },
+        {
+          "word": "электрический ток",
+          "accent": "",
+          "meaning": "电流"
+        },
+        {
+          "word": "рентгеновские лучи",
+          "accent": "",
+          "meaning": "X射线"
+        },
+        {
+          "word": "от нечего делать",
+          "accent": "",
+          "meaning": "由于无事可做"
+        },
+        {
+          "word": "обращать внимание на",
+          "accent": "",
+          "meaning": "把注意力投向"
+        },
+        {
+          "word": "обратить внимание на",
+          "accent": "",
+          "meaning": "把注意力投向"
+        },
+        {
+          "word": "от ужаса",
+          "accent": "",
+          "meaning": "由于恐惧"
+        },
+        {
+          "word": "Это что за новости!",
+          "accent": "",
+          "meaning": "这可真新鲜！"
+        },
+        {
+          "word": "знать наизусть",
+          "accent": "",
+          "meaning": "熟知，倒背如流"
+        }
+      ],
+      "coveredByAnyTier": 1920,
+      "coverageRate": 0.865255
+    },
+    "走遍俄罗斯-第二册": {
+      "distinctWords": 1016,
+      "exact": 904,
+      "relaxed": 0,
+      "wordFormToDictionary": 12,
+      "unmatched": 100,
+      "meaningMissing": 0,
+      "unmatchedSamples": [
+        {
+          "word": "Антон Павлович Чехов",
+          "accent": "",
+          "meaning": "сущ.安东巴甫洛维奇契诃夫;"
+        },
+        {
+          "word": "Левитан",
+          "accent": "",
+          "meaning": "列维坦"
+        },
+        {
+          "word": "влюблённые",
+          "accent": "",
+          "meaning": "恋人们"
+        },
+        {
+          "word": "назватъся",
+          "accent": "",
+          "meaning": "①(кем-чем)自称是,自命为；②（被） 称为，说成是"
+        },
+        {
+          "word": "Александр Меньшиков",
+          "accent": "",
+          "meaning": "亚历山大梅尼什科夫"
+        },
+        {
+          "word": "Пётр Первый",
+          "accent": "",
+          "meaning": "彼得大帝"
+        },
+        {
+          "word": "Юрий Нагибин",
+          "accent": "",
+          "meaning": "尤里·纳格宾"
+        },
+        {
+          "word": "Настя",
+          "accent": "",
+          "meaning": "娜斯佳"
+        },
+        {
+          "word": "Лйлит",
+          "accent": "",
+          "meaning": "莉丽特"
+        },
+        {
+          "word": "Вадим",
+          "accent": "",
+          "meaning": "瓦吉姆"
+        },
+        {
+          "word": "Мурат",
+          "accent": "",
+          "meaning": "姆拉特"
+        },
+        {
+          "word": "Мариям",
+          "accent": "",
+          "meaning": "玛丽娅姆"
+        },
+        {
+          "word": "Шуберт",
+          "accent": "",
+          "meaning": "舒伯特"
+        },
+        {
+          "word": "Вася",
+          "accent": "",
+          "meaning": "瓦夏"
+        },
+        {
+          "word": "Италия",
+          "accent": "3",
+          "meaning": "сущ.意大利;"
+        },
+        {
+          "word": "Верона",
+          "accent": "",
+          "meaning": "维罗纳城"
+        },
+        {
+          "word": "Ереван",
+          "accent": "",
+          "meaning": "埃里温"
+        },
+        {
+          "word": "Донецк",
+          "accent": "",
+          "meaning": "顿涅茨克城"
+        },
+        {
+          "word": "Новосибирск",
+          "accent": "",
+          "meaning": "新西伯利亚"
+        },
+        {
+          "word": "Западная Сибирь",
+          "accent": "",
+          "meaning": "西西伯利亚"
+        }
+      ],
+      "coveredByAnyTier": 916,
+      "coverageRate": 0.901575
+    },
+    "走遍俄罗斯-第四册": {
+      "distinctWords": 900,
+      "exact": 873,
+      "relaxed": 1,
+      "wordFormToDictionary": 4,
+      "unmatched": 22,
+      "meaningMissing": 0,
+      "unmatchedSamples": [
+        {
+          "word": "ГЭС (гидроэлектростанция)",
+          "accent": "",
+          "meaning": "水电站"
+        },
+        {
+          "word": "Дания",
+          "accent": "",
+          "meaning": "丹麦"
+        },
+        {
+          "word": "Великий пост",
+          "accent": "",
+          "meaning": "大斋"
+        },
+        {
+          "word": "Иисус Христ",
+          "accent": "",
+          "meaning": "耶稣基督"
+        },
+        {
+          "word": "рок-фестиваль",
+          "accent": "",
+          "meaning": "摇滚乐节"
+        },
+        {
+          "word": "Наутилус Помпилиус",
+          "accent": "",
+          "meaning": "一个摇滚乐队的名字"
+        },
+        {
+          "word": "Египет",
+          "accent": "",
+          "meaning": "埃及"
+        },
+        {
+          "word": "Швеция",
+          "accent": "3",
+          "meaning": "сущ.瑞典;"
+        },
+        {
+          "word": "Турин",
+          "accent": "",
+          "meaning": "都灵"
+        },
+        {
+          "word": "Башкирия",
+          "accent": "",
+          "meaning": "巴什基尔"
+        },
+        {
+          "word": "биоматериал",
+          "accent": "",
+          "meaning": "生物物质"
+        },
+        {
+          "word": "Аллоплант",
+          "accent": "",
+          "meaning": "—种生物物质"
+        },
+        {
+          "word": "Тибет",
+          "accent": "",
+          "meaning": "西藏"
+        },
+        {
+          "word": "Гренландия",
+          "accent": "",
+          "meaning": "格陵兰"
+        },
+        {
+          "word": "Чили",
+          "accent": "",
+          "meaning": "智利"
+        },
+        {
+          "word": "ДНК",
+          "accent": "",
+          "meaning": "DNA"
+        },
+        {
+          "word": "рождественный",
+          "accent": "",
+          "meaning": "圣诞节的"
+        },
+        {
+          "word": "Сахалин",
+          "accent": "",
+          "meaning": "萨哈林（岛）（库页岛）"
+        },
+        {
+          "word": "Чукотка",
+          "accent": "",
+          "meaning": "楚科奇"
+        },
+        {
+          "word": "Атлантический океан",
+          "accent": "",
+          "meaning": "大西洋"
+        }
+      ],
+      "coveredByAnyTier": 878,
+      "coverageRate": 0.975556
+    },
+    "高考编辑汇总": {
+      "distinctWords": 2340,
+      "exact": 2335,
+      "relaxed": 1,
+      "wordFormToDictionary": 1,
+      "unmatched": 3,
+      "meaningMissing": 0,
+      "unmatchedSamples": [
+        {
+          "word": "испанско-русский",
+          "accent": "4,11",
+          "meaning": "прл.西班牙俄罗斯的"
+        },
+        {
+          "word": "китайско-русский",
+          "accent": "4,11",
+          "meaning": "прл.汉俄的"
+        },
+        {
+          "word": "немецко-русский",
+          "accent": "4,11",
+          "meaning": "прл.德俄的"
+        }
+      ],
+      "coveredByAnyTier": 2337,
+      "coverageRate": 0.998718
+    },
+    "黑大俄语1新版": {
+      "distinctWords": 980,
+      "exact": 835,
+      "relaxed": 2,
+      "wordFormToDictionary": 18,
+      "unmatched": 125,
+      "meaningMissing": 0,
+      "unmatchedSamples": [
+        {
+          "word": "Иван",
+          "accent": "",
+          "meaning": "伊万"
+        },
+        {
+          "word": "Иван стоит у окна.",
+          "accent": "",
+          "meaning": "伊万站在窗前。"
+        },
+        {
+          "word": "Нина",
+          "accent": "",
+          "meaning": "尼娜"
+        },
+        {
+          "word": "Тут нет киоска.",
+          "accent": "",
+          "meaning": "这里没有售货亭。"
+        },
+        {
+          "word": "Им некогда.",
+          "accent": "",
+          "meaning": "他（她）们没有时间。"
+        },
+        {
+          "word": "Антон",
+          "accent": "",
+          "meaning": "安东"
+        },
+        {
+          "word": "Шишкин - художник.",
+          "accent": "",
+          "meaning": "希施金是位画家。"
+        },
+        {
+          "word": "А я иду в аптеку.",
+          "accent": "",
+          "meaning": "而我去药店。"
+        },
+        {
+          "word": "Как вас зовут",
+          "accent": "0",
+          "meaning": "с/с.您叫什么名字？;"
+        },
+        {
+          "word": "Они идут в институт.",
+          "accent": "",
+          "meaning": "他们去学院。"
+        },
+        {
+          "word": "Зоя",
+          "accent": "",
+          "meaning": "卓娅"
+        },
+        {
+          "word": "Доброе утро!",
+          "accent": "",
+          "meaning": "早晨好！"
+        },
+        {
+          "word": "С семи до пяти.",
+          "accent": "",
+          "meaning": "从（早）七点到（晚）五点。"
+        },
+        {
+          "word": "Пушкин - знаменитый поэт.",
+          "accent": "",
+          "meaning": "普希金是位著名的诗人。"
+        },
+        {
+          "word": "Когда буфет работает",
+          "accent": "",
+          "meaning": "小卖部什么时候营业？"
+        },
+        {
+          "word": "Не беспокойся!",
+          "accent": "",
+          "meaning": "别担心！"
+        },
+        {
+          "word": "день рождения",
+          "accent": "",
+          "meaning": "生日"
+        },
+        {
+          "word": "Как тебя зовут",
+          "accent": "",
+          "meaning": "你叫什么名字？"
+        },
+        {
+          "word": "Добрый день!",
+          "accent": "",
+          "meaning": "日安！"
+        },
+        {
+          "word": "чёрный чай",
+          "accent": "",
+          "meaning": "红茶"
+        }
+      ],
+      "coveredByAnyTier": 855,
+      "coverageRate": 0.872449
+    },
+    "黑大俄语2新版": {
+      "distinctWords": 1343,
+      "exact": 1142,
+      "relaxed": 0,
+      "wordFormToDictionary": 17,
+      "unmatched": 184,
+      "meaningMissing": 0,
+      "unmatchedSamples": [
+        {
+          "word": "Многие туристы начинают знакомство с ней со смотровой площадки Большого Каменного моста через Москву-реку.",
+          "accent": "",
+          "meaning": "游客了解它是从莫斯科河白石桥瞭望台开始的。"
+        },
+        {
+          "word": "памятник великому поэту А.С.Пушкину и памятник основателю гброда Москвы Юрию Долгорукому.",
+          "accent": "",
+          "meaning": "诗人普希金纪念碑和莫斯科奠基者尤里•多尔戈鲁基大公纪念碑"
+        },
+        {
+          "word": "ледяные фонари и скульптуры",
+          "accent": "",
+          "meaning": "冰灯和冰雕"
+        },
+        {
+          "word": "пятизвёздный",
+          "accent": "",
+          "meaning": "五星的"
+        },
+        {
+          "word": "как на ладони",
+          "accent": "",
+          "meaning": "一目了然，清清楚楚"
+        },
+        {
+          "word": "Мавзолей В.И.Ленина",
+          "accent": "",
+          "meaning": "列宁墓"
+        },
+        {
+          "word": "смотровая площадка",
+          "accent": "",
+          "meaning": "瞭望台"
+        },
+        {
+          "word": "Большой Каменный мост",
+          "accent": "",
+          "meaning": "白石桥"
+        },
+        {
+          "word": "Москва-река",
+          "accent": "",
+          "meaning": "莫斯科河"
+        },
+        {
+          "word": "Музей изобразительных искусств имени А.С. Пушкина",
+          "accent": "",
+          "meaning": "普希金造型艺术博物馆"
+        },
+        {
+          "word": "ботанический сад",
+          "accent": "",
+          "meaning": "植物园"
+        },
+        {
+          "word": "памятник А.С. Пушкину",
+          "accent": "",
+          "meaning": "普希金纪念碑"
+        },
+        {
+          "word": "Юрий Долгорукий",
+          "accent": "",
+          "meaning": "长臂尤里大公"
+        },
+        {
+          "word": "Государственная Дума (Госдума)",
+          "accent": "",
+          "meaning": "国家杜马"
+        },
+        {
+          "word": "Царь-пушка",
+          "accent": "0",
+          "meaning": "сущ.炮王;"
+        },
+        {
+          "word": "Царь-колокол",
+          "accent": "",
+          "meaning": "钟王"
+        },
+        {
+          "word": "Успенский собор",
+          "accent": "",
+          "meaning": "乌斯宾斯基（圣母安息）大教堂"
+        },
+        {
+          "word": "Благовещенский собор",
+          "accent": "",
+          "meaning": "布拉格维申斯基（报喜或圣母领报）大教堂"
+        },
+        {
+          "word": "Архангельский собор",
+          "accent": "",
+          "meaning": "阿尔汉格尔斯基（天使长）大教堂"
+        },
+        {
+          "word": "Спасская башня",
+          "accent": "",
+          "meaning": "斯帕斯克（救世主）钟楼"
+        }
+      ],
+      "coveredByAnyTier": 1159,
+      "coverageRate": 0.862993
+    },
+    "黑大俄语3新版": {
+      "distinctWords": 1200,
+      "exact": 1062,
+      "relaxed": 2,
+      "wordFormToDictionary": 7,
+      "unmatched": 129,
+      "meaningMissing": 0,
+      "unmatchedSamples": [
+        {
+          "word": "Сычуань",
+          "accent": "",
+          "meaning": "四川（省）"
+        },
+        {
+          "word": "прикладная лингвистика",
+          "accent": "",
+          "meaning": "应用语言学"
+        },
+        {
+          "word": "теоретическая лингвистика",
+          "accent": "",
+          "meaning": "理论语言学"
+        },
+        {
+          "word": "общее языкознание",
+          "accent": "",
+          "meaning": "普通语言学"
+        },
+        {
+          "word": "произнестись",
+          "accent": "",
+          "meaning": "说出;发音，发出"
+        },
+        {
+          "word": "Российская Федерация (РФ)",
+          "accent": "",
+          "meaning": "俄罗斯联邦"
+        },
+        {
+          "word": "Китайская Народная Республика (КНР)",
+          "accent": "",
+          "meaning": "中华人民共和国"
+        },
+        {
+          "word": "Кун-цзы (Конфуций)",
+          "accent": "",
+          "meaning": "孔子"
+        },
+        {
+          "word": "Италия",
+          "accent": "3",
+          "meaning": "сущ.意大利;"
+        },
+        {
+          "word": "шорт-лист",
+          "accent": "",
+          "meaning": "名单"
+        },
+        {
+          "word": "резьба по дереву",
+          "accent": "",
+          "meaning": "木刻"
+        },
+        {
+          "word": "резьба по льду",
+          "accent": "",
+          "meaning": "冰雕"
+        },
+        {
+          "word": "Российская государственная библиотека (имени Ленина)",
+          "accent": "",
+          "meaning": "俄罗斯国立图书馆(列宁国立图书馆）"
+        },
+        {
+          "word": "Библиотека по естественным наукам",
+          "accent": "",
+          "meaning": "自然科学图书馆"
+        },
+        {
+          "word": "Всероссийская Государственная библиотека иностранной литературы",
+          "accent": "",
+          "meaning": "全俄国立外文图书馆"
+        },
+        {
+          "word": "Российская Государственная библиотека для слепых",
+          "accent": "",
+          "meaning": "俄罗斯国立盲人图书馆"
+        },
+        {
+          "word": "Российская Государственная юношеская библиотека",
+          "accent": "",
+          "meaning": "俄罗斯国立青年图书馆"
+        },
+        {
+          "word": "Президентская библиотека имени Б.Н. Ельцина",
+          "accent": "",
+          "meaning": "叶利钦总统图书馆"
+        },
+        {
+          "word": "электронная библиотека",
+          "accent": "",
+          "meaning": "电子图书馆"
+        },
+        {
+          "word": "бесплатные книги",
+          "accent": "",
+          "meaning": "免费书籍"
+        }
+      ],
+      "coveredByAnyTier": 1071,
+      "coverageRate": 0.8925
+    },
+    "黑大俄语第一册": {
+      "distinctWords": 1359,
+      "exact": 1115,
+      "relaxed": 2,
+      "wordFormToDictionary": 86,
+      "unmatched": 156,
+      "meaningMissing": 0,
+      "unmatchedSamples": [
+        {
+          "word": "едут на конях",
+          "accent": "0",
+          "meaning": "с/с.骑马"
+        },
+        {
+          "word": "Как вас зовут",
+          "accent": "0",
+          "meaning": "с/с.您叫什么名字?"
+        },
+        {
+          "word": "гостроном",
+          "accent": "8",
+          "meaning": "сущ.食品店"
+        },
+        {
+          "word": "Дорое утро",
+          "accent": "0",
+          "meaning": "с/с.早晨好!"
+        },
+        {
+          "word": "Открой рот",
+          "accent": "0",
+          "meaning": "с/с.张开嘴！"
+        },
+        {
+          "word": "Пора работать",
+          "accent": "0",
+          "meaning": "с/с.该工作了！"
+        },
+        {
+          "word": "Не стоит",
+          "accent": "0",
+          "meaning": "с/с.不客气！"
+        },
+        {
+          "word": "Что же мне делать",
+          "accent": "0",
+          "meaning": "с/с.我该怎么办呢?"
+        },
+        {
+          "word": "Не беспокойся",
+          "accent": "0",
+          "meaning": "с/с.别担心！"
+        },
+        {
+          "word": "давайте пойдём",
+          "accent": "0",
+          "meaning": "с/с.咱们去......"
+        },
+        {
+          "word": "Экзамен на носу",
+          "accent": "0",
+          "meaning": "с/с.快考试了"
+        },
+        {
+          "word": "Добрый день",
+          "accent": "0",
+          "meaning": "с/с.（白天好!）你好!"
+        },
+        {
+          "word": "Как ты поживаешь",
+          "accent": "0",
+          "meaning": "с/с.你的近况如何？"
+        },
+        {
+          "word": "ходишь на лыжах",
+          "accent": "0",
+          "meaning": "с/с.滑雪"
+        },
+        {
+          "word": "Сколько стоят яблоки",
+          "accent": "0",
+          "meaning": "с/с.苹果多少钱一斤？"
+        },
+        {
+          "word": "молодой человек",
+          "accent": "0",
+          "meaning": "с/с.年青人"
+        },
+        {
+          "word": "течёт",
+          "accent": "4",
+          "meaning": "гл.流淌"
+        },
+        {
+          "word": "Сколько тебе лет",
+          "accent": "0",
+          "meaning": "с/с.你多大了 ?"
+        },
+        {
+          "word": "младший брат",
+          "accent": "0",
+          "meaning": "с/с.弟弟"
+        },
+        {
+          "word": "сделать подарок",
+          "accent": "0",
+          "meaning": "с/с.送礼物"
+        }
+      ],
+      "coveredByAnyTier": 1203,
+      "coverageRate": 0.88521
+    },
+    "黑大俄语第三册": {
+      "distinctWords": 1027,
+      "exact": 949,
+      "relaxed": 1,
+      "wordFormToDictionary": 12,
+      "unmatched": 65,
+      "meaningMissing": 0,
+      "unmatchedSamples": [
+        {
+          "word": "Болгария",
+          "accent": "5",
+          "meaning": "сущ.保加利亚"
+        },
+        {
+          "word": "ежемесячно",
+          "accent": "5",
+          "meaning": "нар.每个月"
+        },
+        {
+          "word": "Дальний Восток",
+          "accent": "0",
+          "meaning": "с/с.远东"
+        },
+        {
+          "word": "автоматическая станция",
+          "accent": "0",
+          "meaning": "с/с.自动太空站"
+        },
+        {
+          "word": "проект «Фобос»",
+          "accent": "0",
+          "meaning": "с/с.《火卫一》计划"
+        },
+        {
+          "word": "Венгрия",
+          "accent": "2",
+          "meaning": "сущ.匈牙利"
+        },
+        {
+          "word": "Польша",
+          "accent": "2",
+          "meaning": "сущ.波兰"
+        },
+        {
+          "word": "Чехословакия",
+          "accent": "2",
+          "meaning": "сущ.（前）捷克斯洛伐克"
+        },
+        {
+          "word": "СССР",
+          "accent": "0",
+          "meaning": "сокр.（前）苏联 (Союз. Советских Социалистических Республик)"
+        },
+        {
+          "word": "Швеция",
+          "accent": "3",
+          "meaning": "сущ.瑞典"
+        },
+        {
+          "word": "полезные ископаемые",
+          "accent": "0",
+          "meaning": "с/с.矿物，矿产"
+        },
+        {
+          "word": "последние известия",
+          "accent": "0",
+          "meaning": "с/с.新闻"
+        },
+        {
+          "word": "выходить из себя",
+          "accent": "0",
+          "meaning": "с/с.发火，发怒"
+        },
+        {
+          "word": "в пользу (чью)",
+          "accent": "0",
+          "meaning": "с/с.(谁)赢了"
+        },
+        {
+          "word": "угловой удар",
+          "accent": "0",
+          "meaning": "с/с.角球"
+        },
+        {
+          "word": "иметь честь",
+          "accent": "0",
+          "meaning": "с/с.有幸，荣幸"
+        },
+        {
+          "word": "зрительный зал",
+          "accent": "0",
+          "meaning": "с/с.观众厅,剧场"
+        },
+        {
+          "word": "(кому)не до(чего)",
+          "accent": "0",
+          "meaning": "с/с.顾不上"
+        },
+        {
+          "word": "переговорный пункт",
+          "accent": "0",
+          "meaning": "с/с.电话营业处"
+        },
+        {
+          "word": "пожимать плечами",
+          "accent": "0",
+          "meaning": "с/с.耸耸肩膀"
+        }
+      ],
+      "coveredByAnyTier": 962,
+      "coverageRate": 0.936709
+    },
+    "黑大俄语第二册": {
+      "distinctWords": 979,
+      "exact": 899,
+      "relaxed": 0,
+      "wordFormToDictionary": 18,
+      "unmatched": 62,
+      "meaningMissing": 0,
+      "unmatchedSamples": [
+        {
+          "word": "делать укол",
+          "accent": "0",
+          "meaning": "с/с.打针"
+        },
+        {
+          "word": "время года",
+          "accent": "0",
+          "meaning": "с/с.季节"
+        },
+        {
+          "word": "Кавказ",
+          "accent": "5",
+          "meaning": "сущ.高加索"
+        },
+        {
+          "word": "посадка в самолёт",
+          "accent": "0",
+          "meaning": "с/с.登机"
+        },
+        {
+          "word": "сколько с кого",
+          "accent": "0",
+          "meaning": "с/с.某人该付多少（钱）"
+        },
+        {
+          "word": "полкило",
+          "accent": "7",
+          "meaning": "сущ.半公斤"
+        },
+        {
+          "word": "дать человеку сколько лет",
+          "accent": "0",
+          "meaning": "с/с.猜（某人）年龄有多少"
+        },
+        {
+          "word": "Земной шар",
+          "accent": "0",
+          "meaning": "с/с.地球"
+        },
+        {
+          "word": "Ничего подобного",
+          "accent": "0",
+          "meaning": "с/с.没那么回事！"
+        },
+        {
+          "word": "части света",
+          "accent": "0",
+          "meaning": "с/с.世界各大洲"
+        },
+        {
+          "word": "Прибалтика",
+          "accent": "5",
+          "meaning": "сущ.波罗的海沿岸"
+        },
+        {
+          "word": "В чём дело",
+          "accent": "4",
+          "meaning": "с/с.怎么回事"
+        },
+        {
+          "word": "Нью-Йорк",
+          "accent": "0",
+          "meaning": "сущ.纽约"
+        },
+        {
+          "word": "ни...ни...",
+          "accent": "0",
+          "meaning": "союз.既不(没有）…，也不（也没有）"
+        },
+        {
+          "word": "лица нет",
+          "accent": "4",
+          "meaning": "с/с.脸色不好"
+        },
+        {
+          "word": "да нет",
+          "accent": "0",
+          "meaning": "част..不是"
+        },
+        {
+          "word": "и тому подобное",
+          "accent": "0",
+          "meaning": "с/с.等等(и т. п.)"
+        },
+        {
+          "word": "нетворческий",
+          "accent": "5",
+          "meaning": "прл.非创造性的"
+        },
+        {
+          "word": "не пройти и...как",
+          "accent": "0",
+          "meaning": "с/с.没过(多长时间）就…"
+        },
+        {
+          "word": "то...то...",
+          "accent": "0",
+          "meaning": "с/с.一会儿…，一会儿…"
+        }
+      ],
+      "coveredByAnyTier": 917,
+      "coverageRate": 0.93667
+    }
+  },
+  "samples": {
+    "exact": [
+      {
+        "word": "а",
+        "bookName": "俄语专业大纲综合",
+        "accent": "0",
+        "meaning": "союз.而，可是",
+        "normalized": "а",
+        "prototypes": [
+          "а"
+        ]
+      },
+      {
+        "word": "аббревиатура",
+        "bookName": "俄语专业大纲综合",
+        "accent": "10",
+        "meaning": "сущ.缩写词",
+        "normalized": "аббревиатура",
+        "prototypes": [
+          "аббревиатура"
+        ]
+      },
+      {
+        "word": "абзац",
+        "bookName": "俄语专业大纲综合",
+        "accent": "4",
+        "meaning": "сущ.(文章每段起首的)空格\r\nсущ.(文章的)段,一段",
+        "normalized": "абзац",
+        "prototypes": [
+          "абзац"
+        ]
+      },
+      {
+        "word": "абитуриент",
+        "bookName": "俄语专业大纲综合",
+        "accent": "8",
+        "meaning": "сущ.中学应届毕业生\r\nсущ.报考高等院校或中专的人",
+        "normalized": "абитуриент",
+        "prototypes": [
+          "абитуриент"
+        ]
+      },
+      {
+        "word": "абонент",
+        "bookName": "俄语专业大纲综合",
+        "accent": "5",
+        "meaning": "сущ.订户,用户",
+        "normalized": "абонент",
+        "prototypes": [
+          "абонент"
+        ]
+      },
+      {
+        "word": "абрикос",
+        "bookName": "俄语专业大纲综合",
+        "accent": "6",
+        "meaning": "сущ.杏树,杏子",
+        "normalized": "абрикос",
+        "prototypes": [
+          "абрикос"
+        ]
+      },
+      {
+        "word": "абсолютный",
+        "bookName": "俄语专业大纲综合",
+        "accent": "6",
+        "meaning": "прл.绝对的，无条件的\r\nпрл.十分的，完全的",
+        "normalized": "абсолютный",
+        "prototypes": [
+          "абсолютный"
+        ]
+      },
+      {
+        "word": "авангард",
+        "bookName": "俄语专业大纲综合",
+        "accent": "6",
+        "meaning": "сущ.前卫，前锋\r\nсущ.先锋队",
+        "normalized": "авангард",
+        "prototypes": [
+          "авангард"
+        ]
+      },
+      {
+        "word": "авантюра",
+        "bookName": "俄语专业大纲综合",
+        "accent": "6",
+        "meaning": "сущ.轻率行为，惊险行为，奇遇\r\nсущ.冒险行为，冒险事业；盲目行为",
+        "normalized": "авантюра",
+        "prototypes": [
+          "авантюра"
+        ]
+      },
+      {
+        "word": "авария",
+        "bookName": "俄语专业大纲综合",
+        "accent": "3",
+        "meaning": "сущ.事故,故障\r\nсущ.失事,遇险\r\n",
+        "normalized": "авария",
+        "prototypes": [
+          "авария"
+        ]
+      },
+      {
+        "word": "август",
+        "bookName": "俄语专业大纲综合",
+        "accent": "1",
+        "meaning": "сущ.八月",
+        "normalized": "август",
+        "prototypes": [
+          "август"
+        ]
+      },
+      {
+        "word": "августовский",
+        "bookName": "俄语专业大纲综合",
+        "accent": "1",
+        "meaning": "прл.八月的",
+        "normalized": "августовский",
+        "prototypes": [
+          "августовский"
+        ]
+      },
+      {
+        "word": "авиационный",
+        "bookName": "俄语专业大纲综合",
+        "accent": "7",
+        "meaning": "прл.航空的",
+        "normalized": "авиационный",
+        "prototypes": [
+          "авиационный"
+        ]
+      },
+      {
+        "word": "авиация",
+        "bookName": "俄语专业大纲综合",
+        "accent": "4",
+        "meaning": "сущ.航空，航空兵，航空学",
+        "normalized": "авиация",
+        "prototypes": [
+          "авиация"
+        ]
+      },
+      {
+        "word": "автобус",
+        "bookName": "俄语专业大纲综合",
+        "accent": "4",
+        "meaning": "сущ.公共汽车，大客车，大轿车",
+        "normalized": "автобус",
+        "prototypes": [
+          "автобус"
+        ]
+      },
+      {
+        "word": "автобусный",
+        "bookName": "俄语专业大纲综合",
+        "accent": "4",
+        "meaning": "прл.汽车的，公共汽车的",
+        "normalized": "автобусный",
+        "prototypes": [
+          "автобусный"
+        ]
+      },
+      {
+        "word": "автомат",
+        "bookName": "俄语专业大纲综合",
+        "accent": "6",
+        "meaning": "сущ.自动机，自动装置\r\nсущ.冲锋枪\r\nсущ.公用自动电话间\r\nсущ.自动收款机\r\nсущ.免试生",
+        "normalized": "автомат",
+        "prototypes": [
+          "автомат"
+        ]
+      },
+      {
+        "word": "автоматизация",
+        "bookName": "俄语专业大纲综合",
+        "accent": "10",
+        "meaning": "сущ.自动化，自动控制",
+        "normalized": "автоматизация",
+        "prototypes": [
+          "автоматизация"
+        ]
+      },
+      {
+        "word": "автоматизировать",
+        "bookName": "俄语专业大纲综合",
+        "accent": "10",
+        "meaning": "гл.使自动化\r\n",
+        "normalized": "автоматизировать",
+        "prototypes": [
+          "автоматизировать"
+        ]
+      },
+      {
+        "word": "автоматический",
+        "bookName": "俄语专业大纲综合",
+        "accent": "8",
+        "meaning": "прл.自动的；自动化的\r\nпрл.无意识的；机械的",
+        "normalized": "автоматический",
+        "prototypes": [
+          "автоматический"
+        ]
+      },
+      {
+        "word": "автомобиль",
+        "bookName": "俄语专业大纲综合",
+        "accent": "8",
+        "meaning": "сущ.汽车，机动车，小汽车",
+        "normalized": "автомобиль",
+        "prototypes": [
+          "автомобиль"
+        ]
+      },
+      {
+        "word": "автомобильный",
+        "bookName": "俄语专业大纲综合",
+        "accent": "8",
+        "meaning": "прл.汽车的",
+        "normalized": "автомобильный",
+        "prototypes": [
+          "автомобильный"
+        ]
+      },
+      {
+        "word": "автономный",
+        "bookName": "俄语专业大纲综合",
+        "accent": "6",
+        "meaning": "прл.自治的，有自治权的",
+        "normalized": "автономный",
+        "prototypes": [
+          "автономный"
+        ]
+      },
+      {
+        "word": "автор",
+        "bookName": "俄语专业大纲综合",
+        "accent": "1",
+        "meaning": "сущ.作者(科学著作,文学艺术作品的)\r\nсущ.发明人，创作人，设计人(某种机器,仪器等的)\r\nсущ.起草人(决议,草案等的)",
+        "normalized": "автор",
+        "prototypes": [
+          "автор"
+        ]
+      },
+      {
+        "word": "авторитет",
+        "bookName": "俄语专业大纲综合",
+        "accent": "8",
+        "meaning": "сущ.威信，威望\r\nсущ.享有权威的人，权威",
+        "normalized": "авторитет",
+        "prototypes": [
+          "авторитет"
+        ]
+      },
+      {
+        "word": "авторский",
+        "bookName": "俄语专业大纲综合",
+        "accent": "1",
+        "meaning": "прл.作者的",
+        "normalized": "авторский",
+        "prototypes": [
+          "авторский"
+        ]
+      },
+      {
+        "word": "авторучка",
+        "bookName": "俄语专业大纲综合",
+        "accent": "6",
+        "meaning": "сущ.自来水笔，钢笔",
+        "normalized": "авторучка",
+        "prototypes": [
+          "авторучка"
+        ]
+      },
+      {
+        "word": "автошкола",
+        "bookName": "俄语专业大纲综合",
+        "accent": "7",
+        "meaning": "сущ.汽车驾驶学校(驾校)",
+        "normalized": "автошкола",
+        "prototypes": [
+          "автошкола"
+        ]
+      },
+      {
+        "word": "агент",
+        "bookName": "俄语专业大纲综合",
+        "accent": "3",
+        "meaning": "сущ.代理人，代表；经理人(国家、机关、企业等的)\r\nсущ.侦探，奸细，间谍；走狗",
+        "normalized": "агент",
+        "prototypes": [
+          "агент"
+        ]
+      },
+      {
+        "word": "агентство",
+        "bookName": "俄语专业大纲综合",
+        "accent": "3",
+        "meaning": "сущ.代办处，分行，分店，支店\r\nсущ.经理处，办事处\r\nсущ.通讯社",
+        "normalized": "агентство",
+        "prototypes": [
+          "агентство"
+        ]
+      },
+      {
+        "word": "агитация",
+        "bookName": "俄语专业大纲综合",
+        "accent": "5",
+        "meaning": "сущ.宣传，鼓动",
+        "normalized": "агитация",
+        "prototypes": [
+          "агитация"
+        ]
+      },
+      {
+        "word": "агитировать",
+        "bookName": "俄语专业大纲综合",
+        "accent": "5",
+        "meaning": "гл.宣传，鼓动",
+        "normalized": "агитировать",
+        "prototypes": [
+          "агитировать"
+        ]
+      },
+      {
+        "word": "аграрный",
+        "bookName": "俄语专业大纲综合",
+        "accent": "4",
+        "meaning": "прл.土地的，农业的",
+        "normalized": "аграрный",
+        "prototypes": [
+          "аграрный"
+        ]
+      },
+      {
+        "word": "агрессивный",
+        "bookName": "俄语专业大纲综合",
+        "accent": "7",
+        "meaning": "прл.侵略的；带侵略性的",
+        "normalized": "агрессивный",
+        "prototypes": [
+          "агрессивный"
+        ]
+      },
+      {
+        "word": "агрессия",
+        "bookName": "俄语专业大纲综合",
+        "accent": "4",
+        "meaning": "сущ.侵略",
+        "normalized": "агрессия",
+        "prototypes": [
+          "агрессия"
+        ]
+      },
+      {
+        "word": "агрессор",
+        "bookName": "俄语专业大纲综合",
+        "accent": "4",
+        "meaning": "сущ.侵略者",
+        "normalized": "агрессор",
+        "prototypes": [
+          "агрессор"
+        ]
+      },
+      {
+        "word": "агроном",
+        "bookName": "俄语专业大纲综合",
+        "accent": "6",
+        "meaning": "сущ.农学家；农艺师，农业技术员",
+        "normalized": "агроном",
+        "prototypes": [
+          "агроном"
+        ]
+      },
+      {
+        "word": "агропромышленный",
+        "bookName": "俄语专业大纲综合",
+        "accent": "9",
+        "meaning": "прл.农业生产的,农工综合的(包括农业生产、材料技术基地及产品加工)",
+        "normalized": "агропромышленный",
+        "prototypes": [
+          "агропромышленный"
+        ]
+      },
+      {
+        "word": "ад",
+        "bookName": "俄语专业大纲综合",
+        "accent": "0",
+        "meaning": "сущ.地狱\r\nсущ.受苦受难，极大的痛苦",
+        "normalized": "ад",
+        "prototypes": [
+          "ад"
+        ]
+      },
+      {
+        "word": "адвокат",
+        "bookName": "俄语专业大纲综合",
+        "accent": "6",
+        "meaning": "сущ.律师；辩护人",
+        "normalized": "адвокат",
+        "prototypes": [
+          "адвокат"
+        ]
+      },
+      {
+        "word": "административный",
+        "bookName": "俄语专业大纲综合",
+        "accent": "12",
+        "meaning": "прл.行政的，行政机关的",
+        "normalized": "административный",
+        "prototypes": [
+          "административный"
+        ]
+      },
+      {
+        "word": "администрация",
+        "bookName": "俄语专业大纲综合",
+        "accent": "10",
+        "meaning": "сущ.行政管理机关\r\nсущ.行政管理人员；负责人",
+        "normalized": "администрация",
+        "prototypes": [
+          "администрация"
+        ]
+      },
+      {
+        "word": "адмирал",
+        "bookName": "俄语专业大纲综合",
+        "accent": "6",
+        "meaning": "сущ.海军将帅，海军上将",
+        "normalized": "адмирал",
+        "prototypes": [
+          "адмирал"
+        ]
+      },
+      {
+        "word": "адрес",
+        "bookName": "俄语专业大纲综合",
+        "accent": "1",
+        "meaning": "сущ.地址，住址",
+        "normalized": "адрес",
+        "prototypes": [
+          "адрес"
+        ]
+      },
+      {
+        "word": "адский",
+        "bookName": "俄语专业大纲综合",
+        "accent": "1",
+        "meaning": "прл.地狱的\r\nпрл.非常的，极度的，难以忍受的",
+        "normalized": "адский",
+        "prototypes": [
+          "адский"
+        ]
+      },
+      {
+        "word": "азбука",
+        "bookName": "俄语专业大纲综合",
+        "accent": "1",
+        "meaning": "сущ.字母表\r\nсущ.初步知识，入门",
+        "normalized": "азбука",
+        "prototypes": [
+          "азбука"
+        ]
+      },
+      {
+        "word": "азиат",
+        "bookName": "俄语专业大纲综合",
+        "accent": "4",
+        "meaning": "сущ.亚洲人",
+        "normalized": "азиат",
+        "prototypes": [
+          "азиат"
+        ]
+      },
+      {
+        "word": "азиатский",
+        "bookName": "俄语专业大纲综合",
+        "accent": "4",
+        "meaning": "прл.亚洲的",
+        "normalized": "азиатский",
+        "prototypes": [
+          "азиатский"
+        ]
+      },
+      {
+        "word": "академик",
+        "bookName": "俄语专业大纲综合",
+        "accent": "5",
+        "meaning": "сущ.科学院院士",
+        "normalized": "академик",
+        "prototypes": [
+          "академик"
+        ]
+      },
+      {
+        "word": "академия",
+        "bookName": "俄语专业大纲综合",
+        "accent": "5",
+        "meaning": "сущ.科学院\r\nсущ.学院；大学(仅用于某些高等学校)",
+        "normalized": "академия",
+        "prototypes": [
+          "академия"
+        ]
+      },
+      {
+        "word": "аккредитация",
+        "bookName": "俄语专业大纲综合",
+        "accent": "9",
+        "meaning": "сущ.( 外交官的)任命，委任；(记者的)采访资格，采访权利",
+        "normalized": "аккредитация",
+        "prototypes": [
+          "аккредитация"
+        ]
+      },
+      {
+        "word": "аккредитовать",
+        "bookName": "俄语专业大纲综合",
+        "accent": "11",
+        "meaning": "гл.(外交)派驻，任命",
+        "normalized": "аккредитовать",
+        "prototypes": [
+          "аккредитовать"
+        ]
+      },
+      {
+        "word": "аккуратный",
+        "bookName": "俄语专业大纲综合",
+        "accent": "6",
+        "meaning": "прл.认真的；准时的；整洁的\r\nпрл.端正的；做得很仔细的(指事物、行为)",
+        "normalized": "аккуратный",
+        "prototypes": [
+          "аккуратный"
+        ]
+      },
+      {
+        "word": "акт",
+        "bookName": "俄语专业大纲综合",
+        "accent": "0",
+        "meaning": "сущ.行为，行动，举动\r\nсущ.(戏剧的)一幕\r\nсущ.法令，决定",
+        "normalized": "акт",
+        "prototypes": [
+          "акт"
+        ]
+      },
+      {
+        "word": "актёр",
+        "bookName": "俄语专业大纲综合",
+        "accent": "4",
+        "meaning": "сущ.演员",
+        "normalized": "актёр",
+        "prototypes": []
+      },
+      {
+        "word": "активизировать",
+        "bookName": "俄语专业大纲综合",
+        "accent": "8",
+        "meaning": "гл.使…积极起来，使…活跃起来",
+        "normalized": "активизировать",
+        "prototypes": [
+          "активизировать"
+        ]
+      },
+      {
+        "word": "активист",
+        "bookName": "俄语专业大纲综合",
+        "accent": "6",
+        "meaning": "сущ.积极分子",
+        "normalized": "активист",
+        "prototypes": [
+          "активист"
+        ]
+      },
+      {
+        "word": "активный",
+        "bookName": "俄语专业大纲综合",
+        "accent": "4",
+        "meaning": "прл.积极的，主动的",
+        "normalized": "активный",
+        "prototypes": [
+          "активный"
+        ]
+      },
+      {
+        "word": "актовый",
+        "bookName": "俄语专业大纲综合",
+        "accent": "1",
+        "meaning": "прл.为举行典礼用的，典礼上的",
+        "normalized": "актовый",
+        "prototypes": [
+          "актовый"
+        ]
+      },
+      {
+        "word": "актуальный",
+        "bookName": "俄语专业大纲综合",
+        "accent": "5",
+        "meaning": "прл.迫切的，切合现实的\r\nпрл.(语言)实际的",
+        "normalized": "актуальный",
+        "prototypes": [
+          "актуальный"
+        ]
+      },
+      {
+        "word": "акцент",
+        "bookName": "俄语专业大纲综合",
+        "accent": "4",
+        "meaning": "сущ.口音(话语中夹杂的某种不纯正的音)",
+        "normalized": "акцент",
+        "prototypes": [
+          "акцент"
+        ]
+      },
+      {
+        "word": "акционер",
+        "bookName": "俄语专业大纲综合",
+        "accent": "7",
+        "meaning": "сущ.股东，股票持有人",
+        "normalized": "акционер",
+        "prototypes": [
+          "акционер"
+        ]
+      },
+      {
+        "word": "акция",
+        "bookName": "俄语专业大纲综合",
+        "accent": "1",
+        "meaning": "сущ.股份，股票",
+        "normalized": "акция",
+        "prototypes": [
+          "акция"
+        ]
+      },
+      {
+        "word": "алгебра",
+        "bookName": "俄语专业大纲综合",
+        "accent": "4",
+        "meaning": "сущ.代数，代数学",
+        "normalized": "алгебра",
+        "prototypes": [
+          "алгебра"
+        ]
+      },
+      {
+        "word": "алкоголизм",
+        "bookName": "俄语专业大纲综合",
+        "accent": "8",
+        "meaning": "сущ.嗜酒癖，酗酒",
+        "normalized": "алкоголизм",
+        "prototypes": [
+          "алкоголизм"
+        ]
+      },
+      {
+        "word": "алкоголик",
+        "bookName": "俄语专业大纲综合",
+        "accent": "6",
+        "meaning": "сущ.嗜酒成癖者，酒鬼",
+        "normalized": "алкоголик",
+        "prototypes": [
+          "алкоголик"
+        ]
+      },
+      {
+        "word": "алло",
+        "bookName": "俄语专业大纲综合",
+        "accent": "4",
+        "meaning": "Частица.喂喂！哈罗！(打电话时的用语)",
+        "normalized": "алло",
+        "prototypes": [
+          "алло"
+        ]
+      },
+      {
+        "word": "аллея",
+        "bookName": "俄语专业大纲综合",
+        "accent": "4",
+        "meaning": "сущ.林荫道",
+        "normalized": "аллея",
+        "prototypes": [
+          "аллея"
+        ]
+      },
+      {
+        "word": "алмаз",
+        "bookName": "俄语专业大纲综合",
+        "accent": "4",
+        "meaning": "сущ.金刚石，钻石",
+        "normalized": "алмаз",
+        "prototypes": [
+          "алмаз"
+        ]
+      },
+      {
+        "word": "алтарь",
+        "bookName": "俄语专业大纲综合",
+        "accent": "4",
+        "meaning": "сущ.祭坛；圣堂",
+        "normalized": "алтарь",
+        "prototypes": [
+          "алтарь"
+        ]
+      },
+      {
+        "word": "алфавит",
+        "bookName": "俄语专业大纲综合",
+        "accent": "6",
+        "meaning": "сущ.字母表\r\nсущ.字母顺序",
+        "normalized": "алфавит",
+        "prototypes": [
+          "алфавит"
+        ]
+      },
+      {
+        "word": "алый",
+        "bookName": "俄语专业大纲综合",
+        "accent": "1",
+        "meaning": "прл.鲜红的，鲜红色的",
+        "normalized": "алый",
+        "prototypes": [
+          "алый"
+        ]
+      },
+      {
+        "word": "альбом",
+        "bookName": "俄语专业大纲综合",
+        "accent": "5",
+        "meaning": "сущ.纪念册；相册\r\nсущ.画册，图集",
+        "normalized": "альбом",
+        "prototypes": [
+          "альбом"
+        ]
+      },
+      {
+        "word": "альпинизм",
+        "bookName": "俄语专业大纲综合",
+        "accent": "7",
+        "meaning": "сущ.登山运动",
+        "normalized": "альпинизм",
+        "prototypes": [
+          "альпинизм"
+        ]
+      },
+      {
+        "word": "альтернатива",
+        "bookName": "俄语专业大纲综合",
+        "accent": "10",
+        "meaning": "сущ.抉择；必择其一(在二者或二者以上之中取其一的选择)",
+        "normalized": "альтернатива",
+        "prototypes": [
+          "альтернатива"
+        ]
+      },
+      {
+        "word": "алюминий",
+        "bookName": "俄语专业大纲综合",
+        "accent": "5",
+        "meaning": "сущ.铝",
+        "normalized": "алюминий",
+        "prototypes": [
+          "алюминий"
+        ]
+      },
+      {
+        "word": "американец",
+        "bookName": "俄语专业大纲综合",
+        "accent": "7",
+        "meaning": "сущ.美国人",
+        "normalized": "американец",
+        "prototypes": [
+          "американец"
+        ]
+      },
+      {
+        "word": "американский",
+        "bookName": "俄语专业大纲综合",
+        "accent": "7",
+        "meaning": "прл.美洲(人)的，美国(人)的",
+        "normalized": "американский",
+        "prototypes": [
+          "американский"
+        ]
+      },
+      {
+        "word": "анализ",
+        "bookName": "俄语专业大纲综合",
+        "accent": "3",
+        "meaning": "сущ.分析\r\nсущ.化验",
+        "normalized": "анализ",
+        "prototypes": [
+          "анализ"
+        ]
+      },
+      {
+        "word": "анализировать",
+        "bookName": "俄语专业大纲综合",
+        "accent": "7",
+        "meaning": "сущ.进行分析，进行化验",
+        "normalized": "анализировать",
+        "prototypes": [
+          "анализировать"
+        ]
+      },
+      {
+        "word": "аналогичный",
+        "bookName": "俄语专业大纲综合",
+        "accent": "7",
+        "meaning": "прл.类似的，相似的",
+        "normalized": "аналогичный",
+        "prototypes": [
+          "аналогичный"
+        ]
+      },
+      {
+        "word": "ананас",
+        "bookName": "俄语专业大纲综合",
+        "accent": "5",
+        "meaning": "сущ.菠萝，凤梨",
+        "normalized": "ананас",
+        "prototypes": [
+          "ананас"
+        ]
+      },
+      {
+        "word": "анархия",
+        "bookName": "俄语专业大纲综合",
+        "accent": "3",
+        "meaning": "сущ.无政府的状态；无政府主义思想",
+        "normalized": "анархия",
+        "prototypes": [
+          "анархия"
+        ]
+      },
+      {
+        "word": "ангел",
+        "bookName": "俄语专业大纲综合",
+        "accent": "1",
+        "meaning": "сущ.天使，安琪儿\r\nсущ.化身(某种美好品质的)",
+        "normalized": "ангел",
+        "prototypes": [
+          "ангел"
+        ]
+      },
+      {
+        "word": "ангина",
+        "bookName": "俄语专业大纲综合",
+        "accent": "4",
+        "meaning": "сущ.咽炎，扁桃体炎",
+        "normalized": "ангина",
+        "prototypes": [
+          "ангина"
+        ]
+      },
+      {
+        "word": "английский",
+        "bookName": "俄语专业大纲综合",
+        "accent": "5",
+        "meaning": "сущ.英国(人)的",
+        "normalized": "английский",
+        "prototypes": [
+          "английский"
+        ]
+      },
+      {
+        "word": "англичанин",
+        "bookName": "俄语专业大纲综合",
+        "accent": "7",
+        "meaning": "сущ.英国人",
+        "normalized": "англичанин",
+        "prototypes": [
+          "англичанин"
+        ]
+      },
+      {
+        "word": "анекдот",
+        "bookName": "俄语专业大纲综合",
+        "accent": "6",
+        "meaning": "сущ.趣闻，笑话",
+        "normalized": "анекдот",
+        "prototypes": [
+          "анекдот"
+        ]
+      },
+      {
+        "word": "анкета",
+        "bookName": "俄语专业大纲综合",
+        "accent": "4",
+        "meaning": "сущ.履历表，登记表\r\nсущ.用调查表征询(意见)",
+        "normalized": "анкета",
+        "prototypes": [
+          "анкета"
+        ]
+      },
+      {
+        "word": "аннотация",
+        "bookName": "俄语专业大纲综合",
+        "accent": "6",
+        "meaning": "сущ.(书刊的)简介、简评、述评",
+        "normalized": "аннотация",
+        "prototypes": [
+          "аннотация"
+        ]
+      },
+      {
+        "word": "ансамбль",
+        "bookName": "俄语专业大纲综合",
+        "accent": "4",
+        "meaning": "сущ.部分协调相称的格局，结构严整的总体\r\nсущ.艺术团，歌舞团",
+        "normalized": "ансамбль",
+        "prototypes": [
+          "ансамбль"
+        ]
+      },
+      {
+        "word": "антипатия",
+        "bookName": "俄语专业大纲综合",
+        "accent": "6",
+        "meaning": "сущ.反感，厌恶",
+        "normalized": "антипатия",
+        "prototypes": [
+          "антипатия"
+        ]
+      },
+      {
+        "word": "античный",
+        "bookName": "俄语专业大纲综合",
+        "accent": "4",
+        "meaning": "прл.古希腊的，古罗马的",
+        "normalized": "античный",
+        "prototypes": [
+          "античный"
+        ]
+      },
+      {
+        "word": "антоним",
+        "bookName": "俄语专业大纲综合",
+        "accent": "4",
+        "meaning": "сущ.反义词",
+        "normalized": "антоним",
+        "prototypes": [
+          "антоним"
+        ]
+      },
+      {
+        "word": "антракт",
+        "bookName": "俄语专业大纲综合",
+        "accent": "5",
+        "meaning": "сущ.幕间休息",
+        "normalized": "антракт",
+        "prototypes": [
+          "антракт"
+        ]
+      },
+      {
+        "word": "апельсин",
+        "bookName": "俄语专业大纲综合",
+        "accent": "7",
+        "meaning": "сущ.(甜)橙，橙树 \r\nсущ.橙子(指果实)",
+        "normalized": "апельсин",
+        "prototypes": [
+          "апельсин"
+        ]
+      },
+      {
+        "word": "аплодировать",
+        "bookName": "俄语专业大纲综合",
+        "accent": "6",
+        "meaning": "гл.向......鼓掌，向......拍手",
+        "normalized": "аплодировать",
+        "prototypes": [
+          "аплодировать"
+        ]
+      },
+      {
+        "word": "аплодисменты",
+        "bookName": "俄语专业大纲综合",
+        "accent": "9",
+        "meaning": "сущ.鼓掌，掌声",
+        "normalized": "аплодисменты",
+        "prototypes": [
+          "аплодисмент"
+        ]
+      },
+      {
+        "word": "аппарат",
+        "bookName": "俄语专业大纲综合",
+        "accent": "6",
+        "meaning": "сущ.器械；仪器，装置\r\nсущ.机关，部门 \r\nсущ.器官",
+        "normalized": "аппарат",
+        "prototypes": [
+          "аппарат"
+        ]
+      },
+      {
+        "word": "аппаратура",
+        "bookName": "俄语专业大纲综合",
+        "accent": "8",
+        "meaning": "сущ.仪器，器械",
+        "normalized": "аппаратура",
+        "prototypes": [
+          "аппаратура"
+        ]
+      }
+    ],
+    "relaxed": [
+      {
+        "word": "ёловый",
+        "bookName": "俄语专业大纲综合",
+        "accent": "3",
+        "meaning": "прл.云杉的",
+        "normalized": "ёловый",
+        "prototypes": []
+      },
+      {
+        "word": "ёль",
+        "bookName": "俄语专业大纲综合",
+        "accent": "0",
+        "meaning": "сущ.罗汉松,云杉",
+        "normalized": "ёль",
+        "prototypes": []
+      },
+      {
+        "word": "клен",
+        "bookName": "俄语专业大纲综合",
+        "accent": "0",
+        "meaning": "сущ.槭树",
+        "normalized": "клен",
+        "prototypes": [
+          "клен"
+        ]
+      },
+      {
+        "word": "недоверчивость",
+        "bookName": "俄语专业大纲综合",
+        "accent": "6",
+        "meaning": "сущ.怀疑,不信任",
+        "normalized": "недоверчивость",
+        "prototypes": [
+          "недоверчивость"
+        ]
+      },
+      {
+        "word": "неопределённо",
+        "bookName": "高考编辑汇总",
+        "accent": "10",
+        "meaning": "нареч.不确定地;毫无表情地",
+        "normalized": "неопределённо",
+        "prototypes": []
+      },
+      {
+        "word": "волонтёр",
+        "bookName": "公共俄语四六级",
+        "accent": "7",
+        "meaning": "сущ.志愿兵;志愿者",
+        "normalized": "волонтёр",
+        "prototypes": []
+      },
+      {
+        "word": "чёрно",
+        "bookName": "公共俄语四六级",
+        "accent": "5",
+        "meaning": "нареч.黑地;忧郁地",
+        "normalized": "чёрно",
+        "prototypes": []
+      },
+      {
+        "word": "шоссё",
+        "bookName": "职称俄语综合",
+        "accent": "5",
+        "meaning": "сущ.公路",
+        "normalized": "шоссё",
+        "prototypes": []
+      },
+      {
+        "word": "слеза",
+        "bookName": "考研",
+        "accent": "5",
+        "meaning": "сущ.眼泪，泪珠",
+        "normalized": "слеза",
+        "prototypes": [
+          "слеза"
+        ]
+      },
+      {
+        "word": "щека",
+        "bookName": "考研",
+        "accent": "4",
+        "meaning": "сущ.面颊,腮",
+        "normalized": "щека",
+        "prototypes": [
+          "щека"
+        ]
+      },
+      {
+        "word": "лёстница",
+        "bookName": "东方教材大学俄语2",
+        "accent": "2",
+        "meaning": "сущ.楼梯,梯子",
+        "normalized": "лёстница",
+        "prototypes": []
+      },
+      {
+        "word": "Вёна",
+        "bookName": "东方教材大学俄语4",
+        "accent": "2",
+        "meaning": "сущ.静脉",
+        "normalized": "вёна",
+        "prototypes": []
+      },
+      {
+        "word": "сокращённо",
+        "bookName": "东方教材大学俄语4",
+        "accent": "7",
+        "meaning": "прл.缩略地",
+        "normalized": "сокращённо",
+        "prototypes": []
+      },
+      {
+        "word": "трёхмерный",
+        "bookName": "东方教材大学俄语4",
+        "accent": "6",
+        "meaning": "прл.三维的",
+        "normalized": "трёхмерный",
+        "prototypes": []
+      },
+      {
+        "word": "нечётный",
+        "bookName": "东方教材大学俄语5",
+        "accent": "4",
+        "meaning": "прл.单数的",
+        "normalized": "нечётный",
+        "prototypes": []
+      },
+      {
+        "word": "ни при чём",
+        "bookName": "东方教材大学俄语5",
+        "accent": "8",
+        "meaning": "предик.(кто-что) 与……有关",
+        "normalized": "нипричём",
+        "prototypes": []
+      },
+      {
+        "word": "отчуждённо",
+        "bookName": "东方教材大学俄语5",
+        "accent": "7",
+        "meaning": "прл.与人疏远地，孤独地",
+        "normalized": "отчуждённо",
+        "prototypes": []
+      },
+      {
+        "word": "пересчёт",
+        "bookName": "东方教材大学俄语5",
+        "accent": "7",
+        "meaning": "сущ.折算，折合成",
+        "normalized": "пересчёт",
+        "prototypes": []
+      },
+      {
+        "word": "в расчёте на",
+        "bookName": "东方教材大学俄语6",
+        "accent": "7",
+        "meaning": "с/с.按……计算",
+        "normalized": "врасчётена",
+        "prototypes": []
+      },
+      {
+        "word": "вёсло",
+        "bookName": "东方教材大学俄语6",
+        "accent": "5",
+        "meaning": "сущ.桨,橹",
+        "normalized": "вёсло",
+        "prototypes": []
+      },
+      {
+        "word": "поблёкший",
+        "bookName": "东方教材大学俄语6",
+        "accent": "5",
+        "meaning": "прл.褪了色的",
+        "normalized": "поблёкший",
+        "prototypes": []
+      },
+      {
+        "word": "повреждённый",
+        "bookName": "东方教材大学俄语6",
+        "accent": "8",
+        "meaning": "прл.损坏的",
+        "normalized": "повреждённый",
+        "prototypes": []
+      },
+      {
+        "word": "за счёт",
+        "bookName": "东方教材大学俄语8",
+        "accent": "6",
+        "meaning": "предл.由……负担费用，由……出钱；靠，有赖于",
+        "normalized": "засчёт",
+        "prototypes": []
+      },
+      {
+        "word": "многожёнец",
+        "bookName": "东方教材大学俄语8",
+        "accent": "7",
+        "meaning": "сущ.多配偶的男人，多妻者",
+        "normalized": "многожёнец",
+        "prototypes": []
+      },
+      {
+        "word": "запрёт",
+        "bookName": "大学俄语第五册",
+        "accent": "5",
+        "meaning": "сущ.禁止",
+        "normalized": "запрёт",
+        "prototypes": []
+      },
+      {
+        "word": "ещё раз",
+        "bookName": "黑大俄语第一册",
+        "accent": "0",
+        "meaning": "с/с.再一次",
+        "normalized": "ещёраз",
+        "prototypes": []
+      },
+      {
+        "word": "ещё бы",
+        "bookName": "黑大俄语第一册",
+        "accent": "0",
+        "meaning": "с/с.那还用说",
+        "normalized": "ещёбы",
+        "prototypes": []
+      },
+      {
+        "word": "о том, о сём",
+        "bookName": "黑大俄语第三册",
+        "accent": "0",
+        "meaning": "с/с.天南海北，海阔天空",
+        "normalized": "отомосём",
+        "prototypes": []
+      },
+      {
+        "word": "неопредёленный",
+        "bookName": "对外俄语二级单词",
+        "accent": "0",
+        "meaning": "",
+        "normalized": "неопредёленный",
+        "prototypes": []
+      },
+      {
+        "word": "моё",
+        "bookName": "东方教材大学俄语1",
+        "accent": "3",
+        "meaning": "我的",
+        "normalized": "моё",
+        "prototypes": []
+      },
+      {
+        "word": "твоё",
+        "bookName": "东方教材大学俄语1",
+        "accent": "4",
+        "meaning": "你的",
+        "normalized": "твоё",
+        "prototypes": []
+      },
+      {
+        "word": "К чёрту!",
+        "bookName": "东方教材大学俄语2",
+        "accent": "0",
+        "meaning": "见鬼去吧！",
+        "normalized": "кчёрту",
+        "prototypes": []
+      },
+      {
+        "word": "тренажёрный",
+        "bookName": "走遍俄罗斯-第四册",
+        "accent": "",
+        "meaning": "训练装置的",
+        "normalized": "тренажёрный",
+        "prototypes": []
+      },
+      {
+        "word": "налёво",
+        "bookName": "黑大俄语1新版",
+        "accent": "",
+        "meaning": "向左;在左边",
+        "normalized": "налёво",
+        "prototypes": []
+      },
+      {
+        "word": "тушёный",
+        "bookName": "黑大俄语1新版",
+        "accent": "",
+        "meaning": "焖的，炖的",
+        "normalized": "тушёный",
+        "prototypes": []
+      },
+      {
+        "word": "копчёность",
+        "bookName": "黑大俄语3新版",
+        "accent": "",
+        "meaning": "（阴）熏制食品",
+        "normalized": "копчёность",
+        "prototypes": []
+      }
+    ],
+    "wordFormToDictionary": [
+      {
+        "word": "волосы",
+        "bookName": "俄语专业大纲综合",
+        "accent": "2",
+        "meaning": "мн.头发",
+        "normalized": "волосы",
+        "prototypes": [
+          "волос"
+        ]
+      },
+      {
+        "word": "немало",
+        "bookName": "俄语专业大纲综合",
+        "accent": "4",
+        "meaning": "нареч.不少,相当多",
+        "normalized": "немало",
+        "prototypes": [
+          "немало",
+          "немалый"
+        ]
+      },
+      {
+        "word": "мягко",
+        "bookName": "高考编辑汇总",
+        "accent": "2",
+        "meaning": "нареч.轻地，温柔地",
+        "normalized": "мягко",
+        "prototypes": [
+          "мягкий",
+          "мягко"
+        ]
+      },
+      {
+        "word": "красиво",
+        "bookName": "公共俄语四六级",
+        "accent": "5",
+        "meaning": "нареч.美好地;好看地 \r\nнареч.(作无人称谓语)美丽",
+        "normalized": "красиво",
+        "prototypes": [
+          "красиво",
+          "красивый"
+        ]
+      },
+      {
+        "word": "супруги",
+        "bookName": "公共俄语四六级",
+        "accent": "5",
+        "meaning": "мн.夫妻",
+        "normalized": "супруги",
+        "prototypes": [
+          "супруг"
+        ]
+      },
+      {
+        "word": "декад",
+        "bookName": "职称俄语综合",
+        "accent": "4",
+        "meaning": "сущ.十进位制",
+        "normalized": "декад",
+        "prototypes": [
+          "декада"
+        ]
+      },
+      {
+        "word": "МГУ",
+        "bookName": "职称俄语综合",
+        "accent": "0",
+        "meaning": "сокр.国立莫斯科大学",
+        "normalized": "мгу",
+        "prototypes": [
+          "мга"
+        ]
+      },
+      {
+        "word": "проходная",
+        "bookName": "职称俄语综合",
+        "accent": "8",
+        "meaning": "сущ.通道，出人口",
+        "normalized": "проходная",
+        "prototypes": [
+          "проходная",
+          "проходной"
+        ]
+      },
+      {
+        "word": "ресурсы",
+        "bookName": "职称俄语综合",
+        "accent": "4",
+        "meaning": "мн.资源，资金，财源",
+        "normalized": "ресурсы",
+        "prototypes": [
+          "ресурс"
+        ]
+      },
+      {
+        "word": "давай",
+        "bookName": "考研",
+        "accent": "4",
+        "meaning": "гл.част.让",
+        "normalized": "давай",
+        "prototypes": [
+          "давай",
+          "давать"
+        ]
+      },
+      {
+        "word": "Баку",
+        "bookName": "东方教材大学俄语1",
+        "accent": "2",
+        "meaning": "сущ.巴库",
+        "normalized": "баку",
+        "prototypes": [
+          "бак"
+        ]
+      },
+      {
+        "word": "здравствуй(те)",
+        "bookName": "东方教材大学俄语1",
+        "accent": "4",
+        "meaning": "межд.你（您）好",
+        "normalized": "здравствуйте",
+        "prototypes": [
+          "здравствовать",
+          "здравствуйте"
+        ]
+      },
+      {
+        "word": "извини(те)",
+        "bookName": "东方教材大学俄语1",
+        "accent": "6",
+        "meaning": "межд.对不起",
+        "normalized": "извините",
+        "prototypes": [
+          "извините",
+          "извинить"
+        ]
+      },
+      {
+        "word": "неплохо",
+        "bookName": "东方教材大学俄语1",
+        "accent": "5",
+        "meaning": "прл.不错地",
+        "normalized": "неплохо",
+        "prototypes": [
+          "неплохо",
+          "неплохой"
+        ]
+      },
+      {
+        "word": "скажи(те)",
+        "bookName": "东方教材大学俄语1",
+        "accent": "5",
+        "meaning": "межд.[命令式]请问",
+        "normalized": "скажите",
+        "prototypes": [
+          "скажите",
+          "сказать"
+        ]
+      },
+      {
+        "word": "цветы",
+        "bookName": "东方教材大学俄语1",
+        "accent": "5",
+        "meaning": "сущ.花",
+        "normalized": "цветы",
+        "prototypes": [
+          "цвет"
+        ]
+      },
+      {
+        "word": "чисти",
+        "bookName": "东方教材大学俄语1",
+        "accent": "2",
+        "meaning": "гл.干净的，整洁的",
+        "normalized": "чисти",
+        "prototypes": [
+          "чистить"
+        ]
+      },
+      {
+        "word": "права",
+        "bookName": "东方教材大学俄语2",
+        "accent": "3",
+        "meaning": "прл.сущ.许可证，证书，执照",
+        "normalized": "права",
+        "prototypes": [
+          "право",
+          "правый"
+        ]
+      },
+      {
+        "word": "продукты",
+        "bookName": "东方教材大学俄语2",
+        "accent": "5",
+        "meaning": "сущ.食品",
+        "normalized": "продукты",
+        "prototypes": [
+          "продукт"
+        ]
+      },
+      {
+        "word": "профессионально",
+        "bookName": "东方教材大学俄语2",
+        "accent": "11",
+        "meaning": "прл.在行，具有专业水平地",
+        "normalized": "профессионально",
+        "prototypes": [
+          "профессионально",
+          "профессиональный"
+        ]
+      },
+      {
+        "word": "Сочи",
+        "bookName": "东方教材大学俄语2",
+        "accent": "4",
+        "meaning": "гл.索契",
+        "normalized": "сочи",
+        "prototypes": [
+          "сочить"
+        ]
+      },
+      {
+        "word": "танцы",
+        "bookName": "东方教材大学俄语2",
+        "accent": "2",
+        "meaning": "сущ.舞会",
+        "normalized": "танцы",
+        "prototypes": [
+          "танец"
+        ]
+      },
+      {
+        "word": "выставочной",
+        "bookName": "东方教材大学俄语3",
+        "accent": "2",
+        "meaning": "прл.展览会的，陈列的",
+        "normalized": "выставочной",
+        "prototypes": [
+          "выставочный"
+        ]
+      },
+      {
+        "word": "горячее",
+        "bookName": "东方教材大学俄语3",
+        "accent": "6",
+        "meaning": "нар.прл.сущ.热菜",
+        "normalized": "горячее",
+        "prototypes": [
+          "горячее",
+          "горячий",
+          "горячо"
+        ]
+      },
+      {
+        "word": "замужняя",
+        "bookName": "东方教材大学俄语3",
+        "accent": "4",
+        "meaning": "сущ.прл.有夫之妇，已婚妇女",
+        "normalized": "замужняя",
+        "prototypes": [
+          "замужний",
+          "замужняя"
+        ]
+      },
+      {
+        "word": "необходимое",
+        "bookName": "东方教材大学俄语3",
+        "accent": "8",
+        "meaning": "прл.сущ.必需的东西；必要的事",
+        "normalized": "необходимое",
+        "prototypes": [
+          "необходимое",
+          "необходимый"
+        ]
+      },
+      {
+        "word": "слепо",
+        "bookName": "东方教材大学俄语3",
+        "accent": "3",
+        "meaning": "прл.盲目地，盲从地",
+        "normalized": "слепо",
+        "prototypes": [
+          "слепо",
+          "слепой"
+        ]
+      },
+      {
+        "word": "вложенный",
+        "bookName": "东方教材大学俄语4",
+        "accent": "3",
+        "meaning": "прч.被投人的",
+        "normalized": "вложенный",
+        "prototypes": [
+          "вложить"
+        ]
+      },
+      {
+        "word": "жесточайший",
+        "bookName": "东方教材大学俄语4",
+        "accent": "7",
+        "meaning": "прл.最残酷的",
+        "normalized": "жесточайший",
+        "prototypes": [
+          "жестокий"
+        ]
+      },
+      {
+        "word": "завалены",
+        "bookName": "东方教材大学俄语4",
+        "accent": "4",
+        "meaning": "прч.（завали́ть/зава́ливать的被动形动词短尾）堆满",
+        "normalized": "завалены",
+        "prototypes": [
+          "завалить"
+        ]
+      },
+      {
+        "word": "заперта",
+        "bookName": "东方教材大学俄语4",
+        "accent": "7",
+        "meaning": "прч.（запере́ть/запира́ть的被动形动词短尾）被锁上",
+        "normalized": "заперта",
+        "prototypes": [
+          "запереть"
+        ]
+      },
+      {
+        "word": "запросы",
+        "bookName": "东方教材大学俄语4",
+        "accent": "5",
+        "meaning": "сущ.要求，需求",
+        "normalized": "запросы",
+        "prototypes": [
+          "запрос"
+        ]
+      },
+      {
+        "word": "зарегистрированный",
+        "bookName": "东方教材大学俄语4",
+        "accent": "10",
+        "meaning": "прч.注册的",
+        "normalized": "зарегистрированный",
+        "prototypes": [
+          "зарегистрировать"
+        ]
+      },
+      {
+        "word": "назначенный",
+        "bookName": "东方教材大学俄语4",
+        "accent": "5",
+        "meaning": "прч.约定的",
+        "normalized": "назначенный",
+        "prototypes": [
+          "назначить"
+        ]
+      },
+      {
+        "word": "отобранный",
+        "bookName": "东方教材大学俄语4",
+        "accent": "3",
+        "meaning": "прч.挑选出来的",
+        "normalized": "отобранный",
+        "prototypes": [
+          "отобрать"
+        ]
+      },
+      {
+        "word": "отходы",
+        "bookName": "东方教材大学俄语4",
+        "accent": "4",
+        "meaning": "сущ.废弃物",
+        "normalized": "отходы",
+        "prototypes": [
+          "отход"
+        ]
+      },
+      {
+        "word": "пилотируемый",
+        "bookName": "东方教材大学俄语4",
+        "accent": "6",
+        "meaning": "прч.有人驾驶的",
+        "normalized": "пилотируемый",
+        "prototypes": [
+          "пилотировать"
+        ]
+      },
+      {
+        "word": "потомки",
+        "bookName": "东方教材大学俄语4",
+        "accent": "4",
+        "meaning": "сущ.后代，后裔",
+        "normalized": "потомки",
+        "prototypes": [
+          "потомок"
+        ]
+      },
+      {
+        "word": "предки",
+        "bookName": "东方教材大学俄语4",
+        "accent": "3",
+        "meaning": "сущ.前辈，先人",
+        "normalized": "предки",
+        "prototypes": [
+          "предок"
+        ]
+      },
+      {
+        "word": "разросшийся",
+        "bookName": "东方教材大学俄语4",
+        "accent": "5",
+        "meaning": "прч.发展起来的",
+        "normalized": "разросшийся",
+        "prototypes": [
+          "разрастись"
+        ]
+      },
+      {
+        "word": "увешаны",
+        "bookName": "东方教材大学俄语4",
+        "accent": "3",
+        "meaning": "прч.（увеша́ть/уве́шивать的被动形动词短尾）挂满，佩满",
+        "normalized": "увешаны",
+        "prototypes": [
+          "увешать"
+        ]
+      },
+      {
+        "word": "благородное",
+        "bookName": "东方教材大学俄语5",
+        "accent": "7",
+        "meaning": "прл.高尚的，崇高的；卓越的",
+        "normalized": "благородное",
+        "prototypes": [
+          "благородный"
+        ]
+      },
+      {
+        "word": "востребованный",
+        "bookName": "东方教材大学俄语5",
+        "accent": "6",
+        "meaning": "прч.要求的",
+        "normalized": "востребованный",
+        "prototypes": [
+          "востребованный",
+          "востребовать"
+        ]
+      },
+      {
+        "word": "допустим",
+        "bookName": "东方教材大学俄语5",
+        "accent": "4",
+        "meaning": "гл.прл.част.假定，设想",
+        "normalized": "допустим",
+        "prototypes": [
+          "допустим",
+          "допустимый",
+          "допустить"
+        ]
+      },
+      {
+        "word": "измором",
+        "bookName": "东方教材大学俄语5",
+        "accent": "4",
+        "meaning": "нар.无休止地纠缠，纠缠不休",
+        "normalized": "измором",
+        "prototypes": [
+          "измор",
+          "измором"
+        ]
+      },
+      {
+        "word": "изначально",
+        "bookName": "东方教材大学俄语5",
+        "accent": "6",
+        "meaning": "прл.自古以来，亘古以来",
+        "normalized": "изначально",
+        "prototypes": [
+          "изначально",
+          "изначальный"
+        ]
+      },
+      {
+        "word": "молодцом",
+        "bookName": "东方教材大学俄语5",
+        "accent": "7",
+        "meaning": "предик.сущ.真行，好样的",
+        "normalized": "молодцом",
+        "prototypes": [
+          "молодец",
+          "молодцом"
+        ]
+      },
+      {
+        "word": "надушу",
+        "bookName": "东方教材大学俄语5",
+        "accent": "6",
+        "meaning": "гл.（同на челове́ка）按每一个人（平均，人均）",
+        "normalized": "надушу",
+        "prototypes": [
+          "надушить"
+        ]
+      },
+      {
+        "word": "нахрапом",
+        "bookName": "东方教材大学俄语5",
+        "accent": "5",
+        "meaning": "нар.（прост.）粗鲁地，粗暴地，蛮橫无理地",
+        "normalized": "нахрапом",
+        "prototypes": [
+          "нахрап",
+          "нахрапом"
+        ]
+      },
+      {
+        "word": "нацеленный",
+        "bookName": "东方教材大学俄语5",
+        "accent": "4",
+        "meaning": "прч.指向.的，给....指出方向的",
+        "normalized": "нацеленный",
+        "prototypes": [
+          "нацелить"
+        ]
+      },
+      {
+        "word": "обстоятельно",
+        "bookName": "东方教材大学俄语5",
+        "accent": "6",
+        "meaning": "прл.详细地，周密地，慎重地",
+        "normalized": "обстоятельно",
+        "prototypes": [
+          "обстоятельно",
+          "обстоятельный"
+        ]
+      },
+      {
+        "word": "опрошенный",
+        "bookName": "东方教材大学俄语5",
+        "accent": "4",
+        "meaning": "прч.被做问卷调查的人",
+        "normalized": "опрошенный",
+        "prototypes": [
+          "опросить"
+        ]
+      },
+      {
+        "word": "предначертано",
+        "bookName": "东方教材大学俄语5",
+        "accent": "8",
+        "meaning": "прч.(кому́-н. что де́лать)（命中）注定",
+        "normalized": "предначертано",
+        "prototypes": [
+          "предначертать"
+        ]
+      },
+      {
+        "word": "пристрастно",
+        "bookName": "东方教材大学俄语5",
+        "accent": "7",
+        "meaning": "прл.偏袓地，不公平地",
+        "normalized": "пристрастно",
+        "prototypes": [
+          "пристрастно",
+          "пристрастный"
+        ]
+      },
+      {
+        "word": "промокший",
+        "bookName": "东方教材大学俄语5",
+        "accent": "5",
+        "meaning": "прч.湿透的",
+        "normalized": "промокший",
+        "prototypes": [
+          "промокнуть"
+        ]
+      },
+      {
+        "word": "распахнутый",
+        "bookName": "东方教材大学俄语5",
+        "accent": "5",
+        "meaning": "прч.敞开的",
+        "normalized": "распахнутый",
+        "prototypes": [
+          "распахнуть"
+        ]
+      },
+      {
+        "word": "рудники",
+        "bookName": "东方教材大学俄语5",
+        "accent": "7",
+        "meaning": "сущ.矿",
+        "normalized": "рудники",
+        "prototypes": [
+          "рудник"
+        ]
+      },
+      {
+        "word": "тряпки",
+        "bookName": "东方教材大学俄语5",
+        "accent": "3",
+        "meaning": "сущ.（мн.неодобр.）（通常指妇女的）各种衣服",
+        "normalized": "тряпки",
+        "prototypes": [
+          "тряпка"
+        ]
+      },
+      {
+        "word": "бескомпромиссно",
+        "bookName": "东方教材大学俄语6",
+        "accent": "11",
+        "meaning": "прл.毫不妥协地",
+        "normalized": "бескомпромиссно",
+        "prototypes": [
+          "бескомпромиссно",
+          "бескомпромиссный"
+        ]
+      },
+      {
+        "word": "бесстрастно",
+        "bookName": "东方教材大学俄语6",
+        "accent": "7",
+        "meaning": "прл.冷漠地，冷淡地",
+        "normalized": "бесстрастно",
+        "prototypes": [
+          "бесстрастно",
+          "бесстрастный"
+        ]
+      },
+      {
+        "word": "инстинктивно",
+        "bookName": "东方教材大学俄语6",
+        "accent": "9",
+        "meaning": "прл.下意识地",
+        "normalized": "инстинктивно",
+        "prototypes": [
+          "инстинктивно",
+          "инстинктивный"
+        ]
+      },
+      {
+        "word": "мучное",
+        "bookName": "东方教材大学俄语6",
+        "accent": "5",
+        "meaning": "сущ.面食",
+        "normalized": "мучное",
+        "prototypes": [
+          "мучное",
+          "мучной"
+        ]
+      },
+      {
+        "word": "накопившийся",
+        "bookName": "东方教材大学俄语6",
+        "accent": "6",
+        "meaning": "прч.积累下来的",
+        "normalized": "накопившийся",
+        "prototypes": [
+          "накопиться"
+        ]
+      },
+      {
+        "word": "нарочито",
+        "bookName": "东方教材大学俄语6",
+        "accent": "6",
+        "meaning": "прл.故意地，有意地",
+        "normalized": "нарочито",
+        "prototypes": [
+          "нарочито",
+          "нарочитый"
+        ]
+      },
+      {
+        "word": "нашумевший",
+        "bookName": "东方教材大学俄语6",
+        "accent": "6",
+        "meaning": "прч.引起轰动的，名噪一时的",
+        "normalized": "нашумевший",
+        "prototypes": [
+          "нашуметь"
+        ]
+      },
+      {
+        "word": "неукоснительно",
+        "bookName": "东方教材大学俄语6",
+        "accent": "8",
+        "meaning": "прл.无条件地，绝对地",
+        "normalized": "неукоснительно",
+        "prototypes": [
+          "неукоснительно",
+          "неукоснительный"
+        ]
+      },
+      {
+        "word": "подпорченный",
+        "bookName": "东方教材大学俄语6",
+        "accent": "5",
+        "meaning": "прч.受损的",
+        "normalized": "подпорченный",
+        "prototypes": [
+          "подпортить"
+        ]
+      },
+      {
+        "word": "прагматично",
+        "bookName": "东方教材大学俄语6",
+        "accent": "8",
+        "meaning": "прл.实用地",
+        "normalized": "прагматично",
+        "prototypes": [
+          "прагматично",
+          "прагматичный"
+        ]
+      },
+      {
+        "word": "разъедающий",
+        "bookName": "东方教材大学俄语6",
+        "accent": "7",
+        "meaning": "прч.腐蚀的，侵蚀的",
+        "normalized": "разъедающий",
+        "prototypes": [
+          "разъедать"
+        ]
+      },
+      {
+        "word": "толерантно",
+        "bookName": "东方教材大学俄语6",
+        "accent": "6",
+        "meaning": "прл.宽容地",
+        "normalized": "толерантно",
+        "prototypes": [
+          "толерантно",
+          "толерантный"
+        ]
+      },
+      {
+        "word": "упущенный",
+        "bookName": "东方教材大学俄语6",
+        "accent": "3",
+        "meaning": "прч.失去的",
+        "normalized": "упущенный",
+        "prototypes": [
+          "упустить"
+        ]
+      },
+      {
+        "word": "Калифорния",
+        "bookName": "东方教材大学俄语7",
+        "accent": "6",
+        "meaning": "сущ.加利福尼亚",
+        "normalized": "калифорния",
+        "prototypes": [
+          "калифорний"
+        ]
+      },
+      {
+        "word": "одержанный",
+        "bookName": "东方教材大学俄语7",
+        "accent": "3",
+        "meaning": "прч.稳重的，持重的，矜持的",
+        "normalized": "одержанный",
+        "prototypes": [
+          "одержать"
+        ]
+      },
+      {
+        "word": "разбои",
+        "bookName": "东方教材大学俄语8",
+        "accent": "5",
+        "meaning": "сущ.抢劫，公开的敲诈",
+        "normalized": "разбои",
+        "prototypes": [
+          "разбой"
+        ]
+      },
+      {
+        "word": "созидательное",
+        "bookName": "东方教材大学俄语8",
+        "accent": "6",
+        "meaning": "прл.创造性",
+        "normalized": "созидательное",
+        "prototypes": [
+          "созидательный"
+        ]
+      },
+      {
+        "word": "стоит",
+        "bookName": "黑大俄语第一册",
+        "accent": "4",
+        "meaning": "гл.站（着）",
+        "normalized": "стоит",
+        "prototypes": [
+          "стоить",
+          "стоять"
+        ]
+      },
+      {
+        "word": "пойдут",
+        "bookName": "黑大俄语第一册",
+        "accent": "5",
+        "meaning": "гл.（步行）去",
+        "normalized": "пойдут",
+        "prototypes": [
+          "пойти"
+        ]
+      },
+      {
+        "word": "ем",
+        "bookName": "黑大俄语第一册",
+        "accent": "0",
+        "meaning": "част.吃",
+        "normalized": "ем",
+        "prototypes": [
+          "есть"
+        ]
+      },
+      {
+        "word": "пью",
+        "bookName": "黑大俄语第一册",
+        "accent": "2",
+        "meaning": "гл.喝",
+        "normalized": "пью",
+        "prototypes": [
+          "пить"
+        ]
+      },
+      {
+        "word": "мою",
+        "bookName": "黑大俄语第一册",
+        "accent": "2",
+        "meaning": "гл.洗",
+        "normalized": "мою",
+        "prototypes": [
+          "мой",
+          "моя",
+          "мыть"
+        ]
+      },
+      {
+        "word": "знаю",
+        "bookName": "黑大俄语第一册",
+        "accent": "0",
+        "meaning": "ввод.知道",
+        "normalized": "знаю",
+        "prototypes": [
+          "знать"
+        ]
+      },
+      {
+        "word": "вижу",
+        "bookName": "黑大俄语第一册",
+        "accent": "2",
+        "meaning": "гл.看见",
+        "normalized": "вижу",
+        "prototypes": [
+          "видеть"
+        ]
+      },
+      {
+        "word": "живут",
+        "bookName": "黑大俄语第一册",
+        "accent": "4",
+        "meaning": "гл.住;生活",
+        "normalized": "живут",
+        "prototypes": [
+          "жить"
+        ]
+      },
+      {
+        "word": "сижу",
+        "bookName": "黑大俄语第一册",
+        "accent": "4",
+        "meaning": "гл.坐",
+        "normalized": "сижу",
+        "prototypes": [
+          "сидеть"
+        ]
+      },
+      {
+        "word": "идут",
+        "bookName": "黑大俄语第一册",
+        "accent": "4",
+        "meaning": "гл.走，去",
+        "normalized": "идут",
+        "prototypes": [
+          "идти"
+        ]
+      },
+      {
+        "word": "хотим",
+        "bookName": "黑大俄语第一册",
+        "accent": "4",
+        "meaning": "гл.想(要)",
+        "normalized": "хотим",
+        "prototypes": [
+          "хотеть"
+        ]
+      },
+      {
+        "word": "пишут",
+        "bookName": "黑大俄语第一册",
+        "accent": "4",
+        "meaning": "гл.写",
+        "normalized": "пишут",
+        "prototypes": [
+          "писать"
+        ]
+      },
+      {
+        "word": "пьют",
+        "bookName": "黑大俄语第一册",
+        "accent": "2",
+        "meaning": "гл.喝",
+        "normalized": "пьют",
+        "prototypes": [
+          "пить"
+        ]
+      },
+      {
+        "word": "встанут",
+        "bookName": "黑大俄语第一册",
+        "accent": "4",
+        "meaning": "гл.起床",
+        "normalized": "встанут",
+        "prototypes": [
+          "встать"
+        ]
+      },
+      {
+        "word": "думаю",
+        "bookName": "黑大俄语第一册",
+        "accent": "2",
+        "meaning": "гл.想",
+        "normalized": "думаю",
+        "prototypes": [
+          "думать"
+        ]
+      },
+      {
+        "word": "сможет",
+        "bookName": "黑大俄语第一册",
+        "accent": "3",
+        "meaning": "гл.能够",
+        "normalized": "сможет",
+        "prototypes": [
+          "смочь"
+        ]
+      },
+      {
+        "word": "спросите",
+        "bookName": "黑大俄语第一册",
+        "accent": "6",
+        "meaning": "гл.问",
+        "normalized": "спросите",
+        "prototypes": [
+          "спросить"
+        ]
+      },
+      {
+        "word": "бегут",
+        "bookName": "黑大俄语第一册",
+        "accent": "4",
+        "meaning": "гл.跑",
+        "normalized": "бегут",
+        "prototypes": [
+          "бежать"
+        ]
+      },
+      {
+        "word": "возьми",
+        "bookName": "黑大俄语第一册",
+        "accent": "6",
+        "meaning": "гл.拿",
+        "normalized": "возьми",
+        "prototypes": [
+          "взять"
+        ]
+      },
+      {
+        "word": "спишь",
+        "bookName": "黑大俄语第一册",
+        "accent": "3",
+        "meaning": "гл.睡觉",
+        "normalized": "спишь",
+        "prototypes": [
+          "спать"
+        ]
+      },
+      {
+        "word": "ищет",
+        "bookName": "黑大俄语第一册",
+        "accent": "4",
+        "meaning": "гл.找",
+        "normalized": "ищет",
+        "prototypes": [
+          "искать"
+        ]
+      },
+      {
+        "word": "скажешь",
+        "bookName": "黑大俄语第一册",
+        "accent": "5",
+        "meaning": "гл.说，告诉",
+        "normalized": "скажешь",
+        "prototypes": [
+          "сказать"
+        ]
+      },
+      {
+        "word": "нравится",
+        "bookName": "黑大俄语第一册",
+        "accent": "3",
+        "meaning": "гл.喜欢",
+        "normalized": "нравится",
+        "prototypes": [
+          "нравиться"
+        ]
+      },
+      {
+        "word": "болит",
+        "bookName": "黑大俄语第一册",
+        "accent": "4",
+        "meaning": "гл.疼",
+        "normalized": "болит",
+        "prototypes": [
+          "болеть"
+        ]
+      },
+      {
+        "word": "уходишь",
+        "bookName": "黑大俄语第一册",
+        "accent": "5",
+        "meaning": "гл.离开",
+        "normalized": "уходишь",
+        "prototypes": [
+          "уходить"
+        ]
+      }
+    ],
+    "unmatched": [
+      {
+        "word": "логин",
+        "bookName": "俄语专业大纲综合",
+        "accent": "2",
+        "meaning": "сущ.登陆,登入(计算机用语)",
+        "normalized": "логин",
+        "prototypes": []
+      },
+      {
+        "word": "свёртывать",
+        "bookName": "俄语专业大纲综合",
+        "accent": "3",
+        "meaning": "гл.卷,卷起\r\nгл.拐向,转向",
+        "normalized": "свёртывать",
+        "prototypes": []
+      },
+      {
+        "word": "испанско-русский",
+        "bookName": "高考编辑汇总",
+        "accent": "4,11",
+        "meaning": "прл.西班牙俄罗斯的",
+        "normalized": "испанско-русский",
+        "prototypes": []
+      },
+      {
+        "word": "китайско-русский",
+        "bookName": "高考编辑汇总",
+        "accent": "4,11",
+        "meaning": "прл.汉俄的",
+        "normalized": "китайско-русский",
+        "prototypes": []
+      },
+      {
+        "word": "немецко-русский",
+        "bookName": "高考编辑汇总",
+        "accent": "4,11",
+        "meaning": "прл.德俄的",
+        "normalized": "немецко-русский",
+        "prototypes": []
+      },
+      {
+        "word": "Госдума",
+        "bookName": "公共俄语四六级",
+        "accent": "2",
+        "meaning": "сущ.国家杜马",
+        "normalized": "госдума",
+        "prototypes": []
+      },
+      {
+        "word": "Байкал",
+        "bookName": "职称俄语综合",
+        "accent": "5",
+        "meaning": "сущ.贝加尔(湖)",
+        "normalized": "байкал",
+        "prototypes": []
+      },
+      {
+        "word": "Белоруссия",
+        "bookName": "职称俄语综合",
+        "accent": "6",
+        "meaning": "сущ.白俄罗斯",
+        "normalized": "белоруссия",
+        "prototypes": []
+      },
+      {
+        "word": "валютно-торговый",
+        "bookName": "职称俄语综合",
+        "accent": "4,13",
+        "meaning": "прл.外汇交易的",
+        "normalized": "валютно-торговый",
+        "prototypes": []
+      },
+      {
+        "word": "ГУМ",
+        "bookName": "职称俄语综合",
+        "accent": "0",
+        "meaning": "сокр.国营百货商店",
+        "normalized": "гум",
+        "prototypes": [
+          "гум"
+        ]
+      },
+      {
+        "word": "маркет",
+        "bookName": "职称俄语综合",
+        "accent": "2",
+        "meaning": "сущ.市场，集市，市面",
+        "normalized": "маркет",
+        "prototypes": []
+      },
+      {
+        "word": "нехватать",
+        "bookName": "职称俄语综合",
+        "accent": "7",
+        "meaning": "гл.不够，缺少",
+        "normalized": "нехватать",
+        "prototypes": []
+      },
+      {
+        "word": "поливалка",
+        "bookName": "职称俄语综合",
+        "accent": "6",
+        "meaning": "сущ.浇灌装置,洒水车",
+        "normalized": "поливалка",
+        "prototypes": []
+      },
+      {
+        "word": "СНГ",
+        "bookName": "职称俄语综合",
+        "accent": "0",
+        "meaning": "Абб.独联体",
+        "normalized": "снг",
+        "prototypes": []
+      },
+      {
+        "word": "СССР",
+        "bookName": "职称俄语综合",
+        "accent": "0",
+        "meaning": "Абб.苏联（苏维埃社会主义共和国联盟）",
+        "normalized": "ссср",
+        "prototypes": []
+      },
+      {
+        "word": "США",
+        "bookName": "职称俄语综合",
+        "accent": "0",
+        "meaning": "Абб.美国",
+        "normalized": "сша",
+        "prototypes": []
+      },
+      {
+        "word": "анти...",
+        "bookName": "考研",
+        "accent": "1",
+        "meaning": "перв часть сложн слов.接形容词和名词 表示 反，反对，违反，对抗",
+        "normalized": "анти",
+        "prototypes": []
+      },
+      {
+        "word": "видео-",
+        "bookName": "考研",
+        "accent": "0",
+        "meaning": "перв часть сложн слов.1.表示 电视、视频；2. 录像",
+        "normalized": "видео-",
+        "prototypes": []
+      },
+      {
+        "word": "видеоигры",
+        "bookName": "考研",
+        "accent": "9",
+        "meaning": "сущ.电子游戏",
+        "normalized": "видеоигры",
+        "prototypes": []
+      },
+      {
+        "word": "Греция",
+        "bookName": "考研",
+        "accent": "3",
+        "meaning": "сущ.希腊",
+        "normalized": "греция",
+        "prototypes": []
+      },
+      {
+        "word": "стереокомплекс",
+        "bookName": "考研",
+        "accent": "8",
+        "meaning": "сущ.组合音响",
+        "normalized": "стереокомплекс",
+        "prototypes": []
+      },
+      {
+        "word": "термо...",
+        "bookName": "考研",
+        "accent": "0",
+        "meaning": "перв часть сложн слов.表示 1.\"热\",\"热力\",\"温\",\"温度\",\"温差\"之意",
+        "normalized": "термо",
+        "prototypes": []
+      },
+      {
+        "word": "то-есть",
+        "bookName": "考研",
+        "accent": "2",
+        "meaning": "союз. част. ввод.即，就是说",
+        "normalized": "то-есть",
+        "prototypes": []
+      },
+      {
+        "word": "экранчик",
+        "bookName": "考研",
+        "accent": "4",
+        "meaning": "сущ.荧光屏",
+        "normalized": "экранчик",
+        "prototypes": [
+          "экранчик"
+        ]
+      },
+      {
+        "word": "будьте добры",
+        "bookName": "东方教材大学俄语1",
+        "accent": "2,12",
+        "meaning": "с/с.劳驾",
+        "normalized": "будьтедобры",
+        "prototypes": []
+      },
+      {
+        "word": "вечернее платье",
+        "bookName": "东方教材大学俄语1",
+        "accent": "4,12",
+        "meaning": "с/с.（女士穿的）晚礼服",
+        "normalized": "вечернееплатье",
+        "prototypes": []
+      },
+      {
+        "word": "Владивосток",
+        "bookName": "东方教材大学俄语1",
+        "accent": "10",
+        "meaning": "сущ.符拉迪沃斯托克（海参崴）",
+        "normalized": "владивосток",
+        "prototypes": []
+      },
+      {
+        "word": "Волгоград",
+        "bookName": "东方教材大学俄语1",
+        "accent": "8",
+        "meaning": "сущ.伏尔加格勒",
+        "normalized": "волгоград",
+        "prototypes": []
+      },
+      {
+        "word": "Третьяковская галерея",
+        "bookName": "东方教材大学俄语1",
+        "accent": "8,20",
+        "meaning": "с/с.特列季亚科夫美术馆",
+        "normalized": "третьяковскаягалерея",
+        "prototypes": []
+      },
+      {
+        "word": "Зимний дворец",
+        "bookName": "东方教材大学俄语1",
+        "accent": "2,12",
+        "meaning": "с/с.冬宫",
+        "normalized": "зимнийдворец",
+        "prototypes": []
+      },
+      {
+        "word": "играть на гитаре",
+        "bookName": "东方教材大学俄语1",
+        "accent": "4,15",
+        "meaning": "с/с.弹吉它",
+        "normalized": "игратьнагитаре",
+        "prototypes": []
+      },
+      {
+        "word": "Интернет-кафе",
+        "bookName": "东方教材大学俄语1",
+        "accent": "7,13",
+        "meaning": "с/с.网吧",
+        "normalized": "интернет-кафе",
+        "prototypes": []
+      },
+      {
+        "word": "Саратов",
+        "bookName": "东方教材大学俄语1",
+        "accent": "4",
+        "meaning": "сущ.萨拉托夫市",
+        "normalized": "саратов",
+        "prototypes": []
+      },
+      {
+        "word": "Средняя Азия",
+        "bookName": "东方教材大学俄语1",
+        "accent": "3",
+        "meaning": "с/с.中亚",
+        "normalized": "средняяазия",
+        "prototypes": []
+      },
+      {
+        "word": "Суздаль",
+        "bookName": "东方教材大学俄语1",
+        "accent": "2",
+        "meaning": "сущ.苏兹达里市",
+        "normalized": "суздаль",
+        "prototypes": []
+      },
+      {
+        "word": "читальный зал",
+        "bookName": "东方教材大学俄语1",
+        "accent": "4",
+        "meaning": "с/с.阅读室",
+        "normalized": "читальныйзал",
+        "prototypes": []
+      },
+      {
+        "word": "время года",
+        "bookName": "东方教材大学俄语2",
+        "accent": "3,8",
+        "meaning": "с/с.季节",
+        "normalized": "времягода",
+        "prototypes": []
+      },
+      {
+        "word": "Гуанчжоу",
+        "bookName": "东方教材大学俄语2",
+        "accent": "7",
+        "meaning": "сущ.广州",
+        "normalized": "гуанчжоу",
+        "prototypes": []
+      },
+      {
+        "word": "ИКЕА",
+        "bookName": "东方教材大学俄语2",
+        "accent": "0",
+        "meaning": "абб.宜家（国际家居制品连锁店）",
+        "normalized": "икеа",
+        "prototypes": []
+      },
+      {
+        "word": "Италия",
+        "bookName": "东方教材大学俄语2",
+        "accent": "3",
+        "meaning": "сущ.意大利",
+        "normalized": "италия",
+        "prototypes": []
+      },
+      {
+        "word": "классно",
+        "bookName": "东方教材大学俄语2",
+        "accent": "3",
+        "meaning": "нар.高水平地，技巧高超地",
+        "normalized": "классно",
+        "prototypes": [
+          "классно"
+        ]
+      },
+      {
+        "word": "контроллёр-автомат",
+        "bookName": "东方教材大学俄语2",
+        "accent": "9,17",
+        "meaning": "сущ.自动检票机",
+        "normalized": "контроллёр-автомат",
+        "prototypes": []
+      },
+      {
+        "word": "лёгкие",
+        "bookName": "东方教材大学俄语2",
+        "accent": "2",
+        "meaning": "сущ.прл.肺",
+        "normalized": "лёгкие",
+        "prototypes": []
+      },
+      {
+        "word": "Париж",
+        "bookName": "东方教材大学俄语2",
+        "accent": "4",
+        "meaning": "сущ.巴黎",
+        "normalized": "париж",
+        "prototypes": []
+      },
+      {
+        "word": "трудоголик",
+        "bookName": "东方教材大学俄语2",
+        "accent": "7",
+        "meaning": "сущ.工作狂",
+        "normalized": "трудоголик",
+        "prototypes": []
+      },
+      {
+        "word": "Ухань",
+        "bookName": "东方教材大学俄语2",
+        "accent": "3",
+        "meaning": "сущ.武汉",
+        "normalized": "ухань",
+        "prototypes": []
+      },
+      {
+        "word": "ЦУМ",
+        "bookName": "东方教材大学俄语2",
+        "accent": "0",
+        "meaning": "абб.中央百货商店",
+        "normalized": "цум",
+        "prototypes": []
+      },
+      {
+        "word": "Шанхай",
+        "bookName": "东方教材大学俄语2",
+        "accent": "5",
+        "meaning": "сущ.上海",
+        "normalized": "шанхай",
+        "prototypes": []
+      },
+      {
+        "word": "Астрахань",
+        "bookName": "东方教材大学俄语3",
+        "accent": "1",
+        "meaning": "сущ.阿斯特拉罕",
+        "normalized": "астрахань",
+        "prototypes": []
+      },
+      {
+        "word": "бизнес-ланч",
+        "bookName": "东方教材大学俄语3",
+        "accent": "2",
+        "meaning": "сущ.商务套餐，工作餐",
+        "normalized": "бизнес-ланч",
+        "prototypes": []
+      },
+      {
+        "word": "веб-сайт",
+        "bookName": "东方教材大学俄语3",
+        "accent": "2",
+        "meaning": "сущ.网站",
+        "normalized": "веб-сайт",
+        "prototypes": []
+      },
+      {
+        "word": "Венеция",
+        "bookName": "东方教材大学俄语3",
+        "accent": "4",
+        "meaning": "сущ.威尼斯",
+        "normalized": "венеция",
+        "prototypes": []
+      },
+      {
+        "word": "Днепр",
+        "bookName": "东方教材大学俄语3",
+        "accent": "0",
+        "meaning": "сущ.第聂伯河",
+        "normalized": "днепр",
+        "prototypes": []
+      },
+      {
+        "word": "Исаакиевский собор",
+        "bookName": "东方教材大学俄语3",
+        "accent": "3,18",
+        "meaning": "с/с.伊萨基耶夫大教堂",
+        "normalized": "исаакиевскийсобор",
+        "prototypes": []
+      },
+      {
+        "word": "Казанский собор",
+        "bookName": "东方教材大学俄语3",
+        "accent": "4,14",
+        "meaning": "с/с.喀山大教堂",
+        "normalized": "казанскийсобор",
+        "prototypes": []
+      },
+      {
+        "word": "Казань",
+        "bookName": "东方教材大学俄语3",
+        "accent": "4",
+        "meaning": "сущ.喀山",
+        "normalized": "казань",
+        "prototypes": []
+      },
+      {
+        "word": "номинирован",
+        "bookName": "东方教材大学俄语3",
+        "accent": "6",
+        "meaning": "крат.获得提名；被提名",
+        "normalized": "номинирован",
+        "prototypes": []
+      },
+      {
+        "word": "социо-культурный",
+        "bookName": "东方教材大学俄语3",
+        "accent": "12",
+        "meaning": "прл.社会文化（学）的",
+        "normalized": "социо-культурный",
+        "prototypes": []
+      },
+      {
+        "word": "Ульяновск",
+        "bookName": "东方教材大学俄语3",
+        "accent": "4",
+        "meaning": "сущ.乌里扬诺夫斯克",
+        "normalized": "ульяновск",
+        "prototypes": []
+      },
+      {
+        "word": "Урга",
+        "bookName": "东方教材大学俄语3",
+        "accent": "4",
+        "meaning": "сущ.库伦",
+        "normalized": "урга",
+        "prototypes": []
+      },
+      {
+        "word": "Финляндия",
+        "bookName": "东方教材大学俄语3",
+        "accent": "5",
+        "meaning": "сущ.芬兰",
+        "normalized": "финляндия",
+        "prototypes": []
+      },
+      {
+        "word": "Хельсинки",
+        "bookName": "东方教材大学俄语3",
+        "accent": "2",
+        "meaning": "сущ.赫尔辛基",
+        "normalized": "хельсинки",
+        "prototypes": []
+      },
+      {
+        "word": "Япония",
+        "bookName": "东方教材大学俄语3",
+        "accent": "3",
+        "meaning": "сущ.日本",
+        "normalized": "япония",
+        "prototypes": []
+      },
+      {
+        "word": "Ярославль",
+        "bookName": "东方教材大学俄语3",
+        "accent": "6",
+        "meaning": "сущ.雅罗斯拉夫尔（俄罗斯城市）",
+        "normalized": "ярославль",
+        "prototypes": []
+      },
+      {
+        "word": "бледно-сапфировый",
+        "bookName": "东方教材大学俄语4",
+        "accent": "12",
+        "meaning": "прл.淡蓝宝石色的",
+        "normalized": "бледно-сапфировый",
+        "prototypes": []
+      },
+      {
+        "word": "Болгария",
+        "bookName": "东方教材大学俄语4",
+        "accent": "6",
+        "meaning": "сущ.保加利亚",
+        "normalized": "болгария",
+        "prototypes": [
+          "болгария"
+        ]
+      },
+      {
+        "word": "Болонская Декларация",
+        "bookName": "东方教材大学俄语4",
+        "accent": "4,17",
+        "meaning": "с/с.博洛尼亚宣言",
+        "normalized": "болонскаядекларация",
+        "prototypes": []
+      },
+      {
+        "word": "действительный член",
+        "bookName": "东方教材大学俄语4",
+        "accent": "7",
+        "meaning": "с/с.正式会员",
+        "normalized": "действительныйчлен",
+        "prototypes": []
+      },
+      {
+        "word": "дипломная работа",
+        "bookName": "东方教材大学俄语4",
+        "accent": "5,14",
+        "meaning": "с/с.毕业论文",
+        "normalized": "дипломнаяработа",
+        "prototypes": []
+      },
+      {
+        "word": "зачётная книжка",
+        "bookName": "东方教材大学俄语4",
+        "accent": "4,12",
+        "meaning": "с/с.记分册",
+        "normalized": "зачётнаякнижка",
+        "prototypes": []
+      },
+      {
+        "word": "Индиана",
+        "bookName": "东方教材大学俄语4",
+        "accent": "5",
+        "meaning": "сущ.印第安纳（州）",
+        "normalized": "индиана",
+        "prototypes": []
+      },
+      {
+        "word": "ИСЗ",
+        "bookName": "东方教材大学俄语4",
+        "accent": "0",
+        "meaning": "абб.人造地球卫星",
+        "normalized": "исз",
+        "prototypes": []
+      },
+      {
+        "word": "Казанское княжество",
+        "bookName": "东方教材大学俄语4",
+        "accent": "4,13",
+        "meaning": "с/с.喀山公国",
+        "normalized": "казанскоекняжество",
+        "prototypes": []
+      },
+      {
+        "word": "катастрофически",
+        "bookName": "东方教材大学俄语4",
+        "accent": "10",
+        "meaning": "нар.灾难性地，毁灭性地",
+        "normalized": "катастрофически",
+        "prototypes": [
+          "катастрофически"
+        ]
+      },
+      {
+        "word": "Медный всадник",
+        "bookName": "东方教材大学俄语4",
+        "accent": "2,10",
+        "meaning": "с/с.青铜骑士",
+        "normalized": "медныйвсадник",
+        "prototypes": []
+      },
+      {
+        "word": "наследствие",
+        "bookName": "东方教材大学俄语4",
+        "accent": "5",
+        "meaning": "сущ.遗产",
+        "normalized": "наследствие",
+        "prototypes": []
+      },
+      {
+        "word": "Нобелевская премия",
+        "bookName": "东方教材大学俄语4",
+        "accent": "2,15",
+        "meaning": "с/с.诺贝尔奖",
+        "normalized": "нобелевскаяпремия",
+        "prototypes": []
+      },
+      {
+        "word": "онлайновый",
+        "bookName": "东方教材大学俄语4",
+        "accent": "4",
+        "meaning": "прл.在线的",
+        "normalized": "онлайновый",
+        "prototypes": []
+      },
+      {
+        "word": "оснащённый",
+        "bookName": "东方教材大学俄语4",
+        "accent": "6",
+        "meaning": "прч.装备......的",
+        "normalized": "оснащённый",
+        "prototypes": []
+      },
+      {
+        "word": "оцифрованный",
+        "bookName": "东方教材大学俄语4",
+        "accent": "6",
+        "meaning": "прл.数字化的",
+        "normalized": "оцифрованный",
+        "prototypes": []
+      },
+      {
+        "word": "подавляющее большинство",
+        "bookName": "东方教材大学俄语4",
+        "accent": "6,23",
+        "meaning": "с/с.压倒多数",
+        "normalized": "подавляющеебольшинство",
+        "prototypes": []
+      },
+      {
+        "word": "Польша",
+        "bookName": "东方教材大学俄语4",
+        "accent": "2",
+        "meaning": "сущ.波兰",
+        "normalized": "польша",
+        "prototypes": []
+      },
+      {
+        "word": "почётный караул",
+        "bookName": "东方教材大学俄语4",
+        "accent": "4,14",
+        "meaning": "с/с.仪仗队",
+        "normalized": "почётныйкараул",
+        "prototypes": []
+      },
+      {
+        "word": "предприняться",
+        "bookName": "东方教材大学俄语4",
+        "accent": "9",
+        "meaning": "прл.做，采取，实现",
+        "normalized": "предприняться",
+        "prototypes": []
+      },
+      {
+        "word": "Прибалтика",
+        "bookName": "东方教材大学俄语4",
+        "accent": "5",
+        "meaning": "сущ.波罗的海沿岸国家",
+        "normalized": "прибалтика",
+        "prototypes": []
+      },
+      {
+        "word": "суздальский князь",
+        "bookName": "东方教材大学俄语4",
+        "accent": "2",
+        "meaning": "с/с.苏兹达里大公",
+        "normalized": "суздальскийкнязь",
+        "prototypes": []
+      },
+      {
+        "word": "умеренно-континентальный",
+        "bookName": "东方教材大学俄语4",
+        "accent": "3,19",
+        "meaning": "прл.温和的大陆性的",
+        "normalized": "умеренно-континентальный",
+        "prototypes": []
+      },
+      {
+        "word": "Бавария",
+        "bookName": "东方教材大学俄语5",
+        "accent": "4",
+        "meaning": "сущ.巴伐利亚（德国）",
+        "normalized": "бавария",
+        "prototypes": []
+      },
+      {
+        "word": "веб-дизайнер",
+        "bookName": "东方教材大学俄语5",
+        "accent": "8",
+        "meaning": "сущ.网页设计师",
+        "normalized": "веб-дизайнер",
+        "prototypes": []
+      },
+      {
+        "word": "ВТО",
+        "bookName": "东方教材大学俄语5",
+        "accent": "0",
+        "meaning": "абб.世贸组织",
+        "normalized": "вто",
+        "prototypes": []
+      },
+      {
+        "word": "годиться кому в отцы",
+        "bookName": "东方教材大学俄语5",
+        "accent": "4,13,20",
+        "meaning": "с/с.年龄上相当于……父亲",
+        "normalized": "годитьсякомувотцы",
+        "prototypes": []
+      },
+      {
+        "word": "домовая контора",
+        "bookName": "东方教材大学俄语5",
+        "accent": "6,13",
+        "meaning": "с/с.房屋管理处",
+        "normalized": "домоваяконтора",
+        "prototypes": []
+      },
+      {
+        "word": "доподготовка",
+        "bookName": "东方教材大学俄语5",
+        "accent": "9",
+        "meaning": "сущ.完成准备",
+        "normalized": "доподготовка",
+        "prototypes": []
+      },
+      {
+        "word": "за кулисами",
+        "bookName": "东方教材大学俄语5",
+        "accent": "7",
+        "meaning": "с/с.在后台",
+        "normalized": "закулисами",
+        "prototypes": []
+      },
+      {
+        "word": "испокон веков",
+        "bookName": "东方教材大学俄语5",
+        "accent": "6,12",
+        "meaning": "с/с.自古以来，从来",
+        "normalized": "испоконвеков",
+        "prototypes": []
+      },
+      {
+        "word": "к общему знаменателю прийти",
+        "bookName": "东方教材大学俄语5",
+        "accent": "3,16,27",
+        "meaning": "с/с.达成共识；通分",
+        "normalized": "кобщемузнаменателюприйти",
+        "prototypes": []
+      },
+      {
+        "word": "наращивание",
+        "bookName": "东方教材大学俄语5",
+        "accent": "4",
+        "meaning": "сущ.增加，扩大",
+        "normalized": "наращивание",
+        "prototypes": [
+          "наращивание"
+        ]
+      },
+      {
+        "word": "нацификация",
+        "bookName": "东方教材大学俄语5",
+        "accent": "8",
+        "meaning": "сущ.纳粹化的",
+        "normalized": "нацификация",
+        "prototypes": []
+      },
+      {
+        "word": "Не так страшен чёрт, как его малюют",
+        "bookName": "东方教材大学俄语5",
+        "accent": "0",
+        "meaning": "鬼并不像人们描绘的那样可怕（传说往往比实际更可怕）",
+        "normalized": "нетакстрашенчёрткакегомалюют",
+        "prototypes": []
+      },
+      {
+        "word": "общество достатка",
+        "bookName": "东方教材大学俄语5",
+        "accent": "1,14",
+        "meaning": "с/с.小康社会",
+        "normalized": "обществодостатка",
+        "prototypes": []
+      }
+    ]
+  }
+}

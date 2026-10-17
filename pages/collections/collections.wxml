@@ -1,0 +1,34 @@
+<view class="collections-page">
+  <view wx:if="{{modeMessage}}" class="mode-message">{{modeMessage}}</view>
+  <!-- 课程列表 -->
+  <view class="course-list">
+    <view class="course-item" 
+          wx:for="{{courses}}" 
+          wx:key="id"
+          bindtap="navigateToDetail"
+          data-id="{{item.id}}">
+      <image class="course-cover" src="{{item.cover_image}}" mode="aspectFill"></image>
+      <view class="course-info">
+        <text class="course-title">{{item.title}}</text>
+        <view class="course-meta">
+          <text class="students-count">{{item.students_count}}人在学</text>
+          <view class="price-box">
+            <text class="price">¥{{item.price}}</text>
+            <text class="original-price" wx:if="{{item.original_price}}">¥{{item.original_price}}</text>
+          </view>
+        </view>
+      </view>
+      <!-- 取消收藏按钮 -->
+      <view class="uncollect-btn" catchtap="handleUncollect" data-id="{{item.id}}">
+        <image src="/images/collected.png"></image>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:if="{{!courses.length}}">
+    <image class="empty-icon" src="/images/empty-collect.png"></image>
+    <text class="empty-text">暂无收藏课程</text>
+    <button class="go-buy-btn" bindtap="navigateToIndex">去选课</button>
+  </view>
+</view> 

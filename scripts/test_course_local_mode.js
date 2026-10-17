@@ -1,0 +1,45 @@
+const assert = require('assert')
+const fs = require('fs')
+const vm = require('vm')
+
+const source = fs.readFileSync('services/course.js', 'utf8')
+    .replace("import request from '../utils/request'", 'const request = () => Promise.reject(new Error(\'network disabled in test\'))')
+    .replace("import config from '../config'", "const config = { enableContentApi: false, enableLocalSampleFallback: true, enableLocalTestMedia: true, devMediaBaseUrl: 'http://127.0.0.1:18090' }")
+    .replace("import { isContentSuccess, normalizeCourseResponse } from './adapters'", 'const isContentSuccess = value => value && value.code === 200; const normalizeCourseResponse = value => value')
+    .replace("import { getContentBookDetail, getContentBooks, getContentCategories } from './content-api'", 'const getContentBookDetail = () => Promise.reject(new Error(\'content API disabled\')); const getContentBooks = () => Promise.reject(new Error(\'content API disabled\')); const getContentCategories = () => Promise.reject(new Error(\'content API disabled\'))')
+    .replace("const textbookSample = require('../data/content_samples/book_1_words.js')", `const textbookSample = ${fs.readFileSync('data/content_samples/book_1_words.json', 'utf8')}`)
+    .replace("const audioIndex = require('../data/content_samples/book_1_audio.js')", 'const audioIndex = {}')
+    .replace("const wordFormSample = require('../data/content_samples/book_word_forms.js')", `const wordFormSample = ${fs.readFileSync('data/content_samples/book_word_forms.json', 'utf8')}`)
+    .replace("const mappingDecisionSample = require('../data/content_samples/mapping_decisions.js')", "const mappingDecisionSample = { decisions: [] }")
+    .replace("const categorySample = require('../data/content_samples/categories.js')", `const categorySample = ${fs.readFileSync('data/content_samples/categories.json', 'utf8')}`)
+    .replace(/export\s*\{[\s\S]*?\}\s*$/, '')
+
+const context = { module: { exports: {} } }
+vm.runInNewContext(`${source}\nmodule.exports = { getCategories, getCourses, getCourseDetail }`, context)
+const { getCategories, getCourses, getCourseDetail } = context.module.exports
+
+;(async () => {
+    const categories = await getCategories()
+    assert.strictEqual(categories.meta.source, 'local-sample')
+    assert.strictEqual(categories.data.categories.length, 2)
+    const all = await getCourses()
+    assert.strictEqual(all.data.courses.length, 1)
+    const filtered = await getCourses({ query: '不存在的课程' })
+    assert.strictEqual(filtered.data.courses.length, 0)
+    const categoryMatch = await getCourses({ categoryId: '3' })
+    assert.strictEqual(categoryMatch.data.courses.length, 1)
+    const categoryMiss = await getCourses({ categoryId: '4' })
+    assert.strictEqual(categoryMiss.data.courses.length, 0)
+    const detail = await getCourseDetail('sample-book-1')
+    assert.strictEqual(detail.data.words.length, 1247)
+    assert.ok(detail.data.chapters[0].videos[0].url.endsWith('/video/video1.mp4'))
+    assert.strictEqual(detail.data.chapters.length, 2)
+    assert.strictEqual(detail.data.chapters[0].videos.length, 3)
+    assert.strictEqual(detail.data.chapters[1].videos.length, 3)
+    assert.ok(detail.data.chapters[1].videos[2].url.endsWith('/video/video6.mp4'))
+    assert.strictEqual(detail.data.chapters[1].videos[0].isPreview, false)
+    console.log('course local mode tests: PASS')
+})().catch(error => {
+    console.error(error)
+    process.exitCode = 1
+})

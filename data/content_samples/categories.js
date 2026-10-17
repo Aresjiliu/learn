@@ -1,0 +1,1 @@
+module.exports = {"categories":[{"id":"3","name":"大学俄语（北外）","icon":"/images/category/all.png"},{"id":"4","name":"俄语专业考试","icon":"/images/category/all.png"}]}

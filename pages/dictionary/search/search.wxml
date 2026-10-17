@@ -1,0 +1,29 @@
+<view class="page">
+    <view class="search-card">
+        <text class="page-title">词典查询</text>
+        <view class="search-row">
+            <input class="search-input" value="{{query}}" placeholder="输入俄语或中文释义" confirm-type="search" bindinput="handleInput" bindconfirm="handleSearch" />
+            <button class="search-action" bindtap="handleSearch">查词</button>
+        </view>
+    </view>
+    <view wx:if="{{searched && words.length}}" class="word-list">
+        <view wx:for="{{words}}" wx:key="word" class="word-card" bindtap="openDetail" data-word="{{item.word}}" data-word-id="{{item.sourceId || item.id}}">
+            <view class="word-head">
+                <text class="word">{{item.word}}</text>
+                <text class="source {{item.sourceType === 'textbook' ? 'textbook-source' : 'dictionary-source'}}">{{item.sourceType === 'textbook' ? '教材词' : '主词典'}}</text>
+            </view>
+            <text class="meaning">{{item.word_meaning_all || item.translation || '释义待补充'}}</text>
+            <text wx:if="{{item.audioPlayable}}" class="audio-tip">含可播放音频</text>
+            <text wx:elif="{{item.audioUrl || item.audio_url}}" class="audio-pending">音频待接入</text>
+        </view>
+        <button wx:if="{{hasMore}}" class="load-more" bindtap="loadMore">{{loading ? '加载中…' : '加载更多'}}</button>
+    </view>
+    <view wx:if="{{loading}}" class="state state-card loading-state">查询中...</view>
+    <view wx:elif="{{loadError}}" class="state state-card error-state">
+        <text>{{loadError}}</text>
+        <button class="state-action" bindtap="retryLoad">重新查询</button>
+    </view>
+    <block wx:elif="{{searched && words.length}}"></block>
+    <view wx:elif="{{searched}}" class="state state-card empty-state">没有找到匹配词条</view>
+    <view wx:else class="state">输入词语开始查询</view>
+</view>

@@ -1,0 +1,11 @@
+const assert = require('assert')
+const fs = require('fs')
+
+const source = fs.readFileSync('pages/course/video/video.js', 'utf8')
+assert.ok(source.includes('currentTime: 0'))
+assert.ok(source.includes('duration: 0'))
+assert.ok(source.includes('buffered: 0'))
+assert.ok(source.includes('lastSavedProgress: -1'))
+assert.ok(source.includes('isSeeking: false'))
+assert.ok(source.includes('loadError: \'\''))
+console.log('video switch state tests: PASS')

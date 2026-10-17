@@ -1,0 +1,284 @@
+page {
+  min-height: 100vh;
+  background: var(--color-page-bg);
+}
+
+.video-page {
+  box-sizing: border-box;
+  min-height: 100vh;
+  padding-bottom: 128rpx;
+  background: var(--color-page-bg);
+}
+
+.player-state {
+  display: flex;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 32rpx;
+  color: var(--color-text-secondary);
+  background: var(--color-surface);
+  font-size: var(--font-size-body);
+  line-height: 1.5;
+  text-align: center;
+}
+
+.video-page > .player-state {
+  position: relative;
+  min-height: 360rpx;
+}
+
+.player-state button {
+  margin-top: 24rpx;
+  color: var(--color-primary);
+  background: var(--color-sky);
+  font-size: var(--font-size-caption);
+}
+
+.player-state button::after,
+.purchase-btn::after,
+.next-video-btn::after {
+  border: 0;
+}
+
+.player-state.error {
+  color: var(--color-error);
+  background: rgba(194, 65, 59, 0.08);
+}
+
+.player-state.pending {
+  color: var(--color-exam);
+  background: rgba(217, 119, 6, 0.1);
+}
+
+.player-state-caption {
+  margin-top: 8rpx;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-caption);
+}
+
+.player-card {
+  overflow: hidden;
+  margin: 0 var(--space-page);
+  background: #111820;
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+}
+
+.video-container {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 56.25%;
+  background: #111820;
+}
+
+.video-player {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.course-info-card {
+  box-sizing: border-box;
+  margin: 20rpx var(--space-page) 0;
+  padding: 24rpx;
+  background: var(--color-surface);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+}
+
+.video-title {
+  display: block;
+  color: var(--color-text);
+  font-size: var(--font-size-section-title);
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.course-title,
+.media-notice,
+.duration {
+  display: block;
+  margin-top: 8rpx;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-caption);
+  line-height: 1.5;
+}
+
+.media-notice {
+  color: var(--color-exam);
+}
+
+.next-video-btn {
+  margin-top: 20rpx;
+  padding: 0 20rpx;
+  color: var(--color-primary);
+  background: var(--color-sky);
+  border-radius: 12rpx;
+  font-size: var(--font-size-caption);
+  line-height: 64rpx;
+  text-align: left;
+}
+
+.chapter-list {
+  margin: 20rpx var(--space-page) 0;
+  padding: 24rpx;
+  background: var(--color-surface);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+}
+
+.chapter + .chapter {
+  margin-top: 28rpx;
+  padding-top: 24rpx;
+  border-top: 1rpx solid rgba(102, 112, 133, 0.12);
+}
+
+.chapter-header {
+  padding-bottom: 12rpx;
+}
+
+.chapter-title {
+  color: var(--color-text);
+  font-size: var(--font-size-body);
+  font-weight: 700;
+}
+
+.video-item,
+.video-info,
+.video-meta {
+  display: flex;
+  align-items: center;
+}
+
+.video-item {
+  justify-content: space-between;
+  min-height: 76rpx;
+  padding: 12rpx 0;
+  border-bottom: 1rpx solid rgba(102, 112, 133, 0.1);
+}
+
+.video-item.active {
+  margin: 0 -12rpx;
+  padding-right: 12rpx;
+  padding-left: 12rpx;
+  background: var(--color-sky);
+  border-radius: 12rpx;
+}
+
+.video-item.locked-state {
+  opacity: 0.72;
+}
+
+.video-item.locked {
+  opacity: 0.72;
+}
+
+.video-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.video-index {
+  display: block;
+  width: 36rpx;
+  height: 36rpx;
+  margin-right: 14rpx;
+  color: var(--color-primary);
+  background: var(--color-sky);
+  border-radius: 10rpx;
+  font-size: var(--font-size-caption);
+  font-weight: 700;
+  line-height: 36rpx;
+  text-align: center;
+}
+
+.video-name {
+  overflow: hidden;
+  color: var(--color-text);
+  font-size: var(--font-size-body);
+  line-height: 1.4;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.video-meta {
+  flex-shrink: 0;
+  align-items: flex-end;
+  flex-direction: column;
+  margin-left: 16rpx;
+}
+
+.video-status {
+  padding: 6rpx 10rpx;
+  border-radius: 8rpx;
+  font-size: var(--font-size-caption);
+}
+
+.preview-state {
+  color: var(--color-primary);
+  background: var(--color-sky);
+}
+
+.ready-state {
+  color: var(--color-text-secondary);
+  background: var(--color-page-bg);
+}
+
+.locked-state {
+  color: var(--color-locked);
+}
+
+.video-status.locked-state {
+  background: rgba(152, 162, 179, 0.14);
+}
+
+.pending-state {
+  color: var(--color-exam);
+  background: rgba(217, 119, 6, 0.12);
+}
+
+.duration {
+  margin-top: 4rpx;
+}
+
+.purchase-tip {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding: 16rpx var(--space-page);
+  background: var(--color-surface);
+  box-shadow: 0 -8rpx 24rpx rgba(31, 41, 51, 0.08);
+}
+
+.purchase-tip text {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-caption);
+}
+
+.purchase-btn {
+  flex-shrink: 0;
+  margin: 0 0 0 16rpx;
+  padding: 0 20rpx;
+  color: var(--color-surface);
+  background: var(--color-primary);
+  border-radius: 12rpx;
+  font-size: var(--font-size-caption);
+  line-height: 64rpx;
+}

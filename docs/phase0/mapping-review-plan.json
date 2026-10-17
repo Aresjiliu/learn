@@ -1,0 +1,3478 @@
+{
+  "policy": "本计划只组织独立复核队列，不自动建立映射、不修改原始导出或生产数据。",
+  "firstWaveBooks": [
+    "东方教材大学俄语3",
+    "俄语专业大纲综合"
+  ],
+  "sourceSummary": {
+    "queueSize": 1781,
+    "highPriority": 1756,
+    "normalPriority": 25,
+    "byReason": {
+      "ambiguous-word-form": 171,
+      "main-dictionary-unmatched": 1610
+    }
+  },
+  "comparisonSummary": {
+    "distinctBookWords": 15335,
+    "dictionaryExact": 13601,
+    "dictionaryRelaxed": 36,
+    "wordFormToDictionary": 331,
+    "unmatched": 1367,
+    "coveredByAnyTier": 13968,
+    "coverageRate": 0.910858
+  },
+  "books": [
+    {
+      "bookName": "东方教材大学俄语3",
+      "stage": "first-wave",
+      "stageRank": 0,
+      "queueSize": 57,
+      "highPriority": 57,
+      "missingMeaning": 0,
+      "byReason": {
+        "ambiguous-word-form": 6,
+        "main-dictionary-unmatched": 51
+      },
+      "topEntries": [
+        {
+          "word": "Астрахань",
+          "meaning": "сущ.阿斯特拉罕",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Венеция",
+          "meaning": "сущ.威尼斯",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Днепр",
+          "meaning": "сущ.第聂伯河",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Жестокий романс",
+          "meaning": "《残酷的浪漫曲》",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Исаакиевский собор",
+          "meaning": "с/с.伊萨基耶夫大教堂",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Казанский собор",
+          "meaning": "с/с.喀山大教堂",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Казань",
+          "meaning": "сущ.喀山",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Отечественная война",
+          "meaning": "卫国战争",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Ростов",
+          "meaning": "罗斯托夫",
+          "reviewReason": "ambiguous-word-form",
+          "prototypeCandidates": [
+            "рост",
+            "ростов"
+          ]
+        },
+        {
+          "word": "Сибирский цирюльник",
+          "meaning": "(影片)《西伯利亚理发师》",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Ульяновск",
+          "meaning": "сущ.乌里扬诺夫斯克",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Урга",
+          "meaning": "сущ.库伦",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Утомлённые солнцем",
+          "meaning": "(影片)《烈日灼人》",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Финляндия",
+          "meaning": "сущ.芬兰",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Хельсинки",
+          "meaning": "сущ.赫尔辛基",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Япония",
+          "meaning": "сущ.日本",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Ярославль",
+          "meaning": "сущ.雅罗斯拉夫尔（俄罗斯城市）",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "бизнес-ланч",
+          "meaning": "сущ.商务套餐，工作餐",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "в канун",
+          "meaning": "前夕",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "в кругу кого",
+          "meaning": "与……在一起,在中间",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        }
+      ],
+      "recommendation": "样本首发课程优先；先处理有教材释义的未匹配词，再处理歧义词形。"
+    },
+    {
+      "bookName": "俄语专业大纲综合",
+      "stage": "first-wave",
+      "stageRank": 0,
+      "queueSize": 3,
+      "highPriority": 3,
+      "missingMeaning": 0,
+      "byReason": {
+        "ambiguous-word-form": 1,
+        "main-dictionary-unmatched": 2
+      },
+      "topEntries": [
+        {
+          "word": "логин",
+          "meaning": "сущ.登陆,登入(计算机用语)",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "немало",
+          "meaning": "нареч.不少,相当多",
+          "reviewReason": "ambiguous-word-form",
+          "prototypeCandidates": [
+            "немало",
+            "немалый"
+          ]
+        },
+        {
+          "word": "свёртывать",
+          "meaning": "гл.卷,卷起\r\nгл.拐向,转向",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        }
+      ],
+      "recommendation": "样本首发课程优先；先处理有教材释义的未匹配词，再处理歧义词形。"
+    },
+    {
+      "bookName": "走遍俄罗斯-第三册",
+      "stage": "second-wave",
+      "stageRank": 1,
+      "queueSize": 302,
+      "highPriority": 302,
+      "missingMeaning": 0,
+      "byReason": {
+        "ambiguous-word-form": 3,
+        "main-dictionary-unmatched": 299
+      },
+      "topEntries": [
+        {
+          "word": "А. Абрикосов",
+          "meaning": "阿勃里考索夫",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "А. Карпов",
+          "meaning": "卡尔波夫",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "А. Островский",
+          "meaning": "亚历山大奥斯特洛夫斯基",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "А. П. Бородин",
+          "meaning": "鲍罗廷（鲍罗丁）",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "А. П. Чехов",
+          "meaning": "契诃夫",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "А. Прохоров",
+          "meaning": "普罗霍罗夫",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "А. Сахаров",
+          "meaning": "萨哈罗夫",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "А. Столетов",
+          "meaning": "斯托列托夫",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Азовское море",
+          "meaning": "亚速海",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Александр III",
+          "meaning": "亚历山大三世",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Александр Белл",
+          "meaning": "贝尔",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Александровский сад",
+          "meaning": "亚历山大花园",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Алтай",
+          "meaning": "阿尔泰",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Альберт Эйнштейн",
+          "meaning": "爱因斯坦",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Альфред Нобель",
+          "meaning": "诺贝尔",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Андрей Рублёв",
+          "meaning": "安德烈鲁勃廖夫",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Анна на шее",
+          "meaning": "《挂在脖子上的安娜》",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Архангельский собор",
+          "meaning": "天使长大教堂",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Баденвейлер",
+          "meaning": "巴登韦勒",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Байкал",
+          "meaning": "сущ. (озеро Байкал)贝加尔湖;",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        }
+      ],
+      "recommendation": "按教材使用频次和用户入口排序；先确认唯一原型，再处理未匹配词。"
+    },
+    {
+      "bookName": "黑大俄语2新版",
+      "stage": "second-wave",
+      "stageRank": 1,
+      "queueSize": 196,
+      "highPriority": 196,
+      "missingMeaning": 0,
+      "byReason": {
+        "ambiguous-word-form": 12,
+        "main-dictionary-unmatched": 184
+      },
+      "topEntries": [
+        {
+          "word": "(не) ударить в грязь лицом",
+          "meaning": "（没有）丢脸",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "DVD-диск",
+          "meaning": "光碟",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "VIP зал",
+          "meaning": "贵宾厅",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "e-mail",
+          "meaning": "电子邮件",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "on-line-библиотека",
+          "meaning": "在线图书馆",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Академия наук РФ (АН РФ)",
+          "meaning": "俄罗斯联邦科学院",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Архангельский собор",
+          "meaning": "阿尔汉格尔斯基（天使长）大教堂",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Благовещенский собор",
+          "meaning": "布拉格维申斯基（报喜或圣母领报）大教堂",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Большой Каменный мост",
+          "meaning": "白石桥",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "В здоровом теле - здоровый дух.",
+          "meaning": "健康的精神寓于健康的体魄中。",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "В народе их называют мыльными операми.",
+          "meaning": "人们把它称为“肥皂剧”。",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Вам помочь",
+          "meaning": "需要帮您吗？（要帮忙吗？）",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Весенний праздник",
+          "meaning": "春节",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Волгоград",
+          "meaning": "сущ.伏尔加格勒;",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Всё зависит от того, кто и с кем разговаривает.",
+          "meaning": " 一切都取决于谁和谁在交谈。",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Вы можете заранее заказать столик по телефону.",
+          "meaning": "您可以提前电话订餐。",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Государственная Дума (Госдума)",
+          "meaning": "国家杜马",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Дворцовая площадь",
+          "meaning": "宫廷广场",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "День Победы",
+          "meaning": "胜利节",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "До вечера.",
+          "meaning": "晚上见。",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        }
+      ],
+      "recommendation": "按教材使用频次和用户入口排序；先确认唯一原型，再处理未匹配词。"
+    },
+    {
+      "bookName": "黑大俄语第一册",
+      "stage": "second-wave",
+      "stageRank": 1,
+      "queueSize": 175,
+      "highPriority": 175,
+      "missingMeaning": 0,
+      "byReason": {
+        "ambiguous-word-form": 19,
+        "main-dictionary-unmatched": 156
+      },
+      "topEntries": [
+        {
+          "word": "Академия наук",
+          "meaning": "с/с.科学院",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Анна Каренина",
+          "meaning": "сущ.«安娜•卡列尼娜》",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Вам кого",
+          "meaning": "с/с.您找谁？(打电话中常说)",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Ветер утих",
+          "meaning": "с/с.风停了。",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Владивосток",
+          "meaning": "сущ.弗拉基沃斯托克",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Война и Мир",
+          "meaning": "сущ.《战争与和平》",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Волгоград",
+          "meaning": "сущ.伏尔加格勒",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Госдума",
+          "meaning": "сущ.国家杜马 Государственная Дума",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Давайте познакомимся",
+          "meaning": "с/с.咱们认识一下吧。",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Дворец съездов в Кремле",
+          "meaning": "с/с.克里姆林宫的代表大会宫",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Добрый день",
+          "meaning": "с/с.（白天好!）你好!",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Дом народных собраний",
+          "meaning": "сущ.人民大会堂",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Дом памяти Председателя Мао",
+          "meaning": "с/с.毛主席纪念堂",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Дорое утро",
+          "meaning": "с/с.早晨好!",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Жэньминьжибао",
+          "meaning": "сущ.《人民日报》",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "КНР",
+          "meaning": "сокр.中华人民共和国",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Казань",
+          "meaning": "сущ.喀山",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Как вас зовут",
+          "meaning": "с/с.您叫什么名字?",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Как вы себя чувствуете",
+          "meaning": "с/с.您感觉如何？",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Как ты поживаешь",
+          "meaning": "с/с.你的近况如何？",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        }
+      ],
+      "recommendation": "按教材使用频次和用户入口排序；先确认唯一原型，再处理未匹配词。"
+    },
+    {
+      "bookName": "黑大俄语3新版",
+      "stage": "second-wave",
+      "stageRank": 1,
+      "queueSize": 133,
+      "highPriority": 133,
+      "missingMeaning": 0,
+      "byReason": {
+        "ambiguous-word-form": 4,
+        "main-dictionary-unmatched": 129
+      },
+      "topEntries": [
+        {
+          "word": "Библиотека по естественным наукам",
+          "meaning": "自然科学图书馆",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Владимиро-Суздальский музей-заповедник",
+          "meaning": "弗拉基米尔-苏兹达里自然保护博物馆",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Всероссийская Государственная библиотека иностранной литературы",
+          "meaning": "全俄国立外文图书馆",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Государственный Исторический Музей",
+          "meaning": "国家历史博物馆",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Государственный Музей Городской скульптуры",
+          "meaning": "国家城市雕塑博物馆",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Государственный музей Пушкина",
+          "meaning": "国立普希金博物馆",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Дело мастера боится.",
+          "meaning": "事怕行家。",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Италия",
+          "meaning": "сущ.意大利;",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Китайская Народная Республика (КНР)",
+          "meaning": "中华人民共和国",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Кун-цзы (Конфуций)",
+          "meaning": "孔子",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Кушайте (Ешьте) на здоровье!",
+          "meaning": "请随便用!",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Медный всадник",
+          "meaning": "с/с.《青铜骑士》;",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Московский музей современного искусства",
+          "meaning": "莫斯科现代艺术博物馆",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Музей декабристов",
+          "meaning": "十二月党人博物馆",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Музей радио и телевидения",
+          "meaning": "广播电视博物馆",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Не стесняйтесь! Будьте как дома!",
+          "meaning": "别拘束，像在家一样！",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Неделя моды",
+          "meaning": "时装周",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Общество Красного креста",
+          "meaning": "红十字协会",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Пицца-Хат",
+          "meaning": "必胜客",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Президентская библиотека имени Б.Н. Ельцина",
+          "meaning": "叶利钦总统图书馆",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        }
+      ],
+      "recommendation": "按教材使用频次和用户入口排序；先确认唯一原型，再处理未匹配词。"
+    },
+    {
+      "bookName": "黑大俄语1新版",
+      "stage": "second-wave",
+      "stageRank": 1,
+      "queueSize": 131,
+      "highPriority": 131,
+      "missingMeaning": 0,
+      "byReason": {
+        "ambiguous-word-form": 6,
+        "main-dictionary-unmatched": 125
+      },
+      "topEntries": [
+        {
+          "word": "15-ого января",
+          "meaning": "一月十五号",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "А что возьмём на первое и второе？",
+          "meaning": "那我们第一道、第二道菜选什么？",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "А я иду в аптеку.",
+          "meaning": "而我去药店。",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Анна Каренина",
+          "meaning": "сущ.《安娜卡列 尼娜》;",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Антон",
+          "meaning": "安东",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Атлантический океан",
+          "meaning": "大西洋",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Байкал",
+          "meaning": "сущ.贝加尔湖;",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Большой театр",
+          "meaning": "大剧院",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "В августе 2008 года. (В августе две тысячи восьмого года.)",
+          "meaning": "在 2008 年 8 月",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "В гостях хорошо, а дома лучше.",
+          "meaning": "做客千般好,不如家中妙。",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "В чём дело？",
+          "meaning": "怎么回事？",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Век живи, век учись.",
+          "meaning": "活到老，学到老。",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Вишнёвый сад",
+          "meaning": "《樱才兆园》",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Владивосток",
+          "meaning": "сущ.符拉迪沃斯托克（海参崴）;",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Война и мир",
+          "meaning": "《战争与 和平》",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Восточная Сибирь",
+          "meaning": "东西伯利亚",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Всё в порядке.",
+          "meaning": "一切正常。",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Говорите громче!",
+          "meaning": "大点儿声说!",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Доброе утро!",
+          "meaning": "早晨好！",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Добрый день!",
+          "meaning": "日安！",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        }
+      ],
+      "recommendation": "按教材使用频次和用户入口排序；先确认唯一原型，再处理未匹配词。"
+    },
+    {
+      "bookName": "走遍俄罗斯-第一册",
+      "stage": "second-wave",
+      "stageRank": 1,
+      "queueSize": 126,
+      "highPriority": 126,
+      "missingMeaning": 0,
+      "byReason": {
+        "ambiguous-word-form": 9,
+        "main-dictionary-unmatched": 117
+      },
+      "topEntries": [
+        {
+          "word": "Александр Порфирьевич Бородин",
+          "meaning": "亚历山大·波尔菲里耶维奇·鲍罗廷",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Александровский сад",
+          "meaning": "亚历山大花园",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Алла Пугачёва",
+          "meaning": "阿拉普加乔娃（歌手）",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Алсу",
+          "meaning": "阿尔苏（歌手）",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Альберт Эйнштейн",
+          "meaning": "阿尔伯特·爱因斯坦",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Андрей",
+          "meaning": "安德列（男）",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Анна Курникова",
+          "meaning": "安娜库尔尼科娃（网球运动员）",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Антон",
+          "meaning": "安东（男）",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Арбат",
+          "meaning": "сущ.阿尔巴特街;",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Большой театр",
+          "meaning": "大剧院",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Ван Лин",
+          "meaning": "王玲",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Ванесса Мей",
+          "meaning": "陈美",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Вань Су",
+          "meaning": "万素",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Великая китайская стена",
+          "meaning": "万里长城",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Венеция",
+          "meaning": "сущ.威尼斯;",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Вернадцкий",
+          "meaning": "韦尔纳茨基",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Владивосток",
+          "meaning": "сущ.符拉迪沃斯托克（海参崴）;",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Вологда",
+          "meaning": "沃洛格达市",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "ГУМ",
+          "meaning": "сущ.国立百货商店;",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": [
+            "гум"
+          ]
+        },
+        {
+          "word": "Гагарин",
+          "meaning": "加加林",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        }
+      ],
+      "recommendation": "按教材使用频次和用户入口排序；先确认唯一原型，再处理未匹配词。"
+    },
+    {
+      "bookName": "走遍俄罗斯-第二册",
+      "stage": "second-wave",
+      "stageRank": 1,
+      "queueSize": 103,
+      "highPriority": 103,
+      "missingMeaning": 0,
+      "byReason": {
+        "ambiguous-word-form": 3,
+        "main-dictionary-unmatched": 100
+      },
+      "topEntries": [
+        {
+          "word": "Александр Лаврентьевич Витберг",
+          "meaning": "亚历山大•拉甫列季耶维奇•威特比尔格",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Александр Меньшиков",
+          "meaning": "亚历山大梅尼什科夫",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Александр Орлов",
+          "meaning": "阿列克谢奥尔洛夫",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Алёна",
+          "meaning": "阿廖娜",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Амадео Модильяни",
+          "meaning": "阿马蒂奥•莫迪里阿尼",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Амстердам",
+          "meaning": "阿姆斯特丹",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Анастасия Вавилова",
+          "meaning": "阿纳斯塔西娅瓦维洛娃",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Анна Ахматова",
+          "meaning": "安娜•阿赫玛托娃",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Антон Павлович Чехов",
+          "meaning": "сущ.安东巴甫洛维奇契诃夫;",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Арбатская",
+          "meaning": "阿尔巴特站",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Байкал",
+          "meaning": "сущ.贝加尔湖;",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Белоруссия",
+          "meaning": "сущ.白俄罗斯;",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Борис Анреп",
+          "meaning": "鲍里斯•安列普",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Борис Сергеевич",
+          "meaning": "鲍里斯•谢尔盖耶维奇",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Вадим",
+          "meaning": "瓦吉姆",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Вася",
+          "meaning": "瓦夏",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Верона",
+          "meaning": "维罗纳城",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Волхонка",
+          "meaning": "瓦尔霍卡",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Воронеж",
+          "meaning": "沃罗涅日",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Галина Вишневская",
+          "meaning": "加琳娜维什涅夫斯卡娅",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        }
+      ],
+      "recommendation": "按教材使用频次和用户入口排序；先确认唯一原型，再处理未匹配词。"
+    },
+    {
+      "bookName": "黑大俄语第三册",
+      "stage": "second-wave",
+      "stageRank": 1,
+      "queueSize": 71,
+      "highPriority": 71,
+      "missingMeaning": 0,
+      "byReason": {
+        "ambiguous-word-form": 6,
+        "main-dictionary-unmatched": 65
+      },
+      "topEntries": [
+        {
+          "word": "(кому)не до(чего)",
+          "meaning": "с/с.顾不上",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Ближний Восток",
+          "meaning": "с/с.近东",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Болгария",
+          "meaning": "сущ.保加利亚",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": [
+            "болгария"
+          ]
+        },
+        {
+          "word": "Венгрия",
+          "meaning": "сущ.匈牙利",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Дальний Восток",
+          "meaning": "с/с.远东",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Лунная соната Бетховена",
+          "meaning": "с/с.贝多芬的月光奏鸣曲",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Международный Женский День",
+          "meaning": "с/с.国际妇女节",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Море спокойствия",
+          "meaning": "с/с.宁静海（月球上的地名）",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Олимпийские игры",
+          "meaning": "с/с.奥运会",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Польша",
+          "meaning": "сущ.波兰",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "СССР",
+          "meaning": "сокр.（前）苏联 (Союз. Советских Социалистических Республик)",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Счастливого пути",
+          "meaning": "с/с.一路顺风，一路平安",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Чехословакия",
+          "meaning": "сущ.（前）捷克斯洛伐克",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Швеция",
+          "meaning": "сущ.瑞典",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "автоматическая станция",
+          "meaning": "с/с.自动太空站",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "в пользу (чью)",
+          "meaning": "с/с.(谁)赢了",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "вести себя",
+          "meaning": "с/с.表现，举止",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "взять себя в руки",
+          "meaning": "с/с.掌握，控制住自己",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "водная станция",
+          "meaning": "с/с.水上运动站",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "вокруг света",
+          "meaning": "с/с.环球（旅行）",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        }
+      ],
+      "recommendation": "按教材使用频次和用户入口排序；先确认唯一原型，再处理未匹配词。"
+    },
+    {
+      "bookName": "黑大俄语第二册",
+      "stage": "second-wave",
+      "stageRank": 1,
+      "queueSize": 69,
+      "highPriority": 69,
+      "missingMeaning": 0,
+      "byReason": {
+        "ambiguous-word-form": 7,
+        "main-dictionary-unmatched": 62
+      },
+      "topEntries": [
+        {
+          "word": "Александр Дюма",
+          "meaning": "сущ.大仲马（法国作家）",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Бетховен",
+          "meaning": "сущ.贝多芬（德国作曲家）",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "В чём дело",
+          "meaning": "с/с.怎么回事",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Греция",
+          "meaning": "сущ.希腊",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Гюго",
+          "meaning": "сущ.雨果（法国作家）",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Земной шар",
+          "meaning": "с/с.地球",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Иоганн Штраус",
+          "meaning": "сущ.约翰•斯特劳斯（奥地利作曲家）",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Кавказ",
+          "meaning": "сущ.高加索",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Клавдий Птолемей",
+          "meaning": "сущ.托勒密（古希腊天文学家）",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Леонардо Да Винчи",
+          "meaning": "сущ.达•芬奇（意大利画家）",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Моцарт",
+          "meaning": "сущ.莫扎特（奥地利作曲家）",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Николай Васильевич Гоголь",
+          "meaning": "сущ.果戈里，俄国作家",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Николай Коперник",
+          "meaning": "сущ.哥白尼（波兰天文学家）",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Ничего подобного",
+          "meaning": "с/с.没那么回事！",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Нью-Йорк",
+          "meaning": "сущ.纽约",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Петербург",
+          "meaning": "сущ.彼得堡",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Польша",
+          "meaning": "сущ.波兰",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Прибалтика",
+          "meaning": "сущ.波罗的海沿岸",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Северо-Китайский",
+          "meaning": "прл.华北的",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Филадельфия",
+          "meaning": "сущ.费拉德尔费亚（美国地名），费城",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        }
+      ],
+      "recommendation": "按教材使用频次和用户入口排序；先确认唯一原型，再处理未匹配词。"
+    },
+    {
+      "bookName": "东方教材大学俄语1",
+      "stage": "second-wave",
+      "stageRank": 1,
+      "queueSize": 57,
+      "highPriority": 57,
+      "missingMeaning": 0,
+      "byReason": {
+        "ambiguous-word-form": 11,
+        "main-dictionary-unmatched": 46
+      },
+      "topEntries": [
+        {
+          "word": "Александр Сергеевич Пушкин",
+          "meaning": "普希金",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Антон Павлович Чехов",
+          "meaning": "契诃夫",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Арбат",
+          "meaning": "阿尔巴特街",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Валентин Распутин",
+          "meaning": "拉斯普京",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Владивосток",
+          "meaning": "сущ.符拉迪沃斯托克（海参崴）",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Владимир Владимирович Маяковский",
+          "meaning": "马雅可夫斯基",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Волгоград",
+          "meaning": "сущ.伏尔加格勒",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Зимний дворец",
+          "meaning": "с/с.冬宫",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Иван Сергеевич Тургенев",
+          "meaning": "屠格涅夫",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Илья Ефимович Репин",
+          "meaning": "列宾",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Институт русского языка",
+          "meaning": "俄语学院",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Интернет-кафе",
+          "meaning": "с/с.网吧",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Исаак Ильич Левитан",
+          "meaning": "列维坦",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Как зовут?",
+          "meaning": "叫什么名字？",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Кто такой?",
+          "meaning": "究竟是谁？",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Лев Николаевич Толстой",
+          "meaning": "列夫•托尔斯泰",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Лондон",
+          "meaning": "сущ.伦敦;",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Малый театр",
+          "meaning": "小剧院",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Нанкин",
+          "meaning": "南京",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Ннтернет",
+          "meaning": "因特网",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        }
+      ],
+      "recommendation": "按教材使用频次和用户入口排序；先确认唯一原型，再处理未匹配词。"
+    },
+    {
+      "bookName": "东方教材大学俄语2",
+      "stage": "second-wave",
+      "stageRank": 1,
+      "queueSize": 49,
+      "highPriority": 49,
+      "missingMeaning": 0,
+      "byReason": {
+        "ambiguous-word-form": 6,
+        "main-dictionary-unmatched": 43
+      },
+      "topEntries": [
+        {
+          "word": "Байкал",
+          "meaning": "сущ.贝加尔(湖)",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "ГУМ",
+          "meaning": "сокр.国营百货商店",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": [
+            "гум"
+          ]
+        },
+        {
+          "word": "Голова кружится",
+          "meaning": "(谁)头晕",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Гуанчжоу",
+          "meaning": "сущ.广州",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "ИКЕА",
+          "meaning": "абб.宜家（国际家居制品连锁店）",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Италия",
+          "meaning": "сущ.意大利",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "На (ком) лица нет.",
+          "meaning": "(谁)脸色很难看.",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "На что вы жалуетесь?",
+          "meaning": "您哪儿不舒服？",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Не падайте духом!",
+          "meaning": "不要泄气！",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Ни пуха ни пера!",
+          "meaning": "祝你一帆风顺!祝你满载而归！",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Ничего страшного",
+          "meaning": "没什么可怕的.(没什么了不起的.)",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Париж",
+          "meaning": "сущ.巴黎",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "С возвращением!",
+          "meaning": "欢迎归来！",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "С приездом!",
+          "meaning": "欢迎到来！",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Ухань",
+          "meaning": "сущ.武汉",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "ЦУМ",
+          "meaning": "абб.中央百货商店",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Шанхай",
+          "meaning": "сущ.上海",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "бабье лето",
+          "meaning": "晴和的初秋",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "в (чью) пользу",
+          "meaning": "……胜,领先;有利于……",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "время года",
+          "meaning": "с/с.季节",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        }
+      ],
+      "recommendation": "按教材使用频次和用户入口排序；先确认唯一原型，再处理未匹配词。"
+    },
+    {
+      "bookName": "东方教材大学俄语5",
+      "stage": "second-wave",
+      "stageRank": 1,
+      "queueSize": 41,
+      "highPriority": 41,
+      "missingMeaning": 0,
+      "byReason": {
+        "ambiguous-word-form": 8,
+        "main-dictionary-unmatched": 33
+      },
+      "topEntries": [
+        {
+          "word": "Бавария",
+          "meaning": "сущ.巴伐利亚（德国）",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "ВТО",
+          "meaning": "абб.世贸组织",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Не так страшен чёрт, как его малюют",
+          "meaning": "鬼并不像人们描绘的那样可怕（传说往往比实际更可怕）",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Перикл",
+          "meaning": "сущ.伯里克利",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Спарта",
+          "meaning": "сущ.斯巴达（希腊城市）",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Уральский хребет",
+          "meaning": "с/с.乌拉尔山脉",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "веб-дизайнер",
+          "meaning": "сущ.网页设计师",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "востребованный",
+          "meaning": "прч.要求的",
+          "reviewReason": "ambiguous-word-form",
+          "prototypeCandidates": [
+            "востребованный",
+            "востребовать"
+          ]
+        },
+        {
+          "word": "годиться кому в отцы",
+          "meaning": "с/с.年龄上相当于……父亲",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "домовая контора",
+          "meaning": "с/с.房屋管理处",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "доподготовка",
+          "meaning": "сущ.完成准备",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "допустим",
+          "meaning": "гл.прл.част.假定，设想",
+          "reviewReason": "ambiguous-word-form",
+          "prototypeCandidates": [
+            "допустим",
+            "допустимый",
+            "допустить"
+          ]
+        },
+        {
+          "word": "за кулисами",
+          "meaning": "с/с.在后台",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "измором",
+          "meaning": "нар.无休止地纠缠，纠缠不休",
+          "reviewReason": "ambiguous-word-form",
+          "prototypeCandidates": [
+            "измор",
+            "измором"
+          ]
+        },
+        {
+          "word": "изначально",
+          "meaning": "прл.自古以来，亘古以来",
+          "reviewReason": "ambiguous-word-form",
+          "prototypeCandidates": [
+            "изначально",
+            "изначальный"
+          ]
+        },
+        {
+          "word": "испокон веков",
+          "meaning": "с/с.自古以来，从来",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "к общему знаменателю прийти",
+          "meaning": "с/с.达成共识；通分",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "молодцом",
+          "meaning": "предик.сущ.真行，好样的",
+          "reviewReason": "ambiguous-word-form",
+          "prototypeCandidates": [
+            "молодец",
+            "молодцом"
+          ]
+        },
+        {
+          "word": "наращивание",
+          "meaning": "сущ.增加，扩大",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": [
+            "наращивание"
+          ]
+        },
+        {
+          "word": "нахрапом",
+          "meaning": "нар.（прост.）粗鲁地，粗暴地，蛮橫无理地",
+          "reviewReason": "ambiguous-word-form",
+          "prototypeCandidates": [
+            "нахрап",
+            "нахрапом"
+          ]
+        }
+      ],
+      "recommendation": "按教材使用频次和用户入口排序；先确认唯一原型，再处理未匹配词。"
+    },
+    {
+      "bookName": "大学俄语第五册",
+      "stage": "second-wave",
+      "stageRank": 1,
+      "queueSize": 41,
+      "highPriority": 41,
+      "missingMeaning": 0,
+      "byReason": {
+        "ambiguous-word-form": 8,
+        "main-dictionary-unmatched": 33
+      },
+      "topEntries": [
+        {
+          "word": "ВТО",
+          "meaning": "сокр.世贸组织",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Не так страшен чёрт, как его малюют",
+          "meaning": "с/с.鬼并不像人们描绘的那样可怕。（传说往往比实际更可怕）(прост.)",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Перикл",
+          "meaning": "сущ.伯里克利",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Спарта",
+          "meaning": "сущ.斯巴达（希腊城市）",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Уральский хребет",
+          "meaning": "с/с.乌拉尔山脉",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "веб-дизайнер",
+          "meaning": "сущ.网页设计师",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "востребованный",
+          "meaning": "прл.要求的",
+          "reviewReason": "ambiguous-word-form",
+          "prototypeCandidates": [
+            "востребованный",
+            "востребовать"
+          ]
+        },
+        {
+          "word": "домовая контора",
+          "meaning": "с/с.房屋管理处",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "доподготовка",
+          "meaning": "сущ.完成准备",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "допустим",
+          "meaning": "част.假定，设想",
+          "reviewReason": "ambiguous-word-form",
+          "prototypeCandidates": [
+            "допустим",
+            "допустимый",
+            "допустить"
+          ]
+        },
+        {
+          "word": "за кулисами",
+          "meaning": "с/с.在后台",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "измором",
+          "meaning": "нар.无休止地纠缠，纠缠不休(разг.)",
+          "reviewReason": "ambiguous-word-form",
+          "prototypeCandidates": [
+            "измор",
+            "измором"
+          ]
+        },
+        {
+          "word": "изначально",
+          "meaning": "нар.自古以来，亘古以来(книж.)",
+          "reviewReason": "ambiguous-word-form",
+          "prototypeCandidates": [
+            "изначально",
+            "изначальный"
+          ]
+        },
+        {
+          "word": "испокон веков",
+          "meaning": "с/с.自古以来，从来",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "к общему знаменателю прийти",
+          "meaning": "с/с.达成共识",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "лень кому что делать",
+          "meaning": "с/с.不愿，懒得(разг.)",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "молодцом",
+          "meaning": "предик.（用作谓语）真行，好样的(разг.)",
+          "reviewReason": "ambiguous-word-form",
+          "prototypeCandidates": [
+            "молодец",
+            "молодцом"
+          ]
+        },
+        {
+          "word": "наращивание",
+          "meaning": "сущ.增加，扩大",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": [
+            "наращивание"
+          ]
+        },
+        {
+          "word": "нахрапом",
+          "meaning": "нар.粗鲁地，粗暴地，蛮横无理地(прост.)",
+          "reviewReason": "ambiguous-word-form",
+          "prototypeCandidates": [
+            "нахрап",
+            "нахрапом"
+          ]
+        },
+        {
+          "word": "нацификация",
+          "meaning": "сущ.纳粹化",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        }
+      ],
+      "recommendation": "按教材使用频次和用户入口排序；先确认唯一原型，再处理未匹配词。"
+    },
+    {
+      "bookName": "东方教材大学俄语4",
+      "stage": "second-wave",
+      "stageRank": 1,
+      "queueSize": 38,
+      "highPriority": 38,
+      "missingMeaning": 0,
+      "byReason": {
+        "main-dictionary-unmatched": 38
+      },
+      "topEntries": [
+        {
+          "word": "Болгария",
+          "meaning": "сущ.保加利亚",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": [
+            "болгария"
+          ]
+        },
+        {
+          "word": "Болонская Декларация",
+          "meaning": "с/с.博洛尼亚宣言",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "ИСЗ",
+          "meaning": "абб.人造地球卫星",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Индиана",
+          "meaning": "сущ.印第安纳（州）",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Казанское княжество",
+          "meaning": "с/с.喀山公国",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Медный всадник",
+          "meaning": "с/с.青铜骑士",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Нобелевская премия",
+          "meaning": "с/с.诺贝尔奖",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Польша",
+          "meaning": "сущ.波兰",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Прибалтика",
+          "meaning": "сущ.波罗的海沿岸国家",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Финляндия",
+          "meaning": "сущ.芬兰",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Формула 1",
+          "meaning": "一级方程式赛车",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "ансамоль",
+          "meaning": "结构整齐的格局；乐团，歌舞团",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "бледно-сапфировый",
+          "meaning": "прл.淡蓝宝石色的",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "внести вклад",
+          "meaning": "做出贡献",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "выйти в отставку",
+          "meaning": "退休,退役",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "выступать за",
+          "meaning": "拥护，赞成",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "выступать против",
+          "meaning": "反对",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "выступать с речью",
+          "meaning": "发言",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "действительный член",
+          "meaning": "с/с.正式会员",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "дипломная работа",
+          "meaning": "с/с.毕业论文",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        }
+      ],
+      "recommendation": "按教材使用频次和用户入口排序；先确认唯一原型，再处理未匹配词。"
+    },
+    {
+      "bookName": "对外俄语一级单词",
+      "stage": "second-wave",
+      "stageRank": 1,
+      "queueSize": 35,
+      "highPriority": 28,
+      "missingMeaning": 26,
+      "byReason": {
+        "ambiguous-word-form": 27,
+        "main-dictionary-unmatched": 8
+      },
+      "topEntries": [
+        {
+          "word": "вести себя",
+          "meaning": ".表现，举止",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "глубже",
+          "meaning": "",
+          "reviewReason": "ambiguous-word-form",
+          "prototypeCandidates": [
+            "глубокий",
+            "глубоко"
+          ]
+        },
+        {
+          "word": "готов",
+          "meaning": "",
+          "reviewReason": "ambiguous-word-form",
+          "prototypeCandidates": [
+            "гот",
+            "готов",
+            "готовый"
+          ]
+        },
+        {
+          "word": "громче",
+          "meaning": "",
+          "reviewReason": "ambiguous-word-form",
+          "prototypeCandidates": [
+            "громкий",
+            "громко"
+          ]
+        },
+        {
+          "word": "давай(те)",
+          "meaning": "",
+          "reviewReason": "ambiguous-word-form",
+          "prototypeCandidates": [
+            "давайте",
+            "давать"
+          ]
+        },
+        {
+          "word": "дешевле",
+          "meaning": "",
+          "reviewReason": "ambiguous-word-form",
+          "prototypeCandidates": [
+            "дешево",
+            "дешевый"
+          ]
+        },
+        {
+          "word": "дороже",
+          "meaning": "",
+          "reviewReason": "ambiguous-word-form",
+          "prototypeCandidates": [
+            "дорого",
+            "дорогой"
+          ]
+        },
+        {
+          "word": "закрыт",
+          "meaning": "",
+          "reviewReason": "ambiguous-word-form",
+          "prototypeCandidates": [
+            "закрытый",
+            "закрыть"
+          ]
+        },
+        {
+          "word": "занят",
+          "meaning": "",
+          "reviewReason": "ambiguous-word-form",
+          "prototypeCandidates": [
+            "занятой",
+            "занять"
+          ]
+        },
+        {
+          "word": "здоров",
+          "meaning": "",
+          "reviewReason": "ambiguous-word-form",
+          "prototypeCandidates": [
+            "здоров",
+            "здоровый"
+          ]
+        },
+        {
+          "word": "здравствуй(те)",
+          "meaning": "межд.你（您）好",
+          "reviewReason": "ambiguous-word-form",
+          "prototypeCandidates": [
+            "здравствовать",
+            "здравствуйте"
+          ]
+        },
+        {
+          "word": "знаком",
+          "meaning": "",
+          "reviewReason": "ambiguous-word-form",
+          "prototypeCandidates": [
+            "знак",
+            "знакомый"
+          ]
+        },
+        {
+          "word": "извини(те)",
+          "meaning": "межд.对不起",
+          "reviewReason": "ambiguous-word-form",
+          "prototypeCandidates": [
+            "извините",
+            "извинить"
+          ]
+        },
+        {
+          "word": "красиво",
+          "meaning": "предик.美丽，好看",
+          "reviewReason": "ambiguous-word-form",
+          "prototypeCandidates": [
+            "красиво",
+            "красивый"
+          ]
+        },
+        {
+          "word": "крепче",
+          "meaning": "",
+          "reviewReason": "ambiguous-word-form",
+          "prototypeCandidates": [
+            "крепкий",
+            "крепко"
+          ]
+        },
+        {
+          "word": "мал",
+          "meaning": "",
+          "reviewReason": "ambiguous-word-form",
+          "prototypeCandidates": [
+            "мала",
+            "малой",
+            "малый"
+          ]
+        },
+        {
+          "word": "матери",
+          "meaning": "",
+          "reviewReason": "ambiguous-word-form",
+          "prototypeCandidates": [
+            "материть",
+            "матерь",
+            "мать"
+          ]
+        },
+        {
+          "word": "моложе",
+          "meaning": "сущ.更年轻",
+          "reviewReason": "ambiguous-word-form",
+          "prototypeCandidates": [
+            "молодо",
+            "молодой"
+          ]
+        },
+        {
+          "word": "мягче",
+          "meaning": "",
+          "reviewReason": "ambiguous-word-form",
+          "prototypeCandidates": [
+            "мягкий",
+            "мягко"
+          ]
+        },
+        {
+          "word": "немедленно",
+          "meaning": "нар.立刻",
+          "reviewReason": "ambiguous-word-form",
+          "prototypeCandidates": [
+            "немедленно",
+            "немедленный"
+          ]
+        }
+      ],
+      "recommendation": "按教材使用频次和用户入口排序；先确认唯一原型，再处理未匹配词。"
+    },
+    {
+      "bookName": "走遍俄罗斯-第四册",
+      "stage": "second-wave",
+      "stageRank": 1,
+      "queueSize": 22,
+      "highPriority": 22,
+      "missingMeaning": 0,
+      "byReason": {
+        "main-dictionary-unmatched": 22
+      },
+      "topEntries": [
+        {
+          "word": "Аллоплант",
+          "meaning": "—种生物物质",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Альпы",
+          "meaning": "阿尔卑斯（山脉）",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Атлантический океан",
+          "meaning": "大西洋",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Башкирия",
+          "meaning": "巴什基尔",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Великий пост",
+          "meaning": "大斋",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "ГЭС (гидроэлектростанция)",
+          "meaning": "水电站",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Гренландия",
+          "meaning": "格陵兰",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "ДНК",
+          "meaning": "DNA",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Дания",
+          "meaning": "丹麦",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Египет",
+          "meaning": "埃及",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Иисус Христ",
+          "meaning": "耶稣基督",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Кения",
+          "meaning": "肯尼亚",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Наутилус Помпилиус",
+          "meaning": "一个摇滚乐队的名字",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Сахалин",
+          "meaning": "萨哈林（岛）（库页岛）",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Тибет",
+          "meaning": "西藏",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Турин",
+          "meaning": "都灵",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Чили",
+          "meaning": "智利",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Чукотка",
+          "meaning": "楚科奇",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Швеция",
+          "meaning": "сущ.瑞典;",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "биоматериал",
+          "meaning": "生物物质",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        }
+      ],
+      "recommendation": "按教材使用频次和用户入口排序；先确认唯一原型，再处理未匹配词。"
+    },
+    {
+      "bookName": "大学俄语第六册",
+      "stage": "second-wave",
+      "stageRank": 1,
+      "queueSize": 17,
+      "highPriority": 17,
+      "missingMeaning": 0,
+      "byReason": {
+        "ambiguous-word-form": 8,
+        "main-dictionary-unmatched": 9
+      },
+      "topEntries": [
+        {
+          "word": "бескомпромиссно",
+          "meaning": "нар.毫不妥协地",
+          "reviewReason": "ambiguous-word-form",
+          "prototypeCandidates": [
+            "бескомпромиссно",
+            "бескомпромиссный"
+          ]
+        },
+        {
+          "word": "бесстрастно",
+          "meaning": "нар.冷漠地，冷淡地",
+          "reviewReason": "ambiguous-word-form",
+          "prototypeCandidates": [
+            "бесстрастно",
+            "бесстрастный"
+          ]
+        },
+        {
+          "word": "гражданский брак",
+          "meaning": "с/с.试婚",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "дистрофичный",
+          "meaning": "прл.营养不良的，",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "инстинктивно",
+          "meaning": "нар.下意识地",
+          "reviewReason": "ambiguous-word-form",
+          "prototypeCandidates": [
+            "инстинктивно",
+            "инстинктивный"
+          ]
+        },
+        {
+          "word": "мучное",
+          "meaning": "сущ.面食",
+          "reviewReason": "ambiguous-word-form",
+          "prototypeCandidates": [
+            "мучное",
+            "мучной"
+          ]
+        },
+        {
+          "word": "нарочито",
+          "meaning": "нар.故意地，有意地",
+          "reviewReason": "ambiguous-word-form",
+          "prototypeCandidates": [
+            "нарочито",
+            "нарочитый"
+          ]
+        },
+        {
+          "word": "неукоснительно",
+          "meaning": "нар.无条件地，绝对地",
+          "reviewReason": "ambiguous-word-form",
+          "prototypeCandidates": [
+            "неукоснительно",
+            "неукоснительный"
+          ]
+        },
+        {
+          "word": "низкоуглеродный",
+          "meaning": "прл.低碳的",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "парниковый газ",
+          "meaning": "с/с.温室气体",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "плакатик",
+          "meaning": "сущ.启事，招贴",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": [
+            "плакатик"
+          ]
+        },
+        {
+          "word": "прагматично",
+          "meaning": "нар.实用地",
+          "reviewReason": "ambiguous-word-form",
+          "prototypeCandidates": [
+            "прагматично",
+            "прагматичный"
+          ]
+        },
+        {
+          "word": "пресс-бар",
+          "meaning": "прл.记者酒会",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "стручковый перец",
+          "meaning": "с/с.辣椒，辣子",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "толерантно",
+          "meaning": "нар.宽容地",
+          "reviewReason": "ambiguous-word-form",
+          "prototypeCandidates": [
+            "толерантно",
+            "толерантный"
+          ]
+        },
+        {
+          "word": "углекислый газ",
+          "meaning": "с/с.二氧化碳",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "хрустальный башмачок",
+          "meaning": "с/с.水晶鞋",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        }
+      ],
+      "recommendation": "按教材使用频次和用户入口排序；先确认唯一原型，再处理未匹配词。"
+    },
+    {
+      "bookName": "对外俄语二级单词",
+      "stage": "second-wave",
+      "stageRank": 1,
+      "queueSize": 34,
+      "highPriority": 16,
+      "missingMeaning": 28,
+      "byReason": {
+        "ambiguous-word-form": 13,
+        "main-dictionary-unmatched": 21
+      },
+      "topEntries": [
+        {
+          "word": "виноват",
+          "meaning": "",
+          "reviewReason": "ambiguous-word-form",
+          "prototypeCandidates": [
+            "виноват",
+            "виноватый"
+          ]
+        },
+        {
+          "word": "времени",
+          "meaning": "",
+          "reviewReason": "ambiguous-word-form",
+          "prototypeCandidates": [
+            "временить",
+            "время"
+          ]
+        },
+        {
+          "word": "занят",
+          "meaning": "",
+          "reviewReason": "ambiguous-word-form",
+          "prototypeCandidates": [
+            "занятой",
+            "занять"
+          ]
+        },
+        {
+          "word": "здравствуй(те)",
+          "meaning": "межд.你（您）好",
+          "reviewReason": "ambiguous-word-form",
+          "prototypeCandidates": [
+            "здравствовать",
+            "здравствуйте"
+          ]
+        },
+        {
+          "word": "испанско-русский",
+          "meaning": "прл.西班牙俄罗斯的",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "китайско-русский",
+          "meaning": "прл.汉俄的",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "кому",
+          "meaning": "",
+          "reviewReason": "ambiguous-word-form",
+          "prototypeCandidates": [
+            "ком",
+            "кома",
+            "кто"
+          ]
+        },
+        {
+          "word": "матерей",
+          "meaning": "",
+          "reviewReason": "ambiguous-word-form",
+          "prototypeCandidates": [
+            "матереть",
+            "мать"
+          ]
+        },
+        {
+          "word": "может",
+          "meaning": "",
+          "reviewReason": "ambiguous-word-form",
+          "prototypeCandidates": [
+            "может",
+            "мочь"
+          ]
+        },
+        {
+          "word": "немедленно",
+          "meaning": "нар.立刻",
+          "reviewReason": "ambiguous-word-form",
+          "prototypeCandidates": [
+            "немедленно",
+            "немедленный"
+          ]
+        },
+        {
+          "word": "немецко-русский",
+          "meaning": "прл.德俄的",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "ничья",
+          "meaning": "",
+          "reviewReason": "ambiguous-word-form",
+          "prototypeCandidates": [
+            "ничей",
+            "ничья"
+          ]
+        },
+        {
+          "word": "нужен",
+          "meaning": "",
+          "reviewReason": "ambiguous-word-form",
+          "prototypeCandidates": [
+            "нудить",
+            "нужный"
+          ]
+        },
+        {
+          "word": "обязан",
+          "meaning": "",
+          "reviewReason": "ambiguous-word-form",
+          "prototypeCandidates": [
+            "обязанный",
+            "обязать"
+          ]
+        },
+        {
+          "word": "потрясающий",
+          "meaning": "",
+          "reviewReason": "ambiguous-word-form",
+          "prototypeCandidates": [
+            "потрясать",
+            "потрясающий"
+          ]
+        },
+        {
+          "word": "прав",
+          "meaning": ".正确，说得对",
+          "reviewReason": "ambiguous-word-form",
+          "prototypeCandidates": [
+            "право",
+            "правый"
+          ]
+        },
+        {
+          "word": "c",
+          "meaning": "",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "взаимо-",
+          "meaning": "",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "достоин",
+          "meaning": "",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "как..., так и...",
+          "meaning": "",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        }
+      ],
+      "recommendation": "按教材使用频次和用户入口排序；先确认唯一原型，再处理未匹配词。"
+    },
+    {
+      "bookName": "东方教材大学俄语6",
+      "stage": "second-wave",
+      "stageRank": 1,
+      "queueSize": 16,
+      "highPriority": 16,
+      "missingMeaning": 0,
+      "byReason": {
+        "ambiguous-word-form": 8,
+        "main-dictionary-unmatched": 8
+      },
+      "topEntries": [
+        {
+          "word": "бескомпромиссно",
+          "meaning": "прл.毫不妥协地",
+          "reviewReason": "ambiguous-word-form",
+          "prototypeCandidates": [
+            "бескомпромиссно",
+            "бескомпромиссный"
+          ]
+        },
+        {
+          "word": "бесстрастно",
+          "meaning": "прл.冷漠地，冷淡地",
+          "reviewReason": "ambiguous-word-form",
+          "prototypeCandidates": [
+            "бесстрастно",
+            "бесстрастный"
+          ]
+        },
+        {
+          "word": "гражданский брак",
+          "meaning": "с/с.试婚",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "дистрофичный",
+          "meaning": "прл.营养不良的，营养障碍的",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "инстинктивно",
+          "meaning": "прл.下意识地",
+          "reviewReason": "ambiguous-word-form",
+          "prototypeCandidates": [
+            "инстинктивно",
+            "инстинктивный"
+          ]
+        },
+        {
+          "word": "мучное",
+          "meaning": "сущ.面食",
+          "reviewReason": "ambiguous-word-form",
+          "prototypeCandidates": [
+            "мучное",
+            "мучной"
+          ]
+        },
+        {
+          "word": "нарочито",
+          "meaning": "прл.故意地，有意地",
+          "reviewReason": "ambiguous-word-form",
+          "prototypeCandidates": [
+            "нарочито",
+            "нарочитый"
+          ]
+        },
+        {
+          "word": "неукоснительно",
+          "meaning": "прл.无条件地，绝对地",
+          "reviewReason": "ambiguous-word-form",
+          "prototypeCandidates": [
+            "неукоснительно",
+            "неукоснительный"
+          ]
+        },
+        {
+          "word": "низкоуглеродный",
+          "meaning": "прл.低碳的",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "плакатик",
+          "meaning": "сущ.启事，招贴",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": [
+            "плакатик"
+          ]
+        },
+        {
+          "word": "прагматично",
+          "meaning": "прл.实用地",
+          "reviewReason": "ambiguous-word-form",
+          "prototypeCandidates": [
+            "прагматично",
+            "прагматичный"
+          ]
+        },
+        {
+          "word": "пресс-бар",
+          "meaning": "сущ.记者酒会",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "стручковый перец",
+          "meaning": "с/с.辣椒，辣子",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "толерантно",
+          "meaning": "прл.宽容地",
+          "reviewReason": "ambiguous-word-form",
+          "prototypeCandidates": [
+            "толерантно",
+            "толерантный"
+          ]
+        },
+        {
+          "word": "углекислый газ",
+          "meaning": "с/с.二氧化碳",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "хрустальный башмачок",
+          "meaning": "с/с.水晶鞋",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        }
+      ],
+      "recommendation": "按教材使用频次和用户入口排序；先确认唯一原型，再处理未匹配词。"
+    },
+    {
+      "bookName": "东方教材大学俄语8",
+      "stage": "second-wave",
+      "stageRank": 1,
+      "queueSize": 11,
+      "highPriority": 11,
+      "missingMeaning": 0,
+      "byReason": {
+        "main-dictionary-unmatched": 11
+      },
+      "topEntries": [
+        {
+          "word": "Иерусалим",
+          "meaning": "сущ.耶路撒冷",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Сербия",
+          "meaning": "сущ.塞尔维亚",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "делать вид",
+          "meaning": "с/с.做样子",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "засучив рукава",
+          "meaning": "с/с.卷起袖子；卖力气地干起来",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "не по дням, а по часам",
+          "meaning": "с/с.非常快地，迅速地",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "не спускать глаз",
+          "meaning": "с/с.目不转睛地看",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "неоднозначность",
+          "meaning": "сущ.非同义性，多义性",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "слава богу",
+          "meaning": "с/с.谢天谢地",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "сойти с ума",
+          "meaning": "с/с.发疯发狂",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "упустить из виду",
+          "meaning": "с/с.忘掉；忽略",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "цивилизационный",
+          "meaning": "прл.文明的",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        }
+      ],
+      "recommendation": "按教材使用频次和用户入口排序；先确认唯一原型，再处理未匹配词。"
+    },
+    {
+      "bookName": "大学俄语第七册",
+      "stage": "second-wave",
+      "stageRank": 1,
+      "queueSize": 11,
+      "highPriority": 11,
+      "missingMeaning": 0,
+      "byReason": {
+        "main-dictionary-unmatched": 11
+      },
+      "topEntries": [
+        {
+          "word": "Византия",
+          "meaning": "сущ.拜占庭",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Кёльн",
+          "meaning": "сущ.科隆市",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "дай бог",
+          "meaning": "с/с.上帝保佑",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "денег куры не клюют",
+          "meaning": "с/с. …钱很多;…很有钱(разг.)",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "между тем",
+          "meaning": "нар.与此同时;当时",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": [
+            "междутем"
+          ]
+        },
+        {
+          "word": "море по колено",
+          "meaning": "с/с.满不在乎",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "отзывычивый",
+          "meaning": "прл.富有同情心的;敏感的",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "стало быть",
+          "meaning": "с/с.所以，因此，可见(разг.)",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "так сказать",
+          "meaning": "с/с.可以说，这样说吧(вводн. сл.)",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "что бы то ни было",
+          "meaning": "с/с.无论什么",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "чёрт возьми",
+          "meaning": "с/с.真见鬼（岂有此理）",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        }
+      ],
+      "recommendation": "按教材使用频次和用户入口排序；先确认唯一原型，再处理未匹配词。"
+    },
+    {
+      "bookName": "考研",
+      "stage": "second-wave",
+      "stageRank": 1,
+      "queueSize": 11,
+      "highPriority": 11,
+      "missingMeaning": 0,
+      "byReason": {
+        "ambiguous-word-form": 1,
+        "main-dictionary-unmatched": 10
+      },
+      "topEntries": [
+        {
+          "word": "Госдума",
+          "meaning": "сущ.国家杜马",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Греция",
+          "meaning": "сущ.希腊",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "анти...",
+          "meaning": "перв часть сложн слов.接形容词和名词 表示 反，反对，违反，对抗",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "видео-",
+          "meaning": "перв часть сложн слов.1.表示 电视、视频；2. 录像",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "видеоигры",
+          "meaning": "сущ.电子游戏",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "давай",
+          "meaning": "гл.част.让",
+          "reviewReason": "ambiguous-word-form",
+          "prototypeCandidates": [
+            "давай",
+            "давать"
+          ]
+        },
+        {
+          "word": "свёртывать",
+          "meaning": "гл.卷,卷起\r\nгл.拐向,转向",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "стереокомплекс",
+          "meaning": "сущ.组合音响",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "термо...",
+          "meaning": "перв часть сложн слов.表示 1.\"热\",\"热力\",\"温\",\"温度\",\"温差\"之意",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "то-есть",
+          "meaning": "союз. част. ввод.即，就是说",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "экранчик",
+          "meaning": "сущ.荧光屏",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": [
+            "экранчик"
+          ]
+        }
+      ],
+      "recommendation": "按教材使用频次和用户入口排序；先确认唯一原型，再处理未匹配词。"
+    },
+    {
+      "bookName": "职称俄语综合",
+      "stage": "second-wave",
+      "stageRank": 1,
+      "queueSize": 11,
+      "highPriority": 11,
+      "missingMeaning": 0,
+      "byReason": {
+        "ambiguous-word-form": 1,
+        "main-dictionary-unmatched": 10
+      },
+      "topEntries": [
+        {
+          "word": "Байкал",
+          "meaning": "сущ.贝加尔(湖)",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Белоруссия",
+          "meaning": "сущ.白俄罗斯",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "ГУМ",
+          "meaning": "сокр.国营百货商店",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": [
+            "гум"
+          ]
+        },
+        {
+          "word": "СНГ",
+          "meaning": "Абб.独联体",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "СССР",
+          "meaning": "Абб.苏联（苏维埃社会主义共和国联盟）",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "США",
+          "meaning": "Абб.美国",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "валютно-торговый",
+          "meaning": "прл.外汇交易的",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "маркет",
+          "meaning": "сущ.市场，集市，市面",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "нехватать",
+          "meaning": "гл.不够，缺少",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "поливалка",
+          "meaning": "сущ.浇灌装置,洒水车",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "проходная",
+          "meaning": "сущ.通道，出人口",
+          "reviewReason": "ambiguous-word-form",
+          "prototypeCandidates": [
+            "проходная",
+            "проходной"
+          ]
+        }
+      ],
+      "recommendation": "按教材使用频次和用户入口排序；先确认唯一原型，再处理未匹配词。"
+    },
+    {
+      "bookName": "东方教材大学俄语7",
+      "stage": "second-wave",
+      "stageRank": 1,
+      "queueSize": 10,
+      "highPriority": 10,
+      "missingMeaning": 0,
+      "byReason": {
+        "main-dictionary-unmatched": 10
+      },
+      "topEntries": [
+        {
+          "word": "Византия",
+          "meaning": "сущ.拜占庭",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "Кёлын",
+          "meaning": "сущ.科隆市",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "дай бог",
+          "meaning": "с/с.上帝保佑",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "денег куры не клюют",
+          "meaning": "с/с.……钱很多，……很有钱",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "между тем",
+          "meaning": "с/с.与此同时；当时",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": [
+            "междутем"
+          ]
+        },
+        {
+          "word": "море по колено",
+          "meaning": "с/с.满不在乎",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "стало быть",
+          "meaning": "с/с.所以，因此，可见",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "так сказать",
+          "meaning": "с/с.可以说，这样说吧",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "что бы то ни было",
+          "meaning": "с/с.无论什么",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "чёрт возьми",
+          "meaning": "с/с.真见鬼（岂有此理）",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        }
+      ],
+      "recommendation": "按教材使用频次和用户入口排序；先确认唯一原型，再处理未匹配词。"
+    },
+    {
+      "bookName": "公共俄语四六级",
+      "stage": "second-wave",
+      "stageRank": 1,
+      "queueSize": 4,
+      "highPriority": 4,
+      "missingMeaning": 0,
+      "byReason": {
+        "ambiguous-word-form": 2,
+        "main-dictionary-unmatched": 2
+      },
+      "topEntries": [
+        {
+          "word": "Госдума",
+          "meaning": "сущ.国家杜马",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "красиво",
+          "meaning": "нареч.美好地;好看地 \r\nнареч.(作无人称谓语)美丽",
+          "reviewReason": "ambiguous-word-form",
+          "prototypeCandidates": [
+            "красиво",
+            "красивый"
+          ]
+        },
+        {
+          "word": "мягко",
+          "meaning": "нареч.轻地，温柔地",
+          "reviewReason": "ambiguous-word-form",
+          "prototypeCandidates": [
+            "мягкий",
+            "мягко"
+          ]
+        },
+        {
+          "word": "свёртывать",
+          "meaning": "гл.卷,卷起\r\nгл.拐向,转向",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        }
+      ],
+      "recommendation": "按教材使用频次和用户入口排序；先确认唯一原型，再处理未匹配词。"
+    },
+    {
+      "bookName": "高考编辑汇总",
+      "stage": "second-wave",
+      "stageRank": 1,
+      "queueSize": 4,
+      "highPriority": 4,
+      "missingMeaning": 0,
+      "byReason": {
+        "ambiguous-word-form": 1,
+        "main-dictionary-unmatched": 3
+      },
+      "topEntries": [
+        {
+          "word": "испанско-русский",
+          "meaning": "прл.西班牙俄罗斯的",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "китайско-русский",
+          "meaning": "прл.汉俄的",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "мягко",
+          "meaning": "нареч.轻地，温柔地",
+          "reviewReason": "ambiguous-word-form",
+          "prototypeCandidates": [
+            "мягкий",
+            "мягко"
+          ]
+        },
+        {
+          "word": "немецко-русский",
+          "meaning": "прл.德俄的",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        }
+      ],
+      "recommendation": "按教材使用频次和用户入口排序；先确认唯一原型，再处理未匹配词。"
+    },
+    {
+      "bookName": "俄语专业八级综合",
+      "stage": "second-wave",
+      "stageRank": 1,
+      "queueSize": 2,
+      "highPriority": 2,
+      "missingMeaning": 0,
+      "byReason": {
+        "ambiguous-word-form": 1,
+        "main-dictionary-unmatched": 1
+      },
+      "topEntries": [
+        {
+          "word": "логин",
+          "meaning": "сущ.登陆,登入(计算机用语)",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        },
+        {
+          "word": "немало",
+          "meaning": "нареч.不少,相当多",
+          "reviewReason": "ambiguous-word-form",
+          "prototypeCandidates": [
+            "немало",
+            "немалый"
+          ]
+        }
+      ],
+      "recommendation": "按教材使用频次和用户入口排序；先确认唯一原型，再处理未匹配词。"
+    },
+    {
+      "bookName": "俄语专业四级综合",
+      "stage": "second-wave",
+      "stageRank": 1,
+      "queueSize": 1,
+      "highPriority": 1,
+      "missingMeaning": 0,
+      "byReason": {
+        "main-dictionary-unmatched": 1
+      },
+      "topEntries": [
+        {
+          "word": "свёртывать",
+          "meaning": "гл.卷,卷起\r\nгл.拐向,转向",
+          "reviewReason": "main-dictionary-unmatched",
+          "prototypeCandidates": []
+        }
+      ],
+      "recommendation": "按教材使用频次和用户入口排序；先确认唯一原型，再处理未匹配词。"
+    }
+  ],
+  "summary": {
+    "bookCount": 30,
+    "firstWaveBookCount": 2,
+    "secondWaveBookCount": 28,
+    "laterBookCount": 0,
+    "firstWaveQueueSize": 60
+  }
+}

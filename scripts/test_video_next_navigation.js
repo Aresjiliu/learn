@@ -1,0 +1,12 @@
+const assert = require('assert')
+const fs = require('fs')
+
+const js = fs.readFileSync('pages/course/video/video.js', 'utf8')
+const wxml = fs.readFileSync('pages/course/video/video.wxml', 'utf8')
+assert.ok(js.includes('findNextPlayableVideo: function'))
+assert.ok(js.includes('playNextVideo: function'))
+assert.ok(js.includes('chapterIndex === 0'))
+assert.ok(js.includes('this.setData({ nextVideo: this.findNextPlayableVideo() })'))
+assert.ok(wxml.includes('wx:if="{{nextVideo}}"'))
+assert.ok(wxml.includes('bindtap="playNextVideo"'))
+console.log('video next navigation tests: PASS')

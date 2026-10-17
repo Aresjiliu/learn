@@ -1,0 +1,19 @@
+.page { min-height: 100vh; padding: var(--space-page); box-sizing: border-box; background: var(--color-page-bg); }
+.detail-card, .state-card { border-radius: var(--radius-card); background: var(--color-surface); box-shadow: var(--shadow-card); }
+.detail-card { padding: 30rpx; }
+.word-head { display: flex; flex-direction: column; align-items: flex-start; gap: 16rpx; padding-bottom: 26rpx; border-bottom: 2rpx solid #eef0f3; }
+.word-identity { display: flex; flex-wrap: wrap; align-items: center; gap: 14rpx; width: 100%; }
+.word { max-width: 100%; color: var(--color-text); font-size: 56rpx; font-weight: 700; line-height: 1.3; overflow-wrap: anywhere; }
+.source { padding: 7rpx 12rpx; border-radius: 999rpx; font-size: 22rpx; }
+.textbook-source { color: var(--color-primary); background: var(--color-sky); }
+.dictionary-source { color: var(--color-exam); background: #fff7ed; }
+.audio-button { margin: 0; padding: 0 22rpx; color: var(--color-primary); background: var(--color-sky); font-size: var(--font-size-caption); line-height: 68rpx; }
+.audio-pending, .audio-unavailable { color: var(--color-text-secondary); font-size: var(--font-size-caption); }
+.word-section { margin-top: 26rpx; }
+.section-label { display: block; color: var(--color-text-secondary); font-size: var(--font-size-caption); font-weight: 600; }
+.part { display: block; margin-top: 10rpx; color: var(--color-text); font-size: var(--font-size-body); line-height: 1.5; }
+.meaning { display: block; margin-top: 10rpx; color: var(--color-text); font-size: 32rpx; line-height: 1.7; overflow-wrap: anywhere; }
+.example { display: block; margin-top: 14rpx; padding: 16rpx; border-left: 4rpx solid var(--color-primary); border-radius: 0 10rpx 10rpx 0; color: var(--color-text-secondary); background: #f7f9fb; font-size: var(--font-size-body); line-height: 1.7; overflow-wrap: anywhere; }
+.state-card { margin-top: 20rpx; padding: 34rpx 24rpx; text-align: center; line-height: 1.6; }
+.loading-state { color: var(--color-loading); }
+.empty-state { color: var(--color-empty); }

@@ -1,0 +1,10 @@
+const assert = require('assert')
+const fs = require('fs')
+
+const source = fs.readFileSync('pages/course/video/video.js', 'utf8')
+assert.ok(source.includes("if (res.code !== 200 || !res.data)"))
+assert.ok(source.includes("throw new Error(res.message || '课程媒体信息响应异常')"))
+assert.ok(source.includes('Array.isArray(res.data.chapters)'))
+assert.ok(source.includes("token && !video.url.startsWith(config.devMediaBaseUrl)"))
+assert.ok(source.includes("!video.url.includes('token=')"))
+console.log('video response guard tests: PASS')

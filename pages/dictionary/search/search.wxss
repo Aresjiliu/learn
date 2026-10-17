@@ -1,0 +1,24 @@
+.page { min-height: 100vh; padding: var(--space-page); box-sizing: border-box; background: var(--color-page-bg); }
+.search-card, .word-card, .state-card { border-radius: var(--radius-card); background: var(--color-surface); box-shadow: var(--shadow-card); }
+.search-card { padding: 26rpx; }
+.page-title { display: block; margin-bottom: 20rpx; color: var(--color-text); font-size: var(--font-size-page-title); font-weight: 700; }
+.search-row { display: flex; align-items: center; gap: 12rpx; }
+.search-input { flex: 1; min-width: 0; height: 76rpx; padding: 0 18rpx; box-sizing: border-box; border: 2rpx solid #e4e7ec; border-radius: 12rpx; color: var(--color-text); background: #f8fafb; font-size: var(--font-size-body); }
+.search-action { flex: 0 0 128rpx; margin: 0; padding: 0; color: #fff; background: var(--color-primary); font-size: var(--font-size-body); line-height: 76rpx; }
+.word-list { margin-top: 20rpx; }
+.word-card { margin-bottom: 16rpx; padding: 24rpx; }
+.word-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16rpx; }
+.word { flex: 1; min-width: 0; color: var(--color-text); font-size: 38rpx; font-weight: 700; overflow-wrap: anywhere; }
+.source { flex-shrink: 0; padding: 7rpx 12rpx; border-radius: 999rpx; font-size: 22rpx; }
+.textbook-source { color: var(--color-primary); background: var(--color-sky); }
+.dictionary-source { color: var(--color-exam); background: #fff7ed; }
+.meaning { display: block; margin-top: 14rpx; color: var(--color-text-secondary); font-size: var(--font-size-body); line-height: 1.6; overflow-wrap: anywhere; }
+.audio-tip, .audio-pending { display: block; margin-top: 12rpx; color: var(--color-primary); font-size: var(--font-size-caption); }
+.audio-pending { color: var(--color-text-secondary); }
+.load-more { margin: 8rpx 0 24rpx; color: var(--color-primary); background: var(--color-surface); box-shadow: var(--shadow-card); font-size: var(--font-size-body); }
+.state-card, .state { margin-top: 20rpx; padding: 34rpx 24rpx; border-radius: var(--radius-card); background: var(--color-surface); box-shadow: var(--shadow-card); text-align: center; line-height: 1.6; }
+.loading-state { color: var(--color-loading); }
+.error-state { color: var(--color-error); }
+.empty-state { color: var(--color-empty); }
+.state { color: var(--color-text-secondary); }
+.state-action { margin-top: 20rpx; color: var(--color-primary); background: var(--color-sky); }

@@ -1,0 +1,169 @@
+.profile-container {
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  padding-bottom: 40rpx;
+}
+
+/* 登录部分样式 */
+.login-section {
+  background: #1296db;
+  padding: 60rpx 30rpx;
+}
+
+.login-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.avatar-default {
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 50%;
+  margin-bottom: 30rpx;
+}
+
+.login-tip {
+  color: #fff;
+  font-size: 32rpx;
+  margin-bottom: 30rpx;
+}
+
+.auth-btn {
+  background: #fff;
+  color: #1296db;
+  font-size: 32rpx;
+  padding: 20rpx 100rpx;
+  border-radius: 40rpx;
+  border: none;
+}
+
+/* 用户信息样式 */
+.user-info-box {
+  background: #1296db;
+  padding: 40rpx 30rpx;
+}
+
+.user-base-info {
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 50%;
+  border: 4rpx solid rgba(255, 255, 255, 0.4);
+}
+
+.user-text {
+  margin-left: 30rpx;
+}
+
+.nickname {
+  font-size: 36rpx;
+  color: #fff;
+  font-weight: 500;
+  margin-bottom: 10rpx;
+  display: block;
+}
+
+.user-level {
+  font-size: 26rpx;
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.2);
+  padding: 4rpx 20rpx;
+  border-radius: 20rpx;
+}
+
+/* 用户数据概览样式 */
+.user-stats {
+  display: flex;
+  background: #fff;
+  padding: 30rpx 0;
+  margin: 20rpx;
+  border-radius: 12rpx;
+}
+
+.stat-item {
+  flex: 1;
+  text-align: center;
+  border-right: 1rpx solid #eee;
+}
+
+.stat-item:last-child {
+  border-right: none;
+}
+
+.stat-num {
+  font-size: 36rpx;
+  color: #333;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 10rpx;
+}
+
+.stat-label {
+  font-size: 26rpx;
+  color: #666;
+}
+
+/* 功能列表样式 */
+.function-list {
+  margin: 20rpx;
+}
+
+.function-group {
+  background: #fff;
+  border-radius: 12rpx;
+  margin-bottom: 20rpx;
+}
+
+.function-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 32rpx;
+  border-bottom: 1rpx solid #f5f5f5;
+}
+
+.function-item:last-child {
+  border-bottom: none;
+}
+
+.function-content {
+  display: flex;
+  align-items: center;
+}
+
+.function-icon {
+  width: 48rpx;
+  height: 48rpx;
+  margin-right: 24rpx;
+}
+
+.function-text {
+  font-size: 30rpx;
+  color: #333;
+}
+
+.arrow {
+  width: 32rpx;
+  height: 32rpx;
+}
+
+.contact-btn {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  line-height: normal;
+  font-size: unset;
+  text-align: left;
+  background: #fff;
+}
+
+.contact-btn::after {
+  border: none;
+}

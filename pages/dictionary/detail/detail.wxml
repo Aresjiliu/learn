@@ -1,0 +1,27 @@
+<view class="page">
+    <view wx:if="{{loading}}" class="state-card loading-state">词条加载中...</view>
+    <view wx:elif="{{word}}" class="detail-card">
+        <view class="word-head">
+            <view class="word-identity">
+                <text class="word">{{word.word}}</text>
+                <text class="source {{word.sourceType === 'textbook' ? 'textbook-source' : 'dictionary-source'}}">{{word.sourceType === 'textbook' ? '教材词' : '主词典'}}</text>
+            </view>
+            <button wx:if="{{word.audioPlayable}}" class="audio-button" bindtap="playAudio">{{isPlaying ? '播放中…' : '播放发音'}}</button>
+            <text wx:if="{{word.audioPending}}" class="audio-pending">音频资源待接入</text>
+            <text wx:if="{{!word.audioPlayable && !word.audioPending}}" class="audio-unavailable">暂无音频</text>
+        </view>
+        <view class="word-section">
+            <text class="section-label">詞性 / Часть речи</text>
+            <text class="part">{{word.textbookWordClass || word.word_character || '词性待补充'}}</text>
+        </view>
+        <view class="word-section">
+            <text class="section-label">释义</text>
+            <text class="meaning">{{word.textbookMeaning || word.word_meaning_all || word.meaning || word.translation || '释义待补充'}}</text>
+        </view>
+        <view wx:if="{{word.examples.length}}" class="word-section examples-section">
+            <text class="section-label">例句</text>
+            <text wx:for="{{word.examples}}" wx:key="*this" class="example">{{item}}</text>
+        </view>
+    </view>
+    <view wx:else class="state-card empty-state">未找到该词条</view>
+</view>

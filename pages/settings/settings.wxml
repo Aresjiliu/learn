@@ -1,0 +1,1 @@
+<view class="placeholder-page"><text class="title">{{title}}</text><text class="message">{{message}}</text></view>

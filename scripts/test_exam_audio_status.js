@@ -1,0 +1,11 @@
+const assert = require('assert')
+const fs = require('fs')
+
+const wxml = fs.readFileSync('pages/exam/practice/practice.wxml', 'utf8')
+assert.ok(wxml.includes('听力音频资源待接入'))
+assert.ok(wxml.includes('questions[currentIndex].audioPending'))
+assert.ok(wxml.includes('{{audioError}}'))
+assert.ok(wxml.includes('bindtap="retryQuestionAudio"'))
+assert.ok(wxml.includes('<block wx:if="{{questions[currentIndex].answerMode !== \'text\'}}">'))
+assert.ok(!wxml.includes('<view wx:if="{{questions[currentIndex].answerMode !== \'text\'}}" wx:for='))
+console.log('exam audio status tests: PASS')

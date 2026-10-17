@@ -1,0 +1,94 @@
+<view class="profile-container">
+  <!-- 未登录状态 -->
+  <view class="login-section" wx:if="{{!userInfo}}">
+    <view class="login-box">
+      <image class="avatar-default" src="/images/avatar-default.png"></image>
+      <text class="login-tip">登录体验更多功能</text>
+      <button class="auth-btn" open-type="getUserInfo" bindgetuserinfo="handleUserLogin">微信一键登录</button>
+    </view>
+  </view>
+
+  <!-- 已登录状态 -->
+  <block wx:else>
+    <view class="user-info-box">
+      <view class="user-base-info">
+        <image class="avatar" src="{{userInfo.avatarUrl}}"></image>
+        <view class="user-text">
+          <text class="nickname">{{userInfo.nickName}}</text>
+          <text class="user-level">普通会员</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 用户数据概览 -->
+    <view class="user-stats">
+      <view class="stat-item">
+        <text class="stat-num">{{studyDays || 0}}</text>
+        <text class="stat-label">学习天数</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-num">{{courseNum || 0}}</text>
+        <text class="stat-label">我的课程</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-num">{{collectNum || 0}}</text>
+        <text class="stat-label">我的收藏</text>
+      </view>
+    </view>
+  </block>
+
+  <!-- 功能列表 -->
+  <view class="function-list">
+    <view class="function-group">
+      <view class="function-item" bindtap="navigateTo" data-url="/pages/my-courses/my-courses">
+        <view class="function-content">
+          <image class="function-icon" src="/images/icon-mycourse.png"></image>
+          <text class="function-text">我的课程</text>
+        </view>
+        <image class="arrow" src="/images/arrow-right.png"></image>
+      </view>
+
+      <view class="function-item" bindtap="navigateTo" data-url="/pages/collections/collections">
+        <view class="function-content">
+          <image class="function-icon" src="/images/collect.png"></image>
+          <text class="function-text">我的收藏</text>
+        </view>
+        <image class="arrow" src="/images/arrow-right.png"></image>
+      </view>
+
+      <view class="function-item" bindtap="navigateTo" data-url="/pages/orders/orders">
+        <view class="function-content">
+          <image class="function-icon" src="/images/icon-order.png"></image>
+          <text class="function-text">全部订单</text>
+        </view>
+        <image class="arrow" src="/images/arrow-right.png"></image>
+      </view>
+    </view>
+
+    <view class="function-group">
+      <view class="function-item" bindtap="navigateTo" data-url="/pages/settings/settings">
+        <view class="function-content">
+          <image class="function-icon" src="/images/icon-setting.png"></image>
+          <text class="function-text">账号设置</text>
+        </view>
+        <image class="arrow" src="/images/arrow-right.png"></image>
+      </view>
+
+      <view class="function-item" bindtap="navigateTo" data-url="/pages/statement/statement">
+        <view class="function-content">
+          <image class="function-icon" src="/images/icon-statement.png"></image>
+          <text class="function-text">商家声明</text>
+        </view>
+        <image class="arrow" src="/images/arrow-right.png"></image>
+      </view>
+
+       <view class="function-item" bindtap="navigateTo" data-url="/pages/client/client">
+        <view class="function-content">
+          <image class="function-icon" src="/images/icon-service.png"></image>
+          <text class="function-text">联系客服</text>
+        </view>
+        <image class="arrow" src="/images/arrow-right.png"></image>
+      </view>
+    </view>
+  </view>
+</view> 

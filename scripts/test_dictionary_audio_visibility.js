@@ -1,0 +1,17 @@
+const assert = require('assert')
+const fs = require('fs')
+
+const searchJs = fs.readFileSync('pages/dictionary/search/search.js', 'utf8')
+const searchWxml = fs.readFileSync('pages/dictionary/search/search.wxml', 'utf8')
+const detailJs = fs.readFileSync('pages/dictionary/detail/detail.js', 'utf8')
+const detailWxml = fs.readFileSync('pages/dictionary/detail/detail.wxml', 'utf8')
+
+assert.ok(searchJs.includes('audioPlayable: this.isAudioPlayable(word)'))
+assert.ok(searchJs.includes('config.enableLocalTestAudio'))
+assert.ok(searchWxml.includes('wx:if="{{item.audioPlayable}}"'))
+assert.ok(detailJs.includes('decorateWord: function'))
+assert.ok(detailWxml.includes('wx:if="{{word.audioPlayable}}"'))
+assert.ok(detailJs.includes('audioPending: Boolean(rawAudio) && !audioPlayable'))
+assert.ok(detailWxml.includes('wx:if="{{word.audioPending}}"'))
+assert.ok(detailWxml.includes('音频资源待接入'))
+console.log('dictionary audio visibility tests: PASS')

@@ -1,0 +1,3 @@
+.placeholder-page { min-height: 100vh; padding: 160rpx 48rpx; box-sizing: border-box; background: #f5f7fa; text-align: center; }
+.title { display: block; color: #333; font-size: 36rpx; font-weight: 600; }
+.message { display: block; margin-top: 24rpx; color: #888; line-height: 1.7; }

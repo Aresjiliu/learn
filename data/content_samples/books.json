@@ -1,0 +1,28 @@
+{
+  "books": [
+    {
+      "id": "1",
+      "book_uuid": "055dd2da114055f6f0ec4ae0075a9545",
+      "book_name": "东方教材大学俄语3",
+      "author": "",
+      "book_cover_img": "/book/90211504200d11ecb48300163e02e041.png",
+      "wordNum": "1247",
+      "book_type": "3",
+      "price": "0",
+      "member_price": "0",
+      "introduce": ""
+    },
+    {
+      "id": "13",
+      "book_uuid": "598a9209941636b1b45c72a10c7cd3f2",
+      "book_name": "俄语专业大纲综合",
+      "author": "",
+      "book_cover_img": "/book/d6cf5d89201111ecb48300163e02e041.png",
+      "wordNum": "7836",
+      "book_type": "4",
+      "price": "0",
+      "member_price": "0",
+      "introduce": ""
+    }
+  ]
+}

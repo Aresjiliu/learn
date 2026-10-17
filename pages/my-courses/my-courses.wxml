@@ -1,0 +1,31 @@
+<view class="my-courses">
+  <view wx:if="{{modeMessage}}" class="mode-message">{{modeMessage}}</view>
+  <view class="course-list">
+    <view class="course-item" 
+          wx:for="{{courses}}" 
+          wx:key="id" 
+          bindtap="navigateToVideo" 
+          data-id="{{item.id}}">
+      <view class="course-cover-wrap">
+        <image class="course-cover" 
+               src="{{item.cover_image}}" 
+               mode="aspectFill"
+               binderror="handleImageError"></image>
+      </view>
+      <view class="course-info">
+        <text class="course-title">{{item.title}}</text>
+        <view class="course-meta">
+          <text class="purchase-time">购买时间：{{item.purchase_time}}</text>
+          <view class="watch-btn">观看视频</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:if="{{courses.length === 0}}">
+    <image class="empty-icon" src="/images/empty-course.png"></image>
+    <text class="empty-text">暂无已购课程</text>
+    <navigator url="/pages/index/index" class="go-buy">去选购课程</navigator>
+  </view>
+</view> 

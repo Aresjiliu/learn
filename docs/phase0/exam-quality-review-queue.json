@@ -1,0 +1,56 @@
+{
+  "policy": {
+    "blank-question": "补录题干或确认删除。",
+    "long-text-answer": "确认是否确实要求整句作答；否则补充标准化判分规则。",
+    "corrupt-text": "重新导出或人工校正损坏字段，禁止直接发布。",
+    "runtime": "本文件仅供人工审核，不进入小程序运行时。"
+  },
+  "summary": {
+    "queueCount": 4,
+    "blankQuestionCount": 3,
+    "longTextAnswerCount": 1,
+    "corruptTextCount": 0
+  },
+  "items": [
+    {
+      "questionId": "260",
+      "paperUuid": "112df13e3990437b8cd021c79fc18b3c",
+      "questionType": "5",
+      "reasons": [
+        "blank-question"
+      ],
+      "answerLength": 0,
+      "corruptFields": []
+    },
+    {
+      "questionId": "186",
+      "paperUuid": "50cda4cb21244f00b72f3c31ec3b7020",
+      "questionType": "5",
+      "reasons": [
+        "blank-question"
+      ],
+      "answerLength": 0,
+      "corruptFields": []
+    },
+    {
+      "questionId": "357",
+      "paperUuid": "78d73aa15ac24f5899848b17af654998",
+      "questionType": "5",
+      "reasons": [
+        "blank-question"
+      ],
+      "answerLength": 0,
+      "corruptFields": []
+    },
+    {
+      "questionId": "12307",
+      "paperUuid": "f179a2e895a6480280267de6f5846fde",
+      "questionType": "4",
+      "reasons": [
+        "long-text-answer"
+      ],
+      "answerLength": 83,
+      "corruptFields": []
+    }
+  ]
+}
