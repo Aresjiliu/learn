@@ -8,13 +8,15 @@ const source = fs.readFileSync('utils/request.js', 'utf8')
 let requestCount = 0
 let requestedUrl = ''
 let responseStatus = 200
+let authorization = ''
 const context = {
     module: { exports: {} },
     wx: {
-        getStorageSync: () => '',
+        getStorageSync: () => 'private-user-token',
         request: options => {
             requestCount += 1
             requestedUrl = options.url
+            authorization = options.header.Authorization
             options.success({ statusCode: responseStatus, data: { code: responseStatus } })
         },
         removeStorageSync: () => {},
@@ -33,6 +35,9 @@ const request = context.module.exports
     assert.strictEqual(response.code, 200)
     assert.strictEqual(requestCount, 1)
     assert.strictEqual(requestedUrl, 'http://local.test/read')
+    assert.strictEqual(authorization, 'Bearer private-user-token')
+    await request({ baseUrl: 'http://local.test', url: '/public-dictionary', method: 'GET', skipAuth: true })
+    assert.strictEqual(authorization, '', 'public local dictionary must not receive a user token')
     responseStatus = 201
     const created = await request({ baseUrl: 'http://local.test', url: '/created', method: 'GET' })
     assert.strictEqual(created.code, 201)

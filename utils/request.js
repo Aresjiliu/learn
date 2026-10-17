@@ -25,7 +25,7 @@ const request = (options) => {
       data: options.data,
       header: {
         'Content-Type': 'application/json',
-        'Authorization': token ? `Bearer ${token}` : ''
+        'Authorization': !options.skipAuth && token ? `Bearer ${token}` : ''
       },
       success: (res) => {
         if (debug) console.log('Response status:', res.statusCode)

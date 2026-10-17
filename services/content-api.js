@@ -10,7 +10,8 @@ function getDictionarySearch(query, options = {}) {
     return request({
         baseUrl: config.contentApiBaseUrl,
         url: buildDictionarySearchPath(query, options.page, options.pageSize, config.contentApiBasePath),
-        method: 'GET'
+        method: 'GET',
+        skipAuth: Boolean(config.enableLocalDictionaryApi && !config.enableContentApi)
     }).then(response => normalizeDictionaryResponse(response)).then(response => {
         if (!isContentSuccess(response)) throw new Error('词典接口返回异常')
         return response
@@ -31,7 +32,8 @@ function getDictionaryDetail(wordId) {
     return request({
         baseUrl: config.contentApiBaseUrl,
         url: buildDictionaryPath(wordId, config.contentApiBasePath),
-        method: 'GET'
+        method: 'GET',
+        skipAuth: Boolean(config.enableLocalDictionaryApi && !config.enableContentApi)
     }).then(response => normalizeDictionaryResponse(response)).then(response => {
         if (!isContentSuccess(response)) throw new Error('词典详情接口返回异常')
         return response
