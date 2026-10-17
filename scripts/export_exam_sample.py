@@ -5,6 +5,7 @@ import gzip
 import json
 from collections import defaultdict
 from pathlib import Path
+from exam_export_fields import explanation_fields
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -37,7 +38,7 @@ def main():
                 'c_item': row.get('c_item', ''),
                 'd_item': row.get('d_item', ''),
                 'right_result': row.get('right_result', ''),
-                'analysis': row.get('exam_explain', ''),
+                **explanation_fields(row),
                 'translate': row.get('translate', ''),
                 'point': row.get('point', ''),
             })

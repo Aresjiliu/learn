@@ -6,6 +6,7 @@ import csv
 import gzip
 import json
 from pathlib import Path
+from exam_export_fields import explanation_fields
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -29,7 +30,7 @@ def main() -> None:
                 'question_content': row.get('question_content', ''),
                 'a_item': '', 'b_item': '', 'c_item': '', 'd_item': '',
                 'right_result': row.get('right_result', ''),
-                'analysis': row.get('exam_explain', ''),
+                **explanation_fields(row),
                 'translate': row.get('translate', ''),
                 'point': row.get('point', ''),
             })

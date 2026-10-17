@@ -30,6 +30,7 @@
         </view>
         <view class="question-card">
             <text class="question-type">{{questions[currentIndex].answerMode === 'text' ? '填空题' : '选择题'}}</text>
+            <text wx:if="{{questions[currentIndex].instruction}}" class="question-instruction">{{questions[currentIndex].instruction}}</text>
             <text class="question">{{questions[currentIndex].question_content}}</text>
             <view wx:if="{{questions[currentIndex].audioPlayable || questions[currentIndex].audioPending}}" class="audio-card">
                 <text class="audio-title">听力材料</text>

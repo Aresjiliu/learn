@@ -6,11 +6,11 @@
             "title": "本地听力练习样本",
             "questionCount": 8,
             "answerReadyCount": 8,
-            "explanationReadyCount": 8,
+            "explanationReadyCount": 0,
             "audioReadyCount": 8,
             "questionMode": "choice",
             "practiceReady": true,
-            "analysisReady": true,
+            "analysisReady": false,
             "source": "local-sample"
         },
         {
@@ -18,11 +18,11 @@
             "title": "本地填空练习样本",
             "questionCount": 8,
             "answerReadyCount": 8,
-            "explanationReadyCount": 8,
+            "explanationReadyCount": 0,
             "audioReadyCount": 0,
             "questionMode": "text",
             "practiceReady": true,
-            "analysisReady": true,
+            "analysisReady": false,
             "source": "local-sample"
         }
     ]

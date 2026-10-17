@@ -30,6 +30,7 @@
 .feedback-wrong { color: var(--color-error); background: #fff3f2; }
 .feedback-title { font-size: var(--font-size-body); font-weight: 700; }
 .reference-answer, .analysis { color: var(--color-text-secondary); font-size: var(--font-size-caption); overflow-wrap: anywhere; }
+.question-instruction { display: block; margin: 12rpx 0; color: var(--color-text-secondary); font-size: var(--font-size-caption); line-height: 1.5; }
 .primary-button { margin-top: 22rpx; color: #fff; background: var(--color-primary); font-size: var(--font-size-body); }
 .state-card { margin-top: 20rpx; text-align: center; line-height: 1.6; }
 .loading-state { color: var(--color-loading); }
