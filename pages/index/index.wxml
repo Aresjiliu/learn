@@ -45,6 +45,8 @@
         class="continue-card"
         bindtap="navigateToCourse"
         data-id="{{progressId}}"
+        data-video-id="{{progressVideoId}}"
+        data-resume="{{true}}"
         aria-label="继续学习">
     <view>
       <text class="section-kicker">继续学习</text>

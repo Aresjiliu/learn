@@ -1,7 +1,7 @@
 import request from '../../../utils/request'
 import { getCourseDetail } from '../../../services/course'
 import { shouldPersistProgress } from '../../../services/playback'
-import { getVideoProgress, saveVideoProgress, saveRecentCourse } from '../../../services/playback-progress'
+import { getVideoProgress, saveVideoProgress, saveRecentVideo } from '../../../services/playback-progress'
 import config from '../../../config'
 
 Page({
@@ -191,12 +191,19 @@ Page({
   // 视频事件处理
   onVideoPlay: function() {
     wx.hideLoading()
-    if (this.data.currentVideo && this.data.courseId) saveRecentCourse(wx, this.data.courseId)
+    if (this.data.currentVideo && this.data.courseId) saveRecentVideo(wx, this.data.courseId, this.data.currentVideo.id)
     this.setData({ isPlaying: true, playbackError: '' })
   },
 
   onVideoPause: function() {
+    this.persistVisibleProgress()
     this.setData({ isPlaying: false })
+  },
+
+  persistVisibleProgress: function() {
+    if (!this.data.currentVideo || !this.data.courseId || !(this.data.currentTime > 0)) return
+    saveVideoProgress(wx, this.data.currentVideo.id, this.data.currentTime)
+    saveRecentVideo(wx, this.data.courseId, this.data.currentVideo.id)
   },
 
   onVideoBuffering: function() {
@@ -251,7 +258,7 @@ Page({
     if (!this.data.currentVideo) return
     const videoId = this.data.currentVideo.id
     saveVideoProgress(wx, videoId, progress)
-    saveRecentCourse(wx, this.data.courseId)
+    saveRecentVideo(wx, this.data.courseId, videoId)
     // 阶段 0/1 只保存在本地；远程上报必须显式开启写权限。
     if (!config.enableRemoteWrites || !wx.getStorageSync('token')) return
     request({
@@ -354,6 +361,7 @@ Page({
   },
 
   onUnload: function() {
+    this.persistVisibleProgress()
     this._isUnloaded = true
     this._loadRequestId = (this._loadRequestId || 0) + 1
   }

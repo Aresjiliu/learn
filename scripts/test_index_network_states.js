@@ -39,7 +39,7 @@ async function runConcurrentRequestTest() {
   const executableSource = source
     .replace(/^import \{ getCategories, getCourses \} from '..\/\.\.\/services\/course'\r?\n/m, '')
     .replace(/^import config from '..\/\.\.\/config'\r?\n/m, '')
-    .replace(/^import \{ getRecentCourse \} from '..\/\.\.\/services\/playback-progress'\r?\n/m, '')
+    .replace(/^import \{ getRecentCourse, getRecentVideo \} from '..\/\.\.\/services\/playback-progress'\r?\n/m, '')
 
   const context = {
     Page: definition => {
@@ -47,6 +47,7 @@ async function runConcurrentRequestTest() {
     },
     config: { enableContentApi: false },
     getRecentCourse: () => '',
+    getRecentVideo: () => '',
     getCategories: () => {
       const request = createDeferred()
       categoryRequests.push(request)

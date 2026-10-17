@@ -1,7 +1,7 @@
 // index.js
 import { getCategories, getCourses } from '../../services/course'
 import config from '../../config'
-import { getRecentCourse } from '../../services/playback-progress'
+import { getRecentCourse, getRecentVideo } from '../../services/playback-progress'
 
 function resolveContentMode(response) {
   const source = response && response.meta ? String(response.meta.source || '') : ''
@@ -51,6 +51,7 @@ Page({
     courseLoadError: '',
     hasLocalProgress: false,
     progressId: '',
+    progressVideoId: '',
     contentMode: 'local-sample',
     contentModeLabel: '本地演示内容'
   },
@@ -66,7 +67,7 @@ Page({
 
   onShow: function() {
     const progressId = getRecentCourse(wx)
-    this.setData({ hasLocalProgress: Boolean(progressId), progressId })
+    this.setData({ hasLocalProgress: Boolean(progressId), progressId, progressVideoId: getRecentVideo(wx, progressId) })
   },
 
   // 加载分类数据
@@ -218,8 +219,13 @@ Page({
   // 跳转到课程详情页
   navigateToCourse: function(e) {
     const courseId = e.currentTarget.dataset.id
+    const videoId = e.currentTarget.dataset.videoId
+    const resume = e.currentTarget.dataset.resume
+    if (!courseId) return
     wx.navigateTo({
-      url: `/pages/course/detail/detail?id=${courseId}`
+      url: resume && videoId
+        ? `/pages/course/video/video?id=${encodeURIComponent(courseId)}&videoId=${encodeURIComponent(videoId)}`
+        : `/pages/course/detail/detail?id=${courseId}`
     })
   },
 
