@@ -3,13 +3,18 @@ const dictionarySample = require('../data/content_samples/dictionary_words.js')
 const textbookSample = require('../data/content_samples/book_1_words.js')
 const audioIndex = require('../data/content_samples/book_1_audio.js')
 
-function withLocalWordAudio(word, textbook) {
-    if (!word || !textbook || !config.enableLocalWordAudio) return word
-    const filename = audioIndex[String(textbook.id)]
-    if (!filename || !/^[0-9a-f]{32}\.mp3$/.test(filename)) return word
+function getLocalTextbookAudioUrl(textbookId) {
+    if (!textbookId || !config.enableLocalWordAudio) return ''
+    const filename = audioIndex[String(textbookId)]
+    if (!filename || !/^[0-9a-f]{32}\.mp3$/.test(filename)) return ''
     const baseUrl = String(config.devMediaBaseUrl || '').replace(/\/+$/, '')
-    if (!/^https?:\/\//i.test(baseUrl)) return word
-    return { ...word, audioUrl: `${baseUrl}/wordaudio/${filename}` }
+    return /^https?:\/\//i.test(baseUrl) ? `${baseUrl}/wordaudio/${filename}` : ''
+}
+
+function withLocalWordAudio(word, textbook) {
+    if (!word || !textbook) return word
+    const audioUrl = getLocalTextbookAudioUrl(textbook.id)
+    return audioUrl ? { ...word, audioUrl } : word
 }
 
 function buildLocalDictionaryWords() {
@@ -79,4 +84,4 @@ function getLocalDictionaryDetail(query, words = buildLocalDictionaryWords(), te
     }, textbook)
 }
 
-export { searchLocalDictionary, getLocalDictionarySearch, getLocalDictionaryDetail, buildLocalDictionaryWords }
+export { searchLocalDictionary, getLocalDictionarySearch, getLocalDictionaryDetail, getLocalTextbookAudioUrl, buildLocalDictionaryWords }

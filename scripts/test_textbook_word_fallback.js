@@ -3,7 +3,7 @@ const fs = require('fs')
 const vm = require('vm')
 
 const source = fs.readFileSync('pages/dictionary/detail/detail.js', 'utf8')
-    .replace("import { getLocalDictionaryDetail } from '../../../services/dictionary'", "const getLocalDictionaryDetail = () => null")
+    .replace("import { getLocalDictionaryDetail, getLocalTextbookAudioUrl } from '../../../services/dictionary'", "const getLocalDictionaryDetail = () => null; const getLocalTextbookAudioUrl = () => ''")
     .replace("import { getDictionaryDetail } from '../../../services/content-api'", "const getDictionaryDetail = () => Promise.reject(new Error('not found'))")
     .replace("import { audioController } from '../../../services/media/audio'", "const audioController = { stop: () => {}, play: () => false }")
     .replace("import config from '../../../config'", "const config = { enableContentApi: false, enableLocalTestMedia: false, devMediaBaseUrl: '' }")

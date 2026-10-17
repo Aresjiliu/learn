@@ -16,7 +16,7 @@ function loadDictionary() {
         .replace("const audioIndex = require('../data/content_samples/book_1_audio.js')", 'const audioIndex = globalAudioIndex')
         .replace(/export\s*\{[\s\S]*?\}\s*$/, '')
     const context = { module: { exports: {} }, globalConfig: config, globalDictionarySample: dictionarySample, globalTextbookSample: textbookSample, globalAudioIndex: index }
-    vm.runInNewContext(`${source}\nmodule.exports = { getLocalDictionaryDetail, getLocalDictionarySearch }`, context)
+    vm.runInNewContext(`${source}\nmodule.exports = { getLocalDictionaryDetail, getLocalDictionarySearch, getLocalTextbookAudioUrl }`, context)
     return context.module.exports
 }
 
@@ -24,6 +24,7 @@ function loadDictionary() {
     const dictionary = loadDictionary()
     const available = dictionary.getLocalDictionaryDetail('агент')
     assert.strictEqual(available.audioUrl, `http://127.0.0.1:18090/wordaudio/${HASH}.mp3`)
+    assert.strictEqual(dictionary.getLocalTextbookAudioUrl('65975'), available.audioUrl)
     assert.strictEqual(dictionary.getLocalDictionaryDetail('академик').audioUrl, undefined)
     const search = await dictionary.getLocalDictionarySearch('агент')
     assert.strictEqual(search.data.words[0].audioUrl, available.audioUrl)
@@ -31,14 +32,14 @@ function loadDictionary() {
     assert.strictEqual(dictionary.getLocalDictionaryDetail('агент').audioUrl, undefined)
 
     const detailSource = fs.readFileSync('pages/dictionary/detail/detail.js', 'utf8')
-        .replace("import { getLocalDictionaryDetail } from '../../../services/dictionary'", 'const getLocalDictionaryDetail = globalLocalDetail')
+        .replace("import { getLocalDictionaryDetail, getLocalTextbookAudioUrl } from '../../../services/dictionary'", 'const getLocalDictionaryDetail = globalLocalDetail; const getLocalTextbookAudioUrl = globalTextbookAudioUrl')
         .replace("import { getDictionaryDetail } from '../../../services/content-api'", 'const getDictionaryDetail = globalRemoteDetail')
         .replace("import { audioController } from '../../../services/media/audio'", 'const audioController = globalAudioController')
         .replace("import config from '../../../config'", 'const config = globalConfig')
         .replace(/Page\(\{/, 'const pageDefinition = {')
         .replace(/\}\)\s*$/, '}')
     const events = []
-    const context = { module: { exports: {} }, globalConfig: config, globalLocalDetail: id => id === '65975' ? available : null, globalRemoteDetail: () => Promise.resolve({ data: { word: { id: 'main-1', word: 'агент' } } }), globalAudioController: { play: (url, handlers) => { events.push({ url, handlers }); return true }, stop: () => events.push({ stopped: true }) }, wx: { showToast: info => events.push(info) } }
+    const context = { module: { exports: {} }, globalConfig: config, globalLocalDetail: () => null, globalTextbookAudioUrl: id => id === '65975' ? available.audioUrl : '', globalRemoteDetail: () => Promise.resolve({ data: { word: { id: 'main-1', word: 'агент' } } }), globalAudioController: { play: (url, handlers) => { events.push({ url, handlers }); return true }, stop: () => events.push({ stopped: true }) }, wx: { showToast: info => events.push(info) } }
     vm.runInNewContext(`${detailSource}\nmodule.exports = pageDefinition`, context)
     const page = context.module.exports
     const instance = { ...page, data: { word: { audioUrl: available.audioUrl } }, setData(values) { Object.assign(this.data, values) } }

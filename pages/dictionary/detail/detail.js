@@ -1,4 +1,4 @@
-import { getLocalDictionaryDetail } from '../../../services/dictionary'
+import { getLocalDictionaryDetail, getLocalTextbookAudioUrl } from '../../../services/dictionary'
 import { getDictionaryDetail } from '../../../services/content-api'
 import { audioController } from '../../../services/media/audio'
 import config from '../../../config'
@@ -34,8 +34,7 @@ Page({
                 if (this._isUnloaded || requestId !== this._detailRequestId) return
                 const word = result && result.data && result.data.word
                 if (!word) throw new Error('词典详情为空')
-                const localWord = textbookId ? getLocalDictionaryDetail(textbookId) : null
-                const audioUrl = localWord && localWord.audioUrl ? localWord.audioUrl : ''
+                const audioUrl = getLocalTextbookAudioUrl(textbookId)
                 this.setData({ word: this.decorateWord(audioUrl ? { ...word, audioUrl } : word, { textbookMeaning: word.word_meaning_all, textbookWordClass: word.word_character, examples: textbookExamples }), loading: false })
             }).catch(() => {
                 if (this._isUnloaded || requestId !== this._detailRequestId) return
