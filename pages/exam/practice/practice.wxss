@@ -12,8 +12,15 @@
 .question-type { display: inline-block; padding: 8rpx 14rpx; border-radius: 8rpx; color: var(--color-exam); background: #fff7ed; font-size: 22rpx; }
 .question { display: block; margin-top: 22rpx; color: var(--color-text); font-size: 36rpx; font-weight: 600; line-height: 1.6; overflow-wrap: anywhere; }
 .audio-card { margin-top: 24rpx; padding: 20rpx; border-radius: 14rpx; background: var(--color-sky); }
+.audio-heading { display: flex; align-items: center; justify-content: space-between; min-height: 88rpx; }
 .audio-title { color: var(--color-text); font-size: var(--font-size-caption); font-weight: 600; }
-.audio-button { margin: 14rpx 0 0; color: var(--color-primary); background: var(--color-surface); }
+.audio-button { display: flex; align-items: center; justify-content: center; box-sizing: border-box; width: 88rpx; height: 88rpx; margin: 0; padding: 0; border: 2rpx solid rgba(31, 95, 139, 0.2); border-radius: 50%; color: var(--color-primary); background: var(--color-surface); }
+.audio-button::after { border: 0; }
+.audio-button--playing { border-color: var(--color-primary); background: #dceef8; }
+.speaker-icon { position: relative; width: 42rpx; height: 42rpx; color: var(--color-primary); }
+.speaker-icon__body { position: absolute; top: 14rpx; left: 2rpx; width: 10rpx; height: 14rpx; border-radius: 2rpx; background: currentColor; }
+.speaker-icon__cone { position: absolute; top: 4rpx; left: 8rpx; width: 0; height: 0; border-top: 17rpx solid transparent; border-right: 20rpx solid currentColor; border-bottom: 17rpx solid transparent; }
+.speaker-icon__wave { position: absolute; top: 5rpx; right: 0; width: 18rpx; height: 32rpx; border: 3rpx solid currentColor; border-top-color: transparent; border-bottom-color: transparent; border-left-color: transparent; border-radius: 50%; }
 .audio-pending { display: block; margin-top: 12rpx; color: var(--color-text-secondary); font-size: var(--font-size-caption); line-height: 1.5; }
 .audio-error { margin-top: 12rpx; color: var(--color-error); font-size: var(--font-size-caption); line-height: 1.5; }
 .text-action { margin: 8rpx 0 0; padding: 0; color: var(--color-primary); background: transparent; font-size: var(--font-size-caption); }

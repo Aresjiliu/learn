@@ -33,8 +33,16 @@
             <text wx:if="{{questions[currentIndex].instruction}}" class="question-instruction">{{questions[currentIndex].instruction}}</text>
             <text class="question">{{questions[currentIndex].question_content}}</text>
             <view wx:if="{{questions[currentIndex].audioPlayable || questions[currentIndex].audioPending}}" class="audio-card">
-                <text class="audio-title">听力材料</text>
-                <button wx:if="{{questions[currentIndex].audioPlayable}}" class="audio-button" bindtap="playQuestionAudio">{{isPlayingAudio ? '播放中…' : '播放听力'}}</button>
+                <view class="audio-heading">
+                    <text class="audio-title">听力材料</text>
+                    <button wx:if="{{questions[currentIndex].audioPlayable}}" class="audio-button {{isPlayingAudio ? 'audio-button--playing' : ''}}" bindtap="playQuestionAudio" aria-label="{{isPlayingAudio ? '正在播放听力，点击重播' : '播放听力'}}">
+                        <view class="speaker-icon" aria-hidden="true">
+                            <view class="speaker-icon__body"></view>
+                            <view class="speaker-icon__cone"></view>
+                            <view class="speaker-icon__wave"></view>
+                        </view>
+                    </button>
+                </view>
                 <text wx:if="{{questions[currentIndex].audioPending}}" class="audio-pending">听力音频资源待接入，可继续作答</text>
                 <view wx:if="{{audioError}}" class="audio-error">
                     <text>{{audioError}}</text>
