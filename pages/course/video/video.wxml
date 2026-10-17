@@ -72,9 +72,8 @@
       </view>
     </view>
 
-    <view class="purchase-tip" wx:if="{{!hasPurchased}}">
-      <text>购买课程后可观看完整内容</text>
-      <button class="purchase-btn" bindtap="handlePurchase">立即购买 ¥{{course.price}}</button>
+    <view class="availability-notice" wx:if="{{!hasPurchased}}">
+      <text>完整课程购买暂未开放，当前可观看试听内容</text>
     </view>
   </block>
 </view>

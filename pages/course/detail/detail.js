@@ -210,7 +210,7 @@ Page({
     const isPreview = event.currentTarget.dataset.isPreview
     if (!videoId) return
     if (!this.data.hasPurchased && !this.isPlayableWithoutPurchase(isPreview, chapterIndex)) {
-      wx.showToast({ title: '请购买课程后观看', icon: 'none' })
+      wx.showToast({ title: '完整课程暂未开放', icon: 'none' })
       return
     }
     wx.navigateTo({
@@ -268,72 +268,6 @@ Page({
         icon: 'none'
       })
       console.error('收藏操作失败:', err && err.message ? err.message : 'unknown error')
-    })
-  },
-
-  // 处理购买
-  handleBuy: function() {
-    if (!config.enableRemoteWrites) {
-      wx.showToast({ title: '当前为只读联调模式', icon: 'none' })
-      return
-    }
-    if (!wx.getStorageSync('token')) {
-      wx.showToast({
-        title: '请先登录',
-        icon: 'none'
-      })
-      return
-    }
-
-    wx.showModal({
-      title: '确认购买',
-      content: `确定要购买《${this.data.course.title}》吗？`,
-      success: (res) => {
-        if (res.confirm) {
-          this.createOrder()
-        }
-      }
-    })
-  },
-
-  // 创建订单
-  createOrder: function() {
-    wx.showLoading({
-      title: '正在处理...'
-    })
-
-    request({
-      url: `/api/courses/${this.data.courseId}/create_order/`,
-      method: 'POST'
-    }).then(res => {
-      if (res.code === 200) {
-        // 支付成功
-        wx.showToast({
-          title: '购买成功',
-          icon: 'success'
-        })
-        
-        // 更新用户课程数量
-        const userInfo = wx.getStorageSync('userInfo')
-        if (userInfo) {
-          userInfo.courseNum = (userInfo.courseNum || 0) + 1
-          wx.setStorageSync('userInfo', userInfo)
-        }
-        
-        // 延迟跳转到视频播放页
-        setTimeout(() => {
-          wx.redirectTo({
-            url: `/pages/course/video/video?id=${this.data.courseId}`
-          })
-        }, 1500)
-      }
-    }).catch(err => {
-      wx.showToast({
-        title: err.message || '购买失败',
-        icon: 'none'
-      })
-    }).finally(() => {
-      wx.hideLoading()
     })
   },
 

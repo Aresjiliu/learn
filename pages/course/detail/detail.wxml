@@ -17,14 +17,15 @@
     <text class="course-subtitle">{{course.subtitle || course.description || '按章节学习俄语词汇与课程内容'}}</text>
     <view class="identity-meta">
       <text>{{course.students_count || 0}} 人学习</text>
-      <text wx:if="{{course.price}}">¥{{course.price}}</text>
+      <text wx:if="{{contentModeLabel === '本地演示内容'}}">免费演示</text>
+      <text wx:elif="{{course.price}}">¥{{course.price}}</text>
     </view>
   </view>
 
   <view class="primary-action-row">
     <button wx:if="{{hasPurchased}}" class="primary-action" bindtap="navigateToVideo">继续学习</button>
     <button wx:elif="{{hasPreview}}" class="primary-action" bindtap="previewVideo">免费试听</button>
-    <button wx:else class="primary-action" bindtap="handleBuy">立即购买</button>
+    <view wx:else class="purchase-unavailable">完整课程购买暂未开放</view>
   </view>
 
   <view class="course-summary course-card">

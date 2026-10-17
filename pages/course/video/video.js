@@ -148,13 +148,13 @@ Page({
     // 优先使用视频级试听标记；旧接口没有该字段时兼容首章试听。
     if (!this.data.hasPurchased && !this.isPlayableWithoutPurchase(video, chapterIndex)) {
       wx.showToast({
-        title: '请购买课程后观看',
+        title: '完整课程暂未开放',
         icon: 'none'
       })
       return
     }
 
-    // 如果视频URL为空（未购买的章节），不允许播放
+    // 没有可用媒体地址时，不允许播放。
     if (!video.url) {
       wx.showToast({
         title: '试听媒体地址待接入',
@@ -327,13 +327,6 @@ Page({
       nextVideo: null,
       loadError: '',
       playbackError: ''
-    })
-  },
-
-  // 处理购买
-  handlePurchase: function() {
-    wx.navigateTo({
-      url: `/pages/course/detail/detail?id=${this.data.courseId}`
     })
   },
 

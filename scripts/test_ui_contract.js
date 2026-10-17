@@ -111,7 +111,7 @@ const pageContracts = [{
   checks: [
     { label: '详情封面比例容器', pattern: /class="course-cover-wrap"/ },
     { label: '详情课程身份和内容状态', pattern: /class="course-identity[^\"]*"[\s\S]*?\{\{contentModeLabel\}\}/ },
-    { label: '详情主行动按钮', pattern: /class="primary-action[^"]*"[\s\S]*?(navigateToVideo|previewVideo|handleBuy)/ },
+    { label: '详情主行动按钮', pattern: /class="primary-action[^"]*"[\s\S]*?(navigateToVideo|previewVideo)/ },
     { label: '详情课程摘要', pattern: /class="course-summary[^\"]*"/ },
     { label: '详情章节区域', pattern: /class="chapter-section[^\"]*"/ },
     { label: '详情章节稳定键', pattern: /<view(?=[^>]*wx:for="\{\{chapters\}\}")(?=[^>]*wx:key="rowKey")[^>]*>/ },
@@ -189,6 +189,7 @@ const indexWxssSource = fs.readFileSync(path.join(root, 'pages', 'index', 'index
 const detailJsSource = fs.readFileSync(path.join(root, 'pages', 'course', 'detail', 'detail.js'), 'utf8')
 const detailWxssSource = fs.readFileSync(path.join(root, 'pages', 'course', 'detail', 'detail.wxss'), 'utf8')
 const videoJsSource = fs.readFileSync(path.join(root, 'pages', 'course', 'video', 'video.js'), 'utf8')
+const videoWxmlSource = fs.readFileSync(path.join(root, 'pages', 'course', 'video', 'video.wxml'), 'utf8')
 const videoWxssSource = fs.readFileSync(path.join(root, 'pages', 'course', 'video', 'video.wxss'), 'utf8')
 const examListJsSource = fs.readFileSync(path.join(root, 'pages', 'exam', 'list', 'list.js'), 'utf8')
 const examListFilterSource = fs.readFileSync(path.join(root, 'pages', 'exam', 'list', 'filter.js'), 'utf8')
@@ -250,7 +251,8 @@ assertSourcePattern(videoWxssSource, /\.video-container\s*\{[\s\S]*?height:\s*0[
 assertSourcePattern(videoWxssSource, /\.player-state\.error\s*\{/, 'pages/course/video/video.wxss', '播放器错误状态样式')
 assertSourcePattern(videoWxssSource, /\.locked-state\s*\{/, 'pages/course/video/video.wxss', '视频锁定状态样式')
 assertSourcePattern(videoWxssSource, /\.pending-state|\.player-state\.pending\s*\{/, 'pages/course/video/video.wxss', '媒体待接入状态样式')
-assertSourcePattern(videoJsSource, /handlePurchase:\s*function[\s\S]*?pages\/course\/detail\/detail\?id=/, 'pages/course/video/video.js', '视频购买导航')
+assertSourcePattern(videoWxmlSource, /完整课程购买暂未开放/, 'pages/course/video/video.wxml', '未接支付时的明确提示')
+assertSourceAbsent(videoWxmlSource, /立即购买/, 'pages/course/video/video.wxml', '无支付能力时的购买按钮')
 
 const routedPages = [
   ['pages/exam/list/list', examListJsSource, examListWxssSource, '题库'],
