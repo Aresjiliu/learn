@@ -16,4 +16,10 @@ unsafe_writes = validate_config(
     '{}',
 )
 assert any('baseUrl 必须使用 HTTPS' in item for item in unsafe_writes['failures'])
+
+unsafe_dictionary = validate_config(
+    "baseUrl: 'https://api.example.com', devMediaBaseUrl: 'https://media.example.com', contentApiBaseUrl: 'https://content.example.com', enableContentApi: false, enableLocalDictionaryApi: true, enableLocalTestMedia: false, enableLocalSampleFallback: false, enableRemoteWrites: false",
+    '{}',
+)
+assert any('enableLocalDictionaryApi 仅供回环地址' in item for item in unsafe_dictionary['failures'])
 print('runtime config security tests: PASS')

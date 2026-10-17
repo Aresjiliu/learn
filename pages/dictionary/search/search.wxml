@@ -6,6 +6,7 @@
             <button class="search-action" bindtap="handleSearch">查词</button>
         </view>
     </view>
+    <view wx:if="{{sampleNotice && searched}}" class="state state-card">完整词典服务未连接，当前仅显示离线样本；请启动本地内容服务后重试。</view>
     <view wx:if="{{searched && words.length}}" class="word-list">
         <view wx:for="{{words}}" wx:key="word" class="word-card" bindtap="openDetail" data-word="{{item.word}}" data-word-id="{{item.sourceId || item.id}}">
             <view class="word-head">
@@ -24,6 +25,6 @@
         <button class="state-action" bindtap="retryLoad">重新查询</button>
     </view>
     <block wx:elif="{{searched && words.length}}"></block>
-    <view wx:elif="{{searched}}" class="state state-card empty-state">没有找到匹配词条</view>
+    <view wx:elif="{{searched}}" class="state state-card empty-state">{{sampleNotice ? '离线样本中没有该词，请连接完整词典服务' : '没有找到匹配词条'}}</view>
     <view wx:else class="state">输入词语开始查询</view>
 </view>

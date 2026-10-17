@@ -76,6 +76,25 @@ MAIN_DICTIONARY = read_main_dictionary()
 DICTIONARY = list(MAIN_DICTIONARY.values()) or DICTIONARY_SAMPLE
 
 
+def rank_dictionary_results(words, query):
+    keyword = normalize_word(query)
+    meaning_keyword = str(query or '').strip().lower()
+    if not keyword:
+        return []
+    exact, prefix, substring, meaning = [], [], [], []
+    for word in words:
+        term = normalize_word(word.get('word', ''))
+        if term == keyword:
+            exact.append(word)
+        elif term.startswith(keyword):
+            prefix.append(word)
+        elif keyword in term:
+            substring.append(word)
+        elif meaning_keyword in word.get('word_meaning_all', '').lower():
+            meaning.append(word)
+    return exact + prefix + substring + meaning
+
+
 WORD_FORMS = read_json('data/content_samples/book_word_forms.json').get('byWord', {})
 
 
@@ -154,7 +173,7 @@ class ContentHandler(BaseHTTPRequestHandler):
             keyword = (query.get('q') or [''])[0].strip().lower()
             page = max(1, int((query.get('page') or ['1'])[0] or 1))
             page_size = min(100, max(1, int((query.get('page_size') or ['20'])[0] or 20)))
-            matched = [word for word in DICTIONARY if keyword in word.get('word', '').lower() or keyword in word.get('word_meaning_all', '').lower()]
+            matched = rank_dictionary_results(DICTIONARY, keyword)
             start = (page - 1) * page_size
             words = matched[start:start + page_size]
             self.respond({'data': {'words': words}, 'meta': {

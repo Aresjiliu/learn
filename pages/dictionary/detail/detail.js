@@ -27,7 +27,7 @@ Page({
         }
         const wordId = options && options.id ? decodeURIComponent(options.id) : ''
         const textbookId = options && options.textbookId ? decodeURIComponent(options.textbookId) : ''
-        if (config.enableContentApi && wordId) {
+        if ((config.enableContentApi || config.enableLocalDictionaryApi) && wordId) {
             const requestId = (this._detailRequestId || 0) + 1
             this._detailRequestId = requestId
             getDictionaryDetail(wordId).then(result => {
@@ -74,7 +74,7 @@ Page({
 
     isAudioPlayable: function(word) {
         const raw = String(word && (word.audioUrl || word.audio_url) || '').trim()
-        return /^https?:\/\//i.test(raw) || (config.enableLocalWordAudio && /^\/wordaudio\/[0-9a-f]{32}\.mp3$/.test(raw)) || (config.enableLocalTestAudio && Boolean(raw))
+        return /^https?:\/\//i.test(raw) || (config.enableLocalWordAudio && /^\/wordaudio\/[0-9a-f]{32}\.mp3$/.test(raw))
     },
 
     decorateWord: function(word, extra = {}) {

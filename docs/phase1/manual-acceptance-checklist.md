@@ -9,7 +9,7 @@ CLI `auto --project ... --port 11367 --trust-project` 在 AppID 权限阶段失�
 - 导入 `D:\project\learn`，确认 AppID 与 `project.config.json` 一致。
 - 本地开发保持 `project.private.config.json` 的 `urlCheck=false`；发布前恢复合法域名校验。
 - 新开终端启动测试媒体：`python scripts/serve_test_media.py --root audio --host 127.0.0.1 --port 18090`；确认本地已有 `videos/video1.mp4` 与 `audio/wordaudio/` 中的缓存 MP3。
-- 如需联调内容接口，再启动只读服务：`python scripts/serve_content_api.py --host 127.0.0.1 --port 18091`，并临时开启 `enableContentApi`；结束后恢复 `false`。
+- 搜索完整词典需启动只读服务：`python scripts/serve_content_api.py --host 127.0.0.1 --port 18091`。默认 `enableLocalDictionaryApi=true`，不必开启全局 `enableContentApi`；若服务不可达，页面明确提示仅查离线样本。
 - 执行 `python scripts/check_runtime_config.py`，确认 `enableRemoteWrites=false`、本地地址和音频开关状态符合预期。
 - 开发者工具点击“编译”。CLI 的 `open` 只能证明 IDE 接受项目；当前没有独立的本地 `compile` 命令，不能把 `preview` 当作本地编译。
 
@@ -19,7 +19,7 @@ CLI `auto --project ... --port 11367 --trust-project` 在 AppID 权限阶段失�
 
 1. 首页：检查搜索、分类切换和快捷入口（课程、练习、词典）的实际跳转；覆盖加载失败重试与无结果状态。
 2. 课程详情与视频：检查课程介绍、视频目录和词汇列表；从目录打开具体视频，确认定位、播放/暂停/拖动、失败提示与重试、断点恢复及权限允许时的下一节入口。
-3. 试卷列表与练习：检查筛选结果；确认审核禁用试卷不可进入练习。进入可练试卷，检查选择题/填空题反馈、完成复盘、退出重进后的进度恢复；验证题库加载错误和重试。
+3. 试卷列表与练习：检查筛选结果；确认审核禁用试卷不可进入练习。进入本地听力样本逐题播放音频（8 题、7 个文件），检查切题时停止、播放失败重试；再检查选择题/填空题反馈、完成复盘、退出重进后的进度恢复，以及题库加载错误和重试。
 4. 词典：分别用俄语和中文搜索，打开结果详情，检查来源/教材词汇信息、释义和例句；测试一条有缓存的教材词音频播放/停止及缺音频降级，验证搜索错误、无结果及详情缺失状态。
 5. 异常与空状态：对首页、课程详情、试卷/练习、词典搜索/详情触发适用的网络错误、空结果或缺失内容状态，确认提示可理解且有可用恢复入口。
 6. 每项保存截图并在结果记录中标注页面、操作、通过/失败、日期和工具版本；未实际操作的项目保持“未验收”。

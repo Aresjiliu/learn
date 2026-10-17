@@ -7,6 +7,7 @@ Page({
         words: [],
         searched: false,
         loadError: '',
+        sampleNotice: false,
         loading: false,
         page: 1,
         pageSize: 20,
@@ -48,7 +49,7 @@ Page({
         this._failedAppendQuery = ''
         if (!query) {
             this._searchRequestId = (this._searchRequestId || 0) + 1
-            this.setData({ words: [], searched: false, loadError: '', loading: false, page: 1, hasMore: false })
+            this.setData({ words: [], searched: false, loadError: '', sampleNotice: false, loading: false, page: 1, hasMore: false })
             return
         }
         this.loadPage(1, false)
@@ -67,13 +68,14 @@ Page({
             }))
             const words = append ? this.data.words.concat(incoming) : incoming
             const meta = result.meta || {}
+            const sampleNotice = /^local-sample/.test(String(meta.source || '')) && Boolean(config.enableLocalDictionaryApi)
             const total = Number(meta.total)
             const hasMore = Number.isFinite(total) && total >= 0
                 ? page * this.data.pageSize < total
                 : incoming.length >= this.data.pageSize
             this._failedAppendPage = 0
             this._failedAppendQuery = ''
-            this.setData({ words, searched: true, loadError: '', page, hasMore })
+            this.setData({ words, searched: true, loadError: '', sampleNotice, page, hasMore })
         }).catch(() => {
             if (this._isUnloaded || requestId !== this._searchRequestId) return
             this._failedAppendPage = append ? page : 0
@@ -101,7 +103,7 @@ Page({
 
     isAudioPlayable: function(word) {
         const raw = String(word && (word.audioUrl || word.audio_url) || '').trim()
-        return /^https?:\/\//i.test(raw) || (config.enableLocalTestAudio && Boolean(raw))
+        return /^https?:\/\//i.test(raw) || (config.enableLocalWordAudio && /^\/wordaudio\/[0-9a-f]{32}\.mp3$/.test(raw))
     },
 
     onUnload: function() {

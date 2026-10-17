@@ -32,6 +32,7 @@ def validate_config(config: str, private_config: str = ""):
     media_url = read_string(config, "devMediaBaseUrl")
     content_url = read_string(config, "contentApiBaseUrl")
     content_enabled = read_flag(config, "enableContentApi")
+    dictionary_enabled = read_flag(config, "enableLocalDictionaryApi")
     media_enabled = read_flag(config, "enableLocalTestMedia")
     audio_enabled = read_flag(config, "enableLocalTestAudio")
     fallback_enabled = read_flag(config, "enableLocalSampleFallback")
@@ -51,6 +52,8 @@ def validate_config(config: str, private_config: str = ""):
         failures.append("内容 API 开启时不应默认启用样例回退；发布前需明确关闭或改为受控降级")
     if content_enabled and not (content_url or "").lower().startswith("https://"):
         failures.append("enableContentApi 开启时 contentApiBaseUrl 必须使用 HTTPS")
+    if dictionary_enabled and not content_enabled and not loopback:
+        failures.append("enableLocalDictionaryApi 仅供回环地址的本机调试使用")
     if remote_writes and not (base_url or "").lower().startswith("https://"):
         failures.append("enableRemoteWrites 开启时 baseUrl 必须使用 HTTPS")
     if loopback and remote_writes:
@@ -65,6 +68,7 @@ def validate_config(config: str, private_config: str = ""):
         "devMediaBaseUrl": media_url,
         "contentApiBaseUrl": content_url,
         "enableContentApi": content_enabled,
+        "enableLocalDictionaryApi": dictionary_enabled,
         "enableLocalTestMedia": media_enabled,
         "enableLocalTestAudio": audio_enabled,
         "enableLocalSampleFallback": fallback_enabled,

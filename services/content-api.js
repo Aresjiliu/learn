@@ -6,7 +6,7 @@ import { getLocalDictionaryDetail, getLocalDictionarySearch } from './dictionary
 import { getLocalExamPapers, getLocalPracticeSet } from './exam'
 
 function getDictionarySearch(query, options = {}) {
-    if (!config.enableContentApi) return getLocalDictionarySearch(query, options)
+    if (!config.enableContentApi && !config.enableLocalDictionaryApi) return getLocalDictionarySearch(query, options)
     return request({
         baseUrl: config.contentApiBaseUrl,
         url: buildDictionarySearchPath(query, options.page, options.pageSize, config.contentApiBasePath),
@@ -21,7 +21,7 @@ function getDictionarySearch(query, options = {}) {
 }
 
 function getDictionaryDetail(wordId) {
-    if (!config.enableContentApi) {
+    if (!config.enableContentApi && !config.enableLocalDictionaryApi) {
         return Promise.resolve({
             code: 200,
             data: { word: getLocalDictionaryDetail(wordId) },

@@ -3,6 +3,7 @@ import { createSession, recordAnswer } from '../../../services/practice-progress
 import { normalizePracticeResponse, normalizePracticeAnswer, getQuestionOptionKeys } from '../../../services/content'
 import { audioController } from '../../../services/media/audio'
 import { getExamPaper } from '../../../services/content-api'
+import { resolveExamAudioQuestion } from '../../../services/exam-audio'
 import config from '../../../config'
 
 Page({
@@ -41,16 +42,16 @@ Page({
         this.setData({ loading: true, loadError: '' })
         const localPracticeOptions = {
             paperId,
-            audioBaseUrl: config.enableLocalTestAudio ? config.devMediaBaseUrl : ''
+            audioBaseUrl: ''
         }
         const dataRequest = config.enableContentApi && paperId
-            ? getExamPaper(paperId, { audioBaseUrl: config.enableLocalTestAudio ? config.devMediaBaseUrl : '' }).then(response => normalizePracticeResponse(response, {
-                audioBaseUrl: config.enableLocalTestAudio ? config.devMediaBaseUrl : ''
+            ? getExamPaper(paperId, { audioBaseUrl: '' }).then(response => normalizePracticeResponse(response, {
+                audioBaseUrl: ''
             }))
             : getLocalPracticeSet(localPracticeOptions)
         dataRequest.then(result => {
             if (this._isUnloaded || requestId !== this._loadRequestId) return
-            const questions = result.questions || []
+            const questions = (result.questions || []).map(resolveExamAudioQuestion)
             const questionIds = questions.map(item => String(item.id))
             const sessionStorageKey = `practice_session_v1:${paperId || 'default'}`
             const saved = wx.getStorageSync(sessionStorageKey)
