@@ -5,7 +5,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-REQUIRED_FOLDERS = {".git", "audio", "videos", "data/remote_7500km", "docs", "scripts", "tasks", "learn", "lingosnake-main", "miniprogram-demo-master"}
+REQUIRED_FOLDERS = {".git", "audio", "videos", "data/remote_7500km", "data/generated", "docs", "scripts", "tasks", "learn", "lingosnake-main", "miniprogram-demo-master"}
 REQUIRED_FILES = {
     "data/content_samples/books.json",
     "data/content_samples/book_1_words.json",

@@ -1,5 +1,6 @@
 # Local production exports and media are not source code.
 /data/remote_7500km/
+/data/generated/
 /videos/
 /audio/
 

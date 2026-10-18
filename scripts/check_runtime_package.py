@@ -23,7 +23,7 @@ def main():
         included.append((relative, path.stat().st_size))
 
     forbidden = [relative for relative, _ in included if str(relative).replace("\\", "/").startswith((
-        "data/remote_7500km/", "docs/", "scripts/", "tasks/", "lingosnake-main/", "miniprogram-demo-master/"
+        "data/remote_7500km/", "data/generated/", "docs/", "scripts/", "tasks/", "lingosnake-main/", "miniprogram-demo-master/"
     )) or (str(relative).replace("\\", "/").startswith("data/content_samples/") and relative.suffix.lower() == ".json")]
     if forbidden:
         print("预计运行时包仍包含禁止路径:")

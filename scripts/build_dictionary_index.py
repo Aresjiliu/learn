@@ -1,0 +1,124 @@
+"""Build a replaceable SQLite snapshot from the owned Russian dictionary export."""
+
+from __future__ import annotations
+
+import argparse
+import csv
+import gzip
+import hashlib
+import json
+import os
+import sqlite3
+import tempfile
+import unicodedata
+from collections import Counter
+from contextlib import closing
+from pathlib import Path
+
+
+def normalize_word(value: str) -> str:
+    text = unicodedata.normalize('NFD', str(value or '').strip().lower())
+    return ''.join(char for char in text if unicodedata.category(char) != 'Mn')
+
+
+def stable_entry_id(source_id: str, word: str) -> str:
+    legacy_id = str(source_id).strip()
+    original = unicodedata.normalize('NFC', str(word).strip())
+    if not legacy_id.isdecimal() or not original:
+        raise ValueError('词条缺少合法旧 ID 或原词')
+    digest = hashlib.sha256(original.encode('utf-8')).hexdigest()[:16]
+    return f'dict:{legacy_id}:{digest}'
+
+
+def extract_meaning(raw: str) -> str:
+    try:
+        values = json.loads(raw or '[]')
+    except (TypeError, ValueError):
+        return ''
+    if isinstance(values, dict):
+        values = [values]
+    if not isinstance(values, list):
+        return ''
+    return '\n'.join(str(value.get('cy', '')).strip() for value in values
+                     if isinstance(value, dict) and str(value.get('cy', '')).strip())
+
+
+def source_sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open('rb') as stream:
+        for chunk in iter(lambda: stream.read(1024 * 1024), b''):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def build_index(source: Path, output: Path) -> dict:
+    source, output = Path(source), Path(output)
+    if not source.is_file():
+        raise FileNotFoundError(source)
+    output.parent.mkdir(parents=True, exist_ok=True)
+    source_hash = source_sha256(source)
+    with tempfile.TemporaryDirectory(prefix='dictionary-index-', dir=output.parent) as directory:
+        staged = Path(directory) / 'snapshot.sqlite'
+        source_ids = Counter()
+        count = 0
+        with closing(sqlite3.connect(staged)) as connection, connection:
+            connection.execute('PRAGMA synchronous=FULL')
+            connection.executescript('''
+                CREATE TABLE entries (
+                    id TEXT PRIMARY KEY,
+                    source_id TEXT NOT NULL,
+                    word TEXT NOT NULL,
+                    normalized_word TEXT NOT NULL,
+                    meaning TEXT NOT NULL,
+                    word_class TEXT NOT NULL,
+                    audio_ref TEXT NOT NULL
+                );
+                CREATE TABLE metadata (key TEXT PRIMARY KEY, value TEXT NOT NULL);
+            ''')
+            with gzip.open(source, 'rt', encoding='utf-8-sig', newline='') as stream:
+                reader = csv.DictReader(stream)
+                required = {'id', 'word', 'XJSY', 'word_character_zh', 'sound'}
+                if not required.issubset(reader.fieldnames or []):
+                    raise ValueError('主词典导出缺少必需字段')
+                for row in reader:
+                    source_id = str(row['id']).strip()
+                    word = str(row['word']).strip()
+                    entry_id = stable_entry_id(source_id, word)
+                    try:
+                        connection.execute('''
+                            INSERT INTO entries
+                            (id, source_id, word, normalized_word, meaning, word_class, audio_ref)
+                            VALUES (?, ?, ?, ?, ?, ?, ?)
+                        ''', (entry_id, source_id, word, normalize_word(word),
+                              extract_meaning(row['XJSY']), row['word_character_zh'] or '', row['sound'] or ''))
+                    except sqlite3.IntegrityError as error:
+                        raise ValueError(f'重复词条键: {entry_id}') from error
+                    source_ids[source_id] += 1
+                    count += 1
+            connection.execute('CREATE INDEX entries_normalized_word ON entries(normalized_word, id)')
+            connection.execute('CREATE INDEX entries_source_id ON entries(source_id)')
+            connection.executemany('INSERT INTO metadata(key, value) VALUES (?, ?)', [
+                ('schema_version', '1'), ('source_sha256', source_hash),
+                ('row_count', str(count)), ('source_name', source.name),
+            ])
+            if connection.execute('PRAGMA integrity_check').fetchone()[0] != 'ok':
+                raise ValueError('词典索引完整性检查失败')
+        os.replace(staged, output)
+    return {
+        'rows': count,
+        'duplicate_source_ids': sum(value - 1 for value in source_ids.values() if value > 1),
+        'source_sha256': source_hash,
+        'index_bytes': output.stat().st_size,
+    }
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--source', type=Path, required=True)
+    parser.add_argument('--output', type=Path, required=True)
+    arguments = parser.parse_args()
+    print(json.dumps(build_index(arguments.source, arguments.output), ensure_ascii=False))
+
+
+if __name__ == '__main__':
+    main()

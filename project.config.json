@@ -45,6 +45,10 @@
                 "type": "folder"
             },
             {
+                "value": "data/generated",
+                "type": "folder"
+            },
+            {
                 "value": "docs",
                 "type": "folder"
             },
