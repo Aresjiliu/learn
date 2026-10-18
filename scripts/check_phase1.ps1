@@ -133,6 +133,7 @@ Invoke-Check $PythonCommand @('scripts/test_cache_word_audio.py')
 Invoke-Check $PythonCommand @('scripts/test_cache_exam_audio.py')
 Invoke-Check $PythonCommand @('scripts/test_dictionary_search_ranking.py')
 Invoke-Check $PythonCommand @('scripts/test_dictionary_index.py')
+Invoke-Check $PythonCommand @('scripts/test_dictionary_store.py')
 Invoke-Check $PythonCommand @('scripts/test_content_api_sample_contract.py')
 Invoke-Check $PythonCommand @('scripts/check_python_syntax.py')
 

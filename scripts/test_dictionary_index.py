@@ -61,6 +61,8 @@ class DictionaryIndexTests(unittest.TestCase):
         self.assertEqual(stable_entry_id('17', 'ёлка'), stable_entry_id('17', 'ёлка'))
         self.assertNotEqual(stable_entry_id('17', 'ёлка'), stable_entry_id('17', 'ель'))
         self.assertEqual(normalize_word(' ЁЛКА́ '), 'елка')
+        self.assertEqual(normalize_word(' МАЙ '), 'май')
+        self.assertNotEqual(normalize_word('май'), normalize_word('маи'))
 
     def test_missing_word_is_rejected(self):
         GENERATED.mkdir(parents=True, exist_ok=True)

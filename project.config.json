@@ -49,6 +49,10 @@
                 "type": "folder"
             },
             {
+                "value": "content_server",
+                "type": "folder"
+            },
+            {
                 "value": "docs",
                 "type": "folder"
             },
