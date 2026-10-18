@@ -5,6 +5,22 @@
     "packOptions": {
         "ignore": [
             {
+                "value": "ui",
+                "type": "folder"
+            },
+            {
+                "value": "node_modules",
+                "type": "folder"
+            },
+            {
+                "value": "package.json",
+                "type": "file"
+            },
+            {
+                "value": "package-lock.json",
+                "type": "file"
+            },
+            {
                 "value": ".git",
                 "type": "folder"
             },
@@ -142,7 +158,13 @@
         "minified": true,
         "enhance": true,
         "showShadowRootInWxmlPanel": true,
-        "packNpmRelationList": [],
+        "packNpmManually": true,
+        "packNpmRelationList": [
+            {
+                "packageJsonPath": "./package.json",
+                "miniprogramNpmDistDir": "./"
+            }
+        ],
         "babelSetting": {
             "ignore": [],
             "disablePlugins": [],

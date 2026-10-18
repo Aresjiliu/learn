@@ -23,7 +23,7 @@ def main():
         included.append((relative, path.stat().st_size))
 
     forbidden = [relative for relative, _ in included if str(relative).replace("\\", "/").startswith((
-        "content_server/", "data/remote_7500km/", "data/generated/", "docs/", "scripts/", "tasks/", "lingosnake-main/", "miniprogram-demo-master/"
+        "ui/", "node_modules/", "content_server/", "data/remote_7500km/", "data/generated/", "docs/", "scripts/", "tasks/", "lingosnake-main/", "miniprogram-demo-master/"
     )) or (str(relative).replace("\\", "/").startswith("data/content_samples/") and relative.suffix.lower() == ".json")]
     if forbidden:
         print("预计运行时包仍包含禁止路径:")
@@ -52,6 +52,9 @@ def main():
         raise SystemExit(1)
 
     total = sum(size for _, size in included)
+    if total > int(1.8 * 1024 * 1024):
+        print("预计运行时包超过项目 1.8 MiB 预算，请检查开发目录排除与组件依赖")
+        raise SystemExit(1)
     print(json.dumps({
         "includedFiles": len(included),
         "estimatedBytes": total,

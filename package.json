@@ -1,0 +1,16 @@
+{
+    "name": "russian-7500-miniprogram",
+    "version": "0.1.0",
+    "private": true,
+    "description": "Native WeChat Mini Program UI dependencies for Russian 7500",
+    "scripts": {
+        "build:ui": "node scripts/build_ui_components.js",
+        "check": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/check_phase1.ps1"
+    },
+    "dependencies": {
+        "@vant/weapp": "1.11.7"
+    },
+    "devDependencies": {
+        "@vant/icons": "3.0.1"
+    }
+}

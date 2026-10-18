@@ -10,6 +10,7 @@
 /miniprogram-demo-master/
 /learn.code-workspace
 /project.private.config.json
+/miniprogram_npm/
 
 # Local infrastructure notes containing host or account details.
 /docs/phase0/asset-inventory.md

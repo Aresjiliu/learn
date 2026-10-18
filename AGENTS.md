@@ -6,7 +6,7 @@ This repository is the native WeChat Mini Program for the “俄语7500” cours
 
 ## Build, Test, and Development
 
-There is no `package.json` build pipeline. Import the project with the AppID in `project.config.json`, then use WeChat DevTools **Compile**, **Preview**, or **真机调试**.
+Run `npm ci --ignore-scripts --registry=https://registry.npmjs.org`, then `npm run build:ui` to generate the pinned native Vant components with embedded offline fonts. Import the project with the AppID in `project.config.json`, then use WeChat DevTools **Compile**, **Preview**, or **真机调试**. Do not substitute CLI `build-npm`: this installed version scans nested tooling dependencies.
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts/check_phase1.ps1
