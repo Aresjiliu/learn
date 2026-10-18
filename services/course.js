@@ -110,15 +110,10 @@ function getCategories() {
 function getCourseDetail(courseId) {
   if (config.enableContentApi && !isSampleCourse(courseId)) {
     return getContentBookDetail(courseId).then(response => {
-      if (String(courseId) !== '1' || !response || !response.data || !Array.isArray(response.data.words)) return response
-      return { ...response, data: { ...response.data, words: response.data.words.map(withLocalWordAudio) } }
-    }).catch(error => {
-      if (config.enableLocalSampleFallback) return {
-        code: 200,
-        message: 'local sample fallback',
-        data: { course: sampleCourse, hasPurchased: false, is_collected: false, chapters: sampleCourse.chapters, words: sampleWords, wordForms: sampleWordForms, mappingDecisions: sampleMappingDecisions }
-      }
-      return Promise.reject(error)
+      const normalizedDetail = validateCourseDetail(response, courseId)
+      if (!isContentSuccess(normalizedDetail)) return normalizedDetail
+      if (String(courseId) !== '1' || !Array.isArray(normalizedDetail.data.words)) return normalizedDetail
+      return { ...normalizedDetail, data: { ...normalizedDetail.data, words: normalizedDetail.data.words.map(withLocalWordAudio) } }
     })
   }
   if (isSampleCourse(courseId)) {
@@ -141,29 +136,83 @@ function getCourseDetail(courseId) {
     url: `/api/courses/${courseId}/`,
     method: 'GET'
   }).then(detailResponse => {
-    const normalizedDetail = normalizeCourseResponse(detailResponse)
+    const normalizedDetail = validateCourseDetail(detailResponse, courseId)
     if (!isContentSuccess(normalizedDetail)) {
       return normalizedDetail
     }
     return request({
       url: `/api/courses/${courseId}/video/`,
       method: 'GET'
-    }).then(videoResponse => ({
-      ...normalizedDetail,
-      data: {
-        ...normalizedDetail.data,
-        chapters: isContentSuccess(videoResponse) ? videoResponse.data.chapters : [],
-        words: []
+    }).catch(() => null).then(videoResponse => {
+      // Only media transport failure is optional. Identity failures must reach
+      // the page's existing loadError/retry path rather than becoming success.
+      if (videoResponse && isContentSuccess(videoResponse)) {
+        validateCourseOwnership(videoResponse.data, courseId)
+        if (videoResponse.data && Object.prototype.hasOwnProperty.call(videoResponse.data, 'book')) {
+          validateCourseIdentity(videoResponse.data.book, courseId)
+        }
+        if (videoResponse.data && videoResponse.data.course) {
+          validateCourseDetail(videoResponse, courseId)
+        }
       }
-    })).catch(() => detailResponse)
-  }).catch(error => {
-    if (!config.enableLocalSampleFallback) return Promise.reject(error)
-    return {
-      code: 200,
-      message: 'local sample fallback',
-      data: { course: sampleCourse, hasPurchased: false, is_collected: false, chapters: sampleCourse.chapters, words: sampleWords, wordForms: sampleWordForms, mappingDecisions: sampleMappingDecisions }
-    }
+      return {
+        ...normalizedDetail,
+        data: {
+          ...normalizedDetail.data,
+          chapters: videoResponse && isContentSuccess(videoResponse) && videoResponse.data
+            ? videoResponse.data.chapters || [] : [],
+          words: []
+        }
+      }
+    })
   })
+}
+
+// IDs are non-empty strings or finite numbers, compared by their exact string
+// representation: 1 equals '1', but '01', whitespace and coercible objects do not.
+function sameCourseId(actual, expected) {
+    const valid = value => (typeof value === 'string' && value.length > 0)
+        || (typeof value === 'number' && Number.isFinite(value))
+    return valid(actual) && valid(expected) && String(actual) === String(expected)
+}
+
+function validateCourseOwnership(data, courseId) {
+    if (!data || typeof data !== 'object') return
+    for (const field of ['courseId', 'course_id', 'bookId', 'book_id']) {
+        if (Object.prototype.hasOwnProperty.call(data, field) && !sameCourseId(data[field], courseId)) {
+            throw new Error('课程内容身份与请求不一致')
+        }
+    }
+    for (const field of ['chapters', 'lessons', 'videos', 'video_list', 'words']) {
+        if (Array.isArray(data[field])) data[field].forEach(item => validateCourseOwnership(item, courseId))
+    }
+}
+
+function validateCourseDetail(response, courseId) {
+    // Check the raw identity before the adapter's id || book_id compatibility
+    // fallback can hide an explicitly invalid id.
+    if (isContentSuccess(response) && response.data) {
+        validateCourseIdentity(response.data.course, courseId)
+    }
+    const normalized = normalizeCourseResponse(response)
+    if (!isContentSuccess(normalized)) return normalized
+    const data = normalized.data
+    if (!data || !data.course || !sameCourseId(data.course.id, courseId)) {
+        throw new Error('课程详情身份与请求不一致')
+    }
+    validateCourseOwnership(data, courseId)
+    validateCourseOwnership(data.course, courseId)
+    // Content API retains its source book alongside the normalized course.
+    if (data.book) {
+        validateCourseIdentity(data.book, courseId)
+    }
+    return normalized
+}
+
+function validateCourseIdentity(course, courseId) {
+    const id = course && (Object.prototype.hasOwnProperty.call(course, 'id') ? course.id : course.book_id)
+    if (!sameCourseId(id, courseId)) throw new Error('课程详情身份与请求不一致')
+    validateCourseOwnership(course, courseId)
 }
 
 export { getCategories, getCourses, getCourseDetail, sampleCourse }

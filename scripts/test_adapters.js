@@ -17,6 +17,13 @@ assert.strictEqual(course.data.courses[0].cover_image, '/cover.png')
 assert.strictEqual(course.data.courses[0].wordCount, 20)
 assert.strictEqual(course.data.courses[0].price, '0.00')
 assert.strictEqual(course.data.courses[0].students_count, 0)
+for (const id of [0, '0', false, null, '', undefined]) {
+    const normalized = normalizeCourseResponse({ data: { course: { id, book_id: 1 } } })
+    assert.strictEqual(normalized.data.course.id, id, 'explicit course ID must survive normalization')
+}
+assert.strictEqual(normalizeCourseResponse({ data: { course: { id: 0 } } }).data.course.id, 0)
+assert.strictEqual(normalizeCourseResponse({ data: { course: { book_id: 0 } } }).data.course.id, 0)
+assert.strictEqual(normalizeCourseResponse({ data: { courses: [{ id: 0 }] } }).data.courses[0].id, 0)
 const courseWord = normalizeCourseWord({ word_id: 9, word_text: 'дом', meaning: '房子', word_character_zh: '名词', sentences: 'Это дом.' })
 assert.strictEqual(courseWord.id, 9)
 assert.strictEqual(courseWord.word, 'дом')

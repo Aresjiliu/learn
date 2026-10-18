@@ -71,6 +71,34 @@ function getContentCategories() {
     })
 }
 
+// Validate declared owners on the original payloads before composition can
+// overwrite or discard them. Only book/course entities use id as an owner;
+// chapter, video and word IDs identify their own records.
+function validateBookDetailOwners(data, bookId, isOwnerEntity = false) {
+    const matches = value => {
+        const valid = candidate => (typeof candidate === 'string' && candidate.length > 0)
+            || (typeof candidate === 'number' && Number.isFinite(candidate))
+        return valid(value) && valid(bookId) && String(value) === String(bookId)
+    }
+    const has = field => Object.prototype.hasOwnProperty.call(data, field)
+    if (!data || typeof data !== 'object') {
+        if (isOwnerEntity) throw new Error('课程内容身份与请求不一致')
+        return
+    }
+    if (isOwnerEntity && !matches(has('id') ? data.id : data.book_id)) {
+        throw new Error('课程内容身份与请求不一致')
+    }
+    for (const field of ['courseId', 'course_id', 'bookId', 'book_id']) {
+        if (has(field) && !matches(data[field])) throw new Error('课程内容身份与请求不一致')
+    }
+    for (const field of ['book', 'course']) {
+        if (has(field)) validateBookDetailOwners(data[field], bookId, true)
+    }
+    for (const field of ['chapters', 'lessons', 'videos', 'video_list', 'words']) {
+        if (Array.isArray(data[field])) data[field].forEach(item => validateBookDetailOwners(item, bookId))
+    }
+}
+
 function getContentBookDetail(bookId) {
     return Promise.all([
         request({
@@ -85,6 +113,8 @@ function getContentBookDetail(bookId) {
         })
     ]).then(([bookResponse, wordsResponse]) => {
         if (!isContentSuccess(bookResponse) || !isContentSuccess(wordsResponse)) throw new Error('课程详情接口返回异常')
+        validateBookDetailOwners(bookResponse.data, bookId)
+        validateBookDetailOwners(wordsResponse.data, bookId)
         const normalized = normalizeCourseResponse({
             ...bookResponse,
             data: {

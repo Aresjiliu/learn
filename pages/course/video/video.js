@@ -82,15 +82,7 @@ Page({
           })
         })
         
-        // 为远程视频URL添加token；本地测试媒体不追加业务token。
-        const token = wx.getStorageSync('token')
-        chapters.forEach(chapter => {
-          chapter.videos.forEach(video => {
-            if (video.url && token && !video.url.startsWith(config.devMediaBaseUrl) && !video.url.includes('token=')) {
-              video.url = `${video.url}${video.url.includes('?') ? '&' : '?'}token=${token}`
-            }
-          })
-        })
+        // 媒体地址由服务端提供公开URL或独立媒体票据，不能附加账号token。
         
         // 设置数据：未购买用户只允许初始化到有地址且可试听的视频。
         let initialVideo = null
@@ -161,12 +153,6 @@ Page({
         icon: 'none'
       })
       return
-    }
-
-    // 确保远程视频URL包含token；本地测试视频保持原地址。
-    const token = wx.getStorageSync('token')
-    if (video.url && token && !video.url.startsWith(config.devMediaBaseUrl) && !video.url.includes('token=')) {
-      video.url = `${video.url}${video.url.includes('?') ? '&' : '?'}token=${token}`
     }
 
     this.setData({

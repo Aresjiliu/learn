@@ -26,7 +26,7 @@ function normalizeChapter(chapter = {}) {
 function normalizeCourse(course = {}) {
     return {
         ...course,
-        id: course.id || course.book_id,
+        id: Object.prototype.hasOwnProperty.call(course, 'id') ? course.id : course.book_id,
         title: course.title || course.name || course.book_name || '',
         cover_image: course.cover_image || course.cover_url || course.book_cover_img || '',
         wordCount: course.wordCount === undefined ? course.word_count : course.wordCount,
