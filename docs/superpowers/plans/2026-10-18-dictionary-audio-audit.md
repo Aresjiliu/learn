@@ -21,7 +21,7 @@
 - [x] 实际运行审计到 `data/generated/dictionary-audio-candidates.json`；报告标记 `publicationReady=false`、结构候选而非语义验证。
 - [x] 更新 `findings.md`、`progress.md` 及 `docs/phase1/` 的统计记录；加入阶段门禁。额外完整解码 1,122 文件均成功；完整 `check_phase1.ps1` 通过。
 - [x] 独立规格/质量检查，修复 WAL 副作用与来源哈希错配；质量复审确认闭环，9 个夹具与完整阶段回归通过，生成报告被 Git 忽略。
-- [ ] 提交源码与汇总文档并核对远端哈希。
+- [x] 审计提交 `7104f37`、隐藏修复与回归集成提交 `c6563cf` 已推送；`git ls-remote` 与本地 `c6563cfdc899085441be6cb11b6d5297e8620327` 一致。完整候选及媒体未提交。
 
 ## 后续边界
 
