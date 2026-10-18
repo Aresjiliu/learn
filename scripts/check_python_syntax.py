@@ -5,9 +5,9 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-FILES = sorted(ROOT.glob("scripts/*.py"))
+FILES = sorted(list(ROOT.glob("scripts/*.py")) + list(ROOT.glob("content_server/*.py")))
 
-pycache_dirs = list(ROOT.glob("scripts/**/__pycache__"))
+pycache_dirs = list(ROOT.glob("scripts/**/__pycache__")) + list(ROOT.glob("content_server/**/__pycache__"))
 if pycache_dirs:
     names = ", ".join(str(path.relative_to(ROOT)) for path in pycache_dirs)
     raise SystemExit(f"发现不应提交的 Python 缓存目录: {names}")

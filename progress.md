@@ -1,5 +1,12 @@
 # 工作进度
 
+## 2026-10-18
+
+- 接通独立只读词典 HTTP 服务（本机 18092），固定隔离环境依赖并提供 HTTPS 代理/systemd 示例。真实索引烟测返回 166,260 词条和一致版本，完整 `check_phase1.ps1` 通过；新增 HTTP 合约 4 个测试通过。
+- 搜索结果与详情改用稳定词条 ID；分页拒绝混入不同版本/样本，服务故障保留真实错误提示；保护原始导出免受输出路径误覆盖，并拒绝空索引发布。原始数据、生成索引与本地依赖未纳入发布包。
+- CLI `auto --port 24586 --auto-port 9420 --trust-project` 成功，本地自动化已可建立连接，但读取模拟器信息超时。未取得页面截图，不宣称 GUI、真机或生产验收通过；未调用 preview/upload。
+- 后续优先 A3 发音资源原词匹配审计，再推进 A4 词典 UI 和 B1 生词本；HTTPS 部署、支付和跨设备同步仍未完成。
+
 ## 2026-10-17
 
 - 首发映射审核更新为 approved 5、rejected 2、pending 53、needs-more-data 0，审核记录详见 `docs/phase0/first-wave-ambiguous-review-notes.md`；运行时仅导出 5 条 approved。新增 summary 一致性强校验及 7 个测试并纳入 phase1 gate，完整 `check_phase1.ps1` 最终 PASS。

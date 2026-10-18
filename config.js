@@ -13,7 +13,7 @@ const config = {
   // 开发机只读完整词典；课程与题库继续使用本地已审核样本。
   enableLocalDictionaryApi: true,
   contentApiBasePath: '/api/v1',
-  contentApiBaseUrl: 'http://127.0.0.1:18091',
+  contentApiBaseUrl: 'http://127.0.0.1:18092',
   // 阶段 0/1 默认禁止远程写入；完成接口、鉴权和支付验收后再显式开启。
   enableRemoteWrites: false,
   enableDebugLog: false,

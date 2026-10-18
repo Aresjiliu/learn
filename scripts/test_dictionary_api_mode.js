@@ -39,5 +39,11 @@ vm.runInNewContext(`${source}\nmodule.exports = { getDictionarySearch, getDictio
     assert.strictEqual(calls[1].skipAuth, true)
     await context.module.exports.getExamPapers()
     assert.strictEqual(calls.length, 2, 'exam source must remain local')
+    config.enableContentApi = true
+    config.enableLocalDictionaryApi = false
+    await context.module.exports.getDictionarySearch('привет')
+    await context.module.exports.getDictionaryDetail('dict:42:example')
+    assert.strictEqual(calls[2].skipAuth, true, 'public dictionary must not receive account tokens in production mode')
+    assert.strictEqual(calls[3].skipAuth, true)
     console.log('dictionary API mode tests: PASS')
 })().catch(error => { console.error(error); process.exitCode = 1 })

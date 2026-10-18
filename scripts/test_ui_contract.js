@@ -166,7 +166,7 @@ const pageContracts = [{
     { label: '搜索输入与查询事件', pattern: /bindinput="handleInput"[\s\S]*?bindconfirm="handleSearch"[\s\S]*?bindtap="handleSearch"/ },
     { label: '查询加载、错误、无结果和初始状态', pattern: /wx:if="\{\{loading\}\}"[\s\S]*?wx:elif="\{\{loadError\}\}"[\s\S]*?wx:elif="\{\{searched\}\}"[\s\S]*?wx:else class="state/ },
     { label: '查询失败重试事件', pattern: /bindtap="retryLoad"/ },
-    { label: '结果稳定键、详情导航与数据字段', pattern: /<view(?=[^>]*wx:for="\{\{words\}\}")(?=[^>]*wx:key="word")(?=[^>]*bindtap="openDetail")(?=[^>]*data-word="\{\{item\.word\}\}")(?=[^>]*data-word-id="\{\{item\.sourceId \|\| item\.id\}\}")[^>]*>/ },
+    { label: '结果稳定键、详情导航与数据字段', pattern: /<view(?=[^>]*wx:for="\{\{words\}\}")(?=[^>]*wx:key="rowKey")(?=[^>]*bindtap="openDetail")(?=[^>]*data-word="\{\{item\.word\}\}")(?=[^>]*data-word-id="\{\{item\.entryId\}\}")[^>]*>/ },
     { label: '词条来源和分页事件', pattern: /sourceType[\s\S]*?wx:if="\{\{hasMore\}\}"[\s\S]*?bindtap="loadMore"/ }
   ]
 }, {

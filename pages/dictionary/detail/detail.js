@@ -8,19 +8,21 @@ Page({
         query: '',
         word: null,
         loading: true,
+        loadError: '',
         isPlaying: false
     },
 
     onLoad: function(options) {
         this._isUnloaded = false
-        this._detailRequestId = 0
+        this._detailRequestId = this._detailRequestId || 0
+        this._routeOptions = options || {}
         const query = options && options.q ? decodeURIComponent(options.q) : ''
         const textbookMeaning = options && options.meaning ? decodeURIComponent(options.meaning) : ''
         const textbookWordClass = options && options.class ? decodeURIComponent(options.class) : ''
         const textbookExamples = options && options.examples
             ? decodeURIComponent(options.examples).split(/\r?\n|#/).map(item => item.trim()).filter(Boolean)
             : []
-        this.setData({ query })
+        this.setData({ query, word: null, loading: true, loadError: '' })
         if (!query.trim()) {
             this.setData({ word: null, loading: false })
             return
@@ -34,10 +36,15 @@ Page({
                 if (this._isUnloaded || requestId !== this._detailRequestId) return
                 const word = result && result.data && result.data.word
                 if (!word) throw new Error('词典详情为空')
+                if (wordId.startsWith('dict:') && word.id !== wordId) throw new Error('词条身份不一致')
                 const audioUrl = getLocalTextbookAudioUrl(textbookId)
-                this.setData({ word: this.decorateWord(audioUrl ? { ...word, audioUrl } : word, { textbookMeaning: word.word_meaning_all, textbookWordClass: word.word_character, examples: textbookExamples }), loading: false })
+                this.setData({ word: this.decorateWord(audioUrl ? { ...word, audioUrl } : word, { textbookMeaning: textbookMeaning || word.textbookMeaning || word.word_meaning_all, textbookWordClass: textbookWordClass || word.textbookWordClass || word.word_character, examples: textbookExamples }), loading: false })
             }).catch(() => {
                 if (this._isUnloaded || requestId !== this._detailRequestId) return
+                if (wordId.startsWith('dict:')) {
+                    this.setData({ word: null, loading: false, loadError: '词条加载失败，请检查网络后重试' })
+                    return
+                }
                 const localWord = getLocalDictionaryDetail(query)
                 this.setData({
                     word: this.decorateWord(localWord || {
@@ -52,6 +59,10 @@ Page({
             })
             return
         }
+        if (wordId.startsWith('dict:')) {
+            this.setData({ word: null, loading: false, loadError: '完整词典暂不可用，请稍后重试' })
+            return
+        }
         const localWord = getLocalDictionaryDetail(query)
         this.setData({
             word: this.decorateWord(localWord ? { ...localWord, examples: textbookExamples.length ? textbookExamples : localWord.examples } : {
@@ -63,6 +74,10 @@ Page({
             }),
             loading: false
         })
+    },
+
+    retryLoad: function() {
+        this.onLoad(this._routeOptions)
     },
 
     resolveAudioUrl: function(value) {
@@ -80,7 +95,7 @@ Page({
     decorateWord: function(word, extra = {}) {
         const audioPlayable = this.isAudioPlayable(word)
         const rawAudio = String(word && (word.audioUrl || word.audio_url) || '').trim()
-        return { ...word, ...extra, audioPlayable, audioPending: Boolean(rawAudio) && !audioPlayable }
+        return { ...word, ...extra, audioPlayable, audioPending: !audioPlayable && (Boolean(rawAudio) || Boolean(word && word.audioPending)) }
     },
 
     playAudio: function() {

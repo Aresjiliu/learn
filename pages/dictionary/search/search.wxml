@@ -6,16 +6,17 @@
             <button class="search-action" bindtap="handleSearch">查词</button>
         </view>
     </view>
-    <view wx:if="{{sampleNotice && searched}}" class="state state-card">完整词典服务未连接，当前仅显示离线样本；请启动本地内容服务后重试。</view>
+    <view wx:if="{{sampleNotice && searched}}" class="state state-card">当前仅显示离线样本，完整词典暂不可用，请稍后重试。</view>
     <view wx:if="{{searched && words.length}}" class="word-list">
-        <view wx:for="{{words}}" wx:key="word" class="word-card" bindtap="openDetail" data-word="{{item.word}}" data-word-id="{{item.sourceId || item.id}}">
+        <view wx:for="{{words}}" wx:key="rowKey" class="word-card" bindtap="openDetail" data-word="{{item.word}}" data-word-id="{{item.entryId}}">
             <view class="word-head">
                 <text class="word">{{item.word}}</text>
                 <text class="source {{item.sourceType === 'textbook' ? 'textbook-source' : 'dictionary-source'}}">{{item.sourceType === 'textbook' ? '教材词' : '主词典'}}</text>
             </view>
             <text class="meaning">{{item.word_meaning_all || item.translation || '释义待补充'}}</text>
+            <text wx:if="{{item.matchTier === 'wordForm'}}" class="audio-tip">词形候选{{item.ambiguous ? ' · 存在多个原型，请核对' : ''}}</text>
             <text wx:if="{{item.audioPlayable}}" class="audio-tip">含可播放音频</text>
-            <text wx:elif="{{item.audioUrl || item.audio_url}}" class="audio-pending">音频待接入</text>
+            <text wx:elif="{{item.audioPending || item.audioUrl || item.audio_url}}" class="audio-pending">音频待接入</text>
         </view>
         <button wx:if="{{hasMore}}" class="load-more" bindtap="loadMore">{{loading ? '加载中…' : '加载更多'}}</button>
     </view>

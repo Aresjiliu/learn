@@ -1,6 +1,6 @@
 # 第三方代码与内容授权清单
 
-更新时间：2026-10-14
+更新时间：2026-10-18
 
 ## 第三方代码
 
@@ -14,6 +14,8 @@
 | w-components | https://github.com/wangzongming/w-components | 音频/录音交互参考 | 未完成核验 | 暂不复制生产代码 |
 
 ## 内容授权核查表
+
+内容服务新增 FastAPI/Uvicorn，版本及传递依赖固定在 `content_server/requirements*.txt`。本次官方 PyPI 元数据核查：运行依赖主要为 MIT/BSD-3-Clause，`opentelemetry-api` 为 Apache-2.0、`typing_extensions` 为 PSF-2.0；开发依赖 `certifi` 为 MPL-2.0。分发服务镜像前须保留各包 LICENSE/NOTICE，并重新审计漏洞。`miniprogram-automator@0.13.0`（MIT）只用于本地验收，其旧传递依赖不进入小程序或服务发布包；存在过时依赖，不能把它的安装成功视为安全审计通过。
 
 | 内容 | 来源 | 小程序发布 | 商业化 | AI 使用 | 证据 |
 |---|---|---|---|---|---|

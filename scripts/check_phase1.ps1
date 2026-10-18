@@ -17,6 +17,14 @@ $PythonCommand = if (Test-Path 'D:\software\anaconda3\python.exe') {
 } else {
     'python'
 }
+$ContentPythonCommand = if ($env:CONTENT_PYTHON) {
+    $env:CONTENT_PYTHON
+} else {
+    Join-Path $RepositoryRoot 'data/generated/content-venv/Scripts/python.exe'
+}
+if (-not (Test-Path -LiteralPath $ContentPythonCommand)) {
+    throw 'Install the isolated content environment per docs/operations/dictionary-service.md or set CONTENT_PYTHON.'
+}
 # The checks are read-only. Prevent imported Python modules from creating
 # __pycache__ directories that would make the repository hygiene check fail.
 $env:PYTHONDONTWRITEBYTECODE = '1'
@@ -61,6 +69,7 @@ Invoke-Check 'node' @('scripts/test_course_video_navigation.js')
 Invoke-Check 'node' @('scripts/test_purchase_gate.js')
 Invoke-Check 'node' @('scripts/test_dictionary.js')
 Invoke-Check 'node' @('scripts/test_dictionary_search_states.js')
+Invoke-Check 'node' @('scripts/test_dictionary_identity_contract.js')
 Invoke-Check 'node' @('scripts/test_dictionary_detail_lifecycle.js')
 Invoke-Check 'node' @('scripts/test_dictionary_audio_visibility.js')
 Invoke-Check 'node' @('scripts/test_word_audio_runtime.js')
@@ -134,6 +143,7 @@ Invoke-Check $PythonCommand @('scripts/test_cache_exam_audio.py')
 Invoke-Check $PythonCommand @('scripts/test_dictionary_search_ranking.py')
 Invoke-Check $PythonCommand @('scripts/test_dictionary_index.py')
 Invoke-Check $PythonCommand @('scripts/test_dictionary_store.py')
+Invoke-Check $ContentPythonCommand @('scripts/test_dictionary_http.py')
 Invoke-Check $PythonCommand @('scripts/test_bench_dictionary_store.py')
 Invoke-Check $PythonCommand @('scripts/test_content_api_sample_contract.py')
 Invoke-Check $PythonCommand @('scripts/check_python_syntax.py')

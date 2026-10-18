@@ -9,7 +9,7 @@ CLI `auto --project ... --port 11367 --trust-project` 在 AppID 权限阶段失�
 - 导入 `D:\project\learn`，确认 AppID 与 `project.config.json` 一致。
 - 本地开发保持 `project.private.config.json` 的 `urlCheck=false`；发布前恢复合法域名校验。
 - 新开终端启动测试媒体：`python scripts/serve_test_media.py --root audio --host 127.0.0.1 --port 18090`；确认本地已有 `videos/video1.mp4` 与 `audio/wordaudio/` 中的缓存 MP3。
-- 搜索完整词典需启动只读服务：`python scripts/serve_content_api.py --host 127.0.0.1 --port 18091`。默认 `enableLocalDictionaryApi=true`，不必开启全局 `enableContentApi`；若服务不可达，页面明确提示仅查离线样本。
+- 搜索完整词典需按 [词典服务运行手册](../operations/dictionary-service.md) 启动索引服务（18092），并运行 `scripts/check_indexed_dictionary_http.py`。默认 `enableLocalDictionaryApi=true`，不必开启全局 `enableContentApi`；服务不可达时搜索页明确提示仅查离线样本，已选稳定词条详情失败可重试。
 - 执行 `python scripts/check_runtime_config.py`，确认 `enableRemoteWrites=false`、本地地址和音频开关状态符合预期。
 - 开发者工具点击“编译”。CLI 的 `open` 只能证明 IDE 接受项目；当前没有独立的本地 `compile` 命令，不能把 `preview` 当作本地编译。
 

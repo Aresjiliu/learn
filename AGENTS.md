@@ -12,7 +12,7 @@ There is no `package.json` build pipeline. Import the project with the AppID in 
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts/check_phase1.ps1
 ```
 
-This read-only suite checks adapters, exams, media, routes, assets, configuration, and write guards. `python scripts/serve_content_api.py` and `python scripts/serve_test_media.py` provide local fixtures only. Use **详情 → 本地设置 → 不校验合法域名** only for local HTTP testing.
+Before the suite, install the isolated content API environment as documented in `docs/operations/dictionary-service.md`. The suite checks adapters, exams, media, routes, assets, configuration, HTTP contracts, and write guards. `content_server/` serves the indexed read-only dictionary on port 18092; `python scripts/serve_content_api.py` and `python scripts/serve_test_media.py` provide local fixtures only. Use **详情 → 本地设置 → 不校验合法域名** only for local HTTP testing.
 
 ## Coding Style and Naming
 
@@ -24,7 +24,7 @@ No coverage threshold is configured, but `check_phase1.ps1` must pass before han
 
 ## Commits and Pull Requests
 
-Git history is unavailable. Use short imperative subjects, optionally scoped, such as `fix(course): handle empty results`. PRs should describe user-visible behavior, affected pages/endpoints, verification commands, UI screenshots, and required AppID, domain, or backend changes.
+Follow the existing short imperative subjects with scopes, such as `fix(course): handle empty results`. PRs should describe user-visible behavior, affected pages/endpoints, verification commands, UI screenshots, and required AppID, domain, or backend changes.
 
 ## Security and Configuration
 

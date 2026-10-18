@@ -1,5 +1,9 @@
 <view class="page">
     <view wx:if="{{loading}}" class="state-card loading-state">词条加载中...</view>
+    <view wx:elif="{{loadError}}" class="state-card error-state">
+        <text>{{loadError}}</text>
+        <button class="state-action" bindtap="retryLoad">重新加载</button>
+    </view>
     <view wx:elif="{{word}}" class="detail-card">
         <view class="word-head">
             <view class="word-identity">
