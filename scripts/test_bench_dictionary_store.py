@@ -33,6 +33,7 @@ class BenchmarkTests(unittest.TestCase):
             with gzip.open(forms, 'wt', encoding='utf-8-sig', newline='') as stream:
                 writer = csv.DictWriter(stream, fieldnames=['id', 'change_form', 'prototype'])
                 writer.writeheader()
+                writer.writerow({'id': '1', 'change_form': 'ёлки', 'prototype': 'ёлка'})
             build_index(words, index, forms)
             result = benchmark(index, ['ёлка'], warm_repeats=3, cold_repeats=3)
             self.assertEqual(result['schemaVersion'], '4')

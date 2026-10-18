@@ -9,6 +9,7 @@ import hashlib
 import json
 import os
 import sqlite3
+import sys
 import tempfile
 import time
 import unicodedata
@@ -16,17 +17,8 @@ from collections import Counter
 from contextlib import closing
 from pathlib import Path
 
-
-def normalize_word(value: str) -> str:
-    text = unicodedata.normalize('NFD', str(value or '').strip().lower())
-    text = text.replace('и\u0306', 'й')
-    return ''.join(char for char in text if unicodedata.category(char) != 'Mn')
-
-
-def normalize_strict_word(value: str) -> str:
-    text = unicodedata.normalize('NFD', str(value or '').strip().lower())
-    text = text.replace('и\u0306', 'й').replace('е\u0308', 'ё')
-    return ''.join(char for char in text if unicodedata.category(char) != 'Mn')
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from content_server.dictionary_normalization import normalize_strict_word, normalize_word
 
 
 def stable_entry_id(source_id: str, word: str) -> str:
@@ -77,6 +69,8 @@ def build_index(source: Path, output: Path, forms_source: Path) -> dict:
     forms_source = Path(forms_source)
     if not forms_source.is_file():
         raise FileNotFoundError(forms_source)
+    if output.resolve() in {source.resolve(), forms_source.resolve()}:
+        raise ValueError('输出不能覆盖源文件')
     output.parent.mkdir(parents=True, exist_ok=True)
     source_hash = source_sha256(source)
     forms_hash = source_sha256(forms_source)
@@ -151,6 +145,8 @@ def build_index(source: Path, output: Path, forms_source: Path) -> dict:
                             VALUES (?, ?, ?, ?)
                         ''', (form, prototype_strict, prototype, str(row['id']).strip()))
                         form_count += 1
+            if not count or not form_count:
+                raise ValueError('词典或词形导出为空，拒绝发布索引')
             connection.execute("INSERT INTO entries_fts(entries_fts) VALUES ('rebuild')")
             connection.execute('CREATE INDEX entries_normalized_word ON entries(normalized_word, id)')
             connection.execute('CREATE INDEX entries_strict_word ON entries(strict_word, id)')

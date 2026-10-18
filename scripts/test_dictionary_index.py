@@ -25,11 +25,12 @@ class DictionaryIndexTests(unittest.TestCase):
             writer.writeheader()
             writer.writerows(rows)
 
-    def build_with_empty_forms(self, source, output):
+    def build_with_forms(self, source, output):
         forms = source.with_name('forms.csv.gz')
         with gzip.open(forms, 'wt', encoding='utf-8-sig', newline='') as stream:
             writer = csv.DictWriter(stream, fieldnames=['id', 'change_form', 'prototype'])
             writer.writeheader()
+            writer.writerow({'id': '1', 'change_form': 'ёлки', 'prototype': 'ёлка'})
         return build_index(source, output, forms)
 
     def test_duplicate_legacy_ids_remain_distinct(self):
@@ -41,7 +42,7 @@ class DictionaryIndexTests(unittest.TestCase):
                 {'id': '17', 'word': 'ёлка', 'XJSY': '[{"cy":"圣诞树"}]'},
                 {'id': '17', 'word': 'ель', 'XJSY': '[{"cy":"云杉"}]'},
             ])
-            report = self.build_with_empty_forms(source, output)
+            report = self.build_with_forms(source, output)
             self.assertEqual(report['rows'], 2)
             self.assertGreater(report['build_seconds'], 0)
             self.assertEqual(report['duplicate_source_ids'], 1)
@@ -63,7 +64,7 @@ class DictionaryIndexTests(unittest.TestCase):
                 {'id': '17', 'word': 'ёлка', 'XJSY': '[{"cy":"不同释义"}]'},
             ])
             with self.assertRaisesRegex(ValueError, '重复词条键'):
-                self.build_with_empty_forms(source, output)
+                self.build_with_forms(source, output)
             self.assertEqual(output.read_bytes(), b'previous-index')
 
     def test_key_is_stable_and_yo_search_is_relaxed(self):
@@ -80,7 +81,7 @@ class DictionaryIndexTests(unittest.TestCase):
             output = Path(directory) / 'dictionary.sqlite'
             self.write_source(source, [{'id': '17', 'word': ''}])
             with self.assertRaisesRegex(ValueError, '词条缺少'):
-                self.build_with_empty_forms(source, output)
+                self.build_with_forms(source, output)
             self.assertFalse(output.exists())
 
     def test_cli_refuses_snapshot_without_forms_source(self):
@@ -96,6 +97,27 @@ class DictionaryIndexTests(unittest.TestCase):
             self.assertNotEqual(result.returncode, 0)
             self.assertIn('--forms-source', result.stderr)
             self.assertFalse(output.exists())
+
+    def test_empty_export_cannot_replace_existing_snapshot(self):
+        GENERATED.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=GENERATED) as directory:
+            source = Path(directory) / 'words.csv.gz'
+            output = Path(directory) / 'dictionary.sqlite'
+            output.write_bytes(b'previous-index')
+            self.write_source(source, [])
+            with self.assertRaisesRegex(ValueError, '空'):
+                self.build_with_forms(source, output)
+            self.assertEqual(output.read_bytes(), b'previous-index')
+
+    def test_output_cannot_replace_input_export(self):
+        GENERATED.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=GENERATED) as directory:
+            source = Path(directory) / 'words.csv.gz'
+            self.write_source(source, [{'id': '1', 'word': 'ёлка'}])
+            previous = source.read_bytes()
+            with self.assertRaisesRegex(ValueError, '源文件'):
+                self.build_with_forms(source, source)
+            self.assertEqual(source.read_bytes(), previous)
 
 
 if __name__ == '__main__':

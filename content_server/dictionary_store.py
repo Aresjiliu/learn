@@ -3,10 +3,11 @@
 from __future__ import annotations
 
 import sqlite3
+import re
 from contextlib import closing
 from pathlib import Path
 
-from scripts.build_dictionary_index import normalize_strict_word, normalize_word
+from .dictionary_normalization import normalize_strict_word, normalize_word
 
 
 TIERS = ('exact', 'prefix', 'wordForm', 'substring', 'meaning')
@@ -14,6 +15,10 @@ TIERS = ('exact', 'prefix', 'wordForm', 'substring', 'meaning')
 
 class AmbiguousLegacyId(ValueError):
     """The old source ID identifies more than one dictionary entry."""
+
+
+class SnapshotUnavailable(ValueError):
+    """Snapshot schema or required content is not ready to serve."""
 
 
 class DictionaryStore:
@@ -27,6 +32,28 @@ class DictionaryStore:
         connection.row_factory = sqlite3.Row
         connection.execute('PRAGMA query_only=ON')
         return connection
+
+    def snapshot_info(self) -> dict:
+        with closing(self.connect()) as connection:
+            metadata = dict(connection.execute('SELECT key, value FROM metadata'))
+            if (metadata.get('schema_version') != '4'
+                    or not str(metadata.get('row_count', '')).isdigit()
+                    or int(metadata.get('row_count', '0')) < 1
+                    or not str(metadata.get('form_row_count', '')).isdigit()
+                    or int(metadata.get('form_row_count', '0')) < 1
+                    or any(not re.fullmatch('[0-9a-f]{64}', metadata.get(key, ''))
+                           for key in ('source_sha256', 'forms_source_sha256'))):
+                raise SnapshotUnavailable('索引版本或元数据无效')
+            if (connection.execute('SELECT id, strict_word FROM entries LIMIT 1').fetchone() is None
+                    or connection.execute('SELECT prototype_strict FROM forms LIMIT 1').fetchone() is None):
+                raise SnapshotUnavailable('索引内容为空')
+            connection.execute('SELECT rowid FROM entries_fts LIMIT 1').fetchone()
+            connection.execute('SELECT rowid FROM meaning_short_fts LIMIT 1').fetchone()
+        return {
+            'schemaVersion': metadata['schema_version'],
+            'contentVersion': 'dict-v4-' + metadata['source_sha256'][:12] + '-' + metadata['forms_source_sha256'][:12],
+            'entryCount': int(metadata['row_count']),
+        }
 
     @staticmethod
     def _word(row: sqlite3.Row, tier: int | None = None, ambiguous: bool = False) -> dict:
@@ -58,11 +85,12 @@ class DictionaryStore:
 
     def search(self, query: str, page: int = 1, page_size: int = 20) -> dict:
         raw = str(query or '').strip()
-        if not raw or len(raw) > 64 or any(char in raw for char in ('%', '_')):
-            raise ValueError('查询词为空、过长或包含不支持的通配符')
-        if not isinstance(page, int) or page < 1 or not isinstance(page_size, int) or not 1 <= page_size <= 100:
-            raise ValueError('分页参数无效')
         normalized = normalize_word(raw)
+        if (not normalized or len(raw) > 64 or any(char in raw for char in ('%', '_'))
+                or any(ord(char) < 32 or ord(char) == 127 for char in raw)):
+            raise ValueError('查询词为空、过长或包含不支持的通配符')
+        if type(page) is not int or not 1 <= page <= 1000000 or type(page_size) is not int or not 1 <= page_size <= 100:
+            raise ValueError('分页参数无效')
         strict = normalize_strict_word(raw)
         clauses = [
             'SELECT id, 0 AS tier FROM entries WHERE normalized_word = ?',

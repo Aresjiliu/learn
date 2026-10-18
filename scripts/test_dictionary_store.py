@@ -120,6 +120,11 @@ class DictionaryStoreTests(unittest.TestCase):
             self.store.search('а' * 65)
         with self.assertRaises(ValueError):
             self.store.search('%')
+        for query in ('\u0301', 'а\x00', 'а\nб'):
+            with self.subTest(query=repr(query)), self.assertRaises(ValueError):
+                self.store.search(query)
+        with self.assertRaises(ValueError):
+            self.store.search('авто', page=10 ** 100)
         with closing(self.store.connect()) as connection:
             with self.assertRaises(sqlite3.OperationalError):
                 connection.execute('CREATE TABLE forbidden(value TEXT)')
