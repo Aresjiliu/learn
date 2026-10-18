@@ -46,7 +46,7 @@ Task 2 本机记录：[可复跑基准](../../phase1/dictionary-index-benchmark-
 - [x] 更新客户端结果键为 `id || sourceId`，保留旧样本路径；扩展 Node 契约测试验证重复词条路由不碰撞、服务故障提示不伪装完整结果。
 - [x] 跑 HTTP、Node 聚焦测试与 `powershell -NoProfile -ExecutionPolicy Bypass -File scripts/check_phase1.ps1`；真实索引 HTTP 烟测通过。
 - [ ] 用开发者工具检查搜索/详情/错误态；CLI `auto` 已成功，但模拟器 `systemInfo()` 超时，无页面截图证据。真机 HTTPS 待真实域名与证书就绪后单独记录。
-- [ ] 提交 `feat(dictionary): serve indexed search` 并核对远端提交哈希。
+- [x] 提交 `feat(dictionary): serve indexed search`（`43ce5a0`）；客户端与回归记录提交 `4546ef7`，已推送并用 `git ls-remote` 核对该远端哈希。
 
 Task 3 本机记录：2026-10-18 完整门禁通过；HTTP 合约 4 个测试通过，实际服务返回 `dict-v4-800b8ddc93a5-2e9141a7b976`、166,260 词条。只读路由、无效参数、损坏/缺失/旧索引、歧义旧 ID 和文件哈希不变均有自动检查。主审补充了空导出与覆盖源文件保护、分页上界和运行时依赖拆分；独立规格复审此前通过，独立质量审查因额度不足未产出报告，不记录为通过。Windows PowerShell 新增报错信息使用 ASCII，避免无 BOM UTF-8 中文单引号消息导致脚本解析失败。
 
