@@ -77,3 +77,16 @@
 - 当前本地无`services/learning-progress.js`；实际已有`practice-progress.js`和`playback-progress.js`。规划按真实模块扩展，不新造已有总进度服务。
 - G0发音身份修复先红后绿：原9组仅1绿，覆盖ID错绑/API覆盖/й混淆；追加严格词优先用例再次红（йод取到иод）再绿，共10组。实际教材样本1247行、0重复ID、0同严格词异音频组；不能据此宣称未来其他教材也无歧义。
 - 完整phase1恢复后首次暴露M2旧`test_textbook_word_fallback.js`未加载新增presenter，修正VM注入真实服务后继续通过。会话22421最终PASS，但最后exactMatch改动发生其Node阶段之后，不能拿该次PASS当最新源码最终完整证据；需等双审后定版重跑。
+
+## G0媒体凭据与课程身份续轮
+
+- 视频页初始化与切换两处读取账号token并直接拼到非开发前缀URL；以纯夹具token复现，媒体外域、带query与fragment均被改写。测试5组修复前仅1绿；删除两处隐式拼接后5/5，旧试听/切换/写保护/下一节等测试通过。保留服务端签名URL原样，不声称已具备远程媒体鉴权。
+- 课程详情固定样本回退由独立实施代理处理，限定`services/course.js`与新身份回归，主代理不重叠编辑。样本入口仍显式可达，真实课程失败不得伪装成另一课程成功；列表/分类策略不在该切片。
+- 课程独立规格审查68组虽绿仍抓到三处：words响应外层归属被组合丢失、旧video响应独立book身份漏检、归一化以备用book_id遮盖显式false/null/空id。已交原代理补红绿；允许只扩展content-api课程组合边界，不动词典/题库分支。
+
+## 实际开发工具可见性恢复
+
+- 沙箱默认Get-Process/Get-NetTCPConnection无结果不能证明已停止。获准查询后确认旧GUI进程20052/窗口1378520、CLI24586、automator9421、词典18092/PID32836、媒体18090/PID35912均存在。
+- 同一PrintWindow脚本在提升权限后实际成功，已查看`D:/software/Temp/codex-learn-wechat-window.png`：工具为iPhone12/13(Pro)、3.17.4、当前词典详情。不是新搜索验收，也不能等同真机。当前可见控制台无红色业务异常，警告包含selectable弃用（建议user-select）、系统API/SharedArrayBuffer/worker；不因警告先修改无关依赖。
+- 后续App.currentPage/截屏以及公开callWxMethod navigateTo均限时超时，OS坐标点击也未使画面进入目标词典。停止重复尝试；用户已收到新版本搜索页的非阻塞打开请求。不要将请求已发或首页截图当成真实搜索验收。
+- G1源码离线编译35个WXML/WXS、25个WXSS根通过；helper先因PS5.1中文路径编码失败，改Unicode参数传工具路径后成功。未改业务代码逃避编译。当前新slot结构检查显式标明非渲染证据。
