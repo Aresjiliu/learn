@@ -110,15 +110,26 @@ Page({
         }
         const played = audioController.play(audioUrl, {
             onEnded: () => {
+                if (this._isHidden) return
                 if (!this._isUnloaded) this.setData({ isPlaying: false })
             },
             onError: () => {
-                if (this._isUnloaded) return
+                if (this._isUnloaded || this._isHidden) return
                 this.setData({ isPlaying: false })
                 wx.showToast({ title: '音频播放失败', icon: 'none' })
             }
         })
         this.setData({ isPlaying: played })
+    },
+
+    onShow: function() {
+        this._isHidden = false
+    },
+
+    onHide: function() {
+        this._isHidden = true
+        audioController.stop()
+        this.setData({ isPlaying: false })
     },
 
     onUnload: function() {

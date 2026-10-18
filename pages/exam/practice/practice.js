@@ -123,10 +123,11 @@ Page({
         this.setData({ audioError: '' })
         const played = audioController.play(question.audioUrl || question.audio_url, {
             onEnded: () => {
+                if (this._isHidden) return
                 if (!this._isUnloaded) this.setData({ isPlayingAudio: false })
             },
             onError: () => {
-                if (this._isUnloaded) return
+                if (this._isUnloaded || this._isHidden) return
                 this.setData({ isPlayingAudio: false, audioError: '当前听力播放失败，可重试或继续作答' })
                 wx.showToast({ title: '音频播放失败', icon: 'none' })
             }
@@ -209,6 +210,16 @@ Page({
                     standardAnswer: question.answerKey || question.right_result || ''
                 }
             })
+    },
+
+    onShow: function() {
+        this._isHidden = false
+    },
+
+    onHide: function() {
+        this._isHidden = true
+        audioController.stop()
+        this.setData({ isPlayingAudio: false })
     },
 
     onUnload: function() {
