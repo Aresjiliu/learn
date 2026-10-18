@@ -1,27 +1,37 @@
 function createAudioController(createContext) {
     let context = null
-    let activeHandlers = {}
     let currentSource = ''
+    let generation = 0
 
-    function ensureContext() {
-        if (context) return context
-        context = createContext()
-        context.onEnded(() => {
-            if (activeHandlers.onEnded) activeHandlers.onEnded()
-        })
-        context.onError(error => {
-            if (activeHandlers.onError) activeHandlers.onError(error)
-        })
-        return context
+    function releaseContext() {
+        const player = context
+        // Invalidate first: native stop/destroy may synchronously emit events.
+        generation++
+        context = null
+        currentSource = ''
+        if (!player) return
+        try {
+            player.stop()
+        } finally {
+            player.destroy()
+        }
     }
 
     return {
         play: function(source, handlers = {}) {
             const audioSource = String(source || '').trim()
             if (!audioSource) return false
-            const player = ensureContext()
-            player.stop()
-            activeHandlers = handlers
+            releaseContext()
+            const player = createContext()
+            const attempt = generation
+            context = player
+            // Bind to this instance, never forward an old event to new handlers.
+            player.onEnded(() => {
+                if (attempt === generation && context === player && handlers.onEnded) handlers.onEnded()
+            })
+            player.onError(error => {
+                if (attempt === generation && context === player && handlers.onError) handlers.onError(error)
+            })
             currentSource = audioSource
             player.src = audioSource
             player.play()
@@ -33,16 +43,11 @@ function createAudioController(createContext) {
         },
 
         stop: function() {
-            if (context) context.stop()
-            currentSource = ''
-            activeHandlers = {}
+            releaseContext()
         },
 
         destroy: function() {
-            if (context) context.destroy()
-            context = null
-            currentSource = ''
-            activeHandlers = {}
+            releaseContext()
         },
 
         getCurrentSource: function() {

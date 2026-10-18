@@ -1,31 +1,54 @@
 <view class="page">
-    <view class="search-card">
-        <text class="page-title">词典查询</text>
-        <view class="search-row">
-            <input class="search-input" value="{{query}}" placeholder="输入俄语或中文释义" confirm-type="search" bindinput="handleInput" bindconfirm="handleSearch" />
-            <button class="search-action" bindtap="handleSearch">查词</button>
-        </view>
+    <view class="search-bar">
+        <van-search class="search-control" value="{{query}}" placeholder="输入俄语或中文释义" background="#ffffff" clearable="{{false}}" left-icon="" input-class="dictionary-search-input" bind:change="handleInput" bind:search="handleSearch" />
+        <button class="icon-button search-icon" bindtap="handleSearch" aria-label="搜索"><van-icon name="search" size="22" /></button>
+        <button wx:if="{{query}}" class="icon-button clear-button" bindtap="clearSearch" aria-label="清空输入"><van-icon name="cross" size="18" /></button>
+        <button class="search-action" bindtap="handleSearch">搜索</button>
     </view>
-    <view wx:if="{{sampleNotice && searched}}" class="state state-card">当前仅显示离线样本，完整词典暂不可用，请稍后重试。</view>
-    <view wx:if="{{searched && words.length}}" class="word-list">
-        <view wx:for="{{words}}" wx:key="rowKey" class="word-card" bindtap="openDetail" data-word="{{item.word}}" data-word-id="{{item.entryId}}">
-            <view class="word-head">
-                <text class="word">{{item.word}}</text>
-                <text class="source {{item.sourceType === 'textbook' ? 'textbook-source' : 'dictionary-source'}}">{{item.sourceType === 'textbook' ? '教材词' : '主词典'}}</text>
+    <text wx:if="{{historyNotice}}" class="notice" role="alert">{{historyNotice}}</text>
+    <view wx:if="{{!searched && !loading}}" class="discovery">
+        <view class="section-heading">
+            <text>搜索历史</text>
+            <button wx:if="{{history.length}}" class="icon-button" bindtap="clearHistory" aria-label="清空搜索历史"><van-icon name="delete-o" size="20" /></button>
+        </view>
+        <view wx:if="{{history.length}}" class="history-list">
+            <view wx:for="{{history}}" wx:key="key" class="history-item" data-query="{{item.query}}" bindtap="selectQuery" role="button" aria-label="查询{{item.query}}">
+                <text class="history-query">{{item.query}}</text>
+                <button class="history-remove" data-key="{{item.key}}" catchtap="removeHistory" aria-label="删除{{item.query}}的记录"><van-icon name="close" size="16" /></button>
             </view>
-            <text class="meaning">{{item.word_meaning_all || item.translation || '释义待补充'}}</text>
-            <text wx:if="{{item.matchTier === 'wordForm'}}" class="audio-tip">词形候选{{item.ambiguous ? ' · 存在多个原型，请核对' : ''}}</text>
-            <text wx:if="{{item.audioPlayable}}" class="audio-tip">含可播放音频</text>
-            <text wx:elif="{{item.audioPending || item.audioUrl || item.audio_url}}" class="audio-pending">音频待接入</text>
         </view>
-        <button wx:if="{{hasMore}}" class="load-more" bindtap="loadMore">{{loading ? '加载中…' : '加载更多'}}</button>
+        <text wx:else class="history-empty">{{historyNotice ? '历史暂不可用，可继续查词' : '暂无搜索记录'}}</text>
+        <view class="examples">
+            <view class="section-heading"><text>示例查询</text></view>
+            <view class="example-list">
+                <button wx:for="{{exampleQueries}}" wx:key="*this" class="example-query" data-query="{{item}}" bindtap="selectQuery">{{item}}</button>
+            </view>
+            <text class="example-help">支持俄语单词、变化词形和中文释义</text>
+        </view>
     </view>
-    <view wx:if="{{loading}}" class="state state-card loading-state">查询中...</view>
-    <view wx:elif="{{loadError}}" class="state state-card error-state">
+    <text wx:if="{{sampleNotice && searched}}" class="notice">当前仅显示离线样本，完整词典暂不可用，请稍后重试。</text>
+    <view wx:if="{{searched && words.length}}" class="word-list">
+        <view class="results-heading">
+            <text class="result-query">{{resultQuery}}</text>
+            <text class="result-count">{{total !== null ? '共 ' + total + ' 条' : '已显示 ' + words.length + ' 条'}}</text>
+        </view>
+        <dictionary-entry wx:for="{{words}}" wx:key="rowKey" entry="{{item}}" bind:open="openDetail" />
+        <view wx:if="{{loadError}}" class="state error-state" role="alert">
+            <text>{{loadError}}</text>
+            <button class="state-action" bindtap="retryLoad">{{hasMore ? '重试加载' : '重新查询'}}</button>
+        </view>
+        <button wx:elif="{{hasMore}}" class="load-more" bindtap="loadMore" disabled="{{loading}}">
+            <van-loading wx:if="{{loading}}" size="18" color="#ed625c">加载中</van-loading>
+            <text wx:else>加载更多</text>
+        </button>
+    </view>
+    <view wx:elif="{{loading}}" class="state loading-state"><van-loading size="22" color="#ed625c">查询中</van-loading></view>
+    <view wx:elif="{{loadError}}" class="state error-state" role="alert">
         <text>{{loadError}}</text>
         <button class="state-action" bindtap="retryLoad">重新查询</button>
     </view>
-    <block wx:elif="{{searched && words.length}}"></block>
-    <view wx:elif="{{searched}}" class="state state-card empty-state">{{sampleNotice ? '离线样本中没有该词，请连接完整词典服务' : '没有找到匹配词条'}}</view>
-    <view wx:else class="state">输入词语开始查询</view>
+    <view wx:elif="{{searched}}" class="state empty-state">
+        <text class="empty-title">没有找到匹配词条</text>
+        <text>{{sampleNotice ? '离线样本中没有该词，请连接完整词典服务' : '请检查拼写，或尝试其他单词和释义'}}</text>
+    </view>
 </view>

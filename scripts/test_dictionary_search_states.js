@@ -4,13 +4,13 @@ const fs = require('fs')
 const wxml = fs.readFileSync('pages/dictionary/search/search.wxml', 'utf8')
 const source = fs.readFileSync('pages/dictionary/search/search.js', 'utf8')
 
-assert.ok(wxml.includes('wx:if="{{loading}}"'))
+assert.ok(wxml.includes('wx:elif="{{loading}}"'))
 assert.ok(wxml.includes('wx:elif="{{loadError}}"'))
 assert.ok(wxml.includes('bindtap="retryLoad"'))
-assert.ok(wxml.includes('wx:elif="{{searched && words.length}}"'))
+assert.ok(wxml.includes('wx:if="{{searched && words.length}}"'))
 assert.ok(wxml.includes('wx:elif="{{searched}}"'))
 assert.ok(wxml.includes('sampleNotice'))
-assert.ok(wxml.includes('wx:else class="state"'))
+assert.ok(wxml.includes('wx:if="{{!searched && !loading}}"'))
 assert.ok(source.includes('if (this.data.loading || !this.data.hasMore) return'))
 assert.ok(source.includes('if (!query)'))
 assert.ok(source.includes('searched: false'))
@@ -23,11 +23,12 @@ console.log('dictionary search state tests: PASS')
 
 const requests = []
 let definition
-new Function('Page', 'getDictionarySearch', 'config', 'wx', source.replace(/^import .*\n/gm, ''))(
+new Function('Page', 'getDictionarySearch', 'config', 'wx', 'require', source.replace(/^import .*\n/gm, ''))(
     page => { definition = page },
     (query, options) => new Promise((resolve, reject) => { requests.push({ query, options, resolve, reject }) }),
     { enableLocalTestAudio: false },
-    { showToast: () => {}, navigateTo: () => {} }
+    { showToast: () => {}, navigateTo: () => {}, getStorageSync: () => [], setStorageSync: () => {} },
+    require('module').createRequire(require('path').resolve('pages/dictionary/search/search.js'))
 )
 const page = {
     ...definition,

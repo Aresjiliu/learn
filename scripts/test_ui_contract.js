@@ -163,11 +163,11 @@ const pageContracts = [{
 }, {
   path: 'pages/dictionary/search/search.wxml',
   checks: [
-    { label: '搜索输入与查询事件', pattern: /bindinput="handleInput"[\s\S]*?bindconfirm="handleSearch"[\s\S]*?bindtap="handleSearch"/ },
-    { label: '查询加载、错误、无结果和初始状态', pattern: /wx:if="\{\{loading\}\}"[\s\S]*?wx:elif="\{\{loadError\}\}"[\s\S]*?wx:elif="\{\{searched\}\}"[\s\S]*?wx:else class="state/ },
+    { label: '搜索输入与查询事件', pattern: /bind:change="handleInput"[\s\S]*?bind:search="handleSearch"[\s\S]*?bindtap="handleSearch"/ },
+    { label: '查询加载、错误、无结果和初始状态', pattern: /wx:if="\{\{!searched && !loading\}\}"[\s\S]*?wx:elif="\{\{loading\}\}"[\s\S]*?wx:elif="\{\{loadError\}\}"[\s\S]*?wx:elif="\{\{searched\}\}"/ },
     { label: '查询失败重试事件', pattern: /bindtap="retryLoad"/ },
-    { label: '结果稳定键、详情导航与数据字段', pattern: /<view(?=[^>]*wx:for="\{\{words\}\}")(?=[^>]*wx:key="rowKey")(?=[^>]*bindtap="openDetail")(?=[^>]*data-word="\{\{item\.word\}\}")(?=[^>]*data-word-id="\{\{item\.entryId\}\}")[^>]*>/ },
-    { label: '词条来源和分页事件', pattern: /sourceType[\s\S]*?wx:if="\{\{hasMore\}\}"[\s\S]*?bindtap="loadMore"/ }
+    { label: '结果稳定键、详情导航与数据字段', pattern: /<dictionary-entry(?=[^>]*wx:for="\{\{words\}\}")(?=[^>]*wx:key="rowKey")(?=[^>]*bind:open="openDetail")(?=[^>]*entry="\{\{item\}\}")[^>]*\/>/ },
+    { label: '样本来源和分页事件', pattern: /sampleNotice[\s\S]*?wx:elif="\{\{hasMore\}\}"[\s\S]*?bindtap="loadMore"/ }
   ]
 }, {
   path: 'pages/dictionary/detail/detail.wxml',
@@ -262,13 +262,21 @@ const routedPages = [
 ]
 for (const [route, jsSource, wxssSource, label] of routedPages) {
   assert.ok(appRoutes.has(`/${route}`), `${label}: route must be registered in app.json`)
-  assertSourcePattern(wxssSource, /var\(--space-page\)/, `${route}.wxss`, '页面间距共享令牌')
-  assertSourcePattern(wxssSource, /var\(--color-page-bg\)/, `${route}.wxss`, '页面背景共享令牌')
-  assertSourcePattern(wxssSource, /var\(--radius-card\)/, `${route}.wxss`, '卡片圆角共享令牌')
-  assertSourcePattern(wxssSource, /var\(--shadow-card\)/, `${route}.wxss`, '卡片阴影共享令牌')
-  assertSourcePattern(wxssSource, /var\(--color-(?:surface|error|loading|empty)/, `${route}.wxss`, '卡片或状态共享令牌')
+  if (route === 'pages/dictionary/search/search') {
+    assertSourcePattern(wxssSource, /padding:\s*20rpx 32rpx 40rpx/, `${route}.wxss`, '紧凑搜索边距')
+    assertSourcePattern(wxssSource, /background:\s*#fff;/, `${route}.wxss`, '白底行式结果')
+    assertSourcePattern(wxssSource, /color:\s*#ed625c;/, `${route}.wxss`, '珊瑚红操作')
+    require('./test_dictionary_search_behavior')
+    require('./test_dictionary_component_events')
+  } else {
+    assertSourcePattern(wxssSource, /var\(--space-page\)/, `${route}.wxss`, '页面间距共享令牌')
+    assertSourcePattern(wxssSource, /var\(--color-page-bg\)/, `${route}.wxss`, '页面背景共享令牌')
+    assertSourcePattern(wxssSource, /var\(--radius-card\)/, `${route}.wxss`, '卡片圆角共享令牌')
+    assertSourcePattern(wxssSource, /var\(--shadow-card\)/, `${route}.wxss`, '卡片阴影共享令牌')
+    assertSourcePattern(wxssSource, /var\(--color-(?:surface|error|loading|empty)/, `${route}.wxss`, '卡片或状态共享令牌')
+  }
   const pageWxml = stripWxmlComments(fs.readFileSync(path.join(root, `${route}.wxml`), 'utf8'))
-  const pageHandlerPattern = /\b(?:bind|catch)[a-z]+=["']([A-Za-z_$][\w$]*)["']/g
+  const pageHandlerPattern = /\b(?:bind|catch):?[a-z]+=["']([A-Za-z_$][\w$]*)["']/g
   let pageHandlerMatch
   while ((pageHandlerMatch = pageHandlerPattern.exec(pageWxml)) !== null) {
     assertSourcePattern(

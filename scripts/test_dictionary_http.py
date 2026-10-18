@@ -15,7 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from fastapi.testclient import TestClient
 from content_server.app import app_from_env, create_app
-from scripts.build_dictionary_index import build_index
+from scripts.build_dictionary_index import build_index, stable_entry_id
 
 
 class DictionaryHttpTests(unittest.TestCase):
@@ -92,6 +92,86 @@ class DictionaryHttpTests(unittest.TestCase):
         with patch.dict(os.environ, {}, clear=True):
             with self.assertRaisesRegex(RuntimeError, 'DICTIONARY_INDEX_PATH'):
                 app_from_env()
+
+    def audio_fixture(self):
+        from scripts.build_development_audio_catalog import compile_catalog
+        import json
+        root = self.root / 'audio'
+        root.mkdir()
+        filename = 'b' * 32 + '.mp3'
+        data = (b'\xff\xfb\x94\xc4' + b'\x00' * 380) * 2
+        (root / filename).write_bytes(data)
+        entry_id = stable_entry_id('1', 'привет')
+        report = {'schemaVersion': 1, 'publicationReady': False, 'verification': 'mp3-structure-only',
+                  'sources': {'dictionarySha256': hashlib.sha256(self.index.read_bytes()).hexdigest(),
+                              'textbookSha256': 'b' * 64},
+                  'candidates': [{'entryId': entry_id, 'word': 'привет', 'textbookIds': ['10'],
+                                  'source': 'textbook-strict-word', 'filename': filename,
+                                  'bytes': len(data), 'sha256': hashlib.sha256(data).hexdigest()}]}
+        catalog = compile_catalog(report, self.index, root, decode=lambda value: {
+            'frames': 22050, 'sampleRate': 44100, 'channels': 1,
+            'durationSeconds': 0.5, 'decoder': 'fixture-decoder'})
+        manifest = self.root / 'audio.json'
+        manifest.write_text(json.dumps(catalog), encoding='utf-8')
+        client = self.enterContext(TestClient(create_app(self.index, audio_manifest_path=manifest,
+                                  audio_root=root, audio_base_url='http://127.0.0.1:18093',
+                                  enable_development_audio=True)))
+        return client, root, filename, data, entry_id
+
+    def test_audio_search_detail_and_versions_are_consistent(self):
+        client, root, filename, data, entry_id = self.audio_fixture()
+        search = client.get('/api/v1/dictionary/search', params={'q': 'привет'}).json()
+        detail = client.get('/api/v1/dictionary/' + quote(entry_id, safe='')).json()
+        word = detail['data']['word']
+        self.assertEqual(search['data']['words'][0]['audio_url'], word['audio_url'])
+        self.assertTrue(word['audio_url'].endswith('/' + filename))
+        self.assertTrue(word['audioDevelopmentOnly'])
+        self.assertEqual(word['audioSource'], 'textbook')
+        self.assertEqual(detail['meta']['contentVersion'], search['meta']['contentVersion'])
+        self.assertNotEqual(client.get('/health').json()['contentVersion'], self.client.get('/health').json()['contentVersion'])
+
+    def test_audio_bytes_range_head_and_unknown_file(self):
+        client, root, filename, data, entry_id = self.audio_fixture()
+        url = '/api/v1/dictionary/audio/' + filename
+        response = client.get(url, headers={'Range': 'bytes=0-99'})
+        self.assertEqual(response.status_code, 206)
+        self.assertEqual(response.content, data[:100])
+        self.assertEqual(response.headers['content-range'], f'bytes 0-99/{len(data)}')
+        head = client.head(url)
+        self.assertEqual(head.status_code, 200)
+        self.assertEqual(head.content, b'')
+        self.assertEqual(int(head.headers['content-length']), len(data))
+        self.assertEqual(client.get(url).content, data)
+        self.assertEqual(client.get(url, headers={'Range': 'bytes=99999-'}).status_code, 416)
+        self.assertEqual(client.get('/api/v1/dictionary/audio/' + 'c' * 32 + '.mp3').status_code, 404)
+        self.assertEqual(self.client.get(url).status_code, 404)
+        (root / filename).write_bytes(b'changed')
+        self.assertEqual(client.get(url).status_code, 404)
+        self.assertEqual(client.get('/api/v1/dictionary/' + quote(entry_id, safe='')).json()['data']['word']['audio_url'], '')
+
+    def test_audio_and_dictionary_keep_one_private_batch_until_restart(self):
+        import sqlite3
+        from contextlib import closing
+        client, root, filename, data, entry_id = self.audio_fixture()
+        before = client.get('/health').json()
+        with closing(sqlite3.connect(self.index)) as connection, connection:
+            connection.execute("UPDATE entries SET word='мир', meaning='changed' WHERE id=?", (entry_id,))
+        detail = client.get('/api/v1/dictionary/' + quote(entry_id, safe='')).json()['data']['word']
+        self.assertEqual(detail['word'], 'привет')
+        self.assertEqual(client.get('/health').json()['contentVersion'], before['contentVersion'])
+        self.assertEqual(client.get('/api/v1/dictionary/audio/' + filename).content, data)
+        self.assertTrue(before['servedSnapshotFixed'])
+
+    def test_head_ignores_valid_invalid_and_out_of_bounds_ranges(self):
+        client, root, filename, data, entry_id = self.audio_fixture()
+        for value in ('bytes=0-99', 'bytes=99999-', 'bytes=invalid'):
+            with self.subTest(value=value):
+                response = client.head('/api/v1/dictionary/audio/' + filename,
+                                       headers={'Range': value})
+                self.assertEqual(response.status_code, 200)
+                self.assertEqual(int(response.headers['content-length']), len(data))
+                self.assertNotIn('content-range', response.headers)
+                self.assertEqual(response.content, b'')
 
 
 if __name__ == '__main__':

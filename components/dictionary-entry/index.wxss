@@ -1,0 +1,9 @@
+:host { display: block; }
+.entry { padding: 28rpx 0; border-bottom: 1rpx solid #ececee; color: #171719; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+.entry--pressed { background: #fafafa; }
+.entry__heading { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8rpx 16rpx; }
+.entry__headword { min-width: 0; max-width: 100%; font-size: 38rpx; font-weight: 600; line-height: 1.4; overflow-wrap: anywhere; word-break: break-word; }
+.entry__class { color: #707075; font-size: 24rpx; line-height: 1.5; }
+.entry__summary { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-top: 10rpx; color: #27272a; font-size: 28rpx; line-height: 1.65; overflow-wrap: anywhere; }
+.entry__metadata { display: flex; flex-wrap: wrap; gap: 6rpx 16rpx; margin-top: 12rpx; color: #77777d; font-size: 22rpx; line-height: 1.5; }
+.entry__match { color: #ed625c; }

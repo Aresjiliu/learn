@@ -4,31 +4,13 @@ from __future__ import annotations
 
 import argparse
 import mimetypes
+import sys
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import unquote, urlparse
 
-
-def parse_range(range_header: str, size: int) -> tuple[int, int, int]:
-    """Return (status, start, end) for a single byte range."""
-    start, end = 0, size - 1
-    status = 200
-    if ',' in range_header:
-        return status, start, end
-    if range_header.startswith('bytes='):
-        requested = range_header[6:].strip()
-        left, right = requested.split('-', 1)
-        if left:
-            start = int(left)
-            end = int(right) if right else size - 1
-        else:
-            suffix = int(right)
-            start = max(0, size - suffix)
-        if start < 0 or start >= size or end < start:
-            raise ValueError('invalid byte range')
-        end = min(end, size - 1)
-        status = 206
-    return status, start, end
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from content_server.media_range import parse_range
 
 
 class RangeMediaHandler(BaseHTTPRequestHandler):
@@ -63,7 +45,7 @@ class RangeMediaHandler(BaseHTTPRequestHandler):
             return
 
         size = target.stat().st_size
-        range_header = self.headers.get('Range', '')
+        range_header = self.headers.get('Range', '') if send_body else ''
         try:
             status, start, end = parse_range(range_header, size)
         except (ValueError, TypeError):

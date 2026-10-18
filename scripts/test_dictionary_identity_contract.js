@@ -15,10 +15,11 @@ async function checkIdentityAndFallback() {
         { id: 'dict:17:b', sourceId: '17', word: 'все' }
     ] }, meta: { source: 'dictionary-index', contentVersion: 'v1', total: 3 } }
     const navigation = []
-    new Function('Page', 'getDictionarySearch', 'config', 'wx', stripImports(fs.readFileSync('pages/dictionary/search/search.js', 'utf8')))(
+    new Function('Page', 'getDictionarySearch', 'config', 'wx', 'require', stripImports(fs.readFileSync('pages/dictionary/search/search.js', 'utf8')))(
         value => { definition = value }, () => Promise.resolve(response),
         { enableContentApi: true, enableLocalDictionaryApi: false },
-        { navigateTo: options => navigation.push(options.url), showToast() {} }
+        { navigateTo: options => navigation.push(options.url), showToast() {}, getStorageSync: () => [], setStorageSync() {} },
+        require('module').createRequire(require('path').resolve('pages/dictionary/search/search.js'))
     )
     const page = instantiate(definition)
     page.onLoad({})
@@ -74,7 +75,9 @@ async function checkStableDetailFailure() {
     await checkStableDetailFailure()
     const wxml = fs.readFileSync('pages/dictionary/search/search.wxml', 'utf8')
     assert.ok(wxml.includes('wx:key="rowKey"'))
-    assert.ok(wxml.includes('data-word-id="{{item.entryId}}"'))
+    assert.match(wxml, /<dictionary-entry[^>]*entry="\{\{item\}\}"[^>]*bind:open="openDetail"/)
+    // The actual Component event and Page navigation are exercised with an encoded stable ID.
+    require('./test_dictionary_component_events')
     assert.ok(fs.readFileSync('pages/dictionary/detail/detail.wxml', 'utf8').includes('bindtap="retryLoad"'))
     console.log('dictionary identity and source contract: PASS')
 })().catch(error => { console.error(error); process.exitCode = 1 })

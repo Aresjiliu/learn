@@ -84,6 +84,14 @@ class MediaServerTests(unittest.TestCase):
         self.assertEqual(headers['Content-Length'], '10')
         self.assertEqual(body, b'0123456789')
 
+    def test_head_ignores_range(self):
+        for value in ('bytes=2-4', 'bytes=999-', 'bytes=invalid'):
+            status, headers, body = self.request('/audio/sample.mp3', method='HEAD', byte_range=value)
+            self.assertEqual(status, 200)
+            self.assertEqual(headers['Content-Length'], '10')
+            self.assertNotIn('Content-Range', headers)
+            self.assertEqual(body, b'')
+
     def test_bounded_range_writes_only_declared_bytes(self):
         status, headers, body = self.request('/audio/sample.mp3', byte_range='bytes=2-4')
         self.assertEqual(status, 206)

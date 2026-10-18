@@ -22,13 +22,16 @@ class SnapshotUnavailable(ValueError):
 
 
 class DictionaryStore:
-    def __init__(self, path: Path):
+    def __init__(self, path: Path, *, immutable: bool = False):
         self.path = Path(path)
+        self.immutable = immutable
 
     def connect(self) -> sqlite3.Connection:
         if not self.path.is_file():
             raise FileNotFoundError(self.path)
-        connection = sqlite3.connect(self.path.resolve().as_uri() + '?mode=ro', uri=True)
+        # immutable is only for a private snapshot owned by the service, with no writer.
+        suffix = '?mode=ro&immutable=1' if self.immutable else '?mode=ro'
+        connection = sqlite3.connect(self.path.resolve().as_uri() + suffix, uri=True)
         connection.row_factory = sqlite3.Row
         connection.execute('PRAGMA query_only=ON')
         return connection

@@ -9,12 +9,17 @@ Page({
         word: null,
         loading: true,
         loadError: '',
-        isPlaying: false
+        isPlaying: false,
+        audioError: ''
     },
 
     onLoad: function(options) {
+        const requestId = (this._detailRequestId || 0) + 1
+        this._detailRequestId = requestId
+        const hadAudioAttempt = Boolean(this._audioAttemptId)
+        this._audioAttemptId = (this._audioAttemptId || 0) + 1
+        if (hadAudioAttempt) audioController.stop()
         this._isUnloaded = false
-        this._detailRequestId = this._detailRequestId || 0
         this._routeOptions = options || {}
         const query = options && options.q ? decodeURIComponent(options.q) : ''
         const textbookMeaning = options && options.meaning ? decodeURIComponent(options.meaning) : ''
@@ -22,7 +27,7 @@ Page({
         const textbookExamples = options && options.examples
             ? decodeURIComponent(options.examples).split(/\r?\n|#/).map(item => item.trim()).filter(Boolean)
             : []
-        this.setData({ query, word: null, loading: true, loadError: '' })
+        this.setData({ query, word: null, loading: true, loadError: '', isPlaying: false, audioError: '' })
         if (!query.trim()) {
             this.setData({ word: null, loading: false })
             return
@@ -30,8 +35,6 @@ Page({
         const wordId = options && options.id ? decodeURIComponent(options.id) : ''
         const textbookId = options && options.textbookId ? decodeURIComponent(options.textbookId) : ''
         if ((config.enableContentApi || config.enableLocalDictionaryApi) && wordId) {
-            const requestId = (this._detailRequestId || 0) + 1
-            this._detailRequestId = requestId
             getDictionaryDetail(wordId).then(result => {
                 if (this._isUnloaded || requestId !== this._detailRequestId) return
                 const word = result && result.data && result.data.word
@@ -99,6 +102,7 @@ Page({
     },
 
     playAudio: function() {
+        if (this._isUnloaded || this._isHidden) return
         const audioUrl = this.resolveAudioUrl(this.data.word && (this.data.word.audioUrl || this.data.word.audio_url))
         if (!audioUrl) {
             wx.showToast({ title: '暂无音频', icon: 'none' })
@@ -108,14 +112,17 @@ Page({
             wx.showToast({ title: '音频资源待接入', icon: 'none' })
             return
         }
+        const attemptId = (this._audioAttemptId || 0) + 1
+        this._audioAttemptId = attemptId
+        this.setData({ audioError: '' })
         const played = audioController.play(audioUrl, {
             onEnded: () => {
-                if (this._isHidden) return
+                if (this._isHidden || attemptId !== this._audioAttemptId) return
                 if (!this._isUnloaded) this.setData({ isPlaying: false })
             },
             onError: () => {
-                if (this._isUnloaded || this._isHidden) return
-                this.setData({ isPlaying: false })
+                if (this._isUnloaded || this._isHidden || attemptId !== this._audioAttemptId) return
+                this.setData({ isPlaying: false, audioError: '音频播放失败，请重试' })
                 wx.showToast({ title: '音频播放失败', icon: 'none' })
             }
         })
@@ -128,12 +135,16 @@ Page({
 
     onHide: function() {
         this._isHidden = true
+        this._audioAttemptId = (this._audioAttemptId || 0) + 1
         audioController.stop()
         this.setData({ isPlaying: false })
     },
 
     onUnload: function() {
         this._isUnloaded = true
+        this._audioAttemptId = (this._audioAttemptId || 0) + 1
+        // Clear local teardown state without updating an unloaded view.
+        this.data.audioError = ''
         this._detailRequestId = (this._detailRequestId || 0) + 1
         audioController.stop()
     }

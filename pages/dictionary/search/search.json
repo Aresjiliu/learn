@@ -1,1 +1,12 @@
-{"navigationBarTitleText":"俄语词典","enablePullDownRefresh":false}
+{
+    "navigationBarTitleText": "俄语词典",
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black",
+    "enablePullDownRefresh": false,
+    "usingComponents": {
+        "van-search": "/miniprogram_npm/@vant/weapp/search/index",
+        "van-icon": "/miniprogram_npm/@vant/weapp/icon/index",
+        "van-loading": "/miniprogram_npm/@vant/weapp/loading/index",
+        "dictionary-entry": "/components/dictionary-entry/index"
+    }
+}

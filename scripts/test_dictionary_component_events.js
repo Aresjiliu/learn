@@ -1,0 +1,20 @@
+const assert = require('assert')
+const fs = require('fs')
+const path = require('path')
+const base = path.resolve(__dirname, '../components/dictionary-entry/index')
+assert.ok(fs.existsSync(base + '.js'), 'entry Component must exist')
+let definition
+new Function('Component', fs.readFileSync(base + '.js', 'utf8'))(value => { definition = value })
+assert.strictEqual(definition.properties.entry.type, Object)
+const events = []
+const entry = { entryId: 'dict:17:b/?&', headword: 'всё́' }
+definition.methods.open.call({ data: { entry }, triggerEvent: (...args) => events.push(args) })
+assert.deepStrictEqual(events, [['open', { word: 'всё́', wordId: 'dict:17:b/?&' }]])
+const template = fs.readFileSync(base + '.wxml', 'utf8')
+assert.match(template, /bindtap="open"/)
+assert.match(template, /entry.headword/)
+assert.match(template, /entry.summary/)
+assert.match(template, /entry.matchLabel/)
+assert.match(template, /entry.audioSource === 'textbook'/)
+assert.match(template, /entry.audioDevelopmentOnly === true/)
+console.log('dictionary component events: PASS')

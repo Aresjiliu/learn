@@ -1,9 +1,16 @@
 import { getDictionarySearch } from '../../../services/content-api'
 import config from '../../../config'
+const { createDictionaryHistory } = require('../../../services/dictionary-history')
+const { presentDictionaryEntry } = require('../../../services/dictionary-presentation')
 
 Page({
     data: {
         query: '',
+        history: [],
+        historyNotice: '',
+        exampleQueries: ['камера', 'дом', '学习'],
+        resultQuery: '',
+        total: null,
         words: [],
         searched: false,
         loadError: '',
@@ -17,15 +24,78 @@ Page({
     onLoad: function(options) {
         this._searchRequestId = 0
         this._isUnloaded = false
+        this._history = null
+        try {
+            this._history = createDictionaryHistory({
+                read: () => wx.getStorageSync('dictionary_history_v1'),
+                write: records => wx.setStorageSync('dictionary_history_v1', records)
+            })
+            this.setData({ history: this._history.list(), historyNotice: '' })
+        } catch (error) {
+            this.setData({ historyNotice: '搜索历史读取失败，本次历史无法保存' })
+        }
         if (options && options.q) {
-            const query = decodeURIComponent(options.q)
+            let query
+            try {
+                query = decodeURIComponent(options.q)
+            } catch (error) {
+                this.setData({
+                    query: '', words: [], loading: false, searched: true,
+                    loadError: '搜索链接中的查询参数无效，请重新输入后搜索'
+                })
+                return
+            }
             this.setData({ query })
             this.search()
         }
     },
 
     handleInput: function(event) {
-        this.setData({ query: event.detail.value })
+        const value = typeof event.detail === 'string' ? event.detail : event.detail && event.detail.value
+        if (typeof value !== 'string' || value === this.data.query) return
+        this._searchRequestId = (this._searchRequestId || 0) + 1
+        this._failedAppendPage = 0
+        this._failedAppendQuery = ''
+        this.setData({ query: value, words: [], searched: false, loading: false, loadError: '', sampleNotice: false,
+            page: 1, hasMore: false, resultQuery: '', total: null })
+    },
+
+    clearSearch: function() {
+        this.setData({ query: '' })
+        this.search()
+    },
+
+    selectQuery: function(event) {
+        this.handleInput({ detail: event.currentTarget.dataset.query })
+        this.search()
+    },
+
+    removeHistory: function(event) {
+        if (!this._history) return
+        try {
+            this._history.remove(event.currentTarget.dataset.key)
+            this.setData({ history: this._history.list(), historyNotice: '' })
+        } catch (error) {
+            this.setData({ historyNotice: '搜索历史删除失败，请重试' })
+        }
+    },
+
+    clearHistory: function() {
+        if (!this._history || !this.data.history.length) return
+        wx.showModal({
+            title: '清空搜索历史',
+            content: '确定删除全部搜索记录？',
+            confirmColor: '#ed625c',
+            success: result => {
+                if (!result.confirm || this._isUnloaded) return
+                try {
+                    this._history.clear()
+                    this.setData({ history: [], historyNotice: '' })
+                } catch (error) {
+                    this.setData({ historyNotice: '搜索历史清空失败，请重试' })
+                }
+            }
+        })
     },
 
     handleSearch: function() {
@@ -42,8 +112,9 @@ Page({
     },
 
     openDetail: function(event) {
-        const word = event.currentTarget.dataset.word
-        const wordId = event.currentTarget.dataset.wordId
+        const payload = event.detail && typeof event.detail.word === 'string' ? event.detail : event.currentTarget.dataset
+        const word = payload.word
+        const wordId = payload.wordId
         wx.navigateTo({ url: `/pages/dictionary/detail/detail?q=${encodeURIComponent(word)}&id=${encodeURIComponent(wordId || '')}` })
     },
 
@@ -53,7 +124,7 @@ Page({
         this._failedAppendQuery = ''
         if (!query) {
             this._searchRequestId = (this._searchRequestId || 0) + 1
-            this.setData({ words: [], searched: false, loadError: '', sampleNotice: false, loading: false, page: 1, hasMore: false })
+            this.setData({ words: [], searched: false, loadError: '', sampleNotice: false, loading: false, page: 1, hasMore: false, resultQuery: '', total: null })
             return
         }
         this.loadPage(1, false)
@@ -63,9 +134,15 @@ Page({
         const requestId = (this._searchRequestId || 0) + 1
         this._searchRequestId = requestId
         const query = this.data.query.trim()
-        this.setData({ loading: true, loadError: '' })
+        this.setData(append ? { loading: true, loadError: '' } : {
+            loading: true, loadError: '', words: [], searched: false, sampleNotice: false,
+            hasMore: false, page: 1, total: null, resultQuery: query
+        })
         getDictionarySearch(query, { page, pageSize: this.data.pageSize }).then(result => {
             if (this._isUnloaded || requestId !== this._searchRequestId) return
+            if (!result || (result.code !== undefined && result.code !== 200) || !result.data || !Array.isArray(result.data.words)) {
+                throw new Error('词典接口返回异常')
+            }
             const meta = result.meta || {}
             const signature = `${meta.source || ''}:${meta.contentVersion || ''}`
             if (append && this._resultSignature !== signature) {
@@ -73,23 +150,30 @@ Page({
                 error.code = 'DICTIONARY_SOURCE_CHANGED'
                 throw error
             }
-            const incoming = (result.data.words || []).map(word => ({
-                ...word,
-                entryId: String(word.id || word.sourceId || ''),
-                rowKey: String(word.id || `${word.sourceId || ''}:${word.word}`),
+            const incoming = result.data.words.map(word => ({
+                ...presentDictionaryEntry(word),
                 audioPlayable: this.isAudioPlayable(word)
             }))
             const words = append ? this.data.words.concat(incoming) : incoming
-            const sampleNotice = /^local-sample/.test(String(meta.source || '')) && Boolean(config.enableContentApi || config.enableLocalDictionaryApi)
-            const total = Number(meta.total)
-            const hasMore = Number.isFinite(total) && total >= 0
+            const sampleNotice = /^local-sample/.test(String(meta.source || ''))
+            const total = (typeof meta.total === 'number' || (typeof meta.total === 'string' && meta.total.trim()))
+                && Number.isFinite(Number(meta.total)) && Number(meta.total) >= 0 ? Number(meta.total) : null
+            const hasMore = total !== null
                 ? page * this.data.pageSize < total
                 : incoming.length >= this.data.pageSize
             this._failedAppendPage = 0
             this._failedAppendQuery = ''
             this._resultSignature = signature
             this._resultQuery = query
-            this.setData({ words, searched: true, loadError: '', sampleNotice, page, hasMore })
+            this.setData({ words, searched: true, loadError: '', sampleNotice, page, hasMore, total, resultQuery: query })
+            if (!append && this._history) {
+                try {
+                    this._history.record(query)
+                    this.setData({ history: this._history.list(), historyNotice: '' })
+                } catch (error) {
+                    this.setData({ historyNotice: '搜索历史保存失败，结果仍可查看' })
+                }
+            }
         }).catch(error => {
             if (this._isUnloaded || requestId !== this._searchRequestId) return
             const sourceChanged = error && error.code === 'DICTIONARY_SOURCE_CHANGED'

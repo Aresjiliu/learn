@@ -5,14 +5,17 @@ import logging
 import os
 import sqlite3
 import time
+from contextlib import asynccontextmanager
 from pathlib import Path
 
-from fastapi import FastAPI, Query
+from fastapi import FastAPI, Query, Request
 from fastapi.exceptions import RequestValidationError
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, Response
 from starlette.exceptions import HTTPException
 
 from .dictionary_store import AmbiguousLegacyId, DictionaryStore, SnapshotUnavailable
+from .audio_catalog import AudioCatalog
+from .media_range import parse_range
 
 LOGGER = logging.getLogger('dictionary_api')
 SOURCE = 'dictionary-index'
@@ -22,9 +25,36 @@ def error_response(status: int, code: str, message: str) -> JSONResponse:
     return JSONResponse(status_code=status, content={'error': {'code': code, 'message': message}})
 
 
-def create_app(index_path: Path) -> FastAPI:
-    store = DictionaryStore(index_path)
-    app = FastAPI(docs_url=None, redoc_url=None, openapi_url=None)
+def create_app(index_path: Path, *, audio_manifest_path: Path | None = None,
+               audio_root: Path | None = None, audio_base_url: str = '',
+               enable_development_audio: bool = False) -> FastAPI:
+    audio = None
+    if audio_manifest_path is not None or audio_root is not None or enable_development_audio:
+        if audio_manifest_path is None or audio_root is None:
+            raise ValueError('development audio requires manifest and root')
+        audio = AudioCatalog(audio_manifest_path, index_path, audio_root, audio_base_url,
+                             development_enabled=enable_development_audio)
+    store = DictionaryStore(audio.index_path, immutable=True) if audio else DictionaryStore(index_path)
+
+    @asynccontextmanager
+    async def lifespan(app):
+        try:
+            yield
+        finally:
+            if audio is not None:
+                audio.close()
+
+    app = FastAPI(docs_url=None, redoc_url=None, openapi_url=None, lifespan=lifespan)
+
+    def snapshot_info():
+        info = store.snapshot_info()
+        if audio is not None:
+            info['contentVersion'] += '-audio-' + audio.version
+            info['audioCatalogEntries'] = len(audio.entries)
+            info['audioDevelopmentOnly'] = True
+            info['audioCatalogCurrent'] = audio.is_current()
+            info['servedSnapshotFixed'] = True
+        return info
 
     @app.middleware('http')
     async def log_request(request, call_next):
@@ -66,29 +96,50 @@ def create_app(index_path: Path) -> FastAPI:
 
     @app.get('/health')
     def health():
-        return {'status': 'ok', 'service': 'dictionary-api', **store.snapshot_info()}
+        return {'status': 'ok', 'service': 'dictionary-api', **snapshot_info()}
 
     @app.get('/api/v1/content/manifest')
     def manifest():
-        info = store.snapshot_info()
+        info = snapshot_info()
         return {'data': {'contentVersion': info['contentVersion'], 'source': SOURCE,
-                         'capabilities': ['dictionary']}, 'meta': metadata(info)}
+                         'capabilities': ['dictionary'] + (['dictionary-audio-development'] if audio else [])},
+                'meta': metadata(info)}
 
     @app.get('/api/v1/dictionary/search')
     def search(q: str = Query(..., min_length=1, max_length=64),
                page: int = Query(1, ge=1, le=1000000), page_size: int = Query(20, ge=1, le=100)):
-        info = store.snapshot_info()
+        info = snapshot_info()
         result = store.search(q, page, page_size)
+        if audio is not None:
+            result['words'] = [audio.decorate(word) for word in result['words']]
         return {'data': {'words': result['words'], 'formCandidates': result['formCandidates']},
                 'meta': {**metadata(info), 'page': page, 'page_size': page_size, 'total': result['total']}}
 
     @app.get('/api/v1/dictionary/{word_id}')
     def detail(word_id: str):
-        info = store.snapshot_info()
+        info = snapshot_info()
         word = store.detail(word_id)
         if word is None:
             return error_response(404, 'CONTENT_NOT_FOUND', '词条不存在')
-        return {'data': {'word': word}, 'meta': metadata(info)}
+        return {'data': {'word': audio.decorate(word) if audio else word}, 'meta': metadata(info)}
+
+    @app.api_route('/api/v1/dictionary/audio/{filename}', methods=['GET', 'HEAD'])
+    def pronunciation(filename: str, request: Request):
+        data = audio.read_file(filename) if audio else None
+        if data is None:
+            return error_response(404, 'CONTENT_NOT_FOUND', '音频不可用')
+        headers = {'Accept-Ranges': 'bytes'}
+        # No validators are advertised: If-Range cannot match, so return the full body.
+        range_header = request.headers.get('Range', '') if request.method == 'GET' and not request.headers.get('If-Range') else ''
+        try:
+            status, start, end = parse_range(range_header, len(data))
+        except (ValueError, TypeError):
+            return Response(status_code=416, headers={'Content-Range': f'bytes */{len(data)}'})
+        headers['Content-Length'] = str(end - start + 1)
+        if status == 206:
+            headers['Content-Range'] = f'bytes {start}-{end}/{len(data)}'
+        return Response(content=b'' if request.method == 'HEAD' else data[start:end + 1],
+                        status_code=status, media_type='audio/mpeg', headers=headers)
 
     return app
 
@@ -101,4 +152,9 @@ def app_from_env() -> FastAPI:
         LOGGER.addHandler(logging.StreamHandler())
         LOGGER.setLevel(logging.INFO)
         LOGGER.propagate = False
-    return create_app(Path(value))
+    manifest = os.environ.get('DICTIONARY_AUDIO_MANIFEST', '').strip()
+    root = os.environ.get('DICTIONARY_AUDIO_ROOT', '').strip()
+    return create_app(Path(value), audio_manifest_path=Path(manifest) if manifest else None,
+                      audio_root=Path(root) if root else None,
+                      audio_base_url=os.environ.get('DICTIONARY_AUDIO_BASE_URL', '').strip(),
+                      enable_development_audio=os.environ.get('DICTIONARY_ENABLE_DEV_AUDIO') == '1')

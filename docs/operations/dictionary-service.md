@@ -21,14 +21,37 @@ data\generated\content-venv\Scripts\python.exe -B -m uvicorn content_server.app:
 
 完整检查为 `powershell -NoProfile -ExecutionPolicy Bypass -File scripts/check_phase1.ps1`。HTTP 测试使用独立环境；可通过 `CONTENT_PYTHON` 显式指定其他兼容解释器。受限沙箱可能阻断 Python 内部回环 socket，此时需执行权限审核，不以超时当作通过。开发 HTTP 地址只适用于开发者工具；手机上的回环地址不指向开发机。
 
+## 教材发音本地接入
+
+离线目录生成器使用 Python 3.12、SoundFile 0.13.1、NumPy 2.4.4（本机已存在），HTTP 服务不需要安装这两项。其他开发机请在独立音频工具环境安装相同版本，不改变内容服务环境；完整解码依赖其 libsndfile 的 MP3 支持。
+
+```powershell
+D:\software\anaconda3\python.exe -B scripts/build_development_audio_catalog.py --export data/remote_7500km/production_7500km_com__n_study_book_word.csv.gz --index data/generated/dictionary.sqlite --cache-dir audio/wordaudio --output data/generated/dictionary-audio-development.json
+```
+
+生成器重新执行严格原词审计，保留歧义拒绝规则，读取校验后的同一批字节完整解码，失败不进入目录。目录及 MP3 不进入 Git/小程序包。当前生成 1,082 个词条映射、0 条解码拒绝；这是可本地联调的来源绑定发音，不是语义听审或生产发布白名单。
+
+在启动服务的同一终端显式配置以下内容，再执行上面的 Uvicorn 命令：
+
+```powershell
+$env:DICTIONARY_AUDIO_MANIFEST = (Resolve-Path data/generated/dictionary-audio-development.json).Path
+$env:DICTIONARY_AUDIO_ROOT = (Resolve-Path audio/wordaudio).Path
+$env:DICTIONARY_AUDIO_BASE_URL = 'http://127.0.0.1:18092'
+$env:DICTIONARY_ENABLE_DEV_AUDIO = '1'
+```
+
+此模式只接受回环 HTTP 基址；默认关闭，未显式开启时不提供词典音频。首次加载把索引复制到服务私有临时目录，对复制字节计算 SHA 与目录核对；查询和音频绑定同一私有只读批次，不采用运行中被更新的原始文件。切换批次须重新生成目录、重启并烟测，退出时清理副本；额外临时空间约 478MB。健康字段 `servedSnapshotFixed=true` 表示固定批次，`audioCatalogCurrent` 指该服务副本存在，不表示追踪原始文件的最新状态。缺失、目录外、超限或哈希变化的 MP3 不返回可播放地址。媒体从核验后的内存字节响应，避免校验后重新打开路径。
+
+运行 `data\generated\content-venv\Scripts\python.exe -B scripts/check_dictionary_audio_http.py` 检查真实搜索、详情、HEAD、Range 与完整文件哈希。小程序保持现有 18092 地址；例如查询 `камера` 应得到本地教材发音字段。播放页增加扬声器与可见重试状态，但实际视觉、iOS/Android 音频及 HTTPS 合法域名仍须单独验收。生产服务不要设置这些开发音频变量；本实现不会将开发目录自动升级为生产放行。
+
 ## 接口与错误
 
 - `GET /health`：验证 v4 元数据、内容表和索引可读取；返回内容版本和词条数量。缺失、损坏、旧版本或空内容均返回 503。
-- `GET /api/v1/content/manifest`：只声明 `dictionary` 能力。
+- `GET /api/v1/content/manifest`：默认只声明 `dictionary`；显式开发音频模式额外声明 `dictionary-audio-development`。
 - `GET /api/v1/dictionary/search?q=汽车&page=1&page_size=20`：俄中分层搜索；每页 1–100，词形候选保留歧义，分页须维持相同内容版本。
 - `GET /api/v1/dictionary/<稳定id>`：唯一词条；无冲突旧 ID 兼容，重复旧 ID 返回 409。未找到返回 404，无效输入返回 400。
 
-原始音频哈希不转为播放地址。服务仅 GET 内容读取；日志只记录方法、路由模板、状态和耗时，不记录搜索词、token 或原始词典数据。
+原始音频哈希不直接转为播放地址；开发模式只有已解码目录中的词条可获得白名单媒体 URL。`GET/HEAD /api/v1/dictionary/audio/<文件名>` 支持单 Range，未知或失效文件返回 404，超范围返回 416。服务不提供内容写入；日志只记录方法、路由模板、状态和耗时，不记录搜索词、token 或原始词典数据。
 
 ## 本地开发者工具自动化
 

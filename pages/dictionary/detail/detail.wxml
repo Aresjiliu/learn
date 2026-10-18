@@ -6,25 +6,42 @@
     </view>
     <view wx:elif="{{word}}" class="detail-card">
         <view class="word-head">
-            <view class="word-identity">
-                <text class="word">{{word.word}}</text>
-                <text class="source {{word.sourceType === 'textbook' ? 'textbook-source' : 'dictionary-source'}}">{{word.sourceType === 'textbook' ? '教材词' : '主词典'}}</text>
+            <view class="word-title-row">
+                <view class="word-identity">
+                    <text class="word">{{word.word}}</text>
+                    <text class="source {{word.sourceType === 'textbook' ? 'textbook-source' : 'dictionary-source'}}">{{word.sourceType === 'textbook' ? '教材词' : '主词典'}}</text>
+                </view>
+                <button wx:if="{{word.audioPlayable}}" class="audio-button {{isPlaying ? 'audio-button--playing' : ''}}" bindtap="playAudio" aria-label="{{isPlaying ? '正在播放发音，点击重新播放' : '播放发音'}}">
+                    <view class="speaker-icon" aria-hidden="true">
+                        <view class="speaker-icon__body"></view>
+                        <view class="speaker-icon__cone"></view>
+                        <view class="speaker-icon__wave"></view>
+                    </view>
+                </button>
             </view>
-            <button wx:if="{{word.audioPlayable}}" class="audio-button" bindtap="playAudio">{{isPlaying ? '播放中…' : '播放发音'}}</button>
+            <view class="word-metadata">
+                <text wx:if="{{word.audioSource === 'textbook'}}" class="audio-source">教材发音</text>
+                <text wx:if="{{word.audioDevelopmentOnly === true}}" class="audio-source">本地验证</text>
+                <text wx:if="{{word.audioPlayable}}" class="pronunciation-hint">{{isPlaying ? '正在播放' : '点扬声器听发音'}}</text>
+            </view>
+            <view wx:if="{{audioError}}" class="audio-error" role="alert">
+                <text>{{audioError}}</text>
+                <button class="audio-retry" bindtap="playAudio">重新播放</button>
+            </view>
             <text wx:if="{{word.audioPending}}" class="audio-pending">音频资源待接入</text>
             <text wx:if="{{!word.audioPlayable && !word.audioPending}}" class="audio-unavailable">暂无音频</text>
         </view>
         <view class="word-section">
-            <text class="section-label">詞性 / Часть речи</text>
+            <text class="section-label">词性</text>
             <text class="part">{{word.textbookWordClass || word.word_character || '词性待补充'}}</text>
         </view>
         <view class="word-section">
             <text class="section-label">释义</text>
-            <text class="meaning">{{word.textbookMeaning || word.word_meaning_all || word.meaning || word.translation || '释义待补充'}}</text>
+            <text class="meaning" selectable>{{word.textbookMeaning || word.word_meaning_all || word.meaning || word.translation || '释义待补充'}}</text>
         </view>
         <view wx:if="{{word.examples.length}}" class="word-section examples-section">
             <text class="section-label">例句</text>
-            <text wx:for="{{word.examples}}" wx:key="*this" class="example">{{item}}</text>
+            <text wx:for="{{word.examples}}" wx:key="*this" class="example" selectable>{{item}}</text>
         </view>
     </view>
     <view wx:else class="state-card empty-state">未找到该词条</view>

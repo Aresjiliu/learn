@@ -41,6 +41,14 @@ node scripts/test_ui_component_build.js
 
 ## 包体和验收边界
 
-ui/、node_modules/、package.json、package-lock.json、导出数据、音视频及工具目录排除上传包；本机预计运行包 1.229 MiB，项目预算 1.8 MiB，由 `scripts/check_runtime_package.py` 门禁检查。这是本地文件估算，不是微信上传包实测。
+ui/、node_modules/、package.json、package-lock.json、导出数据、音视频及工具目录排除上传包；组件基线时预计运行包1.229MiB，M1接入后为180文件/1,296,815字节/1.237MiB，项目预算1.8MiB，由 `scripts/check_runtime_package.py` 门禁检查。这是本地文件估算，不是微信上传包实测。
 
 本轮基线测试与产物检查不证明页面已接入组件、微信 WXML 已真实编译或 UI 视觉通过。搜索与详情按重建设计分片接入，并逐页补截图和原生事件验收。
+
+### 后续本地原生语法编译证据
+
+2026-10-18 已用本机工具内 `code/package.nw/node_modules/wcc-exec/wcc.exe` 编译 pages/、components/、miniprogram_npm/ 的全部 WXML/WXS，输出159,848字节，并确认包含新版搜索页、词条组件与Vant Search。WXSS编译器每次以一个样式为根、其余样式为导入依赖，25个根逐一通过；不能只把 app.wxss 编译通过说成全项目样式通过。输出均留 data/generated/。
+
+工具核心版本为本机捆绑版本（WXML核心20211229、CLI20230804，WXSS核心20200724），不是微信完整应用运行或基础库3.17.4的真机验证。sandbox直接运行遇系统DLL重定位错误，允许本地进程权限后可执行；全程离线、未调用preview/upload。
+
+自动化Tool.getInfo可达而App当前页/截图超时。系统PrintWindow可捕获真实开发工具画面，但当前首页截图不代表新版词典已视觉通过；多尺寸词典截图仍需补齐。
