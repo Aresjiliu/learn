@@ -73,6 +73,8 @@ assert.strictEqual(searchValue({ detail: { value: 'дом' } }), 'дом')
 
 ## M3：结构化详情数据（与 M1/M2 分离的后端切片）
 
+执行优先级调整：先保证发音归属，再进入M4真实词本。M3字段准备独立推进，不要求先扩展整套后端才打通收藏/复习。2026-10-19已修复教材ID覆盖API读音及双字段遮挡：教材回退同时核验ID和严格原词、保留ё/й，API候选选择与实际播放统一。身份11/11、规格/质量复审和最终完整phase1通过，代码提交787d3ec；不等于M2视觉验收通过。后续总体顺序以2026-10-19路线为准。
+
 范围 `D:/project/learn/scripts/build_dictionary_index.py`、`content_server/dictionary_store.py`、`content_server/app.py`、对应 Python 合约/索引测试；不读取生产写接口。
 
 - [ ] 对本地自有导出只读统计 `XJSY.cy/lj`、`zywz`、词性、SHAPE、CZDY、EESY、changes 字段实际类型和覆盖；给出缺失率，不由 Russion1 的 interface 推断数据齐全。
