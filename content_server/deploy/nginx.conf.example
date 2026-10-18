@@ -1,0 +1,25 @@
+# Install inside the nginx http context after replacing domain/certificate paths.
+limit_req_zone $binary_remote_addr zone=dictionary_requests:10m rate=5r/s;
+limit_conn_zone $binary_remote_addr zone=dictionary_connections:10m;
+
+server {
+    listen 443 ssl;
+    server_name dictionary.example.invalid;
+    ssl_certificate /etc/letsencrypt/live/dictionary.example.invalid/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/dictionary.example.invalid/privkey.pem;
+    ssl_protocols TLSv1.2 TLSv1.3;
+    client_max_body_size 1k;
+    access_log off; # Application logs record route/status/timing without search text.
+
+    location / {
+        limit_req zone=dictionary_requests burst=10 nodelay;
+        limit_req_status 429;
+        limit_conn dictionary_connections 10;
+        proxy_pass http://127.0.0.1:18092;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_connect_timeout 2s;
+        proxy_read_timeout 5s;
+    }
+}

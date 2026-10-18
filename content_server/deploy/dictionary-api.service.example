@@ -1,0 +1,20 @@
+[Unit]
+Description=Read-only Russian dictionary API
+After=network.target
+
+[Service]
+Type=simple
+User=russian-content
+WorkingDirectory=/opt/learn
+Environment=DICTIONARY_INDEX_PATH=/srv/learn-content/dictionary-20261018.sqlite
+ExecStart=/opt/learn/.venv/bin/python -B -m uvicorn content_server.app:app_from_env --factory --host 127.0.0.1 --port 18092 --workers 2 --no-access-log --forwarded-allow-ips 127.0.0.1 --limit-concurrency 64 --timeout-keep-alive 5
+Restart=on-failure
+RestartSec=3
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+ReadOnlyPaths=/srv/learn-content
+
+[Install]
+WantedBy=multi-user.target
