@@ -37,10 +37,11 @@ async function pageHarness() {
     let word
     const toasts = []
     new Function('Page', 'getLocalDictionaryDetail', 'getLocalTextbookAudioUrl',
-        'getDictionaryDetail', 'audioController', 'config', 'wx', pageSource)(
+        'getDictionaryDetail', 'audioController', 'config', 'wx', 'presentDictionaryDetail', pageSource)(
         value => { definition = value }, () => null, () => '',
         () => Promise.resolve({ data: { word } }), native.controller,
-        { enableLocalDictionaryApi: true }, { showToast(options) { toasts.push(options) } }
+        { enableLocalDictionaryApi: true }, { showToast(options) { toasts.push(options) } },
+        require('../services/dictionary-presentation').presentDictionaryDetail
     )
     const page = Object.assign({}, definition, {
         data: JSON.parse(JSON.stringify(definition.data)), updates: [],

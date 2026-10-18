@@ -3,8 +3,17 @@ const dictionarySample = require('../data/content_samples/dictionary_words.js')
 const textbookSample = require('../data/content_samples/book_1_words.js')
 const audioIndex = require('../data/content_samples/book_1_audio.js')
 
-function getLocalTextbookAudioUrl(textbookId) {
+function strictHeadword(value) {
+    return typeof value === 'string'
+        ? value.trim().toLowerCase().normalize('NFD').replace(/[\u0300\u0301]/g, '').normalize('NFC')
+        : ''
+}
+
+function getLocalTextbookAudioUrl(textbookId, expectedWord) {
     if (!textbookId || !config.enableLocalWordAudio) return ''
+    const identity = strictHeadword(expectedWord)
+    const candidates = (textbookSample.words || []).filter(item => String(item.id) === String(textbookId))
+    if (!identity || candidates.length !== 1 || strictHeadword(candidates[0].word) !== identity) return ''
     const filename = audioIndex[String(textbookId)]
     if (!filename || !/^[0-9a-f]{32}\.mp3$/.test(filename)) return ''
     const baseUrl = String(config.devMediaBaseUrl || '').replace(/\/+$/, '')
@@ -13,22 +22,23 @@ function getLocalTextbookAudioUrl(textbookId) {
 
 function withLocalWordAudio(word, textbook) {
     if (!word || !textbook) return word
-    const audioUrl = getLocalTextbookAudioUrl(textbook.id)
+    if ([word.audioUrl, word.audio_url].some(value => typeof value === 'string' && value.trim())) return word
+    const audioUrl = getLocalTextbookAudioUrl(textbook.id, word.word || word.lemma)
     return audioUrl ? { ...word, audioUrl } : word
 }
 
 function buildLocalDictionaryWords() {
     const dictionaryWords = (dictionarySample.words || []).map(item => ({ ...item, sourceType: 'dictionary' }))
-    const known = new Set(dictionaryWords.map(item => normalizeQuery(item.word || item.lemma)))
-    const textbookByWord = new Map((textbookSample.words || []).map(item => [normalizeQuery(item.word), item]))
+    const known = new Set(dictionaryWords.map(item => strictHeadword(item.word || item.lemma)))
+    const textbookByWord = new Map((textbookSample.words || []).map(item => [strictHeadword(item.word), item]))
     const textbookWords = (textbookSample.words || [])
         .filter(item => {
-            const key = normalizeQuery(item.word || item.lemma)
+            const key = strictHeadword(item.word || item.lemma)
             return key && !known.has(key)
         })
         .map(item => ({ ...item, sourceType: 'textbook' }))
     return dictionaryWords.concat(textbookWords).map(item => {
-        return withLocalWordAudio(item, textbookByWord.get(normalizeQuery(item.word || item.lemma)))
+        return withLocalWordAudio(item, textbookByWord.get(strictHeadword(item.word || item.lemma)))
     })
 }
 
@@ -68,10 +78,11 @@ function getLocalDictionaryDetail(query, words = buildLocalDictionaryWords(), te
     const matchById = queryText
         ? words.find(item => String(item.sourceId || item.id || item.word_id || '').trim() === queryText)
         : null
-    const match = matchById || searchLocalDictionary(queryText, words)[0]
+    const exactMatch = words.find(item => strictHeadword(item.word || item.lemma) === strictHeadword(queryText))
+    const match = matchById || exactMatch || searchLocalDictionary(queryText, words)[0]
     if (!match) return null
-    const normalized = normalizeQuery(match.word || match.lemma)
-    const textbook = textbookWords.find(item => normalizeQuery(item.word) === normalized)
+    const normalized = strictHeadword(match.word || match.lemma)
+    const textbook = textbookWords.find(item => strictHeadword(item.word) === normalized)
     const examples = String(textbook && textbook.sentence_all || '')
         .split(/\r?\n|#/)
         .map(item => item.trim())

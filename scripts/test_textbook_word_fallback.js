@@ -3,6 +3,7 @@ const fs = require('fs')
 const vm = require('vm')
 
 const source = fs.readFileSync('pages/dictionary/detail/detail.js', 'utf8')
+    .replace("import { presentDictionaryDetail } from '../../../services/dictionary-presentation'", 'const presentDictionaryDetail = detailPresenter')
     .replace("import { getLocalDictionaryDetail, getLocalTextbookAudioUrl } from '../../../services/dictionary'", "const getLocalDictionaryDetail = () => null; const getLocalTextbookAudioUrl = () => ''")
     .replace("import { getDictionaryDetail } from '../../../services/content-api'", "const getDictionaryDetail = () => Promise.reject(new Error('not found'))")
     .replace("import { audioController } from '../../../services/media/audio'", "const audioController = { stop: () => {}, play: () => false }")
@@ -10,7 +11,7 @@ const source = fs.readFileSync('pages/dictionary/detail/detail.js', 'utf8')
     .replace(/Page\(\{/, 'const pageDefinition = {')
     .replace(/\}\)\s*$/, '}')
 
-const context = { module: { exports: {} } }
+const context = { module: { exports: {} }, detailPresenter: require('../services/dictionary-presentation').presentDictionaryDetail }
 vm.runInNewContext(`${source}\nmodule.exports = pageDefinition`, context)
 const page = context.module.exports
 const state = { data: {} }

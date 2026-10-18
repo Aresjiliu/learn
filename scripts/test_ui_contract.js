@@ -173,15 +173,17 @@ const pageContracts = [{
   path: 'pages/dictionary/detail/detail.wxml',
   checks: [
     { label: '详情加载和空状态', pattern: /wx:if="\{\{loading\}\}"[\s\S]*?wx:else class="state-card empty-state"/ },
-    { label: '俄语词形和来源标签', pattern: /class="word">\{\{word\.word\}\}[\s\S]*?sourceType/ },
-    { label: '词性和释义安全兜底', pattern: /textbookWordClass[\s\S]*?word_character[\s\S]*?word_meaning_all[\s\S]*?释义待补充/ },
+    { label: '俄语词形和来源标签', pattern: /class="word" selectable>\{\{word\.headword\}\}[\s\S]*?word\.sourceLabel/ },
+    { label: '模型词性和完整释义绑定', pattern: /wx:if="\{\{word\.wordClass\}\}"[\s\S]*?class="meaning" selectable>\{\{word\.meaningText\}\}/ },
     { label: '音频播放与不可用状态', pattern: /word\.audioPlayable[\s\S]*?bindtap="playAudio"[\s\S]*?word\.audioPending[\s\S]*?暂无音频/ },
-    { label: '例句稳定键', pattern: /wx:for="\{\{word\.examples\}\}"[\s\S]*?wx:key="\*this"/ }
+    { label: '例句稳定键', pattern: /word\.hasExamples[\s\S]*?wx:for="\{\{word\.exampleItems\}\}"[\s\S]*?wx:key="key"[\s\S]*?\{\{item\.text\}\}/ }
   ]
 }]
 for (const contract of pageContracts) {
   assertPageContract(contract)
 }
+// Real presenter evidence for textbook priority, missing fields and uncut meanings.
+require('./test_dictionary_detail_presentation')
 
 const indexWxmlSource = stripWxmlComments(fs.readFileSync(path.join(root, 'pages', 'index', 'index.wxml'), 'utf8'))
 const indexJsSource = fs.readFileSync(path.join(root, 'pages', 'index', 'index.js'), 'utf8')
@@ -268,6 +270,12 @@ for (const [route, jsSource, wxssSource, label] of routedPages) {
     assertSourcePattern(wxssSource, /color:\s*#ed625c;/, `${route}.wxss`, '珊瑚红操作')
     require('./test_dictionary_search_behavior')
     require('./test_dictionary_component_events')
+  } else if (route === 'pages/dictionary/detail/detail') {
+    assertSourcePattern(wxssSource, /padding:\s*24rpx 32rpx 40rpx/, `${route}.wxss`, '详情紧凑边距')
+    assertSourcePattern(wxssSource, /background:\s*#ffffff;/, `${route}.wxss`, '详情白底')
+    assertSourcePattern(wxssSource, /color:\s*#ed625c;/, `${route}.wxss`, '详情珊瑚红操作')
+    assertSourcePattern(wxssSource, /font-family:[^;]*sans-serif/, `${route}.wxss`, '局部系统字体')
+    assertSourceAbsent(wxssSource, /box-shadow|line-clamp|text-overflow/, `${route}.wxss`, '厚重卡片或详情截断')
   } else {
     assertSourcePattern(wxssSource, /var\(--space-page\)/, `${route}.wxss`, '页面间距共享令牌')
     assertSourcePattern(wxssSource, /var\(--color-page-bg\)/, `${route}.wxss`, '页面背景共享令牌')

@@ -1,1 +1,12 @@
-{"navigationBarTitleText":"单词详情","enablePullDownRefresh":false}
+{
+    "navigationBarTitleText": "单词详情",
+    "navigationStyle": "default",
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#ffffff",
+    "enablePullDownRefresh": false,
+    "usingComponents": {
+        "van-icon": "/miniprogram_npm/@vant/weapp/icon/index",
+        "van-loading": "/miniprogram_npm/@vant/weapp/loading/index"
+    }
+}

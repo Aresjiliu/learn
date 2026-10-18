@@ -33,4 +33,22 @@ function presentDictionaryEntry(word = {}) {
     }
 }
 
-module.exports = { presentDictionaryEntry }
+function presentDictionaryDetail(value = {}) {
+    const word = value && typeof value === 'object' ? value : {}
+    const firstText = values => values.find(item => typeof item === 'string' && item.trim()) || ''
+    const examples = [word.examples, word.sentence_all, word.sentences, word.example]
+        .map(source => (Array.isArray(source) ? source : typeof source === 'string' ? source.split(/\r?\n/) : [])
+            .filter(item => typeof item === 'string' && item.trim()).map(item => item.trim()))
+        .find(items => items.length > 0) || []
+    return {
+        ...word,
+        headword: firstText([word.word, word.lemma, word.word_text]).trim(),
+        wordClass: firstText([word.textbookWordClass, word.word_character, word.part_of_speech, word.wordClass]).trim(),
+        sourceLabel: word.sourceType === 'textbook' ? '教材词' : '主词典',
+        meaningText: firstText([word.textbookMeaning, word.word_meaning_all, word.meaning, word.translation]) || '释义待补充',
+        exampleItems: examples.map((text, index) => ({ key: `example:${index}`, text })),
+        hasExamples: examples.length > 0
+    }
+}
+
+module.exports = { presentDictionaryEntry, presentDictionaryDetail }

@@ -50,13 +50,14 @@ async function checkIdentityAndFallback() {
 async function checkStableDetailFailure() {
     let definition
     let attempts = 0
-    new Function('Page', 'getLocalDictionaryDetail', 'getLocalTextbookAudioUrl', 'getDictionaryDetail', 'audioController', 'config', 'wx',
+    new Function('Page', 'getLocalDictionaryDetail', 'getLocalTextbookAudioUrl', 'getDictionaryDetail', 'audioController', 'config', 'wx', 'presentDictionaryDetail',
         stripImports(fs.readFileSync('pages/dictionary/detail/detail.js', 'utf8')))(
         value => { definition = value }, () => ({ word: 'unrelated local result' }), () => '',
         () => ++attempts === 1 ? Promise.reject(new Error('offline')) : Promise.resolve({ data: { word: {
             id: 'dict:17:b', word: 'всё', word_meaning_all: '一切', audioPending: true
         } } }),
-        { stop() {} }, { enableLocalDictionaryApi: true }, { showToast() {} }
+        { stop() {} }, { enableLocalDictionaryApi: true }, { showToast() {} },
+        require('../services/dictionary-presentation').presentDictionaryDetail
     )
     const page = instantiate(definition)
     page.onLoad({ q: encodeURIComponent('всё'), id: 'dict:17:b' })
