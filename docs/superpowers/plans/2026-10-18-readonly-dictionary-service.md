@@ -33,11 +33,11 @@ Task 1 验证记录：真实导出 166,260 行、旧 ID 重复 164 条、索引 
 
 - [x] 在 `scripts/test_dictionary_store.py` 先写失败用例：精确/前缀/子串/中文释义顺序、短查询、稳定分页、缺失详情、旧 ID 冲突，以及一词形多原型不得自动归原。
 - [x] 运行 `D:\software\anaconda3\python.exe -B scripts/test_dictionary_store.py`，确认因查询模块缺失而失败；后续 `й/и` 和缺失原型歧义用例均先红后绿。
-- [x] 在构建器增加 FTS5 trigram 与 `forms(form_normalized, prototype_normalized, source_id)`；对 262 万行词形导出流式导入并建立查询索引。查询层只读打开，使用参数绑定、分页上限 100 和稳定二级排序。
+- [x] 在构建器增加 FTS5 trigram 与 `forms(form_normalized, prototype_strict, prototype_normalized, source_id)`；对 262 万行词形导出流式导入并建立查询索引。严格原型键保留 `ё/е` 差异，查询层只读打开，使用参数绑定、分页上限 100 和稳定二级排序。
 - [x] 聚焦测试通过后，在真实索引上记录俄语与中文查询的本机热查询 p50/p95、索引大小和结果质量；目标服务器冷/热查询与链路延迟留作部署验收，不以本机结果替代。
 - [x] 提交 `feat(dictionary): add ranked readonly search`，不提交 `.sqlite` 或导出。
 
-Task 2 本机记录：词典 166,260 行，词形导出 2,619,728 行、去重词形—原型配对 2,619,728 条；规范化后歧义词形 58,926 个，索引 410,628,096 字节，`integrity_check=ok`。50 次热查询采样 p95：俄语 `привет` 3.51 ms、词形 `пойду` 2.43 ms、两字中文 `汽车` 5.00 ms、单字中文 `学` 23.55 ms。已发现并修复重音归一误把 `й` 变为 `и` 的缺陷；这些数字不证明 HTTPS、目标服务器或真机性能达标。
+Task 2 本机记录：[可复跑基准](../../phase1/dictionary-index-benchmark-2026-10-18.json)包含构建命令、来源哈希、进程首次/热查询 p50/p95 与口径。最终词典 166,260 行、词形—严格原型配对 2,619,728 条、歧义词形 58,926 个、索引 478,396,416 字节，`integrity_check=ok`，构建 40.113 秒。已修复 `й/и` 误合并和 `все/всё` 原型误合并；这些数字不证明 HTTPS、目标服务器或真机性能达标。
 
 ### Task 3：独立 HTTP 服务与客户端兼容
 

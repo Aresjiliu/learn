@@ -68,10 +68,15 @@ class DictionaryStore:
             'SELECT id, 0 AS tier FROM entries WHERE normalized_word = ?',
             'SELECT id, 1 AS tier FROM entries WHERE normalized_word >= ? AND normalized_word < ?',
             '''SELECT e.id, 2 AS tier FROM forms f
-               JOIN entries e ON e.normalized_word = f.prototype_normalized
+               JOIN entries e ON e.strict_word = f.prototype_strict
                WHERE f.form_normalized = ?''',
+            '''SELECT e.id, 2 AS tier FROM forms f
+               JOIN entries e ON e.normalized_word = f.prototype_normalized
+               WHERE f.form_normalized = ? AND NOT EXISTS (
+                   SELECT 1 FROM entries exact WHERE exact.strict_word = f.prototype_strict
+               )''',
         ]
-        parameters = [normalized, normalized, normalized + '\uffff', normalized]
+        parameters = [normalized, normalized, normalized + '\uffff', normalized, normalized]
         if len(normalized) >= 3:
             clauses.append('''SELECT e.id, 3 AS tier FROM entries_fts f
                               JOIN entries e ON e.rowid = f.rowid
@@ -90,8 +95,8 @@ class DictionaryStore:
                ranked AS (SELECT id, MIN(tier) AS tier FROM candidates GROUP BY id)'''
         with closing(self.connect()) as connection:
             form_candidates = [row[0] for row in connection.execute('''
-                SELECT prototype_normalized FROM forms WHERE form_normalized = ?
-                ORDER BY prototype_normalized
+                SELECT prototype_strict FROM forms WHERE form_normalized = ?
+                ORDER BY prototype_strict
             ''', (normalized,))]
             total = connection.execute(cte + ' SELECT COUNT(*) FROM ranked', parameters).fetchone()[0]
             rows = connection.execute(cte + '''

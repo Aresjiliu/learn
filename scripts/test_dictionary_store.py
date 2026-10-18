@@ -34,7 +34,8 @@ class DictionaryStoreTests(unittest.TestCase):
                 ('4', 'приветствие', '问候'), ('5', 'бесприветный', '不友好'),
                 ('6', 'машина', '汽车'), ('7', 'автомобиль', '汽车'),
                 ('8', 'идти', '走'), ('9', 'пойти', '去'),
-                ('10', 'все', '所有人'), ('11', 'всё', '一切')
+                ('10', 'все', '所有人'), ('11', 'всё', '一切'),
+                ('12', 'книга', '学习课本')
             ]:
                 writer.writerow({'id': source_id, 'word': word,
                                  'XJSY': '[{"cy":"' + meaning + '"}]'})
@@ -47,6 +48,8 @@ class DictionaryStoreTests(unittest.TestCase):
                 {'id': '103', 'change_form': 'пойду', 'prototype': 'пойти'},
                 {'id': '104', 'change_form': 'ищу', 'prototype': 'идти'},
                 {'id': '105', 'change_form': 'ищу', 'prototype': 'несуществующий'},
+                {'id': '106', 'change_form': 'всем', 'prototype': 'все'},
+                {'id': '107', 'change_form': 'всем', 'prototype': 'всё'},
             ])
         self.index = root / 'dictionary.sqlite'
         build_index(dictionary, self.index, forms_source=forms)
@@ -72,6 +75,12 @@ class DictionaryStoreTests(unittest.TestCase):
         self.assertTrue(result['words'][0]['ambiguous'])
         self.assertEqual(result['formCandidates'], ['идти', 'несуществующий'])
 
+    def test_yo_distinct_prototypes_are_not_collapsed(self):
+        result = self.store.search('всем')
+        self.assertEqual({item['word'] for item in result['words']}, {'все', 'всё'})
+        self.assertEqual(result['formCandidates'], ['все', 'всё'])
+        self.assertTrue(all(item['ambiguous'] for item in result['words']))
+
     def test_original_yo_spelling_precedes_relaxed_match(self):
         self.assertEqual(self.store.search('всё')['words'][0]['word'], 'всё')
         self.assertEqual(self.store.search('все')['words'][0]['word'], 'все')
@@ -81,6 +90,12 @@ class DictionaryStoreTests(unittest.TestCase):
                          ['ёлка', 'ёлочки'])
         self.assertEqual({item['word'] for item in self.store.search('汽车')['words']},
                          {'машина', 'автомобиль'})
+
+    def test_one_character_chinese_and_short_russian_prefix(self):
+        self.assertEqual([item['word'] for item in self.store.search('学')['words']], ['книга'])
+        self.assertEqual([item['word'] for item in self.store.search('пр')['words']],
+                         ['привет', 'приветствие'])
+        self.assertNotIn('бесприветный', [item['word'] for item in self.store.search('п')['words']])
 
     def test_stable_pagination_and_duplicate_legacy_id(self):
         first = self.store.search('汽车', page=1, page_size=1)
@@ -101,6 +116,10 @@ class DictionaryStoreTests(unittest.TestCase):
             self.store.search('авто', page_size=101)
         with self.assertRaises(ValueError):
             self.store.search('авто', page=0)
+        with self.assertRaises(ValueError):
+            self.store.search('а' * 65)
+        with self.assertRaises(ValueError):
+            self.store.search('%')
         with closing(self.store.connect()) as connection:
             with self.assertRaises(sqlite3.OperationalError):
                 connection.execute('CREATE TABLE forbidden(value TEXT)')

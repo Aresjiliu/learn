@@ -1,0 +1,26 @@
+{
+  "scope": "local-only; no server, HTTPS, OS cache flush or device network",
+  "command": "D:\\software\\anaconda3\\python.exe -B scripts/bench_dictionary_store.py --index data/generated/dictionary.sqlite",
+  "indexBuildCommand": "D:\\software\\anaconda3\\python.exe -B scripts/build_dictionary_index.py --source data/remote_7500km/ey_data__x_7500km_russian_index_new_test.csv.gz --forms-source data/remote_7500km/ey_data__e_change_word.csv.gz --output data/generated/dictionary.sqlite",
+  "pythonVersion": "3.12.3",
+  "sqliteVersion": "3.53.1",
+  "schemaVersion": "4",
+  "sourceSha256": "800b8ddc93a53f2dd80c5fa5e12510ac5b4f34f45c388db767945a916b6d8586",
+  "formsSourceSha256": "2e9141a7b9768713e71745a06c381fd9820967d63f460b25a69d8884f57a4662",
+  "indexBytes": 478396416,
+  "buildSeconds": 40.113,
+  "entries": 166260,
+  "formPairs": 2619728,
+  "ambiguousForms": 58926,
+  "integrityCheck": "ok",
+  "coldDefinition": "New Python process start, import and query; OS filesystem cache not cleared",
+  "coldRepeats": 20,
+  "warmRepeats": 50,
+  "queries": [
+    { "query": "привет", "total": 23, "processColdP50Ms": 97.763, "processColdP95Ms": 101.572, "warmP50Ms": 2.957, "warmP95Ms": 3.444 },
+    { "query": "всё", "total": 285, "processColdP50Ms": 98.438, "processColdP95Ms": 102.599, "warmP50Ms": 3.553, "warmP95Ms": 4.218 },
+    { "query": "пойду", "total": 2, "processColdP50Ms": 96.589, "processColdP95Ms": 100.337, "warmP50Ms": 2.005, "warmP95Ms": 2.786 },
+    { "query": "汽车", "total": 410, "processColdP50Ms": 98.741, "processColdP95Ms": 102.333, "warmP50Ms": 4.121, "warmP95Ms": 4.859 },
+    { "query": "学", "total": 3567, "processColdP50Ms": 118.107, "processColdP95Ms": 120.051, "warmP50Ms": 22.321, "warmP95Ms": 24.28 }
+  ]
+}

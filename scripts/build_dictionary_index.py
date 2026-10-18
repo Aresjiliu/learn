@@ -10,6 +10,7 @@ import json
 import os
 import sqlite3
 import tempfile
+import time
 import unicodedata
 from collections import Counter
 from contextlib import closing
@@ -68,16 +69,17 @@ def chinese_short_grams(meaning: str) -> str:
     return ' '.join(sorted(grams))
 
 
-def build_index(source: Path, output: Path, forms_source: Path | None = None) -> dict:
+def build_index(source: Path, output: Path, forms_source: Path) -> dict:
+    started = time.perf_counter()
     source, output = Path(source), Path(output)
     if not source.is_file():
         raise FileNotFoundError(source)
-    forms_source = Path(forms_source) if forms_source is not None else None
-    if forms_source is not None and not forms_source.is_file():
+    forms_source = Path(forms_source)
+    if not forms_source.is_file():
         raise FileNotFoundError(forms_source)
     output.parent.mkdir(parents=True, exist_ok=True)
     source_hash = source_sha256(source)
-    forms_hash = source_sha256(forms_source) if forms_source is not None else ''
+    forms_hash = source_sha256(forms_source)
     with tempfile.TemporaryDirectory(prefix='dictionary-index-', dir=output.parent) as directory:
         staged = Path(directory) / 'snapshot.sqlite'
         source_ids = Counter()
@@ -99,9 +101,10 @@ def build_index(source: Path, output: Path, forms_source: Path | None = None) ->
                 CREATE TABLE metadata (key TEXT PRIMARY KEY, value TEXT NOT NULL);
                 CREATE TABLE forms (
                     form_normalized TEXT NOT NULL,
+                    prototype_strict TEXT NOT NULL,
                     prototype_normalized TEXT NOT NULL,
                     source_id TEXT NOT NULL,
-                    PRIMARY KEY (form_normalized, prototype_normalized)
+                    PRIMARY KEY (form_normalized, prototype_strict)
                 );
                 CREATE VIRTUAL TABLE entries_fts USING fts5(
                     normalized_word, meaning, content='entries', content_rowid='rowid', tokenize='trigram'
@@ -133,25 +136,27 @@ def build_index(source: Path, output: Path, forms_source: Path | None = None) ->
                                            (cursor.lastrowid, grams))
                     source_ids[source_id] += 1
                     count += 1
-            if forms_source is not None:
-                with gzip.open(forms_source, 'rt', encoding='utf-8-sig', newline='') as stream:
-                    reader = csv.DictReader(stream)
-                    if not {'id', 'change_form', 'prototype'}.issubset(reader.fieldnames or []):
-                        raise ValueError('词形导出缺少必需字段')
-                    for row in reader:
-                        form = normalize_word(row['change_form'])
-                        prototype = normalize_word(row['prototype'])
-                        if form and prototype:
-                            connection.execute('''
-                                INSERT OR IGNORE INTO forms
-                                (form_normalized, prototype_normalized, source_id) VALUES (?, ?, ?)
-                            ''', (form, prototype, str(row['id']).strip()))
-                            form_count += 1
+            with gzip.open(forms_source, 'rt', encoding='utf-8-sig', newline='') as stream:
+                reader = csv.DictReader(stream)
+                if not {'id', 'change_form', 'prototype'}.issubset(reader.fieldnames or []):
+                    raise ValueError('词形导出缺少必需字段')
+                for row in reader:
+                    form = normalize_word(row['change_form'])
+                    prototype_strict = normalize_strict_word(row['prototype'])
+                    prototype = normalize_word(row['prototype'])
+                    if form and prototype:
+                        connection.execute('''
+                            INSERT OR IGNORE INTO forms
+                            (form_normalized, prototype_strict, prototype_normalized, source_id)
+                            VALUES (?, ?, ?, ?)
+                        ''', (form, prototype_strict, prototype, str(row['id']).strip()))
+                        form_count += 1
             connection.execute("INSERT INTO entries_fts(entries_fts) VALUES ('rebuild')")
             connection.execute('CREATE INDEX entries_normalized_word ON entries(normalized_word, id)')
+            connection.execute('CREATE INDEX entries_strict_word ON entries(strict_word, id)')
             connection.execute('CREATE INDEX entries_source_id ON entries(source_id)')
             connection.executemany('INSERT INTO metadata(key, value) VALUES (?, ?)', [
-                ('schema_version', '3'), ('source_sha256', source_hash),
+                ('schema_version', '4'), ('source_sha256', source_hash),
                 ('row_count', str(count)), ('source_name', source.name),
                 ('forms_source_sha256', forms_hash), ('form_row_count', str(form_count)),
             ])
@@ -165,6 +170,7 @@ def build_index(source: Path, output: Path, forms_source: Path | None = None) ->
         'forms_source_sha256': forms_hash,
         'form_rows': form_count,
         'index_bytes': output.stat().st_size,
+        'build_seconds': round(time.perf_counter() - started, 3),
     }
 
 
@@ -172,7 +178,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--source', type=Path, required=True)
     parser.add_argument('--output', type=Path, required=True)
-    parser.add_argument('--forms-source', type=Path)
+    parser.add_argument('--forms-source', type=Path, required=True)
     arguments = parser.parse_args()
     print(json.dumps(build_index(arguments.source, arguments.output, arguments.forms_source), ensure_ascii=False))
 
