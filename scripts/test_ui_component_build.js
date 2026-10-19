@@ -27,7 +27,25 @@ assert.ok(!/url\(\s*["']?(?:https?:)?\/\//i.test(offline), 'no remote font reque
 assert.ok(offline.includes('.van-icon-search:before'), 'icon mappings must remain')
 assert.throws(() => offlineIconStyle(original, 'invalid font'), /font/i)
 assert.throws(() => offlineIconStyle('invalid stylesheet', encoded), /font/i)
-const build = buildComponents()
+// Build in a disposable repository fixture. Never exercise deletion/write tests
+// inside the live output watched by DevTools hot reload.
+const fixtureRoot = fs.mkdtempSync(path.join(require('os').tmpdir(), 'learn-ui-build-test-'))
+try {
+const fixturePackage = path.join(fixtureRoot, 'node_modules/@vant/weapp')
+const fixtureIcons = path.join(fixtureRoot, 'node_modules/@vant/icons')
+for (const filename of files) {
+    const destination = path.join(fixturePackage, 'lib', filename)
+    fs.mkdirSync(path.dirname(destination), { recursive: true })
+    fs.copyFileSync(path.join(source, filename), destination)
+}
+for (const filename of ['package.json', 'LICENSE']) {
+    fs.copyFileSync(path.resolve(source, '..', filename), path.join(fixturePackage, filename))
+    fs.mkdirSync(fixtureIcons, { recursive: true })
+    fs.copyFileSync(path.resolve(__dirname, '../node_modules/@vant/icons', filename), path.join(fixtureIcons, filename))
+}
+fs.mkdirSync(path.join(fixtureIcons, 'src'), { recursive: true })
+fs.copyFileSync(path.resolve(__dirname, '../node_modules/@vant/icons/src/encode-woff2.less'), path.join(fixtureIcons, 'src/encode-woff2.less'))
+const build = buildComponents(fixtureRoot)
 assert.strictEqual(build.files, 47)
 assert.strictEqual(build.bytes, 94242)
 const manifestPath = path.join(build.directory, 'build-manifest.json')
@@ -36,7 +54,7 @@ const manifest = JSON.parse(manifestBytes)
 const staleDirectory = path.join(build.directory, 'calendar')
 fs.mkdirSync(staleDirectory, { recursive: true })
 fs.writeFileSync(path.join(staleDirectory, 'index.js'), '// obsolete generated test artifact\n')
-buildComponents()
+buildComponents(fixtureRoot)
 assert.ok(!fs.existsSync(staleDirectory), 'rebuilding must remove obsolete generated components')
 assert.strictEqual(manifest.version, '1.11.7')
 assert.strictEqual(manifest.iconsVersion, '3.0.1')
@@ -56,7 +74,7 @@ function scan(directory) {
 }
 scan(build.directory)
 assert.deepStrictEqual(actualFiles.sort(), Object.keys(manifest.files).concat('build-manifest.json').sort())
-buildComponents()
+buildComponents(fixtureRoot)
 assert.deepStrictEqual(fs.readFileSync(manifestPath), manifestBytes, 'same inputs must produce the same manifest')
 const originalLstat = fs.lstatSync
 const originalUnlink = fs.unlinkSync
@@ -71,7 +89,7 @@ try {
             : originalLstat(filename)
         fs.unlinkSync = () => { deletes++ }
         fs.writeFileSync = () => { writes++ }
-        assert.throws(() => buildComponents(), /symbolic link/i)
+        assert.throws(() => buildComponents(fixtureRoot), /symbolic link/i)
         assert.strictEqual(deletes, 0, 'redirected outputs must be rejected before deleting')
         assert.strictEqual(writes, 0, 'redirected outputs must be rejected before writing')
     }
@@ -95,7 +113,7 @@ try {
     }
     fs.unlinkSync = () => { deletes++ }
     fs.writeFileSync = () => { writes++ }
-    assert.throws(() => buildComponents(), /symbolic link/i)
+    assert.throws(() => buildComponents(fixtureRoot), /symbolic link/i)
     assert.strictEqual(deletes, 0, 'a later child link must prevent earlier stale file deletion')
     assert.strictEqual(writes, 0)
 } finally {
@@ -103,6 +121,13 @@ try {
     fs.unlinkSync = originalUnlink
     fs.writeFileSync = originalWrite
 }
-buildComponents()
+buildComponents(fixtureRoot)
 assert.ok(!fs.existsSync(staleFile))
 console.log('native component dependency closure and offline font build: PASS')
+} finally {
+    const tempRoot = fs.realpathSync(require('os').tmpdir())
+    const resolvedFixture = fs.realpathSync(fixtureRoot)
+    assert.strictEqual(path.dirname(resolvedFixture), tempRoot, 'cleanup stays in the selected temp directory')
+    assert.ok(path.basename(resolvedFixture).startsWith('learn-ui-build-test-'), 'cleanup only the created fixture')
+    fs.rmSync(resolvedFixture, { recursive: true, force: true })
+}
