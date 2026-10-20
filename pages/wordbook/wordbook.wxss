@@ -1,0 +1,17 @@
+page { background: var(--color-surface, #fff); }
+.wordbook { padding: 32rpx; padding-bottom: calc(32rpx + env(safe-area-inset-bottom)); color: var(--color-text, #232326); font-family: var(--font-family-base, sans-serif); }
+.wordbook__heading { display: flex; justify-content: space-between; align-items: baseline; gap: 24rpx; }
+.wordbook__title { font-size: 40rpx; font-weight: 600; }
+.wordbook__count, .wordbook__help, .wordbook__source { color: var(--color-text-secondary, #67676f); font-size: 24rpx; }
+.wordbook__help { display: block; margin: 16rpx 0 24rpx; line-height: 1.65; }
+.wordbook__notice { padding: 20rpx; background: var(--color-primary-soft, #fff0ee); font-size: 26rpx; line-height: 1.6; }
+.wordbook__record { padding: 20rpx 0; border-bottom: 1rpx solid var(--color-border, #e6e6e3); }
+.wordbook__row { display: flex; align-items: center; gap: 16rpx; }
+.wordbook__word { flex: 1; min-width: 0; min-height: 88rpx; margin: 0; padding: 12rpx 0; background: transparent; color: inherit; font-size: 36rpx; font-weight: 600; text-align: left; line-height: 1.5; overflow-wrap: anywhere; border-radius: 0; }
+.wordbook__remove { display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 88rpx; height: 88rpx; margin: 0; padding: 0; color: var(--color-text-secondary, #67676f); background: transparent; }
+.wordbook__word::after, .wordbook__remove::after, .wordbook__expand::after, .wordbook__retry::after, .wordbook__more::after { border: 0; }
+.wordbook__summary { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; max-height: 3.3em; overflow: hidden; font-size: 28rpx; line-height: 1.65; overflow-wrap: anywhere; }
+.wordbook__summary--expanded { display: block; max-height: none; -webkit-line-clamp: unset; }
+.wordbook__expand, .wordbook__retry, .wordbook__more { min-height: 88rpx; margin: 0; padding: 0; background: transparent; color: var(--color-primary, #b84b45); font-size: 26rpx; line-height: 88rpx; text-align: left; }
+.wordbook__more { text-align: center; }
+.wordbook__empty { padding: 72rpx 0; color: var(--color-text-secondary, #67676f); font-size: 28rpx; text-align: center; line-height: 1.6; }

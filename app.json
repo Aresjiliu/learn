@@ -13,17 +13,20 @@
         "pages/orders/orders",
         "pages/settings/settings",
         "pages/statement/statement",
-        "pages/client/client"
+        "pages/client/client",
+        "pages/course/words/words",
+        "pages/wordbook/wordbook"
     ],
     "window": {
         "backgroundTextStyle": "light",
-        "navigationBarBackgroundColor": "#1296db",
+        "navigationBarBackgroundColor": "#ffffff",
         "navigationBarTitleText": "俄语7500",
-        "navigationBarTextStyle": "white"
+        "navigationBarTextStyle": "black",
+        "backgroundColor": "#f7f7f5"
     },
     "tabBar": {
-        "color": "#8a8a8a",
-        "selectedColor": "#1296db",
+        "color": "#67676f",
+        "selectedColor": "#b84b45",
         "backgroundColor": "#ffffff",
         "borderStyle": "white",
         "list": [

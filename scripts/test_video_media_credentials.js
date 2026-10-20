@@ -1,5 +1,7 @@
 const assert = require('assert')
 const fs = require('fs')
+const { records, loadService } = require('./test_video_learning_controls')
+const preferences = loadService('services/playback-preferences.js', 'getPlaybackPreferences,savePlaybackPreferences')
 
 const source = fs.readFileSync('pages/course/video/video.js', 'utf8').replace(/^import .*$/gm, '')
 const businessToken = 'fixture-business-token-never-for-media'
@@ -25,10 +27,10 @@ function harness(mediaUrls, enableRemoteWrites = false) {
             chapters: [{ id: 'chapter-1', videos: mediaUrls.map((url, index) => ({ id: `v${index}`, url, isPreview: true })) }] }
     }
     new Function('Page', 'request', 'getCourseDetail', 'shouldPersistProgress',
-        'getVideoProgress', 'saveVideoProgress', 'saveRecentVideo', 'config', 'wx', source)(
+        'getPlaybackRecord', 'savePlaybackRecord', 'getPlaybackPreferences', 'savePlaybackPreferences', 'config', 'wx', source)(
         value => { definition = value }, options => { requests.push(options); return Promise.resolve({}) },
         () => Promise.resolve(response), () => false,
-        () => 0, () => {}, () => {},
+        records.getPlaybackRecord, records.savePlaybackRecord, preferences.getPlaybackPreferences, preferences.savePlaybackPreferences,
         { enableRemoteWrites, devMediaBaseUrl: 'http://127.0.0.1:18090' },
         { getStorageSync(key) { reads.push(key); return key === 'token' ? businessToken : '' },
             setStorageSync(key, value) { writes.push([key, value]) }, showToast() {}, hideLoading() {} }

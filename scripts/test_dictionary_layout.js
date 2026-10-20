@@ -10,8 +10,9 @@ const entryCss = read('components/dictionary-entry/index.wxss')
 
 // Structural regression checks only: these do not replace DevTools/device visual acceptance.
 assert.match(detail, /class="word-identity"[\s\S]*?word.headword[\s\S]*?class="word-title-row"[\s\S]*?class="audio-button/)
-assert.match(detail, /class="word-metadata"[\s\S]*?audioSource[\s\S]*?audioDevelopmentOnly/)
-assert.match(detail, /wx:if="\{\{word.wordClass\}\}"[^>]*selectable>\{\{word.wordClass\}\}/)
+assert.match(detail, /class="word-metadata"[\s\S]*?word.shortWordClass/)
+assert.match(detail, /wx:if="\{\{metadataExpanded\}\}"[\s\S]*?word.wordClass[\s\S]*?audioSource[\s\S]*?audioDevelopmentOnly/)
+assert.match(detail, /class="metadata-value" user-select="\{\{true\}\}">\{\{word.wordClass\}\}/)
 assert.match(detail, /wx:if="\{\{word.hasExamples\}\}"/)
 assert.match(detail, /wx:for="\{\{word.exampleItems\}\}" wx:key="key"/)
 assert.ok(!detail.includes('rich-text'))
@@ -26,32 +27,36 @@ assert.strictEqual(detailConfig.navigationBarTextStyle, 'black')
 assert.strictEqual(detailConfig.usingComponents['van-loading'], '/miniprogram_npm/@vant/weapp/loading/index')
 assert.match(detail, /<van-loading/)
 require('./test_dictionary_detail_presentation')
-assert.match(detail, /class="meaning" selectable/)
+assert.match(detail, /class="meaning" user-select="\{\{true\}\}"/)
 assert.match(detailCss, /\.word-title-row\s*\{[^}]*display:\s*flex;/)
 assert.match(detailCss, /\.word-identity\s*\{[^}]*min-width:\s*0;/)
 assert.match(detailCss, /\.audio-button\s*\{[^}]*flex-shrink:\s*0;/)
 assert.match(search, /class="results-heading"/)
 assert.match(search, /<dictionary-entry[^>]*entry="\{\{item\}\}"/)
-assert.match(entry, /class="entry__metadata"[\s\S]*?audioPlayable[\s\S]*?audioSource[\s\S]*?audioDevelopmentOnly/)
+assert.match(entry, /entry.shortWordClass/)
 assert.match(search, /搜索历史[\s\S]*?示例查询/)
-assert.match(entryCss, /\.entry__metadata\s*\{[^}]*flex-wrap:\s*wrap;/)
 assert.match(entryCss, /\.entry__summary\s*\{[^}]*-webkit-line-clamp:\s*2;/)
+// Native selectable text did not honor the clamp in the actual indexed-result
+// screenshot. A block wrapper and explicit two-line fallback bound the preview;
+// the full source still reaches the detail through the existing identity event.
+assert.match(entry, /<view class="entry__summary">\s*<text user-select="\{\{true\}\}">\{\{entry.summary \|\| '释义待补充'\}\}<\/text>\s*<\/view>/)
+const summaryRule = /\.entry__summary\s*\{([^}]+)\}/.exec(entryCss)[1]
+const summaryLineHeight = Number(/line-height:\s*([\d.]+);/.exec(summaryRule)[1])
+const summaryMaxHeight = /max-height:\s*([\d.]+)em;/.exec(summaryRule)
+assert.ok(summaryMaxHeight, 'two-line preview needs a height fallback, not line-clamp alone')
+assert.strictEqual(Number(summaryMaxHeight[1]), 2 * summaryLineHeight)
 assert.match(entryCss, /\.entry__headword\s*\{[^}]*overflow-wrap:\s*anywhere;/)
 assert.match(searchCss, /padding:\s*20rpx 32rpx 40rpx/)
 assert.match(searchCss, /env\(safe-area-inset-bottom\)/)
-const iconButtonRule = /\.icon-button\s*\{([^}]*)\}/.exec(searchCss)[1]
 const clearButtonRule = /\.clear-button\s*\{([^}]*)\}/.exec(searchCss)[1]
 const historyRemoveRule = /\.history-remove\s*\{([^}]*)\}/.exec(searchCss)[1]
 const rpxSize = (rule, property) => Number(new RegExp('(?:^|;)\\s*' + property + ':\\s*(\\d+)rpx').exec(rule)[1])
 assert.deepStrictEqual([
-    rpxSize(clearButtonRule, 'width'), rpxSize(iconButtonRule, 'height'),
+    rpxSize(clearButtonRule, 'width'), rpxSize(clearButtonRule, 'height'),
     rpxSize(historyRemoveRule, 'width'), rpxSize(historyRemoveRule, 'height')
 ], [88, 88, 88, 88], 'clear and history delete outer targets must both be 88rpx square')
-assert.match(searchCss, /\.dictionary-search-input\s*\{[^}]*padding:\s*0 88rpx 0 88rpx;/,
-    'reserve exactly the icon target widths without excessive input padding')
-assert.match(clearButtonRule, /right:\s*104rpx;/, 'keep the clear target inside the search field')
+require('./test_dictionary_search_slots')
 assert.match(searchCss, /\.search-action\s*\{[^}]*width:\s*88rpx;/)
-assert.match(searchCss, /\.search-bar\s*\{[^}]*gap:\s*16rpx;/)
 // Dynamic event, presentation and Page state evidence replaces the old card-only layout contract.
 require('./test_dictionary_component_events')
 require('./test_dictionary_presentation')

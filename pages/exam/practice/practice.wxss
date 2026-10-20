@@ -9,14 +9,14 @@
 .progress-card { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8rpx 20rpx; }
 .progress-count { color: var(--color-text); font-size: var(--font-size-body); font-weight: 600; }
 .progress-score { color: var(--color-text-secondary); font-size: var(--font-size-caption); }
-.question-type { display: inline-block; padding: 8rpx 14rpx; border-radius: 8rpx; color: var(--color-exam); background: #fff7ed; font-size: 22rpx; }
+.question-type { display: inline-block; padding: 8rpx 14rpx; border-radius: 8rpx; color: var(--color-exam); background: var(--color-exam-soft); font-size: 22rpx; }
 .question { display: block; margin-top: 22rpx; color: var(--color-text); font-size: 36rpx; font-weight: 600; line-height: 1.6; overflow-wrap: anywhere; }
 .audio-card { margin-top: 24rpx; padding: 20rpx; border-radius: 14rpx; background: var(--color-sky); }
 .audio-heading { display: flex; align-items: center; justify-content: space-between; min-height: 88rpx; }
 .audio-title { color: var(--color-text); font-size: var(--font-size-caption); font-weight: 600; }
-.audio-button { display: flex; align-items: center; justify-content: center; box-sizing: border-box; width: 88rpx; height: 88rpx; margin: 0; padding: 0; border: 2rpx solid rgba(31, 95, 139, 0.2); border-radius: 50%; color: var(--color-primary); background: var(--color-surface); }
+.audio-button { display: flex; align-items: center; justify-content: center; box-sizing: border-box; width: 88rpx; height: 88rpx; margin: 0; padding: 0; border: 2rpx solid var(--color-border); border-radius: 50%; color: var(--color-primary); background: var(--color-surface); }
 .audio-button::after { border: 0; }
-.audio-button--playing { border-color: var(--color-primary); background: #dceef8; }
+.audio-button--playing { border-color: var(--color-primary); background: var(--color-primary-soft); }
 .speaker-icon { position: relative; width: 42rpx; height: 42rpx; color: var(--color-primary); }
 .speaker-icon__body { position: absolute; top: 14rpx; left: 2rpx; width: 10rpx; height: 14rpx; border-radius: 2rpx; background: currentColor; }
 .speaker-icon__cone { position: absolute; top: 4rpx; left: 8rpx; width: 0; height: 0; border-top: 17rpx solid transparent; border-right: 20rpx solid currentColor; border-bottom: 17rpx solid transparent; }
@@ -25,20 +25,20 @@
 .audio-error { margin-top: 12rpx; color: var(--color-error); font-size: var(--font-size-caption); line-height: 1.5; }
 .text-action { margin: 8rpx 0 0; padding: 0; color: var(--color-primary); background: transparent; font-size: var(--font-size-caption); }
 .section-title { display: block; margin-bottom: 20rpx; color: var(--color-text); font-size: var(--font-size-section-title); font-weight: 700; }
-.option { display: flex; align-items: center; gap: 18rpx; min-height: 84rpx; margin-bottom: 14rpx; padding: 14rpx 18rpx; border: 2rpx solid #e4e7ec; border-radius: 12rpx; color: var(--color-text); }
+.option { display: flex; align-items: center; gap: 18rpx; min-height: 84rpx; margin-bottom: 14rpx; padding: 14rpx 18rpx; border: 2rpx solid var(--color-border); border-radius: 12rpx; color: var(--color-text); }
 .option.selected { border-color: var(--color-primary); background: var(--color-sky); }
-.option.correct { border-color: #3b8c5a; background: #effaf3; }
-.option.wrong { border-color: var(--color-error); background: #fff3f2; }
+.option.correct { border-color: var(--color-success-border); background: var(--color-success-soft); }
+.option.wrong { border-color: var(--color-error); background: var(--color-error-soft); }
 .option-key { flex: 0 0 38rpx; color: var(--color-primary); font-weight: 700; text-transform: uppercase; }
 .option-label { flex: 1; min-width: 0; line-height: 1.5; overflow-wrap: anywhere; }
-.answer-input { box-sizing: border-box; width: 100%; height: 84rpx; padding: 0 20rpx; border: 2rpx solid #e4e7ec; border-radius: 12rpx; color: var(--color-text); background: var(--color-surface); }
+.answer-input { box-sizing: border-box; width: 100%; height: 84rpx; padding: 0 20rpx; border: 2rpx solid var(--color-border); border-radius: 12rpx; color: var(--color-text); background: var(--color-surface); }
 .feedback-card { display: flex; flex-direction: column; gap: 10rpx; margin-top: 20rpx; padding: 20rpx; border-radius: 12rpx; line-height: 1.55; }
-.feedback-correct { color: #256b42; background: #effaf3; }
-.feedback-wrong { color: var(--color-error); background: #fff3f2; }
+.feedback-correct { color: var(--color-success); background: var(--color-success-soft); }
+.feedback-wrong { color: var(--color-error); background: var(--color-error-soft); }
 .feedback-title { font-size: var(--font-size-body); font-weight: 700; }
 .reference-answer, .analysis { color: var(--color-text-secondary); font-size: var(--font-size-caption); overflow-wrap: anywhere; }
 .question-instruction { display: block; margin: 12rpx 0; color: var(--color-text-secondary); font-size: var(--font-size-caption); line-height: 1.5; }
-.primary-button { margin-top: 22rpx; color: #fff; background: var(--color-primary); font-size: var(--font-size-body); }
+.primary-button { margin-top: 22rpx; color: var(--color-surface); background: var(--color-primary); font-size: var(--font-size-body); }
 .state-card { margin-top: 20rpx; text-align: center; line-height: 1.6; }
 .loading-state { color: var(--color-loading); }
 .empty-state { color: var(--color-empty); }
@@ -49,10 +49,10 @@
 .result-title { display: block; color: var(--color-text); font-size: var(--font-size-page-title); font-weight: 700; }
 .result-score { display: block; margin-top: 18rpx; color: var(--color-primary); font-size: 60rpx; font-weight: 700; }
 .review-card { padding: 26rpx; }
-.review-item { margin-top: 16rpx; padding: 18rpx; border-radius: 12rpx; background: #f5f7f9; }
+.review-item { margin-top: 16rpx; padding: 18rpx; border-radius: 12rpx; background: var(--color-page-bg); }
 .review-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 12rpx; }
 .review-question { flex: 1; min-width: 0; color: var(--color-text); line-height: 1.5; overflow-wrap: anywhere; }
 .review-status { flex-shrink: 0; font-size: var(--font-size-caption); font-weight: 700; }
-.review-status.correct { color: #256b42; }
+.review-status.correct { color: var(--color-success); }
 .review-status.wrong { color: var(--color-error); }
 .review-answer, .review-analysis { display: block; margin-top: 10rpx; color: var(--color-text-secondary); font-size: var(--font-size-caption); line-height: 1.5; overflow-wrap: anywhere; }

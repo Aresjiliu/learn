@@ -1,0 +1,26 @@
+<view class="wordbook">
+    <view class="wordbook__heading">
+        <text class="wordbook__title">本机生词本</text>
+        <text wx:if="{{total !== null}}" class="wordbook__count">{{total}} 个词</text>
+    </view>
+    <text class="wordbook__help">仅保存在本机，清理小程序数据可能丢失。已存摘要可离线查看，完整词条需联网。</text>
+    <view wx:if="{{notice || loadError}}" class="wordbook__notice" role="alert">
+        <text>{{loadError || notice}}</text>
+        <button class="wordbook__retry" bindtap="refresh">重新读取</button>
+    </view>
+    <view wx:if="{{visibleRecords.length}}" class="wordbook__list">
+        <view wx:for="{{visibleRecords}}" wx:key="key" class="wordbook__record">
+            <view class="wordbook__row">
+                <button class="wordbook__word" data-key="{{item.key}}" bindtap="openDetail" aria-label="查看{{item.headword}}的完整词条">{{item.headword}}</button>
+                <text class="wordbook__source">{{item.sourceLabel}}</text>
+                <button wx:if="{{!readOnly}}" class="wordbook__remove" data-key="{{item.key}}" bindtap="requestRemove" aria-label="将{{item.headword}}移出生词本"><van-icon name="delete-o" size="20" /></button>
+            </view>
+            <view class="wordbook__summary {{expandedKey === item.key ? 'wordbook__summary--expanded' : ''}}">
+                <text user-select="{{true}}">{{item.summary || '未保存释义，可联网查看完整词条'}}</text>
+            </view>
+            <button wx:if="{{item.summary}}" class="wordbook__expand" data-key="{{item.key}}" bindtap="toggleSummary" aria-expanded="{{expandedKey === item.key}}">{{expandedKey === item.key ? '收起摘要' : '查看已存摘要'}}</button>
+        </view>
+        <button wx:if="{{hasMore}}" class="wordbook__more" bindtap="loadMore">加载更多</button>
+    </view>
+    <view wx:elif="{{total === 0 && !loadError}}" class="wordbook__empty">还没有生词。查词后可将词条加入这里。</view>
+</view>

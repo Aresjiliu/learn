@@ -4,10 +4,11 @@
     src="{{src}}"
     title="{{title}}"
     autoplay="{{autoplay}}"
-    controls="{{controls}}"
-    show-center-play-btn="{{true}}"
-    enable-play-gesture="{{true}}"
-    enable-progress-gesture="{{true}}"
+    controls="{{false}}"
+    show-center-play-btn="{{false}}"
+    enable-play-gesture="{{false}}"
+    enable-progress-gesture="{{false}}"
+    show-fullscreen-btn="{{false}}"
     initial-time="{{initialTime}}"
     bindtimeupdate="onTimeUpdate"
     bindended="onEnded"
@@ -21,11 +22,66 @@
     bindseek="onSeek"
     bindseekcomplete="onSeekComplete"
     play-btn-position="center"
-    show-mute-btn="{{true}}"
-    show-play-btn="{{true}}"
-    show-progress="{{true}}"
+    show-mute-btn="{{false}}"
+    show-play-btn="{{false}}"
+    show-progress="{{false}}"
     object-fit="{{objectFit}}"
     buffer="{{2}}"
     cache="{{true}}"
     custom-cache="{{false}}">
+    <!-- controls gates all user interaction; imperative session APIs remain available to the page. -->
+    <cover-view wx:if="{{controls}}" class="media-player__surface {{fullscreen ? 'media-player__surface--fullscreen' : ''}}" bindtap="onSurfaceTap">
+        <cover-view wx:if="{{controlsVisible}}" class="media-player__chrome">
+            <cover-view wx:if="{{controlMessage || waiting}}" class="media-player__message" catchtap="onControlTap">{{controlMessage || '正在缓冲…'}}</cover-view>
+            <cover-view class="media-player__bottom" catchtap="onControlTap">
+                <cover-view class="media-player__bar-backdrop"></cover-view>
+                <cover-view class="media-player__row">
+                    <cover-view class="media-player__button" catchtap="onTogglePlay" aria-label="{{playing ? '暂停' : '播放'}}" role="button">
+                        <cover-view class="{{playing ? 'media-player__pause' : 'media-player__play'}}"></cover-view>
+                    </cover-view>
+                    <cover-view class="media-player__track-hit {{canScrub ? '' : 'media-player__disabled'}}"
+                        catchtouchstart="onScrubStart" catchtouchmove="onScrubMove" catchtouchend="onScrubEnd" catchtouchcancel="onScrubCancel" catchtap="onControlTap">
+                        <cover-view class="media-player__time">{{positionText}} / {{durationText}}</cover-view>
+                        <cover-view class="media-player__track">
+                            <cover-view class="media-player__rail"></cover-view>
+                            <cover-view class="media-player__fill" style="width: {{progressPercent}}%;">
+                                <cover-view class="media-player__fill-line"></cover-view>
+                                <cover-view class="media-player__thumb"></cover-view>
+                            </cover-view>
+                        </cover-view>
+                    </cover-view>
+                    <cover-view class="media-player__wide">
+                        <cover-view class="media-player__button" catchtap="onRewind" aria-label="后退10秒" role="button">−10秒</cover-view>
+                        <cover-view class="media-player__button {{canForward ? '' : 'media-player__disabled'}}" catchtap="onForward" aria-label="前进10秒" role="button">+10秒</cover-view>
+                    </cover-view>
+                    <cover-view class="media-player__button" catchtap="onOpenRates" aria-label="播放倍速" role="button">{{appliedRate}}×</cover-view>
+                    <cover-view class="media-player__button" catchtap="onOpenSettings" aria-label="播放设置" role="button">
+                        <cover-view class="media-player__settings">
+                            <cover-view class="media-player__dot"></cover-view>
+                            <cover-view class="media-player__dot"></cover-view>
+                            <cover-view class="media-player__dot"></cover-view>
+                        </cover-view>
+                    </cover-view>
+                    <cover-view class="media-player__button" catchtap="onToggleFullscreen" aria-label="{{fullscreen ? '退出全屏' : '进入全屏'}}" role="button">
+                        <cover-view class="media-player__fullscreen-icon {{fullscreen ? 'media-player__fullscreen-icon--exit' : ''}}">
+                            <cover-view class="media-player__corner media-player__corner--tl"></cover-view>
+                            <cover-view class="media-player__corner media-player__corner--tr"></cover-view>
+                            <cover-view class="media-player__corner media-player__corner--bl"></cover-view>
+                            <cover-view class="media-player__corner media-player__corner--br"></cover-view>
+                        </cover-view>
+                    </cover-view>
+                </cover-view>
+            </cover-view>
+        </cover-view>
+        <cover-view wx:if="{{panel}}" class="media-player__panel" catchtap="onControlTap">
+            <cover-view wx:if="{{panel === 'rates'}}" class="media-player__rate-list">
+                <cover-view wx:for="{{rates}}" wx:key="*this" class="media-player__rate {{appliedRate === item ? 'media-player__rate--active' : ''}}" data-rate="{{item}}" catchtap="onSelectRate" role="button">{{item}}×</cover-view>
+            </cover-view>
+            <cover-view wx:else class="media-player__options">
+                <cover-view class="media-player__option" catchtap="onRewind" role="button">后退10秒</cover-view>
+                <cover-view class="media-player__option {{canForward ? '' : 'media-player__disabled'}}" catchtap="onForward" role="button">前进10秒</cover-view>
+                <cover-view class="media-player__option {{autoNext ? 'media-player__option--active' : ''}}" catchtap="onToggleAutoNext" role="button" aria-label="自动下一节，{{autoNext ? '已开启' : '已关闭'}}">连播 {{autoNext ? '开' : '关'}}</cover-view>
+            </cover-view>
+        </cover-view>
+    </cover-view>
 </video>

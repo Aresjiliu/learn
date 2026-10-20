@@ -2,13 +2,18 @@
   <view wx:if="{{loading}}" class="player-state">视频信息加载中...</view>
   <view wx:if="{{!loading && loadError}}" class="player-state error">
     <text>{{loadError}}</text>
-    <button bindtap="retryLoad">重新加载</button>
+    <button class="player-state-action" bindtap="retryLoad">重新加载</button>
   </view>
   <block wx:if="{{!loading && !loadError}}">
     <view class="player-card">
       <view class="video-container">
-        <media-player wx:if="{{currentVideo && currentVideo.url && !playbackError}}"
+        <block wx:if="{{currentVideo && currentVideo.url && !playbackError}}">
+        <media-player wx:for="{{playerSessions}}" wx:key="sessionId"
           class="video-player"
+          session-id="{{item.sessionId}}"
+          desired-rate="{{desiredRate}}"
+          auto-next="{{autoNext}}"
+          bindautonextchange="onAutoNextChange"
           src="{{currentVideo.url}}"
           title="{{currentVideo.title}}"
           autoplay="{{true}}"
@@ -23,19 +28,29 @@
           bindfullscreenchange="onFullScreenChange"
           object-fit="contain"
           bindplaybackratechange="onPlaybackRateChange"
+          bindrateapplied="onRateApplied"
+          bindcontrolerror="onControlError"
           bindprogress="onVideoProgress"
           bindseek="onVideoSeek"
           bindseekcomplete="onVideoSeekComplete">
         </media-player>
+        </block>
         <view wx:elif="{{playbackError}}" class="player-state error">
           <text>{{playbackError}}</text>
-          <button bindtap="retryPlayback">重试播放</button>
+          <button class="player-state-action" bindtap="retryPlayback">重试播放</button>
         </view>
         <view wx:else class="player-state pending">
           <text>媒体待接入</text>
           <text class="player-state-caption">当前章节暂无可访问的视频地址</text>
         </view>
       </view>
+    </view>
+
+    <view wx:if="{{saveError || recordError || controlError}}" class="learning-feedback">
+      <text wx:if="{{recordError}}" class="learning-message">{{recordError}}</text>
+      <text wx:if="{{controlError}}" class="learning-message">{{controlError}}</text>
+      <text wx:if="{{saveError}}" class="learning-message">{{saveError}}</text>
+      <button wx:if="{{saveError}}" class="learning-control" bindtap="retrySaveProgress">重试保存</button>
     </view>
 
     <view class="course-info-card">
@@ -73,7 +88,7 @@
     </view>
 
     <view class="availability-notice" wx:if="{{!hasPurchased}}">
-      <text>完整课程购买暂未开放，当前可观看试听内容</text>
+      <text class="availability-caption">完整课程购买暂未开放，当前可观看试听内容</text>
     </view>
   </block>
 </view>

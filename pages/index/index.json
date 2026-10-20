@@ -1,6 +1,8 @@
 {
   "usingComponents": {
-
+    "van-icon": "/miniprogram_npm/@vant/weapp/icon/index"
   },
-  "navigationBarTitleText": "课程列表"
+  "navigationBarTitleText": "俄语7500",
+  "navigationBarBackgroundColor": "#ffffff",
+  "navigationBarTextStyle": "black"
 }

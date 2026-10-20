@@ -1,21 +1,31 @@
-/* Shared visual tokens for the textbook and exam UI. */
+/* Shared visual baseline; color-sky remains a compatibility alias. */
 page {
-    --color-primary: #1f5f8b;
-    --color-sky: #eaf3f8;
-    --color-page-bg: #f5f7f9;
-    --color-text: #1f2933;
-    --color-text-secondary: #667085;
-    --color-exam: #d97706;
-    --color-error: #c2413b;
+    --color-primary: #b84b45;
+    --color-accent: #ed625c;
+    --color-primary-soft: #fff0ee;
+    --color-sky: var(--color-primary-soft);
+    --color-page-bg: #f7f7f5;
+    --color-text: #232326;
+    --color-text-secondary: #67676f;
+    --color-border: #e6e6e3;
     --color-surface: #ffffff;
+    --color-exam: #9a5505;
+    --color-exam-soft: #fff7ed;
+    --color-error: #c2413b;
+    --color-error-soft: #fff3f2;
+    --color-success: #256b42;
+    --color-success-border: #3b8c5a;
+    --color-success-soft: #effaf3;
     --color-loading: #98a2b3;
-    --color-empty: #667085;
-    --color-locked: #98a2b3;
-    --radius-card: 20rpx;
+    --color-empty: #67676f;
+    --color-locked: #67676f;
+    --radius-card: 16rpx;
     --space-page: 32rpx;
-    --shadow-card: 0 8rpx 24rpx rgba(31, 41, 51, 0.08);
+    --shadow-card: 0 2rpx 8rpx rgba(35, 35, 38, 0.04);
     --font-size-page-title: 40rpx;
     --font-size-section-title: 32rpx;
     --font-size-body: 28rpx;
     --font-size-caption: 24rpx;
+    --font-family-base: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", "Segoe UI", Arial, sans-serif;
+    --font-family-system: var(--font-family-base);
 }

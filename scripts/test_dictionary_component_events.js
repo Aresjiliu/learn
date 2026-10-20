@@ -15,6 +15,9 @@ assert.match(template, /bindtap="open"/)
 assert.match(template, /entry.headword/)
 assert.match(template, /entry.summary/)
 assert.match(template, /entry.matchLabel/)
-assert.match(template, /entry.audioSource === 'textbook'/)
-assert.match(template, /entry.audioDevelopmentOnly === true/)
+assert.doesNotMatch(template, /entry\.(?:audioPlayable|audioPending|audioUrl|audio_url|audioSource|audioDevelopmentOnly)|可听发音|音频待接入|教材发音|本地验证/,
+    'clean result rows omit audio labels; audio facts remain covered by Page behavior and safety tests')
+assert.match(fs.readFileSync(path.resolve(__dirname, '../pages/dictionary/search/search.wxml'), 'utf8'),
+    /<text\b[^>]*wx:if="\{\{audioDevelopmentNotice\}\}"[^>]*>当前结果中的部分发音仅供本地开发验证。<\/text>/,
+    'development-only audio notice belongs to the search page')
 console.log('dictionary component events: PASS')

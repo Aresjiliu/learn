@@ -1,6 +1,10 @@
 const assert = require('assert')
 const fs = require('fs')
 const vm = require('vm')
+const progressSource = fs.readFileSync('services/playback-progress.js', 'utf8')
+  .replace(/export\s*\{[\s\S]*?\}\s*$/, '')
+const progressContext = { module: { exports: {} } }
+vm.runInNewContext(`${progressSource}\nmodule.exports = { getRecentPlayback }`, progressContext)
 
 const source = fs.readFileSync('pages/index/index.js', 'utf8')
 assert.ok(source.includes("加载分类失败:"))
@@ -39,15 +43,14 @@ async function runConcurrentRequestTest() {
   const executableSource = source
     .replace(/^import \{ getCategories, getCourses \} from '..\/\.\.\/services\/course'\r?\n/m, '')
     .replace(/^import config from '..\/\.\.\/config'\r?\n/m, '')
-    .replace(/^import \{ getRecentCourse, getRecentVideo \} from '..\/\.\.\/services\/playback-progress'\r?\n/m, '')
+    .replace(/^import \{ getRecentPlayback \} from '..\/\.\.\/services\/playback-progress'\r?\n/m, '')
 
   const context = {
     Page: definition => {
       pageDefinition = definition
     },
     config: { enableContentApi: false },
-    getRecentCourse: () => '',
-    getRecentVideo: () => '',
+    getRecentPlayback: progressContext.module.exports.getRecentPlayback,
     getCategories: () => {
       const request = createDeferred()
       categoryRequests.push(request)
@@ -59,6 +62,7 @@ async function runConcurrentRequestTest() {
       return request.promise
     },
     wx: {
+      getStorageSync: () => undefined,
       showLoading: () => {
         loadingState.shown += 1
       },

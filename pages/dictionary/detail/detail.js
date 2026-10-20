@@ -8,10 +8,14 @@ Page({
     data: {
         query: '',
         word: null,
+        wordbookContext: null,
         loading: true,
         loadError: '',
+        sourceNotice: '',
         isPlaying: false,
-        audioError: ''
+        audioError: '',
+        examplesExpanded: false,
+        metadataExpanded: false
     },
 
     onLoad: function(options) {
@@ -21,12 +25,13 @@ Page({
         this._audioAttemptId = (this._audioAttemptId || 0) + 1
         if (hadAudioAttempt) audioController.stop()
         this._isUnloaded = false
+        this.setData({ examplesExpanded: false, metadataExpanded: false, sourceNotice: '', wordbookContext: null })
         this._routeOptions = options || {}
         let route
         try {
             route = {}
-            for (const field of ['q', 'meaning', 'class', 'examples', 'id', 'textbookId']) {
-                route[field] = options && options[field] ? decodeURIComponent(options[field]) : ''
+            for (const field of ['q', 'meaning', 'class', 'examples', 'id', 'textbookId', 'collectionId']) {
+                route[field] = options && options[field] !== undefined && options[field] !== null ? decodeURIComponent(options[field]) : ''
             }
         } catch (error) {
             this.setData({ query: '', word: null, loading: false, loadError: '词条链接无效，请返回搜索后重试', isPlaying: false, audioError: '' })
@@ -48,26 +53,30 @@ Page({
         }
         const wordId = route.id
         const textbookId = route.textbookId
+        if (route.collectionId.trim() && textbookId.trim()) {
+            this.setData({ wordbookContext: { collectionId: route.collectionId, sourceId: textbookId } })
+        }
         if ((config.enableContentApi || config.enableLocalDictionaryApi) && wordId) {
             getDictionaryDetail(wordId).then(result => {
                 if (this._isUnloaded || requestId !== this._detailRequestId) return
                 const word = result && result.data && result.data.word
                 if (!word) throw new Error('词典详情为空')
+                const isSample = /^local-sample/.test(String(result && result.meta && result.meta.source || ''))
                 if (wordId.startsWith('dict:') && word.id !== wordId) throw new Error('词条身份不一致')
+                if (wordId.startsWith('dict:') && isSample) throw new Error('完整词条不可用')
                 const audioUrl = this.isAudioPlayable(word) ? '' : getLocalTextbookAudioUrl(textbookId, word.word || word.lemma || word.word_text)
-                this.setData({ word: this.decorateWord(audioUrl ? { ...word, audioUrl } : word, textbookFields), loading: false })
+                this.setData({
+                    word: this.decorateWord(audioUrl ? { ...word, audioUrl } : word, textbookFields),
+                    loading: false,
+                    sourceNotice: isSample ? '当前为离线样本，完整词典暂不可用' : ''
+                })
             }).catch(() => {
                 if (this._isUnloaded || requestId !== this._detailRequestId) return
                 if (wordId.startsWith('dict:')) {
                     this.setData({ word: null, loading: false, loadError: '词条加载失败，请检查网络后重试' })
                     return
                 }
-                const localWord = this.resolveLocalWord(query, textbookFields)
-                this.setData({
-                    word: localWord,
-                    loading: false,
-                    loadError: localWord ? '' : '词条加载失败，请检查网络后重试'
-                })
+                this.showLocalWord(query, textbookFields, '词条加载失败，请检查网络后重试')
             })
             return
         }
@@ -75,10 +84,18 @@ Page({
             this.setData({ word: null, loading: false, loadError: '完整词典暂不可用，请稍后重试' })
             return
         }
+        this.showLocalWord(query, textbookFields)
+    },
+
+    showLocalWord: function(query, textbookFields, loadError = '') {
         const localWord = this.resolveLocalWord(query, textbookFields)
         this.setData({
             word: localWord,
-            loading: false
+            loading: false,
+            loadError: localWord ? '' : loadError,
+            sourceNotice: localWord ? (localWord.detailSource === 'local-sample'
+                ? '当前为离线样本，完整词典暂不可用'
+                : '当前为本地教材资料，完整词典暂不可用') : ''
         })
     },
 
@@ -88,16 +105,37 @@ Page({
         const identity = value => value.normalize('NFD').replace(/[\u0300\u0301]/g, '').normalize('NFC').trim().toLowerCase()
         const headword = presentDictionaryDetail(localWord).headword
         if (headword && identity(headword) === identity(query)) {
-            return this.decorateWord(localWord, textbookFields)
+            return this.decorateWord(localWord, { ...textbookFields, detailSource: 'local-sample' })
         }
         if (Object.keys(textbookFields).length) {
-            return this.decorateWord({ word: query, sourceType: 'textbook' }, textbookFields)
+            return this.decorateWord({ word: query, sourceType: 'textbook' }, { ...textbookFields, detailSource: 'local-textbook' })
         }
         return null
     },
 
     retryLoad: function() {
+        if (this._isUnloaded) return
         this.onLoad(this._routeOptions)
+    },
+
+    openWordbook: function() {
+        if (this._isUnloaded || this._isHidden) return
+        wx.navigateTo({ url: '/pages/wordbook/wordbook' })
+    },
+
+    queryFullDictionary: function() {
+        if (this._isUnloaded || this._isHidden || !this.data.query.trim()) return
+        wx.navigateTo({ url: `/pages/dictionary/search/search?q=${encodeURIComponent(this.data.query)}` })
+    },
+
+    toggleExamples: function() {
+        if (this._isUnloaded || !this.data.word || !this.data.word.hasMoreExamples) return
+        this.setData({ examplesExpanded: !this.data.examplesExpanded })
+    },
+
+    toggleMetadata: function() {
+        if (this._isUnloaded || !this.data.word) return
+        this.setData({ metadataExpanded: !this.data.metadataExpanded })
     },
 
     resolveAudioUrl: function(value) {

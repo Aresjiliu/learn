@@ -11,6 +11,45 @@ const before = JSON.stringify(raw)
 const entry = presentDictionaryEntry(raw)
 assert.strictEqual(entry.headword, 'всё́')
 assert.strictEqual(entry.wordClass, 'мест.')
+assert.strictEqual(entry.shortWordClass, '代词')
+for (const [wordClass, expected] of [
+    ['名 非动 单 阴 1格', '名词'],
+    ['名 动名 单 阳 1格', '名词'],
+    ['动 未 及 不定', '动词'],
+    ['形 单 阴 1格', '形容词'],
+    ['副 不变', '副词'],
+    ['代 单 阳 1格', '代词'],
+    ['名\t非动\n单 阴 1格', '名词'],
+    ['动名 单 阳 1格', ''],
+    ['名非动 单 阴 1格', ''],
+    ['名，非动 单 阴 1格', ''],
+    ['未知 名 单 阴 1格', ''],
+    ['非动 单 阴 1格', '']
+]) {
+    const original = { id: 'compound', word_character: wordClass, word_meaning_all: '动 未 及 不定；名词释义原文' }
+    const snapshot = JSON.stringify(original)
+    const presented = presentDictionaryEntry(original)
+    assert.strictEqual(presented.shortWordClass, expected, wordClass)
+    assert.strictEqual(presented.wordClass, wordClass.replace(/\s+/g, ' ').trim())
+    assert.strictEqual(presented.word_character, wordClass)
+    assert.strictEqual(presented.summary, original.word_meaning_all)
+    assert.strictEqual(JSON.stringify(original), snapshot)
+}
+assert.strictEqual(presentDictionaryEntry({ word_meaning_all: '名 非动 单 阴 1格' }).shortWordClass, '',
+    'meaning text never supplies the part of speech')
+for (const [wordClass, shortWordClass] of [
+    ['сущ.', '名词'], ['м.', '名词'], ['ж.', '名词'], ['ср.', '名词'],
+    ['прил.', '形容词'], ['гл.', '动词'], ['нареч.', '副词'], ['предл.', '前置词'],
+    ['союз', '连词'], ['част.', '语气词'], ['числ.', '数词'], ['межд.', '感叹词'],
+    ['名词', '名词'], ['未知；可能是动词', ''], ['м. 复杂说明', ''], ['', '']
+]) {
+    const original = { id: 'stable', wordClass, sourceId: 'source', sourceType: 'dictionary',
+        audioUrl: 'unsafe-raw', audioDevelopmentOnly: true, word_meaning_all: '1. 原文；2. 不切分，全文保留。' }
+    const presented = presentDictionaryEntry(original)
+    assert.strictEqual(presented.shortWordClass, shortWordClass, wordClass)
+    for (const key of Object.keys(original)) assert.strictEqual(presented[key], original[key], key)
+    assert.strictEqual(presented.summary, original.word_meaning_all)
+}
 assert.strictEqual(entry.summary, '2. 一切； 全部', 'preserve original sense numbers')
 assert.deepStrictEqual(entry.meaningBlocks, ['2. 一切；', '全部'])
 assert.deepStrictEqual(entry.examples, ['Всё хорошо. 一切都好。'])

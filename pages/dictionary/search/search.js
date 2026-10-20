@@ -15,6 +15,7 @@ Page({
         searched: false,
         loadError: '',
         sampleNotice: false,
+        audioDevelopmentNotice: false,
         loading: false,
         page: 1,
         pageSize: 20,
@@ -56,7 +57,7 @@ Page({
         this._searchRequestId = (this._searchRequestId || 0) + 1
         this._failedAppendPage = 0
         this._failedAppendQuery = ''
-        this.setData({ query: value, words: [], searched: false, loading: false, loadError: '', sampleNotice: false,
+        this.setData({ query: value, words: [], searched: false, loading: false, loadError: '', sampleNotice: false, audioDevelopmentNotice: false,
             page: 1, hasMore: false, resultQuery: '', total: null })
     },
 
@@ -111,6 +112,11 @@ Page({
         this.loadPage(this.data.page + 1, true)
     },
 
+    openWordbook: function() {
+        if (this._isUnloaded) return
+        wx.navigateTo({ url: '/pages/wordbook/wordbook' })
+    },
+
     openDetail: function(event) {
         const payload = event.detail && typeof event.detail.word === 'string' ? event.detail : event.currentTarget.dataset
         const word = payload.word
@@ -124,7 +130,7 @@ Page({
         this._failedAppendQuery = ''
         if (!query) {
             this._searchRequestId = (this._searchRequestId || 0) + 1
-            this.setData({ words: [], searched: false, loadError: '', sampleNotice: false, loading: false, page: 1, hasMore: false, resultQuery: '', total: null })
+            this.setData({ words: [], searched: false, loadError: '', sampleNotice: false, audioDevelopmentNotice: false, loading: false, page: 1, hasMore: false, resultQuery: '', total: null })
             return
         }
         this.loadPage(1, false)
@@ -135,7 +141,7 @@ Page({
         this._searchRequestId = requestId
         const query = this.data.query.trim()
         this.setData(append ? { loading: true, loadError: '' } : {
-            loading: true, loadError: '', words: [], searched: false, sampleNotice: false,
+            loading: true, loadError: '', words: [], searched: false, sampleNotice: false, audioDevelopmentNotice: false,
             hasMore: false, page: 1, total: null, resultQuery: query
         })
         getDictionarySearch(query, { page, pageSize: this.data.pageSize }).then(result => {
@@ -165,7 +171,9 @@ Page({
             this._failedAppendQuery = ''
             this._resultSignature = signature
             this._resultQuery = query
-            this.setData({ words, searched: true, loadError: '', sampleNotice, page, hasMore, total, resultQuery: query })
+            this.setData({ words, searched: true, loadError: '', sampleNotice,
+                audioDevelopmentNotice: words.some(word => word.audioDevelopmentOnly === true),
+                page, hasMore, total, resultQuery: query })
             if (!append && this._history) {
                 try {
                     this._history.record(query)

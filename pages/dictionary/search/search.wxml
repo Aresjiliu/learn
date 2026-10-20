@@ -1,10 +1,12 @@
 <view class="page">
     <view class="search-bar">
-        <van-search class="search-control" value="{{query}}" placeholder="输入俄语或中文释义" background="#ffffff" clearable="{{false}}" left-icon="" input-class="dictionary-search-input" bind:change="handleInput" bind:search="handleSearch" />
-        <button class="icon-button search-icon" bindtap="handleSearch" aria-label="搜索"><van-icon name="search" size="22" /></button>
-        <button wx:if="{{query}}" class="icon-button clear-button" bindtap="clearSearch" aria-label="清空输入"><van-icon name="cross" size="18" /></button>
-        <button class="search-action" bindtap="handleSearch">搜索</button>
+        <van-search class="search-control" value="{{query}}" placeholder="输入俄语或中文释义" background="#ffffff" clearable="{{false}}" use-left-icon-slot="{{true}}" use-right-icon-slot="{{true}}" use-action-slot="{{true}}" field-class="dictionary-search-field" input-class="dictionary-search-input" bind:change="handleInput" bind:search="handleSearch">
+            <view slot="left-icon" class="search-decoration" aria-hidden="true"><van-icon name="search" size="22" /></view>
+            <button slot="right-icon" wx:if="{{query}}" class="clear-button" bindtap="clearSearch" aria-label="清空输入"><van-icon name="cross" size="18" /></button>
+            <button slot="action" class="search-action" bindtap="handleSearch">搜索</button>
+        </van-search>
     </view>
+    <button class="wordbook-entry" bindtap="openWordbook"><van-icon name="notes-o" size="20" /><text class="wordbook-entry__label">本机生词本</text><van-icon name="arrow" size="16" /></button>
     <text wx:if="{{historyNotice}}" class="notice" role="alert">{{historyNotice}}</text>
     <view wx:if="{{!searched && !loading}}" class="discovery">
         <view class="section-heading">
@@ -27,6 +29,7 @@
         </view>
     </view>
     <text wx:if="{{sampleNotice && searched}}" class="notice">当前仅显示离线样本，完整词典暂不可用，请稍后重试。</text>
+    <text wx:if="{{audioDevelopmentNotice}}" class="notice">当前结果中的部分发音仅供本地开发验证。</text>
     <view wx:if="{{searched && words.length}}" class="word-list">
         <view class="results-heading">
             <text class="result-query">{{resultQuery}}</text>

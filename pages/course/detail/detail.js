@@ -1,10 +1,4 @@
-import request from '../../../utils/request'
 import { getCourseDetail } from '../../../services/course'
-import { prepareCourseWords, filterCourseWords } from '../../../services/content'
-import config from '../../../config'
-
-const dictionarySample = require('../../../data/content_samples/dictionary_words.js')
-const wordFormSample = require('../../../data/content_samples/book_word_forms.js')
 
 function isPreviewFlag(value) {
   return value === true || value === 'true' || value === 1 || value === '1'
@@ -15,16 +9,7 @@ Page({
     courseId: null,
     course: null,
     chapters: [],
-    activeTab: 'detail',
-    isCollected: false,
     hasPurchased: false,
-    words: [],
-    filteredWords: [],
-    visibleWords: [],
-    wordPageSize: 50,
-    hasMoreWords: false,
-    wordQuery: '',
-    wordSummary: { total: 0, mapped: 0, pending: 0, missingMeaning: 0 },
     contentModeLabel: '本地演示内容',
     courseStats: { chapterCount: 0, videoCount: 0, wordCount: 0 },
     hasPreview: false,
@@ -54,29 +39,20 @@ Page({
       if (this._isUnloaded || requestId !== this._loadRequestId) return
       if (res.code === 200) {
         const courseData = res.data.course;
-        const courseBookName = courseData.bookName || courseData.book_name || courseData.title || ''
-        const preparedWords = prepareCourseWords(
-          res.data.words || [],
-          dictionarySample.words || [],
-          res.data.wordForms || wordFormSample,
-          res.data.mappingDecisions || [],
-          { bookName: courseBookName }
-        )
-        const wordSummary = {
-          total: preparedWords.length,
-          mapped: preparedWords.filter(item => item.matchTier !== 'unmatched').length,
-          pending: preparedWords.filter(item => item.matchTier === 'unmatched').length,
-          missingMeaning: preparedWords.filter(item => !item.hasMeaning).length
-        }
+        const wordCount = Array.isArray(res.data.words) ? res.data.words.length : 0
         const hasPurchased = Boolean(res.data.hasPurchased)
         const rawChapters = Array.isArray(res.data.chapters) ? res.data.chapters : []
         const chapters = rawChapters.map((chapter, chapterIndex) => ({
-          ...chapter,
+          title: chapter.title,
           rowKey: chapter.rowKey || `chapter-${chapter.id || chapterIndex}`,
           videos: (Array.isArray(chapter.videos) ? chapter.videos : []).map((video, videoIndex) => {
             const canPreview = Boolean(video.url) && (isPreviewFlag(video.isPreview) || ((video.isPreview === undefined || video.isPreview === null || video.isPreview === '') && chapterIndex === 0))
             return {
-              ...video,
+              id: video.id,
+              title: video.title,
+              durationText: video.durationText,
+              url: video.url,
+              isPreview: video.isPreview,
               rowKey: video.rowKey || `video-${video.id || `${chapterIndex}-${videoIndex}`}`,
               canPreview: Boolean(video.url) && (isPreviewFlag(video.isPreview) || ((video.isPreview === undefined || video.isPreview === null || video.isPreview === '') && chapterIndex === 0)),
               statusLabel: !video.url ? '媒体待接入' : (!hasPurchased && !canPreview ? '已锁定' : (canPreview ? '免费试听' : '可播放'))
@@ -87,23 +63,21 @@ Page({
         const responseMessage = String(res.message || '')
         this.setData({
           course: {
-            ...courseData,
+            title: courseData.title,
+            subtitle: courseData.subtitle,
+            description: courseData.description,
+            students_count: courseData.students_count,
+            price: courseData.price,
             cover_image: courseData.cover_image
           },
           hasPurchased,
-          isCollected: res.data.is_collected,
           chapters,
           hasPreview: Boolean(this.findPreviewVideo(chapters)),
-          words: preparedWords,
-          filteredWords: preparedWords,
-          visibleWords: preparedWords.slice(0, this.data.wordPageSize),
-          hasMoreWords: preparedWords.length > this.data.wordPageSize,
-          wordSummary,
           contentModeLabel: responseMessage.indexOf('local sample') === 0 ? '本地演示内容' : '在线教材内容',
           courseStats: {
             chapterCount: chapters.length,
             videoCount,
-            wordCount: preparedWords.length
+            wordCount
           }
         })
       } else if (res.code === 302) {
@@ -138,43 +112,10 @@ Page({
     this.loadCourseDetail()
   },
 
-  // 切换标签
-  switchTab: function(e) {
-    const tab = e.currentTarget.dataset.tab
-    this.setData({
-      activeTab: tab
-    })
-  },
-
-  loadMoreWords: function() {
-    const nextEnd = this.data.visibleWords.length + this.data.wordPageSize
-    this.setData({
-      visibleWords: this.data.filteredWords.slice(0, nextEnd),
-      hasMoreWords: nextEnd < this.data.filteredWords.length
-    })
-  },
-
-  searchWords: function(event) {
-    const wordQuery = event.detail.value || ''
-    const filteredWords = filterCourseWords(this.data.words, wordQuery)
-    this.setData({
-      wordQuery,
-      filteredWords,
-      visibleWords: filteredWords.slice(0, this.data.wordPageSize),
-      hasMoreWords: filteredWords.length > this.data.wordPageSize
-    })
-  },
-
-  openWordDetail: function(event) {
-    const word = event.currentTarget.dataset.word
-    const wordId = event.currentTarget.dataset.wordId || ''
-    const textbookId = event.currentTarget.dataset.textbookId || ''
-    const meaning = event.currentTarget.dataset.wordMeaning || ''
-    const wordClass = event.currentTarget.dataset.wordClass || ''
-    const examples = event.currentTarget.dataset.wordExamples || ''
-    if (!word) return
+  openVocabulary: function() {
+    if (this.data.courseStats.wordCount <= 0) return
     wx.navigateTo({
-      url: `/pages/dictionary/detail/detail?q=${encodeURIComponent(word)}&id=${encodeURIComponent(wordId)}&textbookId=${encodeURIComponent(textbookId)}&meaning=${encodeURIComponent(meaning)}&class=${encodeURIComponent(wordClass)}&examples=${encodeURIComponent(examples)}`
+      url: `/pages/course/words/words?id=${encodeURIComponent(this.data.courseId)}`
     })
   },
 
@@ -224,63 +165,9 @@ Page({
     return isPreview === undefined || isPreview === null || isPreview === '' ? chapterIndex === 0 : false
   },
 
-  // 处理收藏/取消收藏
-  handleCollect: function() {
-    if (!config.enableRemoteWrites) {
-      wx.showToast({ title: '当前为只读联调模式', icon: 'none' })
-      return
-    }
-    if (!wx.getStorageSync('token')) {
-      wx.showToast({
-        title: '请先登录',
-        icon: 'none'
-      })
-      return
-    }
-
-    const url = `/api/favorites/${this.data.courseId}/`
-    const method = this.data.isCollected ? 'DELETE' : 'POST'
-
-    request({
-      url: url,
-      method: method
-    }).then(res => {
-      if (res.code === 200) {
-        // 更新收藏状态
-        this.setData({
-          isCollected: !this.data.isCollected
-        })
-
-        // 更新收藏数量
-        const collectNum = wx.getStorageSync('collectNum') || 0
-        wx.setStorageSync('collectNum', 
-          this.data.isCollected ? collectNum + 1 : Math.max(0, collectNum - 1)
-        )
-
-        wx.showToast({
-          title: this.data.isCollected ? '已收藏' : '已取消收藏',
-          icon: 'success'
-        })
-      }
-    }).catch(err => {
-      wx.showToast({
-        title: '操作失败',
-        icon: 'none'
-      })
-      console.error('收藏操作失败:', err && err.message ? err.message : 'unknown error')
-    })
-  },
-
-  // 格式化视频时长
-  formatDuration: function(seconds) {
-    const minutes = Math.floor(seconds / 60)
-    const remainingSeconds = seconds % 60
-    return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`
-  },
-
   onUnload: function() {
     this._isUnloaded = true
     this._loadRequestId = (this._loadRequestId || 0) + 1
     wx.hideLoading()
   }
-}) 
+})

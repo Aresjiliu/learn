@@ -64,7 +64,7 @@
     <view wx:if="{{chapters.length}}" class="chapter-list">
       <view class="chapter-card" wx:for="{{chapters}}" wx:for-index="chapterIndex" wx:key="rowKey">
         <view class="chapter-heading">
-          <text class="chapter-number">{{index + 1}}</text>
+          <text class="chapter-number">{{chapterIndex + 1}}</text>
           <text class="chapter-title">{{item.title}}</text>
         </view>
         <view class="video-list">
@@ -92,41 +92,8 @@
     <view wx:else class="empty-state">暂无章节内容</view>
   </view>
 
-  <view class="related-words course-card">
-    <view class="section-heading">
-      <view>
-        <text class="section-title">关联词汇</text>
-        <text class="section-description">从课程词汇进入词典查看详情</text>
-      </view>
-      <text class="section-count">{{wordSummary.total}} 词</text>
-    </view>
-    <view class="word-summary">
-      <text>共 {{wordSummary.total}} 词</text>
-      <text>已匹配 {{wordSummary.mapped}}</text>
-      <text>待复核 {{wordSummary.pending}}</text>
-      <text>缺释义 {{wordSummary.missingMeaning}}</text>
-    </view>
-    <input class="word-search" value="{{wordQuery}}" bindinput="searchWords" placeholder="搜索俄语词形或中文释义" confirm-type="search" />
-    <view wx:if="{{visibleWords.length}}" class="word-list">
-      <view class="word-item"
-            wx:for="{{visibleWords}}"
-            wx:key="rowKey"
-            bindtap="openWordDetail"
-            data-word="{{item.word}}"
-            data-word-id="{{item.dictionaryId || ''}}"
-            data-textbook-id="{{item.id || ''}}"
-            data-word-meaning="{{item.displayMeaning || ''}}"
-            data-word-class="{{item.word_character || ''}}"
-            data-word-examples="{{item.sentence_all || ''}}">
-        <view class="word-main">
-          <text class="word-text">{{item.word}}</text>
-          <text class="word-type">{{item.word_character}}</text>
-        </view>
-        <text class="word-meaning">{{item.displayMeaning || '释义待补充'}}</text>
-        <text class="word-match">{{item.matchTier === 'exact' ? '主词典已匹配' : item.matchTier === 'relaxed' ? '规范化匹配' : item.matchTier === 'wordForm' ? '词形回溯' : item.matchTier === 'reviewed' ? '人工审核匹配' : '待人工复核'}}</text>
-      </view>
-      <button wx:if="{{hasMoreWords}}" class="load-more-words" bindtap="loadMoreWords">加载更多词汇</button>
-    </view>
-    <view wx:else class="empty-state">暂无关联词汇</view>
-  </view>
+  <button wx:if="{{courseStats.wordCount > 0}}" class="vocabulary-entry" bindtap="openVocabulary">
+    <text>配套词汇</text>
+    <text class="vocabulary-count">{{courseStats.wordCount}} 词 ›</text>
+  </button>
 </view>

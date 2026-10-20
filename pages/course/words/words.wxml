@@ -1,0 +1,30 @@
+<view class="vocabulary-page">
+    <button class="back-course" bindtap="backToCourse">返回课程</button>
+    <view wx:if="{{loading}}" class="page-state">词汇加载中...</view>
+    <view wx:elif="{{loadError}}" class="page-state">
+        <text>{{loadError}}</text>
+        <button class="text-action" bindtap="retryLoad">重新加载</button>
+    </view>
+    <view wx:else>
+        <view class="course-heading">
+            <text class="course-title">{{courseTitle}}</text>
+            <view class="course-meta">
+                <text>共 {{wordSummary.total}} 词</text>
+                <text>{{contentModeLabel}}</text>
+            </view>
+        </view>
+        <input class="word-search" value="{{wordQuery}}" bindinput="searchWords" placeholder="搜索俄语词形或中文释义" confirm-type="search" />
+        <text wx:if="{{wordQuery}}" class="result-count">找到 {{resultCount}} 词</text>
+        <view wx:if="{{visibleWords.length}}" class="word-list">
+            <view class="word-item" wx:for="{{visibleWords}}" wx:key="rowKey" bindtap="openWordDetail" data-row-key="{{item.rowKey}}">
+                <view class="word-main">
+                    <text class="word-text">{{item.word}}</text>
+                    <text class="word-type">{{item.word_character}}</text>
+                </view>
+                <text class="word-meaning">{{item.displayMeaning || '释义待补充'}}</text>
+            </view>
+            <button wx:if="{{hasMoreWords}}" class="text-action" bindtap="loadMoreWords">加载更多词汇</button>
+        </view>
+        <view wx:else class="page-state">{{wordQuery ? '没有找到匹配词汇' : '暂无配套词汇'}}</view>
+    </view>
+</view>

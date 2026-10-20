@@ -1,20 +1,62 @@
 <view class="page">
   <view class="home-header">
-    <text class="eyebrow">俄语7500 · 主学习入口</text>
     <text class="page-title">俄语教材学习</text>
-    <text class="page-description">从教材词汇、课程内容到考级练习，按章节稳步推进。</text>
+    <text class="page-description">查词、练习，按自己的节奏学习。</text>
+  </view>
+
+  <view wx:if="{{hasLocalProgress}}"
+        class="continue-card"
+        bindtap="navigateToCourse"
+        data-id="{{progressId}}"
+        data-video-id="{{progressVideoId}}"
+        data-resume="{{true}}"
+        aria-label="继续学习 {{resumeCourseTitle}} {{resumeVideoTitle}}，上次播放至 {{resumePositionLabel}}">
+    <view class="continue-info">
+      <text class="section-kicker">继续学习</text>
+      <text class="continue-title">{{resumeCourseTitle}}</text>
+      <text class="continue-video">{{resumeVideoTitle}}</text>
+      <text class="continue-position">上次播放至 {{resumePositionLabel}}</text>
+    </view>
+    <text class="continue-action">继续播放 ›</text>
+  </view>
+  <view wx:if="{{resumeError}}" class="resume-error" role="alert">{{resumeError}}</view>
+
+  <view class="quick-actions">
+    <navigator url="/pages/exam/list/list" class="quick-action">
+      <view class="quick-action-icon"><van-icon name="edit" size="40rpx" /></view>
+      <text class="quick-action-title">练习</text>
+      <text class="quick-action-caption">考级题库</text>
+    </navigator>
+    <navigator url="/pages/dictionary/search/search" class="quick-action">
+      <view class="quick-action-icon"><van-icon name="search" size="40rpx" /></view>
+      <text class="quick-action-title">词典</text>
+      <text class="quick-action-caption">查词辨义</text>
+    </navigator>
+    <navigator url="/pages/my-courses/my-courses" class="quick-action">
+      <view class="quick-action-icon"><van-icon name="orders-o" size="40rpx" /></view>
+      <text class="quick-action-title">我的课程</text>
+      <text class="quick-action-caption">查看课程</text>
+    </navigator>
+  </view>
+
+  <view class="section-heading">
+    <view>
+      <text class="section-title">教材课程</text>
+      <text class="section-description">选择课程，查看简介与章节</text>
+    </view>
+    <text class="content-status">{{contentModeLabel}}</text>
   </view>
 
   <view class="search-card">
     <view class="search-box">
-      <icon type="search" size="16" color="#667085"></icon>
-      <input type="text"
+      <van-icon name="search" size="32rpx" color="#797980" />
+      <input class="course-search-input" type="text"
              placeholder="搜索教材或课程"
              placeholder-class="placeholder"
              value="{{searchQuery}}"
              bindinput="handleSearchInput"
-             bindconfirm="handleSearch">
-      </input>
+             bindconfirm="handleSearch"
+             confirm-type="search" />
       <button wx:if="{{searchQuery}}"
               class="clear-search"
               bindtap="clearSearch"
@@ -22,54 +64,6 @@
     </view>
     <button class="search-action" bindtap="handleSearch">搜索</button>
   </view>
-
-  <view class="quick-actions">
-    <navigator url="/pages/exam/list/list" class="quick-action">
-      <text class="quick-action-icon exam-icon">题</text>
-      <text class="quick-action-title">练习</text>
-      <text class="quick-action-caption">考级题库</text>
-    </navigator>
-    <navigator url="/pages/dictionary/search/search" class="quick-action">
-      <text class="quick-action-icon dictionary-icon">词</text>
-      <text class="quick-action-title">词典</text>
-      <text class="quick-action-caption">查词辨义</text>
-    </navigator>
-    <navigator url="/pages/my-courses/my-courses" class="quick-action">
-      <text class="quick-action-icon course-icon">书</text>
-      <text class="quick-action-title">我的课程</text>
-      <text class="quick-action-caption">已购内容</text>
-    </navigator>
-  </view>
-
-  <view wx:if="{{hasLocalProgress && progressId}}"
-        class="continue-card"
-        bindtap="navigateToCourse"
-        data-id="{{progressId}}"
-        data-video-id="{{progressVideoId}}"
-        data-resume="{{true}}"
-        aria-label="继续学习">
-    <view>
-      <text class="section-kicker">继续学习</text>
-      <text class="continue-title">返回上次学习内容</text>
-    </view>
-    <text class="continue-arrow">›</text>
-  </view>
-
-  <view class="section-heading">
-    <view>
-      <text class="section-title">教材课程</text>
-      <text class="section-description">按教材和章节建立稳定的学习节奏</text>
-    </view>
-    <text class="content-status">{{contentModeLabel}}</text>
-  </view>
-
-  <navigator url="/pages/exam/list/list" class="exam-entry">
-    <view>
-      <text class="exam-entry-kicker">考级题库</text>
-      <text class="exam-entry-title">用真题检验阶段学习成果</text>
-    </view>
-    <text class="exam-entry-arrow">进入题库 ›</text>
-  </navigator>
 
   <scroll-view class="category-scroll" scroll-x="{{true}}" enhanced="{{true}}" show-scrollbar="{{false}}">
     <view class="category-tabs">
@@ -101,22 +95,24 @@
           bindtap="navigateToCourse"
           data-id="{{item.id}}">
       <view class="course-cover-wrap">
-        <image class="course-cover"
+        <view wx:if="{{contentMode === 'local-sample'}}" class="course-demo-cover">
+          <text class="demo-cover-title">{{item.title}}</text>
+          <text class="demo-cover-label">演示教材</text>
+        </view>
+        <image wx:else class="course-cover"
                src="{{item.cover_image}}"
                mode="aspectFill"
                binderror="handleImageError"
                data-type="course"
                data-index="{{index}}"></image>
-        <text class="course-cover-label">教材</text>
       </view>
       <view class="course-info">
         <view class="course-heading">
           <text class="course-title">{{item.title}}</text>
-          <text class="content-status">{{contentModeLabel}}</text>
         </view>
         <text class="course-description">{{item.displayDescription}}</text>
         <view class="course-meta">
-          <text class="course-state">{{item.wordCount}} 词汇 · {{item.students_count}} 人学习</text>
+          <text class="course-state">{{item.wordCount}} 配套词汇</text>
           <text wx:if="{{contentMode === 'local-sample'}}" class="course-price free">免费演示</text>
           <text wx:else class="course-price">¥{{item.price}}</text>
         </view>

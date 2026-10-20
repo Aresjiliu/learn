@@ -1,16 +1,20 @@
 const assert = require('assert')
 const fs = require('fs')
 const vm = require('vm')
+const { records, loadService } = require('./test_video_learning_controls')
+const preferences = loadService('services/playback-preferences.js', 'getPlaybackPreferences,savePlaybackPreferences')
 
 const source = fs.readFileSync('pages/course/video/video.js', 'utf8')
   .replace("import request from '../../../utils/request'", 'const request = () => Promise.resolve({})')
   .replace("import { getCourseDetail } from '../../../services/course'", 'const getCourseDetail = () => Promise.resolve({})')
   .replace("import { shouldPersistProgress } from '../../../services/playback'", 'const shouldPersistProgress = () => false')
-  .replace("import { getVideoProgress, saveVideoProgress, saveRecentVideo } from '../../../services/playback-progress'", 'const getVideoProgress = () => 0; const saveVideoProgress = () => {}; const saveRecentVideo = () => {}')
+  .replace(/^import .*playback-progress.*$/gm, '')
+  .replace(/^import .*playback-preferences.*$/gm, '')
   .replace("import config from '../../../config'", "const config = { devMediaBaseUrl: 'http://127.0.0.1:18090', enableRemoteWrites: false }")
 
 let definition
 vm.runInNewContext(source, {
+  ...records, ...preferences,
   Page(value) { definition = value },
   wx: { getStorageSync: () => '', setData: () => {} }
 })

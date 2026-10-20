@@ -1,9 +1,42 @@
 /**app.wxss**/
 @import "styles/design-tokens.wxss";
 
+page {
+    background: var(--color-page-bg);
+    color: var(--color-text);
+    font-family: var(--font-family-system);
+    font-size: var(--font-size-body);
+}
+
+/* Business containers inherit the system stack without overriding icon fonts. */
+.container,
+.profile-container,
+.my-courses,
+.collections-page,
+.page,
+.vocabulary-page {
+    font-family: var(--font-family-system);
+}
+
+/* Native controls use existing business classes in component-safe rules. */
+.auth-btn,
+.contact-btn,
+.filter-button,
+.state-action,
+.audio-button,
+.text-action,
+.primary-button,
+.answer-input,
+.back-course,
+.word-search,
+.go-buy,
+.go-buy-btn {
+    font-family: var(--font-family-base);
+}
+
 .container {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-} 
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}

@@ -1,7 +1,28 @@
 // index.js
 import { getCategories, getCourses } from '../../services/course'
 import config from '../../config'
-import { getRecentCourse, getRecentVideo } from '../../services/playback-progress'
+import { getRecentPlayback } from '../../services/playback-progress'
+
+function formatResumePosition(position) {
+    const seconds = Math.floor(position)
+    const minutes = Math.floor(seconds / 60)
+    const pad = value => String(value).padStart(2, '0')
+    return minutes >= 60
+        ? `${pad(Math.floor(minutes / 60))}:${pad(minutes % 60)}:${pad(seconds % 60)}`
+        : `${pad(minutes)}:${pad(seconds % 60)}`
+}
+
+function isNavigationId(value) {
+    const valid = typeof value === 'string' ? value.trim().length > 0 : typeof value === 'number' && Number.isFinite(value)
+    if (!valid) return false
+    // Reject malformed Unicode rather than replacing characters and changing identity.
+    try {
+        encodeURIComponent(value)
+        return true
+    } catch (error) {
+        return false
+    }
+}
 
 function resolveContentMode(response) {
   const source = response && response.meta ? String(response.meta.source || '') : ''
@@ -52,6 +73,10 @@ Page({
     hasLocalProgress: false,
     progressId: '',
     progressVideoId: '',
+    resumeCourseTitle: '',
+    resumeVideoTitle: '',
+    resumePositionLabel: '',
+    resumeError: '',
     contentMode: 'local-sample',
     contentModeLabel: '本地演示内容'
   },
@@ -66,8 +91,18 @@ Page({
   },
 
   onShow: function() {
-    const progressId = getRecentCourse(wx)
-    this.setData({ hasLocalProgress: Boolean(progressId), progressId, progressVideoId: getRecentVideo(wx, progressId) })
+    if (this._isUnloaded) return
+    const result = getRecentPlayback(wx)
+    const record = result.ok ? result.record : null
+    this.setData({
+        hasLocalProgress: Boolean(record),
+        progressId: record ? record.courseId : '',
+        progressVideoId: record ? record.videoId : '',
+        resumeCourseTitle: record ? (record.courseTitle || '').trim() || '上次学习的课程' : '',
+        resumeVideoTitle: record ? (record.videoTitle || '').trim() || '上次学习的视频' : '',
+        resumePositionLabel: record ? formatResumePosition(record.position) : '',
+        resumeError: result.ok ? '' : '学习记录暂时无法读取，可从下方课程继续学习'
+    })
   },
 
   // 加载分类数据
@@ -221,11 +256,12 @@ Page({
     const courseId = e.currentTarget.dataset.id
     const videoId = e.currentTarget.dataset.videoId
     const resume = e.currentTarget.dataset.resume
-    if (!courseId) return
+    if (this._isUnloaded || !isNavigationId(courseId)) return
+    if (resume && !isNavigationId(videoId)) return
     wx.navigateTo({
-      url: resume && videoId
+      url: resume
         ? `/pages/course/video/video?id=${encodeURIComponent(courseId)}&videoId=${encodeURIComponent(videoId)}`
-        : `/pages/course/detail/detail?id=${courseId}`
+        : `/pages/course/detail/detail?id=${encodeURIComponent(courseId)}`
     })
   },
 

@@ -1,0 +1,37 @@
+const assert = require('assert');
+const fs = require('fs');
+const markup = fs.readFileSync('pages/index/index.wxml', 'utf8');
+const css = fs.readFileSync('pages/index/index.wxss', 'utf8');
+const config = JSON.parse(fs.readFileSync('pages/index/index.json', 'utf8'));
+assert.strictEqual(config.navigationBarBackgroundColor, '#ffffff');
+assert.strictEqual(config.navigationBarTextStyle, 'black');
+assert.strictEqual(config.usingComponents['van-icon'], '/miniprogram_npm/@vant/weapp/icon/index');
+for (const route of ['/pages/exam/list/list', '/pages/dictionary/search/search', '/pages/my-courses/my-courses']) {
+    assert.strictEqual(markup.split('url="' + route + '"').length - 1, 1, 'one clear entry per learning task');
+}
+assert.ok(markup.indexOf('class="section-title"') < markup.indexOf('class="search-card"'), 'course search belongs to the course section');
+const cover = /<view class="course-cover-wrap">([\s\S]*?)<\/view>\s*<view class="course-info">/.exec(markup);
+assert.ok(cover, 'course cover and info remain separate');
+assert.match(cover[1], /<view wx:if="\{\{contentMode === 'local-sample'\}\}" class="course-demo-cover">/);
+assert.match(cover[1], /<image wx:else class="course-cover"[\s\S]*?src="\{\{item.cover_image\}\}"[\s\S]*?binderror="handleImageError"[\s\S]*?data-index="\{\{index\}\}"/);
+assert.ok(!markup.includes('已购内容'), 'unknown entitlement is not a purchase fact');
+assert.ok(!markup.includes('exam-entry'), 'no duplicate exam banner');
+assert.match(markup, /wx:if="\{\{hasLocalProgress\}\}"/);
+assert.ok(markup.indexOf('class="continue-card"') < markup.indexOf('class="quick-actions"'), 'real resume is the primary focus before tools');
+for (const field of ['resumeCourseTitle', 'resumeVideoTitle', 'resumePositionLabel', 'resumeError']) assert.ok(markup.includes('{{' + field + '}}'), field + ' is visible');
+assert.match(markup, /继续播放/);
+assert.match(css, /background:\s*var\(--color-page-bg,\s*#F7F7F5\)/i);
+assert.match(css, /\.course-list\s*\{[^}]*border:\s*1rpx solid/);
+assert.match(css, /\.category-tab\s*\{[^}]*min-height:\s*88rpx/);
+assert.match(css, /var\(--font-family-base/);
+assert.ok(!css.includes('#ed625c'), 'primary fallback must use accessible deep coral');
+assert.match(css, /\.continue-action\s*\{[^}]*background:\s*var\(--color-primary,\s*#b84b45\)/);
+assert.ok(!markup.includes('progress-percent') && !markup.includes('生词本'));
+assert.match(markup, /data-video-id="\{\{progressVideoId\}\}"/);
+assert.match(markup, /bindconfirm="handleSearch"/);
+assert.match(css, /\.course-card\s*\{[^}]*display:\s*flex;/);
+assert.match(css, /\.course-cover-wrap\s*\{[^}]*width:\s*144rpx;/);
+assert.match(css, /env\(safe-area-inset-bottom\)/);
+assert.ok(!/\.search-box\s+input\b/.test(css), 'business input uses a class, not a restricted tag selector');
+assert.ok(!/(?:^|\n)page\s*\{/.test(css), 'page-specific component stylesheet uses the root business class');
+console.log('learning home UI contract: PASS (not visual acceptance)');

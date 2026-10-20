@@ -23,6 +23,12 @@ const lockClass = new Function('hasPurchased', 'video', `return ${lockedClassMat
 assert.strictEqual(lockClass(false, { canPreview: false }), 'locked', 'unpaid non-preview videos must be locked')
 assert.strictEqual(lockClass(true, { canPreview: false }), '', 'purchased non-preview videos must not be locked')
 assert.ok(js.includes('const dataRequest = getCourseDetail(this.data.courseId)'))
-assert.ok(/onVideoPlay: function\(\)[\s\S]*?saveRecentVideo\(wx, this\.data\.courseId, this\.data\.currentVideo\.id\)/.test(js), 'first successful playback records recent course and video')
+const { loaded, event, records } = require('./test_video_learning_controls')
+;(async () => {
+  const { page, wx } = await loaded()
+  assert.strictEqual(records.getRecentPlayback(wx).record, null, 'loading alone does not create recent playback')
+  page.onVideoPlay(event(page))
+  assert.strictEqual(records.getRecentPlayback(wx).record.videoId, page.data.currentVideo.id, 'first successful playback records scoped recent identity')
+})().catch(error => { console.error(error); process.exitCode = 1 })
 assert.ok(!js.includes("/api/courses/${this.data.courseId}/video/"))
 console.log('video page state tests: PASS')

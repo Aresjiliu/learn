@@ -11,7 +11,7 @@ const instantiate = definition => ({
 async function checkIdentityAndFallback() {
     let definition
     let response = { data: { words: [
-        { id: 'dict:17:a', sourceId: '17', word: 'все' },
+        { id: 'dict:17:a', sourceId: '17', word: 'все', audioDevelopmentOnly: true },
         { id: 'dict:17:b', sourceId: '17', word: 'все' }
     ] }, meta: { source: 'dictionary-index', contentVersion: 'v1', total: 3 } }
     const navigation = []
@@ -28,14 +28,17 @@ async function checkIdentityAndFallback() {
     await settle()
     assert.deepStrictEqual(page.data.words.map(word => word.entryId), ['dict:17:a', 'dict:17:b'])
     assert.notStrictEqual(page.data.words[0].rowKey, page.data.words[1].rowKey)
+    assert.strictEqual(page.data.audioDevelopmentNotice, true)
     page.openDetail({ currentTarget: { dataset: { word: 'все', wordId: page.data.words[1].entryId } } })
     assert.ok(navigation[0].includes('id=dict%3A17%3Ab'))
     response = { data: { words: [{ sourceId: 'sample', word: 'все' }] }, meta: { source: 'local-sample', total: 1 } }
     page.loadMore()
     await settle()
     assert.strictEqual(page.data.words.length, 2, 'a fallback page must not mix with indexed results')
+    assert.strictEqual(page.data.audioDevelopmentNotice, true, 'notice still describes retained indexed results')
     assert.ok(page.data.loadError)
     page.retryLoad()
+    assert.strictEqual(page.data.audioDevelopmentNotice, false, 'fresh retry removes the old notice immediately')
     await settle()
     assert.strictEqual(page.data.sampleNotice, true, 'online mode fallback must be visibly labelled')
     assert.strictEqual(page.data.page, 1)

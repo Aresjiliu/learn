@@ -1,8 +1,14 @@
 import request from '../../../utils/request'
 import { getCourseDetail } from '../../../services/course'
 import { shouldPersistProgress } from '../../../services/playback'
-import { getVideoProgress, saveVideoProgress, saveRecentVideo } from '../../../services/playback-progress'
+import { getPlaybackRecord, savePlaybackRecord } from '../../../services/playback-progress'
+import { getPlaybackPreferences, savePlaybackPreferences } from '../../../services/playback-preferences'
 import config from '../../../config'
+
+const RATES = [0.8, 1, 1.25, 1.5, 2]
+const isTime = value => typeof value === 'number' && Number.isFinite(value) && value >= 0
+const MAX_PENDING = 32
+const CHECKPOINT_RETRY_MS = 5000
 
 Page({
   data: {
@@ -23,17 +29,29 @@ Page({
     loading: true,
     loadError: '',
     playbackError: '',
-    lastSavedProgress: -1
+    lastSavedProgress: -1,
+    playerSessions: [],
+    desiredRate: 1,
+    autoNext: false,
+    saveError: '',
+    recordError: '',
+    controlError: ''
   },
 
   onLoad: function(options) {
     this._isUnloaded = false
+    this._hidden = false
+    this._pending = new Map()
+    this._deferredVideo = null
+    const preferences = getPlaybackPreferences(wx)
     this._loadRequestId = 0
     this.setData({
       courseId: options.id,
-      requestedVideoId: options.videoId || '',
+      requestedVideoId: options.videoId === 0 ? '0' : String(options.videoId || ''),
       isPlaying: false,
       playbackRate: 1.0,
+      desiredRate: preferences.rate,
+      autoNext: preferences.autoNext,
       loadError: '',
       playbackError: '',
       lastSavedProgress: -1,
@@ -44,6 +62,8 @@ Page({
 
   // 加载课程数据
   loadCourseData: function() {
+    this._rateMenuGeneration = (this._rateMenuGeneration || 0) + 1
+    this._deferredVideo = null
     const requestId = (this._loadRequestId || 0) + 1
     this._loadRequestId = requestId
     this.setData({ loading: true, loadError: '' })
@@ -110,8 +130,9 @@ Page({
           loadError: '',
           playbackError: '',
           // 默认播放第一个视频
-          currentVideo: this.withLocalProgress(initialVideo)
+          currentVideo: null
         })
+        this.startVideo(initialVideo)
         this.setData({ loading: false })
       }
     }).catch(err => {
@@ -126,11 +147,66 @@ Page({
   },
 
   withLocalProgress: function(video) {
-    if (!video || !video.id) return video
+    if (!video || video.id === undefined || video.id === null) return video
+    const result = getPlaybackRecord(wx, this.data.courseId, video.id)
+    const key = JSON.stringify([String(this.data.courseId), String(video.id)])
+    const pending = this._pending && this._pending.get(key)
+    if (!result.ok && !this._isUnloaded) this.setData({ recordError: '本机学习记录暂不可用，可继续播放' })
     return {
       ...video,
-      lastProgress: Number(video.lastProgress) || getVideoProgress(wx, video.id)
+      lastProgress: pending ? pending.position : (result.ok && result.record ? result.record.position : (isTime(video.lastProgress) ? video.lastProgress : 0))
     }
+  },
+
+  startVideo: function(video) {
+    if (this._isUnloaded) return false
+    this._rateMenuGeneration = (this._rateMenuGeneration || 0) + 1
+    if (this._hidden) {
+      this._deferredVideo = { video }
+      return false
+    }
+    this._deferredVideo = null
+    this.persistVisibleProgress()
+    // Never evict a failed snapshot silently. At capacity the current session
+    // remains playable; retrying storage frees room for another selection.
+    const targetKey = video && JSON.stringify([String(this.data.courseId), String(video.id)])
+    if (this._pending && this._pending.size >= MAX_PENDING && !this._pending.has(targetKey)) {
+      this.setData({ saveError: '本机未保存记录较多，请重试保存后切换' })
+      return false
+    }
+    const player = this.getPlayer()
+    const oldSession = this._session
+    this._session = null
+    if (player && oldSession && player.pause) player.pause()
+    this._waiting = false
+    wx.hideLoading()
+    this.setData({ recordError: '' })
+    const currentVideo = this.withLocalProgress(video)
+    const sessionId = 'playback-' + (this._sessionSequence = (this._sessionSequence || 0) + 1)
+    this._session = currentVideo ? {
+      sessionId, courseId: this.data.courseId, videoId: currentVideo.id,
+      position: currentVideo.lastProgress, duration: 0, observed: false, played: false,
+      courseTitle: this.data.course && this.data.course.title,
+      videoTitle: currentVideo.title
+    } : null
+    this.setData({
+      currentVideo,
+      playerSessions: currentVideo ? [{ sessionId }] : [],
+      currentTime: currentVideo ? currentVideo.lastProgress : 0,
+      duration: 0, buffered: 0, isSeeking: false, isPlaying: false,
+      lastSavedProgress: -1, nextVideo: null, loadError: '', playbackError: '',
+      playbackRate: 1, controlError: '', isFullScreen: false
+    })
+    return true
+  },
+
+  acceptsEvent: function(e) {
+    return Boolean(!this._isUnloaded && !this._hidden && this._session && e && e.detail &&
+      e.detail.sessionId === this._session.sessionId)
+  },
+
+  getPlayer: function() {
+    return typeof this.selectComponent === 'function' ? this.selectComponent('.video-player') : null
   },
 
   // 切换视频
@@ -155,18 +231,7 @@ Page({
       return
     }
 
-    this.setData({
-      currentVideo: this.withLocalProgress(video),
-      isPlaying: false,
-      currentTime: 0,
-      duration: 0,
-      buffered: 0,
-      isSeeking: false,
-      lastSavedProgress: -1,
-      nextVideo: null,
-      loadError: '',
-      playbackError: ''
-    })
+    this.startVideo(video)
   },
 
   isPlayableWithoutPurchase: function(video, chapterIndex) {
@@ -175,35 +240,81 @@ Page({
   },
 
   // 视频事件处理
-  onVideoPlay: function() {
+  onVideoPlay: function(e) {
+    if (!this.acceptsEvent(e)) return
+    this._waiting = false
     wx.hideLoading()
-    if (this.data.currentVideo && this.data.courseId) saveRecentVideo(wx, this.data.courseId, this.data.currentVideo.id)
+    const firstPlay = !this._session.played
+    this._session.played = true
     this.setData({ isPlaying: true, playbackError: '' })
+    if (firstPlay) this.persistVisibleProgress()
   },
 
-  onVideoPause: function() {
+  onVideoPause: function(e) {
+    if (!this.acceptsEvent(e)) return
+    this._waiting = false
+    wx.hideLoading()
     this.persistVisibleProgress()
     this.setData({ isPlaying: false })
   },
 
-  persistVisibleProgress: function() {
-    if (!this.data.currentVideo || !this.data.courseId || !(this.data.currentTime > 0)) return
-    saveVideoProgress(wx, this.data.currentVideo.id, this.data.currentTime)
-    saveRecentVideo(wx, this.data.courseId, this.data.currentVideo.id)
+  persistVisibleProgress: function(memoryOnly = false) {
+    const session = this._session
+    if (!session || (!session.played && !session.observed)) return false
+    const record = { courseId: session.courseId, videoId: session.videoId, position: session.position, duration: session.duration }
+    for (const field of ['courseTitle', 'videoTitle']) {
+      if (typeof session[field] === 'string' && Array.from(session[field]).length <= 256) record[field] = session[field]
+    }
+    // During retry backoff keep the latest failed snapshot without synchronous IO.
+    if (memoryOnly) {
+      const key = JSON.stringify([String(record.courseId), String(record.videoId)])
+      if (this._pending && this._pending.has(key)) this._pending.set(key, record)
+      return false
+    }
+    return this.saveSnapshot(record, true)
   },
 
-  onVideoBuffering: function() {
-    // 只在缓冲进度小于当前播放进度时显示加载提示
-    if (this.data.buffered < this.data.currentTime) {
-      wx.showLoading({
-        title: '加载中...'
-      })
+  saveSnapshot: function(record, makeRecent) {
+    if (!this._pending) this._pending = new Map()
+    const key = JSON.stringify([String(record.courseId), String(record.videoId)])
+    const result = savePlaybackRecord(wx, record, { makeRecent })
+    if (result.ok) {
+      this._pending.delete(key)
+      if (!this._isUnloaded && this._session && String(this._session.courseId) === String(record.courseId) &&
+          String(this._session.videoId) === String(record.videoId)) {
+        this.setData({ lastSavedProgress: Math.floor(record.position) })
+      }
+    } else if (this._pending.has(key) || this._pending.size < MAX_PENDING) {
+      this._pending.set(key, { ...record })
     }
+    if (!this._isUnloaded) this.setData({ saveError: this._pending.size || !result.ok ? '本机学习记录保存失败，可继续播放或重试保存' : '' })
+    return result.ok
+  },
+
+  retrySaveProgress: function() {
+    if (this._isUnloaded || this._hidden) return
+    // Old identity snapshots must never steal recent from a newer playback.
+    const entries = this._pending ? Array.from(this._pending.values()) : []
+    entries.forEach(record => this.saveSnapshot(record, false))
+    this.persistVisibleProgress()
+  },
+
+  onVideoBuffering: function(e) {
+    if (!this.acceptsEvent(e)) return
+    this._waiting = true
+    wx.showLoading({ title: '加载中...' })
   },
 
   onVideoError: function(e) {
+    if (!this.acceptsEvent(e)) return
+    this._waiting = false
+    wx.hideLoading()
+    this.persistVisibleProgress()
+    const retryVideo = { ...this.data.currentVideo, lastProgress: this._session.position }
+    this._session = null
+    this._rateMenuGeneration = (this._rateMenuGeneration || 0) + 1
     console.error('视频播放错误:', e && e.detail && e.detail.errMsg ? e.detail.errMsg : 'unknown error')
-    this.setData({ playbackError: '当前视频无法播放，请检查媒体服务或切换其他视频' })
+    this.setData({ currentVideo: retryVideo, playerSessions: [], isPlaying: false, playbackError: '当前视频无法播放，请检查媒体服务或切换其他视频' })
     wx.showToast({
       title: '视频播放失败',
       icon: 'none'
@@ -211,7 +322,7 @@ Page({
   },
 
   retryPlayback: function() {
-    this.setData({ playbackError: '' })
+    this.startVideo(this.data.currentVideo)
   },
 
   retryLoad: function() {
@@ -220,33 +331,45 @@ Page({
 
   // 记录播放进度
   onTimeUpdate: function(e) {
-    if (!this.data.currentVideo) return
-    
+    if (!this.acceptsEvent(e) || !isTime(e.detail.currentTime)) return
     const currentTime = e.detail.currentTime
-    const videoId = this.data.currentVideo.id
-
-    // 更新当前播放时间
+    if (this._waiting && currentTime > this._session.position) {
+      this._waiting = false
+      wx.hideLoading()
+    }
+    const duration = isTime(e.detail.duration) ? e.detail.duration : this._session.duration
+    this._session.position = currentTime
+    this._session.duration = duration
+    this._session.observed = true
     this.setData({
       currentTime: currentTime,
-      duration: e.detail.duration
+      duration,
+      isSeeking: false
     })
 
     // 每30秒记录一次进度，且不在拖拽状态时
-    if (shouldPersistProgress(currentTime, this.data.lastSavedProgress) && !this.data.isSeeking) {
-      this.setData({ lastSavedProgress: Math.floor(currentTime) })
-      saveVideoProgress(wx, videoId, currentTime)
-      this.updateVideoProgress(currentTime)
+    if (shouldPersistProgress(currentTime, this.data.lastSavedProgress)) {
+      const key = JSON.stringify([String(this._session.courseId), String(this._session.videoId)])
+      const attemptedAt = this._session.checkpointAttemptedAt
+      if (this._pending && this._pending.has(key) && typeof attemptedAt === 'number' &&
+          Date.now() - attemptedAt < CHECKPOINT_RETRY_MS) {
+        this.persistVisibleProgress(true)
+      } else {
+        this.updateVideoProgress(currentTime)
+      }
     }
   },
 
   // 更新视频进度的统一方法
   updateVideoProgress: function(progress) {
-    if (!this.data.currentVideo) return
+    if (this._isUnloaded || this._hidden || !this._session || !isTime(progress) || progress !== this._session.position) return
     const videoId = this.data.currentVideo.id
-    saveVideoProgress(wx, videoId, progress)
-    saveRecentVideo(wx, this.data.courseId, videoId)
+    this._session.checkpointAttemptedAt = Date.now()
+    this.persistVisibleProgress()
     // 阶段 0/1 只保存在本地；远程上报必须显式开启写权限。
-    if (!config.enableRemoteWrites || !wx.getStorageSync('token')) return
+    try {
+      if (!config.enableRemoteWrites || !wx.getStorageSync('token')) return
+    } catch (error) { return }
     request({
       url: '/api/video/progress/',
       method: 'POST',
@@ -261,24 +384,28 @@ Page({
 
   // 开始拖动进度条
   onVideoSeek: function(e) {
-    this.setData({ isSeeking: true })
+    if (!this.acceptsEvent(e)) return
+    // Native timeupdate is the only position authority; no seekcomplete lock.
   },
 
   // 拖动进度条完成
   onVideoSeekComplete: function(e) {
-    this.setData({ isSeeking: false })
-    // 拖拽完成时更新进度
-    if (e.detail && e.detail.position !== undefined) {
-      this.updateVideoProgress(e.detail.position)
-    }
+    if (!this.acceptsEvent(e)) return
   },
 
   // 视频播放结束
-  onVideoEnd: function() {
-    if (this.data.currentVideo && this.data.duration > 0) {
-      this.updateVideoProgress(this.data.duration)
+  onVideoEnd: function(e) {
+    if (!this.acceptsEvent(e)) return
+    this._waiting = false
+    wx.hideLoading()
+    if (isTime(this._session.duration) && this._session.duration > 0) {
+      this._session.position = this._session.duration
+      this.setData({ currentTime: this._session.duration })
     }
+    this.persistVisibleProgress()
+    this.setData({ isPlaying: false })
     this.setData({ nextVideo: this.findNextPlayableVideo() })
+    if (this.data.autoNext && this.data.nextVideo) this.playNextVideo()
     wx.showToast({
       title: '播放完成',
       icon: 'success'
@@ -302,22 +429,12 @@ Page({
 
   playNextVideo: function() {
     if (!this.data.nextVideo) return
-    this.setData({
-      currentVideo: this.withLocalProgress(this.data.nextVideo),
-      isPlaying: false,
-      currentTime: 0,
-      duration: 0,
-      buffered: 0,
-      isSeeking: false,
-      lastSavedProgress: -1,
-      nextVideo: null,
-      loadError: '',
-      playbackError: ''
-    })
+    this.startVideo(this.data.nextVideo)
   },
 
   // 全屏状态变化
   onFullScreenChange: function(e) {
+    if (!this.acceptsEvent(e)) return
     this.setData({
       isFullScreen: e.detail.fullScreen
     })
@@ -325,23 +442,117 @@ Page({
 
   // 播放速率变化
   onPlaybackRateChange: function(e) {
-    this.setData({
-      playbackRate: e.detail.rate
+    if (!this.acceptsEvent(e)) return
+    const rate = e.detail.playbackRate
+    if (RATES.includes(rate)) this.applyRateLabel(rate)
+  },
+
+  onRateApplied: function(e) {
+    if (!this.acceptsEvent(e) || !RATES.includes(e.detail.rate)) return
+    this.applyRateLabel(e.detail.rate)
+  },
+
+  applyRateLabel: function(rate) {
+    const changed = this.data.desiredRate !== rate
+    this.setData({ playbackRate: rate, desiredRate: rate, controlError: '' })
+    if (changed) this.savePreferences()
+  },
+
+  savePreferences: function() {
+    if (!savePlaybackPreferences(wx, { rate: this.data.desiredRate, autoNext: this.data.autoNext })) {
+      wx.showToast({ title: '学习设置未保存，本次仍可使用', icon: 'none' })
+    }
+  },
+
+  choosePlaybackRate: function() {
+    if (this._isUnloaded || this._hidden || !this._session || this.data.playbackError) return
+    const sessionId = this._session.sessionId
+    const menuGeneration = (this._rateMenuGeneration || 0) + 1
+    this._rateMenuGeneration = menuGeneration
+    wx.showActionSheet({
+      itemList: RATES.map(rate => rate + '倍'),
+      success: result => {
+        if (menuGeneration !== this._rateMenuGeneration || !this.acceptsEvent({ detail: { sessionId } }) || this.data.playbackError || !Number.isInteger(result.tapIndex)) return
+        const rate = RATES[result.tapIndex]
+        if (!RATES.includes(rate)) return
+        this._rateMenuGeneration += 1
+        const player = this.getPlayer()
+        if (!player || !player.setPlaybackRate || !player.setPlaybackRate(rate)) {
+          this.onControlError({ detail: { sessionId, command: 'rate' } })
+        }
+      }
     })
+  },
+
+  rewindTenSeconds: function() {
+    if (this._isUnloaded || this._hidden || !this._session || this.data.playbackError) return
+    const player = this.getPlayer()
+    if (!player || !player.seekTo || !player.seekTo(Math.max(0, this._session.position - 10))) {
+      this.onControlError({ detail: { sessionId: this._session.sessionId, command: 'seek' } })
+    }
+  },
+
+  onControlError: function(e) {
+    if (!this.acceptsEvent(e)) return
+    const update = { controlError: e.detail.message || '当前设备暂不支持此操作，请使用原生播放控件' }
+    this.setData(update)
+  },
+
+  onAutoNextChange: function(e) {
+    if (!this.acceptsEvent(e)) return
+    this.toggleAutoNext(e)
+  },
+
+  toggleAutoNext: function(e) {
+    if (this._isUnloaded || this._hidden || !e.detail || typeof e.detail.value !== 'boolean') return
+    this.setData({ autoNext: e.detail.value })
+    this.savePreferences()
   },
 
   // 视频缓冲进度更新
   onVideoProgress: function(e) {
-    if (e.detail && e.detail.buffered) {
+    if (this.acceptsEvent(e) && isTime(e.detail.buffered)) {
       this.setData({
         buffered: e.detail.buffered
       })
     }
   },
 
-  onUnload: function() {
+  onHide: function() {
+    this._waiting = false
+    this._rateMenuGeneration = (this._rateMenuGeneration || 0) + 1
+    this._hidden = true
     this.persistVisibleProgress()
+    if (this._session) this._deferredVideo = {
+      video: { ...this.data.currentVideo, lastProgress: this._session.position }
+    }
+    // Renew the native node on return: already-forwarded events must stay stale.
+    this._session = null
+    const player = this.getPlayer()
+    if (player && player.pause) player.pause()
+    wx.hideLoading()
+    if (!this._isUnloaded) this.setData({ playerSessions: [], isPlaying: false, isFullScreen: false })
+  },
+
+  onShow: function() {
+    if (this._isUnloaded) return
+    this._hidden = false
+    if (this._deferredVideo) this.startVideo(this._deferredVideo.video)
+  },
+
+  onUnload: function() {
+    this._waiting = false
+    this._rateMenuGeneration = (this._rateMenuGeneration || 0) + 1
+    // Capture remains private while invalidation prevents synchronous pause events
+    // or storage callbacks from issuing UI updates during teardown.
     this._isUnloaded = true
+    this._hidden = true
+    this._deferredVideo = null
+    this.persistVisibleProgress()
+    this._session = null
+    const player = this.getPlayer()
+    if (player && player.pause) player.pause()
+    wx.hideLoading()
     this._loadRequestId = (this._loadRequestId || 0) + 1
   }
 }) 

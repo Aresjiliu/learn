@@ -3,20 +3,22 @@
         <van-loading color="#ed625c" size="40rpx">词条加载中...</van-loading>
     </view>
     <view wx:elif="{{loadError}}" class="state-card error-state">
-        <text selectable>{{loadError}}</text>
+        <text user-select="{{true}}">{{loadError}}</text>
         <button class="state-action" bindtap="retryLoad">重新加载</button>
     </view>
     <view wx:elif="{{word}}" class="detail-content">
+        <view wx:if="{{sourceNotice}}" class="source-notice" role="alert">
+            <text>{{sourceNotice}}</text>
+            <button class="source-requery" bindtap="queryFullDictionary">重新查询完整词典</button>
+        </view>
         <view class="word-head">
             <view class="word-identity">
-                <text class="word" selectable>{{word.headword}}</text>
+                <text class="word" user-select="{{true}}">{{word.headword}}</text>
             </view>
             <view class="word-title-row">
                 <view class="word-metadata">
-                    <text wx:if="{{word.wordClass}}" class="part" selectable>{{word.wordClass}}</text>
-                    <text class="source" selectable>{{word.sourceLabel}}</text>
-                    <text wx:if="{{word.audioSource === 'textbook'}}" class="audio-source">教材发音</text>
-                    <text wx:if="{{word.audioDevelopmentOnly === true}}" class="audio-source">本地验证</text>
+                    <text wx:if="{{word.shortWordClass}}" class="part">{{word.shortWordClass}}</text>
+                    <text wx:if="{{word.audioPlayable}}" class="pronunciation-label">点击右侧听发音</text>
                 </view>
                 <button wx:if="{{word.audioPlayable}}" class="audio-button {{isPlaying ? 'audio-button--playing' : ''}}" bindtap="playAudio" aria-label="{{isPlaying ? '正在播放发音，点击重新播放' : '播放发音'}}">
                     <van-icon name="volume-o" size="40rpx" aria-hidden="true" />
@@ -30,13 +32,45 @@
             <text wx:if="{{word.audioPending}}" class="audio-pending">音频资源待接入</text>
             <text wx:if="{{!word.audioPlayable && !word.audioPending}}" class="audio-unavailable">暂无音频</text>
         </view>
+        <wordbook-action entry="{{word}}" source-context="{{wordbookContext}}" />
+        <button class="wordbook-link" bindtap="openWordbook">查看本机生词本</button>
         <view class="word-section">
             <text class="section-label">释义</text>
-            <text class="meaning" selectable>{{word.meaningText}}</text>
+            <view class="meaning-panel">
+                <text class="meaning" user-select="{{true}}">{{word.meaningText}}</text>
+            </view>
         </view>
         <view wx:if="{{word.hasExamples}}" class="word-section examples-section">
             <text class="section-label">例句</text>
-            <text wx:for="{{word.exampleItems}}" wx:key="key" class="example" selectable>{{item.text}}</text>
+            <view class="examples-panel">
+                <block wx:for="{{word.exampleItems}}" wx:key="key">
+                    <text wx:if="{{examplesExpanded || index === 0 || index === 1}}" class="example" user-select="{{true}}">{{item.text}}</text>
+                </block>
+            </view>
+            <button wx:if="{{word.hasMoreExamples}}" class="section-toggle" bindtap="toggleExamples" aria-expanded="{{examplesExpanded}}">{{examplesExpanded ? '收起例句' : '查看全部例句（' + word.exampleItems.length + '）'}}</button>
+        </view>
+        <view class="word-section metadata-section">
+            <button class="metadata-toggle" bindtap="toggleMetadata" aria-expanded="{{metadataExpanded}}">
+                <text class="metadata-title">词条资料</text>
+                <text class="metadata-toggle-label">{{metadataExpanded ? '收起 −' : '展开 +'}}</text>
+            </button>
+            <view wx:if="{{metadataExpanded}}" class="metadata-panel">
+                <view wx:if="{{word.wordClass}}" class="metadata-row">
+                    <text class="metadata-label">详细词性</text>
+                    <text class="metadata-value" user-select="{{true}}">{{word.wordClass}}</text>
+                </view>
+                <view class="metadata-row">
+                    <text class="metadata-label">释义来源</text>
+                    <text class="source" user-select="{{true}}">{{word.sourceLabel}}</text>
+                </view>
+                <view wx:if="{{word.audioSource === 'textbook' || word.audioDevelopmentOnly === true}}" class="metadata-row">
+                    <text class="metadata-label">发音资料</text>
+                    <view class="audio-metadata">
+                        <text wx:if="{{word.audioSource === 'textbook'}}" class="audio-source">教材发音</text>
+                        <text wx:if="{{word.audioDevelopmentOnly === true}}" class="audio-source">本地验证</text>
+                    </view>
+                </view>
+            </view>
         </view>
     </view>
     <view wx:else class="state-card empty-state">未找到该词条</view>

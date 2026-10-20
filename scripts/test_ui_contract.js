@@ -7,20 +7,21 @@ const tokenPath = path.join(root, 'styles', 'design-tokens.wxss')
 const appStylesPath = path.join(root, 'app.wxss')
 
 const requiredTokens = [
-  ['--color-primary', '#1f5f8b'],
-  ['--color-sky', '#eaf3f8'],
-  ['--color-page-bg', '#f5f7f9'],
-  ['--color-text', '#1f2933'],
-  ['--color-text-secondary', '#667085'],
-  ['--color-exam', '#d97706'],
+  ['--color-primary', '#b84b45'],
+  ['--color-accent', '#ed625c'],
+  ['--color-sky', 'var(--color-primary-soft)'],
+  ['--color-page-bg', '#f7f7f5'],
+  ['--color-text', '#232326'],
+  ['--color-text-secondary', '#67676f'],
+  ['--color-exam', '#9a5505'],
   ['--color-error', '#c2413b'],
   ['--color-surface', '#ffffff'],
   ['--color-loading', '#98a2b3'],
-  ['--color-empty', '#667085'],
-  ['--color-locked', '#98a2b3'],
-  ['--radius-card', '20rpx'],
+  ['--color-empty', '#67676f'],
+  ['--color-locked', '#67676f'],
+  ['--radius-card', '16rpx'],
   ['--space-page', '32rpx'],
-  ['--shadow-card', '0 8rpx 24rpx rgba(31, 41, 51, 0.08)'],
+  ['--shadow-card', '0 2rpx 8rpx rgba(35, 35, 38, 0.04)'],
   ['--font-size-page-title', '40rpx'],
   ['--font-size-section-title', '32rpx'],
   ['--font-size-body', '28rpx'],
@@ -88,11 +89,11 @@ const pageContracts = [{
     { label: '练习入口路由和行为文案', pattern: /<navigator[^>]*url="\/pages\/exam\/list\/list"[^>]*class="quick-action"[^>]*>[\s\S]*?<text class="quick-action-title">练习<\/text>[\s\S]*?<\/navigator>/ },
     { label: '词典入口路由和行为文案', pattern: /<navigator[^>]*url="\/pages\/dictionary\/search\/search"[^>]*class="quick-action"[^>]*>[\s\S]*?<text class="quick-action-title">词典<\/text>[\s\S]*?<\/navigator>/ },
     { label: '我的课程入口路由和行为文案', pattern: /<navigator[^>]*url="\/pages\/my-courses\/my-courses"[^>]*class="quick-action"[^>]*>[\s\S]*?<text class="quick-action-title">我的课程<\/text>[\s\S]*?<\/navigator>/ },
-    { label: '继续学习卡片受 hasLocalProgress 和 progressId 控制', pattern: /<view(?=[^>]*class="continue-card")(?=[^>]*wx:if="\{\{hasLocalProgress && progressId\}\}")[^>]*>/ },
+    { label: '继续学习卡片受已校验记录 hasLocalProgress 控制', pattern: /<view(?=[^>]*class="continue-card")(?=[^>]*wx:if="\{\{hasLocalProgress\}\}")[^>]*>/ },
     { label: '继续学习卡片可导航到课程', pattern: /<view(?=[^>]*class="continue-card")(?=[^>]*bindtap="navigateToCourse")(?=[^>]*data-id="\{\{progressId\}\}")[^>]*>/ },
     { label: '继续学习卡片内容', pattern: /class="continue-title">[^<]+<\/text>/ },
     { label: '教材课程分区', pattern: /<text class="section-title">教材课程<\/text>/ },
-    { label: '考级题库入口', pattern: /<navigator[^>]*url="\/pages\/exam\/list\/list"[^>]*class="exam-entry"[^>]*>[\s\S]*?考级题库[\s\S]*?<\/navigator>/ },
+    { label: '考级题库保留单一入口', pattern: /<navigator[^>]*url="\/pages\/exam\/list\/list"[^>]*class="quick-action"[^>]*>[\s\S]*?考级题库[\s\S]*?<\/navigator>/ },
     { label: '横向分类滚动结构', pattern: /<scroll-view[^>]*class="category-scroll"[^>]*scroll-x=/ },
     { label: '分类 switchCategory 行为绑定', pattern: /<view[^>]*class="category-tab[^"]*"[^>]*bindtap="switchCategory"[^>]*>/ },
     { label: '分类列表 wx:key 和 data-id', pattern: /<view(?=[^>]*wx:for="\{\{categories\}\}")(?=[^>]*wx:key="id")(?=[^>]*data-id="\{\{item\.id\}\}")[^>]*>/ },
@@ -120,8 +121,15 @@ const pageContracts = [{
     { label: '详情试听状态', pattern: /video\.canPreview[\s\S]*?video\.statusLabel/ },
     { label: '详情锁定状态', pattern: /!hasPurchased && !video\.canPreview/ },
     { label: '详情媒体待接入状态', pattern: /!video\.url/ },
-    { label: '详情四项词汇统计', pattern: /wordSummary\.total[\s\S]*?wordSummary\.mapped[\s\S]*?wordSummary\.pending[\s\S]*?wordSummary\.missingMeaning/ },
-    { label: '详情词条打开词典', pattern: /bindtap="openWordDetail"/ }
+    { label: '详情仅提供配套词汇入口和真实总数', pattern: /wx:if="\{\{courseStats\.wordCount > 0\}\}"[^>]*class="vocabulary-entry"[^>]*bindtap="openVocabulary"[\s\S]*?courseStats\.wordCount/ }
+  ]
+}, {
+  path: 'pages/course/words/words.wxml',
+  checks: [
+    { label: '教材身份可见', pattern: /courseTitle/ },
+    { label: '词汇独立搜索', pattern: /bindinput="searchWords"/ },
+    { label: '词汇使用稳定行键及私有记录导航', pattern: /wx:key="rowKey"[\s\S]*?bindtap="openWordDetail"[\s\S]*?data-row-key="\{\{item.rowKey\}\}"/ },
+    { label: '词汇支持继续分页', pattern: /hasMoreWords[\s\S]*?bindtap="loadMoreWords"/ }
   ]
 }, {
   path: 'pages/course/video/video.wxml',
@@ -173,8 +181,8 @@ const pageContracts = [{
   path: 'pages/dictionary/detail/detail.wxml',
   checks: [
     { label: '详情加载和空状态', pattern: /wx:if="\{\{loading\}\}"[\s\S]*?wx:else class="state-card empty-state"/ },
-    { label: '俄语词形和来源标签', pattern: /class="word" selectable>\{\{word\.headword\}\}[\s\S]*?word\.sourceLabel/ },
-    { label: '模型词性和完整释义绑定', pattern: /wx:if="\{\{word\.wordClass\}\}"[\s\S]*?class="meaning" selectable>\{\{word\.meaningText\}\}/ },
+    { label: '可复制俄语词形和来源标签', pattern: /class="word" user-select="\{\{true\}\}">\{\{word\.headword\}\}[\s\S]*?word\.sourceLabel/ },
+    { label: '简明词性和完整可复制释义绑定', pattern: /word\.shortWordClass[\s\S]*?class="meaning" user-select="\{\{true\}\}">\{\{word\.meaningText\}\}/ },
     { label: '音频播放与不可用状态', pattern: /word\.audioPlayable[\s\S]*?bindtap="playAudio"[\s\S]*?word\.audioPending[\s\S]*?暂无音频/ },
     { label: '例句稳定键', pattern: /word\.hasExamples[\s\S]*?wx:for="\{\{word\.exampleItems\}\}"[\s\S]*?wx:key="key"[\s\S]*?\{\{item\.text\}\}/ }
   ]
@@ -231,11 +239,13 @@ assertSourcePattern(indexJsSource, /contentMode:\s*'local-sample'/, 'pages/index
 assertSourcePattern(indexJsSource, /contentModeLabel:\s*'本地演示内容'/, 'pages/index/index.js', 'contentModeLabel 默认值 本地演示内容')
 assertSourcePattern(indexJsSource, /displayDescription:\s*normalizedCourse\.description\s*\|\|\s*normalizedCourse\.subtitle\s*\|\|\s*'课程内容待完善'/, 'pages/index/index.js', '课程说明安全兜底')
 assertSourcePattern(indexJsSource, /navigateToCourse:\s*function[\s\S]*?`\/pages\/course\/video\/video\?id=\$\{encodeURIComponent\(courseId\)\}&videoId=\$\{encodeURIComponent\(videoId\)\}`/, 'pages/index/index.js', '继续学习视频路径')
-assertSourcePattern(indexJsSource, /`\/pages\/course\/detail\/detail\?id=\$\{courseId\}`/, 'pages/index/index.js', '普通课程详情路径')
-assertSourcePattern(indexWxssSource, /\.page\s*\{[\s\S]*?padding:\s*40rpx\s+var\(--space-page\)/, 'pages/index/index.wxss', '页面边距令牌')
-assertSourcePattern(indexWxssSource, /\.course-card\s*\{[\s\S]*?border-radius:\s*var\(--radius-card\)[\s\S]*?box-shadow:\s*var\(--shadow-card\)/, 'pages/index/index.wxss', '课程卡圆角和阴影')
+assertSourcePattern(indexJsSource, /`\/pages\/course\/detail\/detail\?id=\$\{encodeURIComponent\(courseId\)\}`/, 'pages/index/index.js', '普通课程详情路径安全编码')
+assertSourcePattern(indexJsSource, /const result = getRecentPlayback\(wx\)/, 'pages/index/index.js', '续学读取受保护课程视频记录')
+assertSourcePattern(indexJsSource, /const record = result\.ok \? result\.record : null/, 'pages/index/index.js', '损坏或读取失败不可伪装有效续学')
+assertSourcePattern(indexWxssSource, /\.page\s*\{[\s\S]*?padding:\s*28rpx\s+var\(--space-page\)/, 'pages/index/index.wxss', '紧凑页面保留共享横向边距令牌')
+assertSourcePattern(indexWxssSource, /\.course-card\s*\{[^}]*display:\s*flex;[^}]*border-bottom:\s*1rpx solid/, 'pages/index/index.wxss', '课程横向列表与细分割线')
 assertSourcePattern(indexWxssSource, /\.category-scroll\s*\{[\s\S]*?width:\s*100%/, 'pages/index/index.wxss', '横向分类容器样式')
-assertSourcePattern(indexWxssSource, /\.course-cover-wrap\s*\{[\s\S]*?padding-bottom:\s*56\.25%/, 'pages/index/index.wxss', '课程封面比例')
+assertSourcePattern(indexWxssSource, /\.course-cover-wrap\s*\{[^}]*width:\s*144rpx;[^}]*height:\s*180rpx;/, 'pages/index/index.wxss', '紧凑课程缩略封面')
 assertSourcePattern(indexWxssSource, /\.content-status\s*\{/, 'pages/index/index.wxss', '内容状态标签样式')
 assertSourcePattern(indexWxssSource, /\.course-state-card\s*\{/, 'pages/index/index.wxss', '课程加载/错误/空状态卡样式')
 assertSourceAbsent(indexWxmlSource, /立即购买/, 'pages/index/index.wxml', '立即购买')

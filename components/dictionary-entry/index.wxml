@@ -1,15 +1,10 @@
 <view class="entry" bindtap="open" role="button" aria-label="查看{{entry.headword}}的释义" hover-class="entry--pressed">
     <view class="entry__heading">
         <text class="entry__headword">{{entry.headword}}</text>
-        <text wx:if="{{entry.wordClass}}" class="entry__class">{{entry.wordClass}}</text>
+        <text wx:if="{{entry.shortWordClass}}" class="entry__class">{{entry.shortWordClass}}</text>
     </view>
-    <text class="entry__summary">{{entry.summary || '释义待补充'}}</text>
-    <view class="entry__metadata">
-        <text wx:if="{{entry.matchLabel}}" class="entry__match">{{entry.matchLabel}}</text>
-        <text>{{entry.sourceLabel}}</text>
-        <text wx:if="{{entry.audioPlayable}}">可听发音</text>
-        <text wx:elif="{{entry.audioPending || entry.audioUrl || entry.audio_url}}">音频待接入</text>
-        <text wx:if="{{entry.audioSource === 'textbook'}}">教材发音</text>
-        <text wx:if="{{entry.audioDevelopmentOnly === true}}">本地验证</text>
+    <view class="entry__summary">
+        <text user-select="{{true}}">{{entry.summary || '释义待补充'}}</text>
     </view>
+    <text wx:if="{{entry.matchTier === 'wordForm'}}" class="entry__match">{{entry.matchLabel}}</text>
 </view>

@@ -1,0 +1,6 @@
+{
+    "navigationBarTitleText": "本机生词本",
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black",
+    "usingComponents": { "van-icon": "/miniprogram_npm/@vant/weapp/icon/index" }
+}

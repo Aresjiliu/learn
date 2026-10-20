@@ -58,8 +58,8 @@ const tests = [
             ['/wordaudio/' + 'a'.repeat(32) + '.mp3', false, false],
             ['/wordaudio/' + 'a'.repeat(32) + '.mp3', true, true],
             ['/wordaudio/../secret.mp3', true, false], ['unverified-hash', true, false]
-        ]) for (const [audioSource, audioDevelopmentOnly, labels] of [
-            ['textbook', true, ['教材发音', '本地验证']], ['other', 'true', []]
+        ]) for (const [audioSource, audioDevelopmentOnly] of [
+            ['textbook', true], ['other', 'true']
         ]) {
             const { page, requests } = harness({}, { enableLocalWordAudio: enabled })
             page.handleInput({ detail: 'кот' }); page.handleSearch()
@@ -68,14 +68,58 @@ const tests = [
             assert.strictEqual(entry.audioPlayable, playable)
             assert.strictEqual(entry.audioSource, audioSource)
             assert.strictEqual(entry.audioDevelopmentOnly, audioDevelopmentOnly)
-            const visible = []
-            for (const tag of component.matchAll(/<text\b([^>]*)>(教材发音|本地验证)<\/text>/g)) {
-                const condition = /wx:if="\{\{(.*?)\}\}"/.exec(tag[1])
-                assert.ok(condition)
-                if (new Function('entry', 'return (' + condition[1] + ')')(entry)) visible.push(tag[2])
-            }
-            assert.deepStrictEqual(visible, labels)
+            assert.strictEqual(page.data.audioDevelopmentNotice, audioDevelopmentOnly === true)
+            assert.ok(!/教材发音|本地验证|可听发音|音频待接入/.test(component))
         }
+    }],
+    ['only strict boolean true triggers the Page notice, including merged pages', async () => {
+        const ordinaryAudio = { audioUrl: 'https://example.test/ordinary.mp3', audioSource: 'textbook' }
+        for (const fields of [
+            {}, ordinaryAudio,
+            ...['true', 1, false, 0, null, undefined].map(audioDevelopmentOnly => ({ ...ordinaryAudio, audioDevelopmentOnly }))
+        ]) {
+            const { page, requests } = harness()
+            const meta = { source: 'dictionary-index', total: 60 }
+            page.handleInput({ detail: 'дом' }); page.search()
+            requests[0].resolve(result([{ id: 'ordinary', word: 'дом', ...fields }], meta)); await settle()
+            assert.strictEqual(page.data.audioDevelopmentNotice, false, JSON.stringify(fields))
+            for (const key of Object.keys(fields)) assert.strictEqual(page.data.words[0][key], fields[key], key)
+            assert.strictEqual(page.data.words[0].audioPlayable, Boolean(fields.audioUrl))
+            page.loadMore()
+            requests[1].resolve(result([{ id: 'numeric', audioDevelopmentOnly: 1 }], meta)); await settle()
+            assert.strictEqual(page.data.audioDevelopmentNotice, false, 'truthy flags on appended pages are not booleans')
+            page.loadMore()
+            requests[2].resolve(result([{ id: 'development', audioDevelopmentOnly: true }], meta)); await settle()
+            assert.strictEqual(page.data.audioDevelopmentNotice, true, 'explicit true on any merged page triggers notice')
+            assert.strictEqual(page.data.words[1].audioDevelopmentOnly, 1)
+            assert.strictEqual(page.data.words[2].audioDevelopmentOnly, true)
+        }
+    }],
+    ['development notice aggregates merged pages and resets on edits, clear and fresh retry', async () => {
+        const { page, requests } = harness()
+        assert.strictEqual(page.data.audioDevelopmentNotice, false)
+        page.handleInput({ detail: 'кот' }); page.search()
+        const meta = { total: 100, source: 'dictionary-index' }
+        requests[0].resolve(result([{ id: '1', audioDevelopmentOnly: false }], meta)); await settle()
+        assert.strictEqual(page.data.audioDevelopmentNotice, false)
+        page.loadMore()
+        requests[1].resolve(result([{ id: '2', audioDevelopmentOnly: true }], meta)); await settle()
+        assert.strictEqual(page.data.audioDevelopmentNotice, true)
+        page.loadMore()
+        requests[2].resolve(result([{ id: '3', audioDevelopmentOnly: 'true' }], meta)); await settle()
+        assert.strictEqual(page.data.audioDevelopmentNotice, true, 'aggregate all merged pages')
+        page.loadMore(); requests[3].reject(Error('offline')); await settle()
+        assert.strictEqual(page.data.audioDevelopmentNotice, true, 'retained results retain their notice')
+        page.retryLoad(); requests[4].resolve(result([], { source: 'changed' })); await settle()
+        page.retryLoad()
+        assert.strictEqual(page.data.audioDevelopmentNotice, false, 'fresh first-page retry clears old notice while pending')
+        requests[5].resolve(result([{ audioDevelopmentOnly: true }], meta)); await settle()
+        page.handleInput({ detail: 'дом' })
+        assert.strictEqual(page.data.audioDevelopmentNotice, false)
+        page.search(); requests[6].resolve(result([{ audioDevelopmentOnly: true }], meta)); await settle()
+        page.clearSearch()
+        assert.strictEqual(page.data.audioDevelopmentNotice, false)
+        assert.deepStrictEqual(page.data.words, [])
     }],
     ['only explicit word arrays count as a successful response', async () => {
         for (const response of [{ data: {} }, { code: 500, data: { words: [] } }]) {
@@ -105,7 +149,7 @@ const tests = [
             page.handleInput({ detail: 'дом' }); page.handleSearch()
             requests[1].resolve(result([{ id: 'new', word: 'дом' }])); await settle()
             const state = JSON.stringify(page.data), updates = page.updates.length
-            requests[0][outcome](outcome === 'resolve' ? result([{ id: 'old', word: 'кот' }]) : Error('late'))
+            requests[0][outcome](outcome === 'resolve' ? result([{ id: 'old', word: 'кот', audioDevelopmentOnly: true }]) : Error('late'))
             await settle()
             assert.strictEqual(JSON.stringify(page.data), state); assert.strictEqual(page.updates.length, updates)
             assert.strictEqual(writes.length, 1)
@@ -171,7 +215,7 @@ const tests = [
             if (action === 'clear') page.clearSearch()
             if (action === 'unload') page.onUnload()
             const state = JSON.stringify(page.data), updates = page.updates.length
-            requests[0][outcome](outcome === 'resolve' ? result([{ word: 'кот' }]) : Error('late'))
+            requests[0][outcome](outcome === 'resolve' ? result([{ word: 'кот', audioDevelopmentOnly: true }]) : Error('late'))
             await settle()
             assert.strictEqual(JSON.stringify(page.data), state)
             assert.strictEqual(page.updates.length, updates)

@@ -330,8 +330,11 @@ const tests = [
         ]) {
             const { page } = await harness(fields)
             assert.deepStrictEqual(sourceLabels(wxml, 'word', page.data.word), expected)
-            assert.deepStrictEqual(sourceLabels(search, 'entry', presentDictionaryEntry(page.data.word)), expected)
+            assert.deepStrictEqual(sourceLabels(search, 'entry', presentDictionaryEntry(page.data.word)), [],
+                'list rows omit audio source labels; detail source labels retain the exact conditions above')
         }
+        assert.doesNotMatch(search, /entry\.(?:sourceLabel|audioPlayable|audioPending|audioUrl|audio_url|audioSource|audioDevelopmentOnly)|entry__metadata/,
+            'clean list rows do not render source or audio metadata')
     }],
     ['icon, accessible name, touch target and visible retry bindings', async () => {
         assert.match(wxml, /<button[^>]*class="audio-button[^\"]*"[^>]*bindtap="playAudio"[^>]*aria-label="[^\"]+"[^>]*>/)

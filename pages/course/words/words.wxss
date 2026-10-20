@@ -1,0 +1,85 @@
+page {
+    background: var(--color-surface);
+    color: var(--color-text);
+    font-family: var(--font-family-system);
+}
+.vocabulary-page {
+    padding: 16rpx 32rpx 40rpx;
+}
+.back-course,
+.text-action {
+    padding: 16rpx 0;
+    background: var(--color-surface);
+    color: var(--color-primary);
+    border-radius: 0;
+    font-size: 26rpx;
+}
+.back-course {
+    margin: 0;
+    text-align: left;
+}
+.back-course::after,
+.text-action::after {
+    border: 0;
+}
+.course-heading {
+    padding: 12rpx 0 24rpx;
+}
+.course-title {
+    display: block;
+    font-size: 34rpx;
+    font-weight: 600;
+    line-height: 1.4;
+}
+.course-meta {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 12rpx;
+    color: var(--color-text-secondary);
+    font-size: 24rpx;
+}
+.word-search {
+    box-sizing: border-box;
+    height: 76rpx;
+    padding: 0 20rpx;
+    background: var(--color-page-bg);
+    color: var(--color-text);
+    font-size: 26rpx;
+}
+.result-count {
+    display: block;
+    padding-top: 16rpx;
+    color: var(--color-text-secondary);
+    font-size: 24rpx;
+}
+.word-item {
+    padding: 20rpx 0;
+    border-bottom: 1rpx solid var(--color-border);
+}
+.word-main {
+    display: flex;
+    align-items: baseline;
+}
+.word-text {
+    font-size: 32rpx;
+    font-weight: 600;
+}
+.word-type {
+    margin-left: 16rpx;
+    color: var(--color-text-secondary);
+    font-size: 24rpx;
+}
+.word-meaning {
+    display: block;
+    margin-top: 8rpx;
+    font-size: 28rpx;
+    line-height: 1.55;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+.page-state {
+    padding: 64rpx 0;
+    color: var(--color-text-secondary);
+    font-size: 28rpx;
+    text-align: center;
+}

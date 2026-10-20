@@ -1,0 +1,11 @@
+<view class="wordbook-action">
+    <button wx:if="{{eligible}}" class="wordbook-action__button {{blocked ? 'wordbook-action__button--disabled' : ''}}" disabled="{{blocked}}" bind:tap="toggle" aria-label="{{saved === null ? '生词本状态待确认' : (saved ? '已加入生词本，点击移除' : '加入生词本')}}" aria-pressed="{{saved === null ? 'mixed' : saved}}">{{saved === null ? '状态待确认' : (saved ? '已加入' : '加入生词本')}}</button>
+    <view class="wordbook-action__status">
+        <text wx:if="{{blocked || !eligible}}" class="wordbook-action__status-text">{{statusText}}</text>
+        <text class="wordbook-action__local">仅保存在本机</text>
+    </view>
+    <view wx:if="{{errorText}}" class="wordbook-action__error" role="alert">
+        <text>{{errorText}}</text>
+        <button class="wordbook-action__retry" bind:tap="retry" aria-label="重试读取生词本状态">重试</button>
+    </view>
+</view>
