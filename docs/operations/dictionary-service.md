@@ -46,6 +46,21 @@ $env:DICTIONARY_ENABLE_DEV_AUDIO = '1'
 
 ## 接口与错误
 
+### 排查连接拒绝与“只查到一条”
+
+`net::ERR_CONNECTION_REFUSED` 发生在HTTP响应之前，先检查服务，而非修改词典查询或MP3格式：
+
+```powershell
+Get-NetTCPConnection -State Listen -LocalPort 18092 -ErrorAction SilentlyContinue
+curl.exe --noproxy '*' --max-time 5 http://127.0.0.1:18092/health
+```
+
+无监听时，按本页环境变量与Uvicorn命令重新启动，并保留该终端；终端退出或机器重启后须再次启动。媒体18090与词典18092是独立服务，视频正常不意味着词典可用。需要后台运行时使用隐藏窗口并将stdout/stderr写入本机忽略目录或临时目录；不得把进程创建成功当健康检查成功，也不要抢占或终止未知端口进程。当前尚无开机自启/自动恢复，不把临时后台运行当生产部署。
+
+本轮2026-10-21健康检查：166260词条、1082开发音频映射；`камера`全量查询41条，第一页20条。该数量只作当前批次核对，不写死为未来数据契约。若仍显示一条或“离线样本”，返回搜索页重新搜索，确认请求成功且响应来源为`dictionary-index`，再从新结果进入详情。服务恢复不会自动刷新已打开的样本详情。
+
+样本ID（例如66262）不等于全量索引ID；完整词典返回404时不得硬改数据库、按词头强制替换或伪装成功。稳定ID由新搜索结果提供。分页必须维持同一来源和版本，不能把索引结果与回退样本拼接。
+
 - `GET /health`：验证 v4 元数据、内容表和索引可读取；返回内容版本和词条数量。缺失、损坏、旧版本或空内容均返回 503。
 - `GET /api/v1/content/manifest`：默认只声明 `dictionary`；显式开发音频模式额外声明 `dictionary-audio-development`。
 - `GET /api/v1/dictionary/search?q=汽车&page=1&page_size=20`：俄中分层搜索；每页 1–100，词形候选保留歧义，分页须维持相同内容版本。
