@@ -118,3 +118,4 @@ function createWordbook(storage, now = () => Date.now()) {
 }
 
 module.exports = { createWordbook };
+module.exports.prepareWordbookEntry = snapshot;
