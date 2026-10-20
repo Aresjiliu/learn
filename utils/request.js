@@ -5,7 +5,7 @@ const request = (options) => {
   if (method !== 'GET' && !config.enableRemoteWrites) {
     return Promise.reject(new Error('remote writes are disabled in the current environment'))
   }
-  const token = wx.getStorageSync('token')
+  const token = options.skipAuth ? '' : wx.getStorageSync('token')
   
   return new Promise((resolve, reject) => {
     const baseUrl = String(options.baseUrl || config.baseUrl || '').replace(/\/+$/, '')
@@ -31,7 +31,7 @@ const request = (options) => {
         if (debug) console.log('Response status:', res.statusCode)
         if (res.statusCode >= 200 && res.statusCode < 300) {
           resolve(res.data)
-        } else if (res.statusCode === 401) {
+        } else if (res.statusCode === 401 && !options.skipAuth) {
           wx.removeStorageSync('token')
           wx.removeStorageSync('userInfo')
           
