@@ -159,7 +159,7 @@ function readLegacyRecord(storage, courseId, videoId) {
     const progress = storage.getStorageSync(STORAGE_KEY)
     if (!isObject(progress) || !Object.prototype.hasOwnProperty.call(progress, recentVideoId)) return readResult()
     const position = progress[recentVideoId]
-    if (!isTime(position)) return readResult()
+    if (!isTime(position)) return readError('corrupt_legacy_progress')
     return readResult({ courseId: recentCourseId, videoId: recentVideoId, position, duration: 0, courseTitle: '', videoTitle: '' })
 }
 

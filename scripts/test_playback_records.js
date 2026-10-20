@@ -296,14 +296,70 @@ test('legacy fallback requires both exact bindings and valid numeric position', 
     }
     for (const value of ['23', undefined, null, -1, Infinity, NaN, true]) {
         const storage = legacy(value)
-        expectRead(api.getPlaybackRecord(storage, 'c', 'v'), null)
-        expectRead(api.getRecentPlayback(storage), null)
+        const before = { ...storage.values, [api.STORAGE_KEY]: { v: value } }
+        for (const result of [api.getPlaybackRecord(storage, 'c', 'v'), api.getRecentPlayback(storage)]) {
+            expectFailure(result)
+            assert.strictEqual(result.reason, 'corrupt_legacy_progress')
+            assert.strictEqual(result.record, null)
+        }
+        assert.deepStrictEqual(storage.values, before)
+        assert.deepStrictEqual(storage.writes, [])
     }
     for (const name of [api.RECENT_COURSE_KEY, api.RECENT_VIDEO_KEY]) {
         const storage = legacy()
         delete storage.values[name]
         expectRead(api.getPlaybackRecord(storage, 'c', 'v'), null)
         expectRead(api.getRecentPlayback(storage), null)
+    }
+})
+for (const position of [-1, '12', null]) {
+    test(`bound legacy position ${JSON.stringify(position)} reports corruption without mutation`, () => {
+        const storage = legacy(position)
+        const before = plain(storage.values)
+        const results = [api.getRecentPlayback(storage), api.getPlaybackRecord(storage, 'c', 'v')]
+        assert.deepStrictEqual(storage.values, before, 'reading corrupt legacy progress must not mutate storage')
+        assert.deepStrictEqual(storage.writes, [])
+        for (const result of results) {
+            assert.deepStrictEqual(plain(result), { ok: false, record: null, reason: 'corrupt_legacy_progress' })
+        }
+    })
+}
+test('unbound or missing legacy progress stays legitimate empty history', () => {
+    const values = [
+        {},
+        { [api.RECENT_COURSE_KEY]: 'c', [api.STORAGE_KEY]: { v: -1 } },
+        { [api.RECENT_VIDEO_KEY]: { c: 'v' }, [api.STORAGE_KEY]: { v: -1 } },
+        { [api.RECENT_COURSE_KEY]: 'c', [api.RECENT_VIDEO_KEY]: { c: 'v' } }
+    ]
+    for (const progress of [null, '', false, [], {}, { other: -1 }]) {
+        values.push({ [api.RECENT_COURSE_KEY]: 'c', [api.RECENT_VIDEO_KEY]: { c: 'v' }, [api.STORAGE_KEY]: progress })
+    }
+    for (const value of values) {
+        const storage = fixture(value)
+        const before = plain(value)
+        expectRead(api.getRecentPlayback(storage), null)
+        expectRead(api.getPlaybackRecord(storage, 'c', 'v'), null)
+        assert.deepStrictEqual(storage.values, before)
+        assert.deepStrictEqual(storage.writes, [])
+    }
+    const storage = legacy(-1)
+    expectRead(api.getPlaybackRecord(storage, 'other', 'v'), null)
+    expectRead(api.getPlaybackRecord(storage, 'c', 'other'), null)
+    assert.deepStrictEqual(storage.writes, [])
+})
+test('valid v2 zero bypasses corrupt legacy progress entirely', () => {
+    for (const position of [-1, '12', null]) {
+        const storage = legacy(position)
+        storage.values[key] = root([record('c', 'v', 0)])
+        const before = plain(storage.values)
+        const reads = []
+        const get = storage.getStorageSync
+        storage.getStorageSync = function (name) { reads.push(name); return get.call(this, name) }
+        expectRead(api.getRecentPlayback(storage), record('c', 'v', 0))
+        expectRead(api.getPlaybackRecord(storage, 'c', 'v'), record('c', 'v', 0))
+        assert.deepStrictEqual(reads, [key, key])
+        assert.deepStrictEqual(storage.values, before)
+        assert.deepStrictEqual(storage.writes, [])
     }
 })
 test('legacy fallback accepts zero IDs but never inherited map entries', () => {
